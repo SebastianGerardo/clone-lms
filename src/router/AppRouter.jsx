@@ -8,7 +8,7 @@ import Administracion from '../pages/Administracion/Administracion'
 const AppRouter = () => {
   return (
     <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<PrivateRouter><DashboardRouter/></PrivateRouter>}>
             <Route index element={<Administracion/>} />
             <Route path='estadisticas' element={<h1>Soy el curso</h1>} />
