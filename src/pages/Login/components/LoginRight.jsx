@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import loginImg from '../../../assets/img/loginImg-1.png'
-import loginImg1 from '../../../assets/img/loginImg-2.png'
-import loginImg2 from '../../../assets/img/loginImg-3.jpg'
+import loginImg from '../../../assets/img/LoginImg-1.png'
+import loginImg1 from '../../../assets/img/LoginImg-2.png'
+import loginImg2 from '../../../assets/img/LoginImg-3.jpg'
 
 const LoginRight = () => {
     const images = [loginImg, loginImg1, loginImg2]
