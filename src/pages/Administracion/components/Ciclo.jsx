@@ -3,8 +3,8 @@ import CircularProgress from '../../../components/ProgressStatus/CircularProgres
 
 const Ciclo = () => {
   return (
-    <div className='bg-[#F2F8FF] max-w-max w-max lg:w-full rounded-2xl p-6 pb-5 flex justify-between gap-10'>
-        {/* Card 1 */}
+    <div className='bg-[#F2F8FF] max-w-max flex flex-col justify-between sm:flex-row md:flex-row lg:flex-row xl:flex-row w-max lg:w-full rounded-2xl p-6 pb-5  gap-10'>
+        {/* RADIAL DEL CIRCULO */}
       <section className="bg-primary-100  rounded-xl text-gray-300 flex flex-col justify- gap-6">
         <div className='flex gap-2 items-center'>
             <h4 className="text-xl text-[#11223E] font-extrabold">
@@ -19,8 +19,8 @@ const Ciclo = () => {
             <h1 className='text-center text-[#11223E]'>Progreso</h1>
         </div>
       </section>
-
-            {/* Card 2 */}
+        
+        {/* CONTENIDO DEL CICLO */}
       <section className='flex flex-col gap-y-10'>
 
         <div className='flex flex-col'>

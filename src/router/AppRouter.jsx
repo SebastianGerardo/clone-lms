@@ -15,6 +15,7 @@ const AppRouter = () => {
             <Route path='cursos' element={<h1>Soy la estadistica</h1>} />
             <Route path='perfil' element={<h1>Soy el perfil</h1>} />
             <Route path='matricula' element={<h1>Soy la matricula</h1>} />
+            <Route path='configuracion' element={<h1>Soy la configuracion</h1>} />
         </Route>
     </Routes>
   )

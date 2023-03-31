@@ -3,7 +3,7 @@ import profeImg from '../../../assets/img/profesor-img.svg'
 
 const Profesores = () => {
   return (
-    <div className="flex flex-col place-items-center p-2 min-h-full h-full min-w-[60%]">
+    <div className="flex flex-col place-items-center p-2 min-h-full h-full md:min-w-[50%] xl:min-w-[80%]">
         {/* TITULO Y BOTONES */}
       <section className='w-full p-2 flex justify-between items-center mb-3 mt-1'>
         <div className='flex items-center gap-2'>
@@ -110,6 +110,7 @@ const Profesores = () => {
           </section>
         </div>
       </section>
+
     </div>
   )
 }

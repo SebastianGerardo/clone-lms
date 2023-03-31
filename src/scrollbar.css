@@ -13,7 +13,6 @@
   border-radius: 10px;
 }
 
-/* Aplicar estilos de Tailwind para la barra de desplazamiento */
 body {
   scrollbar-width: thin;
   scrollbar-color: #9CA3AF #f1f1f1;
