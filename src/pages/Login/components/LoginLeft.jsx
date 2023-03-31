@@ -1,32 +1,43 @@
 import React, { useState } from 'react'
 import logoGoogle from '../../../assets/icons/google.png'
-import { pruebaUsuario } from '../../../helpers/ApiUsuarios'
+import { IniciarSesion } from '../../../helpers/ApiUsuarios'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 const LoginLeft = () => {
-  const [inputUser, setInputUser] = useState({
+  const [datosUsuario, setDatosUsuario] = useState({
     email: '',
     password: ''
   })
-
   const navigate = useNavigate()
 
+    /* CAPTURA LOS DATOS DEL FORMULARIO */
   const handleInputChange = (e) => {
-    setInputUser({
-        ...inputUser,
+    setDatosUsuario({
+        ...datosUsuario,
         [e.target.name]: e.target.value
     })
   }
 
-//   console.log(pruebaUsuario.password)
-
+    /* ENVÍA LOS DATOS AL BACKEND */
   const handleSubmit = (e) => {
     e.preventDefault()
-    if(inputUser.email === pruebaUsuario.email && inputUser.password === pruebaUsuario.password) {
-        return navigate('/dashboard', {replace: true, state: {usuario: pruebaUsuario, logged: true}})
-    } else {
-        return console.log('Usuario incorrecto')
-    }
+    IniciarSesion(datosUsuario).then((res) => {
+      if (res.statusCode === 200) {
+        navigate('/dashboard', {
+            state: {
+                logged: true
+            }
+        })
+        localStorage.setItem('token', res.data.token)
+      } else {
+        Swal.fire(
+          "Algo salio mal....",
+          "Usuario y/o contraseña Incorrectos",
+          "error"
+        );            
+      }
+    })
   }
 
   return (

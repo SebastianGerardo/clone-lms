@@ -3,7 +3,6 @@ import { useNavigate, NavLink } from "react-router-dom";
 import Swal from 'sweetalert2';
 
 const LinksSidebar = () => {
-
     const navigate = useNavigate();
 
     const logout = (e) => {
@@ -18,6 +17,7 @@ const LinksSidebar = () => {
             cancelButtonText: 'Cancelar'
           }).then((result) => {
             if (result.isConfirmed) {
+              localStorage.removeItem('token')
               navigate('/', { state: { logged: false } })
             }
           })
@@ -33,8 +33,8 @@ const LinksSidebar = () => {
                     {({ isActive }) => (
                         <>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 18V15" stroke={isActive ? "#fff" : "#292D32"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M10.07 2.81997L3.14002 8.36997C2.36002 8.98997 1.86002 10.3 2.03002 11.28L3.36002 19.24C3.60002 20.66 4.96002 21.81 6.40002 21.81H17.6C19.03 21.81 20.4 20.65 20.64 19.24L21.97 11.28C22.13 10.3 21.63 8.98997 20.86 8.36997L13.93 2.82997C12.86 1.96997 11.13 1.96997 10.07 2.81997Z" stroke={isActive ? "#fff" : "#292D32"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 18V15" stroke={isActive ? "#fff" : "#292D32"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M10.07 2.81997L3.14002 8.36997C2.36002 8.98997 1.86002 10.3 2.03002 11.28L3.36002 19.24C3.60002 20.66 4.96002 21.81 6.40002 21.81H17.6C19.03 21.81 20.4 20.65 20.64 19.24L21.97 11.28C22.13 10.3 21.63 8.98997 20.86 8.36997L13.93 2.82997C12.86 1.96997 11.13 1.96997 10.07 2.81997Z" stroke={isActive ? "#fff" : "#292D32"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                         <span className='pt-1 text-center'>Administración</span>
                         </>
@@ -47,10 +47,10 @@ const LinksSidebar = () => {
                     {({ isActive }) => (
                         <>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M22 16.7399V4.66994C22 3.46994 21.02 2.57994 19.83 2.67994H19.77C17.67 2.85994 14.48 3.92994 12.7 5.04994L12.53 5.15994C12.24 5.33994 11.76 5.33994 11.47 5.15994L11.22 5.00994C9.44 3.89994 6.26 2.83994 4.16 2.66994C2.97 2.56994 2 3.46994 2 4.65994V16.7399C2 17.6999 2.78 18.5999 3.74 18.7199L4.03 18.7599C6.2 19.0499 9.55 20.1499 11.47 21.1999L11.51 21.2199C11.78 21.3699 12.21 21.3699 12.47 21.2199C14.39 20.1599 17.75 19.0499 19.93 18.7599L20.26 18.7199C21.22 18.5999 22 17.6999 22 16.7399Z" stroke={isActive ? "#fff" : "#292D32"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M12 5.48999V20.49" stroke={isActive ? "#fff" : "#292D32"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M7.75 8.48999H5.5" stroke={isActive ? "#fff" : "#292D32"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M8.5 11.49H5.5" stroke={isActive ? "#fff" : "#292D32"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22 16.7399V4.66994C22 3.46994 21.02 2.57994 19.83 2.67994H19.77C17.67 2.85994 14.48 3.92994 12.7 5.04994L12.53 5.15994C12.24 5.33994 11.76 5.33994 11.47 5.15994L11.22 5.00994C9.44 3.89994 6.26 2.83994 4.16 2.66994C2.97 2.56994 2 3.46994 2 4.65994V16.7399C2 17.6999 2.78 18.5999 3.74 18.7199L4.03 18.7599C6.2 19.0499 9.55 20.1499 11.47 21.1999L11.51 21.2199C11.78 21.3699 12.21 21.3699 12.47 21.2199C14.39 20.1599 17.75 19.0499 19.93 18.7599L20.26 18.7199C21.22 18.5999 22 17.6999 22 16.7399Z" stroke={isActive ? "#fff" : "#292D32"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M12 5.48999V20.49" stroke={isActive ? "#fff" : "#292D32"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M7.75 8.48999H5.5" stroke={isActive ? "#fff" : "#292D32"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M8.5 11.49H5.5" stroke={isActive ? "#fff" : "#292D32"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                         <span className='pt-[0.15rem] text-center'>Estadísticas</span>
                         </>
@@ -63,10 +63,10 @@ const LinksSidebar = () => {
                     {({ isActive }) => (
                         <>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M21.6601 10.44L20.6801 14.62C19.8401 18.23 18.1801 19.69 15.0601 19.39C14.5601 19.35 14.0201 19.26 13.4401 19.12L11.7601 18.72C7.59006 17.73 6.30006 15.67 7.28006 11.49L8.26006 7.30001C8.46006 6.45001 8.70006 5.71001 9.00006 5.10001C10.1701 2.68001 12.1601 2.03001 15.5001 2.82001L17.1701 3.21001C21.3601 4.19001 22.6401 6.26001 21.6601 10.44Z" stroke={isActive ? "#fff" : "#292D32"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M15.06 19.39C14.44 19.81 13.66 20.16 12.71 20.47L11.13 20.99C7.15998 22.27 5.06997 21.2 3.77997 17.23L2.49997 13.28C1.21997 9.30998 2.27997 7.20998 6.24997 5.92998L7.82997 5.40998C8.23997 5.27998 8.62997 5.16998 8.99997 5.09998C8.69997 5.70998 8.45997 6.44998 8.25997 7.29998L7.27997 11.49C6.29997 15.67 7.58998 17.73 11.76 18.72L13.44 19.12C14.02 19.26 14.56 19.35 15.06 19.39Z" stroke={isActive ? "#fff" : "#292D32"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M12.64 8.53003L17.49 9.76003" stroke={isActive ? "#fff" : "#292D32"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M11.66 12.4L14.56 13.14" stroke={isActive ? "#fff" : "#292D32"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M21.6601 10.44L20.6801 14.62C19.8401 18.23 18.1801 19.69 15.0601 19.39C14.5601 19.35 14.0201 19.26 13.4401 19.12L11.7601 18.72C7.59006 17.73 6.30006 15.67 7.28006 11.49L8.26006 7.30001C8.46006 6.45001 8.70006 5.71001 9.00006 5.10001C10.1701 2.68001 12.1601 2.03001 15.5001 2.82001L17.1701 3.21001C21.3601 4.19001 22.6401 6.26001 21.6601 10.44Z" stroke={isActive ? "#fff" : "#292D32"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M15.06 19.39C14.44 19.81 13.66 20.16 12.71 20.47L11.13 20.99C7.15998 22.27 5.06997 21.2 3.77997 17.23L2.49997 13.28C1.21997 9.30998 2.27997 7.20998 6.24997 5.92998L7.82997 5.40998C8.23997 5.27998 8.62997 5.16998 8.99997 5.09998C8.69997 5.70998 8.45997 6.44998 8.25997 7.29998L7.27997 11.49C6.29997 15.67 7.58998 17.73 11.76 18.72L13.44 19.12C14.02 19.26 14.56 19.35 15.06 19.39Z" stroke={isActive ? "#fff" : "#292D32"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M12.64 8.53003L17.49 9.76003" stroke={isActive ? "#fff" : "#292D32"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M11.66 12.4L14.56 13.14" stroke={isActive ? "#fff" : "#292D32"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                         <span className='pt-[0.15rem] text-center'>Cursos</span>
                         </>
@@ -84,9 +84,9 @@ const LinksSidebar = () => {
                     {({ isActive }) => (
                         <>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12.12 12.78C12.05 12.77 11.96 12.77 11.88 12.78C10.12 12.72 8.71997 11.28 8.71997 9.50998C8.71997 7.69998 10.18 6.22998 12 6.22998C13.81 6.22998 15.28 7.69998 15.28 9.50998C15.27 11.28 13.88 12.72 12.12 12.78Z" stroke={isActive ? "#fff" : "#292D32"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M18.74 19.3801C16.96 21.0101 14.6 22.0001 12 22.0001C9.40001 22.0001 7.04001 21.0101 5.26001 19.3801C5.36001 18.4401 5.96001 17.5201 7.03001 16.8001C9.77001 14.9801 14.25 14.9801 16.97 16.8001C18.04 17.5201 18.64 18.4401 18.74 19.3801Z" stroke={isActive ? "#fff" : "#292D32"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke={isActive ? "#fff" : "#292D32"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12.12 12.78C12.05 12.77 11.96 12.77 11.88 12.78C10.12 12.72 8.71997 11.28 8.71997 9.50998C8.71997 7.69998 10.18 6.22998 12 6.22998C13.81 6.22998 15.28 7.69998 15.28 9.50998C15.27 11.28 13.88 12.72 12.12 12.78Z" stroke={isActive ? "#fff" : "#292D32"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M18.74 19.3801C16.96 21.0101 14.6 22.0001 12 22.0001C9.40001 22.0001 7.04001 21.0101 5.26001 19.3801C5.36001 18.4401 5.96001 17.5201 7.03001 16.8001C9.77001 14.9801 14.25 14.9801 16.97 16.8001C18.04 17.5201 18.64 18.4401 18.74 19.3801Z" stroke={isActive ? "#fff" : "#292D32"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke={isActive ? "#fff" : "#292D32"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                         <span className='pt-[0.15rem] text-center'>Perfil</span>
                         </>
@@ -99,10 +99,10 @@ const LinksSidebar = () => {
                     {({ isActive }) => (
                         <>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M3.5 18V7C3.5 3 4.5 2 8.5 2H15.5C19.5 2 20.5 3 20.5 7V17C20.5 17.14 20.5 17.28 20.49 17.42" stroke={isActive ? "#fff" : "#292D32"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M6.35 15H20.5V18.5C20.5 20.43 18.93 22 17 22H7C5.07 22 3.5 20.43 3.5 18.5V17.85C3.5 16.28 4.78 15 6.35 15Z" stroke={isActive ? "#fff" : "#292D32"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M8 7H16" stroke={isActive ? "#fff" : "#292D32"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M8 10.5H13" stroke={isActive ? "#fff" : "#292D32"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M3.5 18V7C3.5 3 4.5 2 8.5 2H15.5C19.5 2 20.5 3 20.5 7V17C20.5 17.14 20.5 17.28 20.49 17.42" stroke={isActive ? "#fff" : "#292D32"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M6.35 15H20.5V18.5C20.5 20.43 18.93 22 17 22H7C5.07 22 3.5 20.43 3.5 18.5V17.85C3.5 16.28 4.78 15 6.35 15Z" stroke={isActive ? "#fff" : "#292D32"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M8 7H16" stroke={isActive ? "#fff" : "#292D32"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M8 10.5H13" stroke={isActive ? "#fff" : "#292D32"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
 
                         <span className='pt-[0.15rem] text-center'>Matrícula</span>
@@ -133,7 +133,7 @@ const LinksSidebar = () => {
                 </li>
                    {/* CERRAR SESIÓN */}
                 <li>
-                  <button className="flex gap-2 text-red-500" onClick={logout}>
+                  <button onClick={logout} className="flex gap-2 text-red-500">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M15.2405 22.27H15.1105C10.6705 22.27 8.5305 20.52 8.1605 16.6C8.1205 16.19 8.4205 15.82 8.8405 15.78C9.2405 15.74 9.6205 16.05 9.6605 16.46C9.9505 19.6 11.4305 20.77 15.1205 20.77H15.2505C19.3205 20.77 20.7605 19.33 20.7605 15.26V8.73998C20.7605 4.66998 19.3205 3.22998 15.2505 3.22998H15.1205C11.4105 3.22998 9.9305 4.41998 9.6605 7.61998C9.6105 8.02998 9.2605 8.33998 8.8405 8.29998C8.4205 8.26998 8.1205 7.89998 8.1505 7.48998C8.4905 3.50998 10.6405 1.72998 15.1105 1.72998H15.2405C20.1505 1.72998 22.2505 3.82998 22.2505 8.73998V15.26C22.2505 20.17 20.1505 22.27 15.2405 22.27Z" fill="#EF4444"/>
                       <path d="M14.9991 12.75H3.61914C3.20914 12.75 2.86914 12.41 2.86914 12C2.86914 11.59 3.20914 11.25 3.61914 11.25H14.9991C15.4091 11.25 15.7491 11.59 15.7491 12C15.7491 12.41 15.4091 12.75 14.9991 12.75Z" fill="#EF4444"/>
