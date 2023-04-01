@@ -4,6 +4,7 @@ import Login from '../pages/Login/Login'
 import DashboardRouter from '../pages/DashboardRouter/DashboardRouter'
 import { PrivateRouter } from './PrivateRouter'
 import Administracion from '../pages/Administracion/Administracion'
+import Estadisticas from '../pages/Estadisticas/Estadisticas'
 
 const AppRouter = () => {
   return (
@@ -11,8 +12,8 @@ const AppRouter = () => {
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<PrivateRouter><DashboardRouter/></PrivateRouter>}>
             <Route index element={<Administracion/>} />
-            <Route path='estadisticas' element={<h1>Soy el curso</h1>} />
-            <Route path='cursos' element={<h1>Soy la estadistica</h1>} />
+            <Route path='estadisticas' element={<Estadisticas/>} />
+            <Route path='cursos' element={<h1>Soy el curso</h1>} />
             <Route path='perfil' element={<h1>Soy el perfil</h1>} />
             <Route path='matricula' element={<h1>Soy la matricula</h1>} />
             <Route path='configuracion' element={<h1>Soy la configuracion</h1>} />

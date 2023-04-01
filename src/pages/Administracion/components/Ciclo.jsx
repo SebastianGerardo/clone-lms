@@ -15,7 +15,17 @@ const Ciclo = () => {
             </svg>
         </div>
         <div className='h-full flex flex-col justify-center items-center gap-2'>
-            <CircularProgress percentage={10}/>
+            <CircularProgress 
+              percentage={10} 
+              sizeCircle={230}
+              textContent={"Ciclo 1"}
+              colorText={"#0052CA"} 
+              colorFondo={"#ccc"} 
+              colorRelleno={"#3751FE"}
+              strokeWidth={20} 
+              fontSize={"15px"} 
+              fontWeight={"bold"} 
+            />
             <h1 className='text-center text-[#11223E]'>Progreso</h1>
         </div>
       </section>
