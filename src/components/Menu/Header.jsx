@@ -3,7 +3,7 @@ import userImg from "../../assets/img/user-img.svg";
 
 const Header = () => {
   return (
-    <header className="flex py-4 px-8 flex-col md:flex-row items-center justify-between gap-4">
+    <header className="flex py-4 px-8 flex-col min-[790px]:flex-row items-center justify-between gap-4">
       
       {/* WELCOME USER */}
       <div className="flex flex-col items-center justify-center text-center md:justify-start">
@@ -14,7 +14,7 @@ const Header = () => {
       </div>
 
       {/* SEARCH */}
-      <form className="w-full md:w-auto ml-4">
+      <form className="w-full min-[790px]:w-auto">
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,7 +26,7 @@ const Header = () => {
             type="text"
             name="search"
             id="search"
-            className="text-gray-400 placeholder:text-[#A4B2CD] block w-full text-lg py-4 pl-12 pr-4 rounded-md md:w-96  bg-[#F9F9F9] focus:outline-none focus:ring-2 focus:ring-[#EDF0FF] focus:border-transparent"
+            className="text-gray-400 placeholder:text-[#A4B2CD] block w-full text-lg py-4 pl-12 pr-4 rounded-md min-[790px]:w-96  bg-[#F9F9F9] focus:outline-none focus:ring-2 focus:ring-[#EDF0FF] focus:border-transparent"
             placeholder="Buscar"
             autoComplete="off"
           />
