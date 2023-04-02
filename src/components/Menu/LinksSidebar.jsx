@@ -18,7 +18,7 @@ const LinksSidebar = () => {
           }).then((result) => {
             if (result.isConfirmed) {
               localStorage.removeItem('token')
-              navigate('/', { state: { logged: false } })
+              navigate('/login', { state: { logged: false } })
             }
           })
     }
@@ -29,7 +29,7 @@ const LinksSidebar = () => {
             <ul className="flex flex-col gap-y-2">
                 {/* ADMINISTRACION */}
                 <li>
-                    <NavLink to={"/dashboard"} state={{ logged: true }} className={({ isActive }) => isActive ? "flex gap-2 px-5 p-3 w-full rounded-md text-white bg-blue-600" : "flex gap-2 px-5 p-3 w-full bg-transparent" } end>
+                    <NavLink to={"/dashboard/administracion"} state={{ logged: true }} className={({ isActive }) => isActive ? "flex gap-2 px-5 p-3 w-full rounded-md text-white bg-blue-600" : "flex gap-2 px-5 p-3 w-full bg-transparent" } >
                     {({ isActive }) => (
                         <>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

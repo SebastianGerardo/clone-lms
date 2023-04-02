@@ -20,7 +20,7 @@ const ContextLms = ({children}) => {
             })
         setUsuarioLogin(res.data)
       } else {
-        navigate("/", {replace: true, state: {logged: false}})
+        navigate("/login", {replace: true, state: {logged: false}})
       }
     })
   }, [])

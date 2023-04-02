@@ -1,10 +1,9 @@
 import React from 'react'
-import CircularProgress from '../../components/ProgressStatus/CircularProgress'
-import Ciclo from './components/Ciclo'
-import Profesores from './components/Profesores'
-import '../../index.css'
-import ControlCenter from './components/ControlCenter'
-import TableCatalogo from './components/TableCatalogo'
+import Ciclo from './Ciclo'
+import Profesores from './Profesores'
+import '../../../index.css'
+import ControlCenter from './ControlCenter'
+import TableCatalogo from './TableCatalogo'
 
 const Administracion = () => {
   return (
