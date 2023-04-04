@@ -8,6 +8,7 @@ import Cursos from '../pages/Cursos/Cursos'
 import FormAlumno from '../pages/Formularios/AlumnoRegistro/FormAlumno'
 import DashboardAdministracion from '../pages/Administracion/RouteAdministracion'
 import Administracion from '../pages/Administracion/components/Administracion'
+import FormPadre from '../pages/Formularios/PadreRegistro/PadreRegistro'
 
 const AppRouter = () => {
   return (
@@ -17,7 +18,8 @@ const AppRouter = () => {
             <Route path='administracion' element={<DashboardAdministracion/>}>
               <Route index element={<Administracion/>} />
                 {/* CREACION DE USUARIOS */}
-              <Route path='create/alumno' element={<FormAlumno />} />
+              <Route path='edit/alumno' element={<FormAlumno />} />
+              <Route path='edit/padre' element={<FormPadre />} />
             </Route>
             <Route path='estadisticas' element={<Estadisticas/>} />
             <Route path='cursos' element={<Cursos />} />

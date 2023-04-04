@@ -31,9 +31,9 @@ const ControlCenter = () => {
         <div className='flex flex-col gap-3'>
             <h1 className='font-bold text-xl'>Padres de fam.</h1>
             <div className='flex gap-5 rounded-lgs text-xs text-gray-400'>
-                <button className='text-blue-500'>Editar</button>
-                <button>Nuevo</button>
-                <button>Borrar</button>
+                <NavLink className='hover:text-blue-500 transition-all duration-100' to='/dashboard/administracion/edit/padre' state={{ logged: true }}>Editar</NavLink>
+                <button className='hover:text-blue-500 transition-all duration-100'>Nuevo</button>
+                <button className='hover:text-blue-500 transition-all duration-100'>Borrar</button>
             </div>
         </div>
       </section>
@@ -47,9 +47,9 @@ const ControlCenter = () => {
         <div className='flex flex-col gap-3'>
             <h1 className='font-bold text-xl'>Alumnos</h1>
             <div className='flex gap-5 rounded-lgs text-xs text-gray-400'>
-                <button className='text-blue-500'>Editar</button>
-                <NavLink to='/dashboard/administracion/create/alumno' state={{ logged: true }}>Nuevo</NavLink>
-                <button>Borrar</button>
+                <NavLink className='hover:text-blue-500 transition-all duration-100' to='/dashboard/administracion/edit/alumno' state={{ logged: true }}>Editar</NavLink>
+                <button className='hover:text-blue-500 transition-all duration-100'>Nuevo</button>
+                <button className='hover:text-blue-500 transition-all duration-100'>Borrar</button>
             </div>
         </div>
       </section>
