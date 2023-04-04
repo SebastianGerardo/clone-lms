@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const FormPadre = () => {
+const FormPadreRegistro = () => {
 
   const [colorBoton, setColorBoton] = useState(false)
   const [active, setActive] = useState(true)
@@ -202,4 +202,4 @@ const FormPadre = () => {
       </div>
   );
 };
-export default FormPadre;
+export default FormPadreRegistro;

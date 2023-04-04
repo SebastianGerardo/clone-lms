@@ -6,15 +6,6 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-/* BREAKPOINTS PERSONALIZADOS */
-
-@media screen and (max-width: 1165px) {
-  .admin_breakpoint {
-    display: flex;
-    flex-direction: column;
-  }
-}
-  
 /* ESTILOS PERSONALIZADOS */
 
 /* VIDEO './pages/components/estadisticas/components/Video' */

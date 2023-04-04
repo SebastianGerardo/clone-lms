@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import escudo from '../../../assets/icons/escudo.svg'
+import escudo from '../../../../../assets/icons/escudo.svg'
 
 const ControlCenter = () => {
   return (
@@ -15,9 +15,9 @@ const ControlCenter = () => {
         <div className='flex flex-col gap-3'>
             <h1 className='font-bold text-xl'>Videos</h1>
             <div className='flex gap-5 rounded-lgs text-xs text-gray-400'>
-                <button className='text-blue-500'>Editar</button>
-                <button>Nuevo</button>
-                <button>Borrar</button>
+                <NavLink className='hover:text-blue-500 transition-all duration-100' to='/dashboard/administracion/edit/videos' state={{ logged: true }}>Editar</NavLink>
+                <button className='hover:text-blue-500 transition-all duration-100'>Nuevo</button>
+                <button className='hover:text-blue-500 transition-all duration-100'>Borrar</button>
             </div>
         </div>
       </section>

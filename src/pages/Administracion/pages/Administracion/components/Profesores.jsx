@@ -1,5 +1,5 @@
 import React from 'react'
-import profeImg from '../../../assets/img/profesor-img.svg'
+import profeImg from '../../../../../assets/img/profesor-img.svg'
 
 const Profesores = () => {
   return (

@@ -1,10 +1,10 @@
 import React from 'react'
 import DataTable from 'react-data-table-component'
-import { ApiCatalogo } from '../../../helpers/ApiAdministracion'
-import water from '../../../assets/icons/water.svg'
-import computer from '../../../assets/icons/computer.svg'
-import cuadricula from '../../../assets/icons/cuadricula.svg'
-import ProgressBar from '../../../components/ProgressStatus/ProgressBar'
+import { ApiCatalogo } from '../../../../../helpers/ApiAdministracion'
+import water from '../../../../../assets/icons/water.svg'
+import computer from '../../../../../assets/icons/computer.svg'
+import cuadricula from '../../../../../assets/icons/cuadricula.svg'
+import ProgressBar from '../../../../../components/ProgressStatus/ProgressBar'
 
 const NameTable = ({name}) => {
   return (

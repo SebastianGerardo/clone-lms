@@ -1,5 +1,5 @@
 import React from 'react'
-import CircularProgress from '../../../components/ProgressStatus/CircularProgress'
+import CircularProgress from '../../../../../components/ProgressStatus/CircularProgress'
 
 const Ciclo = () => {
   return (

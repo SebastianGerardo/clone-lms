@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const FormAlumno = () => {
+const FormAlumnoRegistro = () => {
 
   const [colorBoton, setColorBoton] = useState(false)
   const [active, setActive] = useState(true)
@@ -196,4 +196,4 @@ const FormAlumno = () => {
       </div>
   );
 };
-export default FormAlumno;
+export default FormAlumnoRegistro;

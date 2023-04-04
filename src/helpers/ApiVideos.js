@@ -1,0 +1,98 @@
+export const ApiVideos = [
+    {
+        id: 1,
+        nombreCurso: "Nombre del curso",
+        iconoCurso: "water",
+        tema: "Tema 1",
+        profesor: {
+            nombre: "Nombre y Apellido",
+            sexo: "mujer",
+        },
+        nivel: "Básico",
+        duracion: "18h 05m",
+    },
+    {
+        id: 2,
+        nombreCurso: "Nombre del curso",
+        iconoCurso: "water",
+        tema: "Tema 1",
+        profesor: {
+            nombre: "Nombre y Apellido",
+            sexo: "hombre",
+        },
+        nivel: "Medio",
+        duracion: "18h 05m",
+    },
+    {
+        id: 3,
+        nombreCurso: "Nombre del curso",
+        iconoCurso: "water",
+        tema: "Tema 1",
+        profesor: {
+            nombre: "Nombre y Apellido",
+            sexo: "hombre",
+        },
+        nivel: "Avanzado",
+        duracion: "18h 05m",
+    },
+    {
+        id: 4,
+        nombreCurso: "Nombre del curso",
+        iconoCurso: "water",
+        tema: "Tema 1",
+        profesor: {
+            nombre: "Nombre y Apellido",
+            sexo: "mujer",
+        },
+        nivel: "Avanzado",
+        duracion: "18h 05m",
+    },
+    {
+        id: 5,
+        nombreCurso: "Nombre del curso",
+        iconoCurso: "water",
+        tema: "Tema 1",
+        profesor: {
+            nombre: "Nombre y Apellido",
+            sexo: "hombre",
+        },
+        nivel: "Avanzado",
+        duracion: "18h 05m",
+    },
+    {
+        id: 6,
+        nombreCurso: "Nombre del curso",
+        iconoCurso: "water",
+        tema: "Tema 1",
+        profesor: {
+            nombre: "Nombre y Apellido",
+            sexo: "mujer",
+        },
+        nivel: "Medio",
+        duracion: "18h 05m",
+    },
+    {
+        id: 7,
+        nombreCurso: "Nombre del curso",
+        iconoCurso: "water",
+        tema: "Tema 1",
+        profesor: {
+            nombre: "Nombre y Apellido",
+            sexo: "hombre",
+        },
+        nivel: "Básico",
+        duracion: "18h 05m",
+    },
+    {
+        id: 8,
+        nombreCurso: "Nombre del curso",
+        iconoCurso: "water",
+        tema: "Tema 1",
+        profesor: {
+            nombre: "Nombre y Apellido",
+            sexo: "mujer",
+        },
+        nivel: "Medio",
+        duracion: "18h 05m",
+    },
+]
