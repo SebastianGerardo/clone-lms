@@ -1,10 +1,11 @@
 import React from 'react'
 import VideoPlyr from './components/VideoPlyr'
 import profeImg from '../../../../assets/img/user-img.svg'
+import { ApiCursoVideo } from '../../../../helpers/ApiCursos'
 
 const CursoVideo = () => {
   return (
-    <div className='grid grid-cols-[auto_25rem]'>
+    <div className='grid grid-cols-1 min-[820px]:grid-cols-[65%_35%] lg:grid-cols-[70%_30%]'>
       <section>
         <VideoPlyr/>
         <section className='flex flex-col gap-4 p-4 text-gray-400'>
@@ -41,13 +42,22 @@ const CursoVideo = () => {
           </div>
         </section>
       </section>
-      <section className='flex flex-col'>
-        <h1>Modulo</h1>
-        <div>
-          <div>
-            <div>1</div>
-            <p>Intro</p>
-          </div>
+      <section className='flex flex-col px-6 py-2 gap-y-6'>
+        <button className='w-max text-xl p-2 border-b border-black'>Modulo</button>
+        <div className='flex flex-col gap-y-4'>
+          {
+            ApiCursoVideo.map((item) => (
+              <div key={item.id} className='flex justify-between'>
+                <div className='flex items-center gap-2'>
+                  <div className='w-8 h-8 flex justify-center items-center font-semibold rounded-lg bg-[#0052CA] text-white'>{item.numeroVideo}</div>
+                  <p>{item.titulo}</p>
+                </div>
+                <div className='flex flex-col items-center justify-center'>
+                  <span className='text-gray-400/80 text-sm'>{item.duracion}</span>
+                </div>
+              </div>
+            ))
+          }
         </div>
       </section>
     </div>
