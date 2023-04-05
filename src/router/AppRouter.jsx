@@ -10,6 +10,7 @@ import DashboardAdministracion from '../pages/Administracion/RouteAdministracion
 import Administracion from '../pages/Administracion/pages/Administracion/Administracion'
 import FormPadreRegistro from '../pages/Administracion/pages/Formularios/Padres/FormPadreRegistro'
 import Videos from '../pages/Administracion/pages/TableVideos/Videos'
+import Matricula2 from '../pages/Matricula/Matricula'
 
 const AppRouter = () => {
   return (
@@ -25,8 +26,8 @@ const AppRouter = () => {
             </Route>
             <Route path='estadisticas' element={<Estadisticas/>} />
             <Route path='cursos' element={<Cursos />} />
-            <Route path='perfil' element={<h1>Soy el perfil</h1>} />
-            <Route path='matricula' element={<h1>Soy la matricula</h1>} />
+            <Route path='perfil' element={<Matricula2 />} />
+            <Route path='matricula' element={<h1>asdasd</h1>} />
             <Route path='configuracion' element={<h1>Soy la configuracion</h1>} />
         </Route>
     </Routes>
