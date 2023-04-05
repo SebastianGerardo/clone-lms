@@ -1,17 +1,40 @@
-import React from "react";
+import React, { useContext } from "react";
 import userImg from "../../assets/img/user-img.svg";
+import { UserContext } from "../../context/ContextLms";
 
 const Header = () => {
+  const {setShowMenu, showMenu} = useContext(UserContext)
+  
   return (
     <header className="flex py-4 px-8 flex-col min-[790px]:flex-row items-center justify-between gap-4">
-      
-      {/* WELCOME USER */}
-      <div className="flex flex-col items-center justify-center text-center md:justify-start">
-        <h1 className="text-2xl md:text-3xl font-bold text-black">
-          <span className="text-blue-600 text-xl font-bold"><span className="text-black">Hola</span> Alex</span>
-        </h1>
-          <p className="text-gray-400 text-xs">¿Cómo estás hoy?</p>
-      </div>
+      <section className="flex gap-3 items-center">
+        <div className="h-11 w-11 absolute left-8 min-[790px]:relative cursor-pointer lg:hidden text-2xl bg-primary-900 p-2.5 rounded-full text-white z-50 "
+        onClick={() => setShowMenu(!showMenu)}
+        >
+          {showMenu ? 
+            <svg className={`absolute bottom-10 left-40`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9.16998 14.83L14.83 9.17004" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M14.83 14.83L9.16998 9.17004" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="#1D4ED8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            :
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 7H21" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M3 12H21" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M3 17H21" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          }
+        </div>
+
+        {/* WELCOME USER */}
+        <div className="flex flex-col items-center justify-center text-center md:justify-start min-[790px]:hidden min-[925px]:flex">
+          <h1 className="text-2xl md:text-3xl font-bold text-black">
+            <span className="text-blue-600 text-xl font-bold"><span className="text-black">Hola</span> Alex</span>
+          </h1>
+            <p className="text-gray-400 text-xs">¿Cómo estás hoy?</p>
+        </div>
+
+      </section>
 
       {/* SEARCH */}
       <form className="w-full min-[790px]:w-auto">

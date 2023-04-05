@@ -6,6 +6,7 @@ export const UserContext = createContext()
 
 const ContextLms = ({children}) => {
   const [usuarioLogin, setUsuarioLogin] = useState([])
+  const [showMenu, setShowMenu] = useState(false);
   const  navigate = useNavigate()
   const token = localStorage.getItem('token')
 
@@ -26,7 +27,7 @@ const ContextLms = ({children}) => {
   }, [])
 
   return (
-    <UserContext.Provider value={{usuarioLogin, setUsuarioLogin}}>
+    <UserContext.Provider value={{usuarioLogin, setUsuarioLogin, showMenu, setShowMenu}}>
         {children}
     </UserContext.Provider>
   )
