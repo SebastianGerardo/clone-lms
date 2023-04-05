@@ -1,12 +1,11 @@
 import React from 'react'
-import TableCursos from './components/TableCursos'
+import { Outlet } from 'react-router-dom'
+import TableCursos from './pages/CursoMain/components/TableCursos'
 
 const Cursos = () => {
   return (
     <section className='p-8'>
-        <div className='max-w-[1200px] mx-auto flex flex-col gap-y-12'>
-            <TableCursos />
-        </div>
+        <Outlet />
     </section>
   )
 }

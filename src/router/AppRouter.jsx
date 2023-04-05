@@ -11,6 +11,8 @@ import Administracion from '../pages/Administracion/pages/Administracion/Adminis
 import FormPadreRegistro from '../pages/Administracion/pages/Formularios/Padres/FormPadreRegistro'
 import Videos from '../pages/Administracion/pages/TableVideos/Videos'
 import Matricula2 from '../pages/Matricula/Matricula'
+import CursoMain from '../pages/Cursos/pages/CursoMain/CursoMain'
+import CursoVideo from '../pages/Cursos/pages/CursoVideo/CursoVideo'
 
 const AppRouter = () => {
   return (
@@ -25,9 +27,12 @@ const AppRouter = () => {
               <Route path='edit/videos' element={<Videos />} />
             </Route>
             <Route path='estadisticas' element={<Estadisticas/>} />
-            <Route path='cursos' element={<Cursos />} />
-            <Route path='perfil' element={<Matricula2 />} />
-            <Route path='matricula' element={<h1>asdasd</h1>} />
+            <Route path='cursos' element={<Cursos />}>
+              <Route index element={<CursoMain/>} />
+              <Route path='curso-info/:id' element={<CursoVideo/>} />
+            </Route>
+            <Route path='perfil' />
+            <Route path='matricula' element={<Matricula2 />} />
             <Route path='configuracion' element={<h1>Soy la configuracion</h1>} />
         </Route>
     </Routes>
