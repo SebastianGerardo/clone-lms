@@ -19,12 +19,6 @@ const Configuracion = () => {
     }
   };
 
-  const [active, setActive] = useState(true);
-
-  const activarInput = () => {
-    setActive(!active);
-  };
-
   return (
     <div className="bg-white h-full py-6 px-4 sm:px-20">
       {/* BOTÓN DE EDITAR */}
@@ -49,7 +43,7 @@ const Configuracion = () => {
             {/*  NAV */}
             <nav className="flex sm:border-b justify-center sm:justify-start mt-3 flex-wrap w-full sm:w-max mx-auto lg:mx-0 text-[#999999]">
               <button
-                className={`w-max cursor-pointer px-6 mx-0 text-left py-3 border-b-2 sm:text-basic border-transparent transition-all duration-100 hover:text-blue-600 hover:border-blue-600 ${activeTab == "Ciclo" ? "border-blue-600 text-blue-600" : "border-[#D9D9D9]"}`}
+                className={`w-max cursor-pointer px-6 mx-0 text-left py-3 border-b-2 sm:text-basic transition-all duration-100 hover:text-blue-600 hover:border-blue-600 ${activeTab == "Ciclo" ? "border-blue-600 text-blue-600" : "border-[#D9D9D9]"}`}
                 onClick={() => setActiveTab("Ciclo")}
               >
                 <svg
@@ -79,7 +73,7 @@ const Configuracion = () => {
               </button>
 
               <button
-                className={`w-max cursor-pointer px-6 mx-0 text-left py-3 border-b-2 sm:text-basic border-transparent transition-all duration-100 hover:text-blue-600 hover:border-blue-600 ${activeTab == "Cursos" ? "border-blue-600 text-blue-600" : "border-[#D9D9D9]"}`}
+                className={`w-max cursor-pointer px-6 mx-0 text-left py-3 border-b-2 sm:text-basic transition-all duration-100 hover:text-blue-600 hover:border-blue-600 ${activeTab == "Cursos" ? "border-blue-600 text-blue-600" : "border-[#D9D9D9]"}`}
                 onClick={() => setActiveTab("Cursos")}
               >
                 <svg
@@ -115,7 +109,7 @@ const Configuracion = () => {
                 Cursos
               </button>
               <button
-                className={`w-max cursor-pointer px-6 mx-0 text-left py-3 border-b-2 sm:text-basic border-transparent transition-all duration-100 hover:text-blue-600 hover:border-blue-600 ${activeTab == "LearningPath" ? "border-blue-600 text-blue-600" : "border-[#D9D9D9]"}`}
+                className={`w-max cursor-pointer px-6 mx-0 text-left py-3 border-b-2 sm:text-basic transition-all duration-100 hover:text-blue-600 hover:border-blue-600 ${activeTab == "LearningPath" ? "border-blue-600 text-blue-600" : "border-[#D9D9D9]"}`}
                 onClick={() => setActiveTab("LearningPath")}
               >
                 <svg

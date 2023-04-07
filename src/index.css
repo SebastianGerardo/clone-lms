@@ -14,3 +14,15 @@ body {
   display: grid;
   grid-template-columns: auto 1px auto;
 }
+
+/* BREAKPOINTS PERSONALIZADOS */
+
+@media screen and (max-height: 622px) {
+  .menu_max_height_622 {
+    overflow-y: scroll;
+  }
+  .menu_button_max_height_622 {
+    margin-bottom: 1rem;
+  }
+}
+  
