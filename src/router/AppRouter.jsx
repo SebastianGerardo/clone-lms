@@ -13,6 +13,7 @@ import Videos from '../pages/Administracion/pages/TableVideos/Videos'
 import Matricula2 from '../pages/Matricula/Matricula'
 import CursoMain from '../pages/Cursos/pages/CursoMain/CursoMain'
 import CursoVideo from '../pages/Cursos/pages/CursoVideo/CursoVideo'
+import Configuracion from '../pages/Configuracion/Configuracion'
 
 const AppRouter = () => {
   return (
@@ -33,7 +34,7 @@ const AppRouter = () => {
             </Route>
             <Route path='perfil' />
             <Route path='matricula' element={<Matricula2 />} />
-            <Route path='configuracion' element={<h1>Soy la configuracion</h1>} />
+            <Route path='configuracion' element={<Configuracion />} />
         </Route>
     </Routes>
   )
