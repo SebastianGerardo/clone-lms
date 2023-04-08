@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import userImg from "../../assets/img/user-img.svg";
 import { UserContext } from "../../context/ContextLms";
+import PerfilHamburguesa from "./PerfilHamburguesa";
 
 const Header = () => {
   const {setShowMenu, showMenu} = useContext(UserContext)
@@ -11,10 +11,10 @@ const Header = () => {
         <div className="h-11 w-11 cursor-pointer lg:hidden text-2xl p-2.5 rounded-full text-white "
         onClick={() => setShowMenu(!showMenu)}
         >
-            <svg className={showMenu && 'hidden'} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 7H21" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M3 12H21" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M3 17H21" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"/>
+            <svg className={`${showMenu && 'hidden'}`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 7H21" stroke="#292D32" strokeWidth="1.5" strokeLinecap="round"/>
+              <path d="M3 12H21" stroke="#292D32" strokeWidth="1.5" strokeLinecap="round"/>
+              <path d="M3 17H21" stroke="#292D32" strokeWidth="1.5" strokeLinecap="round"/>
             </svg>
         </div>
 
@@ -67,21 +67,7 @@ const Header = () => {
         </svg>
 
         {/* PERFIL HAMBURGUESA */}
-        <button className="flex gap-2 items-center rounded-xl px-4 py-2">
-          <div className="max-w-[3rem] min-w-[3rem] max-h-[3rem] min-h-[3rem] rounded-2xl">
-            <img src={userImg} alt="" className="w-full h-full object-cover" />
-          </div>
-          <div className="flex flex-col text-start">
-            <span>José M.</span>
-            <span className="text-sm text-gray-500">
-              Administrador 
-            </span>
-          </div>
-          {/* ICONO FLECHA */}
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19.9201 8.94995L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.94995" stroke="#292D32" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
+        <PerfilHamburguesa />
 
       </div>
 
