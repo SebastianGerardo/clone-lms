@@ -53,7 +53,7 @@ export const ApiProfesor = [
         estadisticas: {
             numeroVideos: "18",
             promedioPuntuacion: "15",
-            tiempoSistema: "18hrs",
+            tiempoSistema: "18",
         }
     },
     {
@@ -63,7 +63,7 @@ export const ApiProfesor = [
         estadisticas: {
             numeroVideos: "22",
             promedioPuntuacion: "19",
-            tiempoSistema: "36hrs",
+            tiempoSistema: "36",
         }
     },
     {
@@ -73,7 +73,7 @@ export const ApiProfesor = [
         estadisticas: {
             numeroVideos: "6",
             promedioPuntuacion: "14",
-            tiempoSistema: "12hrs",
+            tiempoSistema: "12",
         }
     }
 ]

@@ -81,7 +81,7 @@ const LinksSidebar = () => {
           <li>
             <Logout>
               <button className="flex gap-2 text-red-500 menu_button_max_height_622">
-                <LogoutIcon />
+                <LogoutIcon color={"#EF4444"}/>
                 <span className="pt-[0.15rem] text-center">Cerrar sesión</span>
               </button>
             </Logout>

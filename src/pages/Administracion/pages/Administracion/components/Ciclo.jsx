@@ -18,6 +18,7 @@ const Ciclo = () => {
             <CircularProgress 
               percentage={10} 
               sizeCircle={230}
+              progressCircle={66}
               textContent={"Ciclo 1"}
               colorText={"#0052CA"} 
               colorFondo={"#ccc"} 

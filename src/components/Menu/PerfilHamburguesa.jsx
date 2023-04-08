@@ -34,7 +34,7 @@ const PerfilHamburguesa = () => {
             Administrador 
           </span>
         </div>
-        <ArrowDownIcon />
+        <ArrowDownIcon width={12} height={12}/>
       </button>
 
       <AnimatePresence>
@@ -49,7 +49,7 @@ const PerfilHamburguesa = () => {
           <div className="py-1">
             <Logout>
                 <button onClick={() => setIsOpen(false)} className="flex gap-2 text-red-500 w-full text-start px-4 py-2 text-sm hover:bg-gray-100 transition-all duration-100 ">
-                    <LogoutIcon />
+                    <LogoutIcon color={"#EF4444"} />
                     <span className='pt-[0.15rem] text-center'>Cerrar sesión</span>
                 </button>  
             </Logout>

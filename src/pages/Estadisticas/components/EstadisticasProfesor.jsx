@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { useMemo } from 'react'
 import profeImg from '../../../assets/img/profesor-img.svg'
+import { ArrowDownIcon2 } from '../../../assets/svgs/NormalSvgs'
 import CircularProgress from '../../../components/ProgressStatus/CircularProgress'
 import { ApiProfesor } from '../../../helpers/ApiEstadisticas'
 
 const EstadisticasProfesor = () => {
+    const [dataApi, setDataApi] = useState(ApiProfesor)
     const [index, setIndex] = useState(0)
-    const [selectedProfesorId, setSelectedProfesorId] = useState(1) //DE MOMENTO PONGO EL 1, ESTO SE CAMBIARÁ MÁS ADELANTE
+    const [selectedProfesorId, setSelectedProfesorId] = useState(dataApi.length > 0 ? dataApi[0].id : null)
 
     // ESTA FUNCION SE ENCARGA DE CAMBIAR EL INDEX DEL PROFESOR SELECCIONADO
     const handleProfesorClick = (profesor) => {
@@ -18,7 +20,7 @@ const EstadisticasProfesor = () => {
     
     // EL MEMO ALMACENA LA ULTIMA DATA, Y SOLO RENDERIZA SI HAY UN CAMBIO EN EL INDEX
     const profesorData = useMemo(() => {
-        return ApiProfesor[index]
+        return dataApi[index]
     }, [index])
     
   return (
@@ -29,23 +31,21 @@ const EstadisticasProfesor = () => {
             <section className='w-full p-2 flex justify-between items-center mb-3 mt-1'>
                 <div className='flex items-center gap-2'>
                     <h1 className="text-xl font-bold">Profesores</h1>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19.9201 8.94995L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.94995" stroke="#292D32" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+                    <ArrowDownIcon2 />
                 </div>
             </section>
 
                 {/* LISTA DE PROFESORES */}
             <section className="w-full p-2 rounded-xl overflow-y-auto flex flex-col gap-y-3">
                 {
-                    ApiProfesor.length > 0 ? (ApiProfesor.map((profesor) => (
+                    dataApi.length > 0 ? (dataApi.map((profesor) => (
                         <div 
                          key={profesor.id} 
                          onClick={() => handleProfesorClick(profesor)} 
                          className='flex items-center justify-between border-b pb-4'
                         >
                             <div 
-                             className={`w-full flex items-center gap-3 font-medium cursor-pointer border-2 py-3 px-4 rounded-lg text-gray-400
+                             className={`w-full flex items-center gap-3 font-medium cursor-pointer border-2 py-3 px-4 rounded-lg text-gray-400 hover:border-[#00B0FF] transition-all duration-200 ease-in-out
                              ${profesor.id === selectedProfesorId ? 'border-[#00B0FF]' : 'border-gray-300'}`}
                               
                             >
@@ -80,6 +80,7 @@ const EstadisticasProfesor = () => {
                 <CircularProgress 
                  sizeCircle={145}
                  strokeWidth={25}
+                 progressCircle={profesorData.estadisticas.promedioPuntuacion || "0"}
                  colorFondo={"#ECEFF7"}
                  colorRelleno={"#A0CFCF"}
                  textContent={profesorData.estadisticas.promedioPuntuacion || "0"}
@@ -92,9 +93,10 @@ const EstadisticasProfesor = () => {
                 <CircularProgress 
                  sizeCircle={145}
                  strokeWidth={25}
+                 progressCircle={profesorData.estadisticas.tiempoSistema || "0"}
                  colorFondo={"#ECEFF7"}
                  colorRelleno={"#B9EEFF"}
-                 textContent={profesorData.estadisticas.tiempoSistema || "0hrs"}
+                 textContent={`${profesorData.estadisticas.tiempoSistema || "0"}hrs`}
                  fontWeight={"bold"}
                  fontSize={".9rem"}
                 />
