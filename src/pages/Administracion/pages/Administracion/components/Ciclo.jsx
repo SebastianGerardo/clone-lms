@@ -1,25 +1,42 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import CircularProgress from '../../../../../components/ProgressStatus/CircularProgress'
+import { ApiCiclo } from '../../../../../helpers/ApiAdministracion'
 
 const Ciclo = () => {
+  const [dataApi, setDataApi] = useState(ApiCiclo)
+  const [index, setIndex] = useState(0)
+  const [selectedCicloId, setSelectedCicloId] = useState(dataApi.length > 0 ? dataApi[0].id : null)
+
+  const handleCicloClick = (ciclo) => {
+    if (index + 1 !== ciclo) {
+      setIndex(ciclo - 1)
+      setSelectedCicloId(ciclo)
+    }
+  }
+
+  const dataCiclo = useMemo(() => {
+    return dataApi[index]
+  })
+
+  console.log(dataCiclo)
+
   return (
     <div className='bg-[#F2F8FF] max-w-max flex flex-col justify-between sm:flex-row md:flex-row lg:flex-row xl:flex-row w-max lg:w-full rounded-2xl p-6 pb-5  gap-10'>
         {/* RADIAL DEL CIRCULO */}
       <section className="bg-primary-100  rounded-xl text-gray-300 flex flex-col justify- gap-6">
         <div className='flex gap-2 items-center'>
-            <h4 className="text-xl text-[#11223E] font-extrabold">
-                Ciclo 1
-            </h4>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19.9201 8.94995L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.94995" stroke="#292D32" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+          <select className='cursor-pointer border-none bg-transparent text-xl text-[#11223E] font-extrabold outline-none' name="" id="" onChange={(e) => handleCicloClick(parseInt(e.target.value))}>
+              {dataApi.map((ciclo) => (
+                  <option key={ciclo.id} value={ciclo.id}>{ciclo.nombre}</option>
+              ))}
+          </select>
         </div>
         <div className='h-full flex flex-col justify-center items-center gap-2'>
             <CircularProgress 
               percentage={10} 
               sizeCircle={230}
-              progressCircle={66}
-              textContent={"Ciclo 1"}
+              progressCircle={dataCiclo.process}
+              textContent={dataCiclo.nombre}
               colorText={"#0052CA"} 
               colorFondo={"#ccc"} 
               colorRelleno={"#3751FE"}
@@ -56,9 +73,9 @@ const Ciclo = () => {
           <section className='flex flex-col gap-y-1 font-bold mt-4'>
               <h1 className='text-[#11223E] font-extrabold'>FECHA INICIO</h1>
               <div className='flex gap-2'>
-                  <span className='text-[#3751FE] text-3xl'>24</span> 
+                  <span className='text-[#3751FE] text-3xl'>{dataCiclo?.fechaInicio}</span> 
                   <span className='flex items-end'>
-                      <h2 className='text-[#48566F]'>de enero</h2>
+                      <h2 className='text-[#48566F]'>de {dataCiclo?.mesInicio}</h2>
                   </span>
               </div>
           </section>
