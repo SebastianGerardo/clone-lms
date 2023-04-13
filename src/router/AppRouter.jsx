@@ -10,7 +10,7 @@ import DashboardAdministracion from '../pages/Administracion/RouteAdministracion
 import Administracion from '../pages/Administracion/pages/Administracion/Administracion'
 import FormPadreRegistro from '../pages/Administracion/pages/Formularios/Padres/FormPadreRegistro'
 import Videos from '../pages/Administracion/pages/TableVideos/Videos'
-import Matricula2 from '../pages/Matricula/Matricula'
+import Matricula from '../pages/Matricula/Matricula'
 import CursoMain from '../pages/Cursos/pages/CursoMain/CursoMain'
 import CursoVideo from '../pages/Cursos/pages/CursoVideo/CursoVideo'
 import Configuracion from '../pages/Configuracion/Configuracion'
@@ -33,7 +33,7 @@ const AppRouter = () => {
               <Route path='curso-info/:id' element={<CursoVideo/>} />
             </Route>
             <Route path='perfil' />
-            <Route path='matricula' element={<Matricula2 />} />
+            <Route path='matricula' element={<Matricula />} />
             <Route path='configuracion' element={<Configuracion />} />
         </Route>
     </Routes>
