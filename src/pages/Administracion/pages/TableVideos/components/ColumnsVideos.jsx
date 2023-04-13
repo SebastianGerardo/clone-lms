@@ -1,22 +1,10 @@
 import React from 'react'
 import DataTable from 'react-data-table-component'
+import ButtonManager from '../../../../../components/Buttons/ButtonManager'
+import { NameTable } from '../../../../../components/Tables/TableComponents'
 import { ApiVideos } from '../../../../../helpers/ApiVideos'
 
-
-
-
-const TableVideos = () => {
-  // ELEMENTOS PERSONALIZADOS PARA LA TABLA
-  const customStyles = {
-    rows: {
-      style: {
-        paddingTop: '1rem',
-        paddingBottom: '1rem',
-      }
-    }
-  }
-  
-  const NombreTabla = () => {
+export const ContentTableVideos = () => {
     return (
       <div className='flex flex-col gap-y-2 mb-4 '>
           <h1 className='font-bold text-2xl text-center min-[1235px]:text-start'>Videos</h1>
@@ -27,11 +15,7 @@ const TableVideos = () => {
               <span className='text-white/80'>{"("}{ApiVideos.length}{")"}</span>
             </div>
             {/* BOTONES */}
-            <div className='flex gap-2 rounded-lg p-2 text-xs text-gray-400'>
-              <button className='text-blue-500'>Editar</button>
-              <button>Nuevo</button>
-              <button>Borrar</button>
-            </div>
+            <ButtonManager />
             {/* INPUT BUSCAR */}
             <form className="w-full min-[790px]:w-auto">
               <div className="relative">
@@ -75,14 +59,8 @@ const TableVideos = () => {
       </div>          
     )
   }
-  
-  const NameTable = ({name}) => {
-    return (
-        <h3 className="pl-3 text-center text-gray-500 font-semibold">{name}</h3>
-    )
-  }
 
-  const columns = [
+export const columnsVideos = [
     {
       name: <NameTable name="Curso" />,
       cell: (row) => row.nombreCurso ,
@@ -127,27 +105,3 @@ const TableVideos = () => {
     },
   ]
   
-
-  return (
-    <div>
-      <DataTable
-        title={<NombreTabla />}
-        columns={columns}
-        data={ApiVideos}
-        pagination
-        paginationPerPage={5}
-        paginationRowsPerPageOptions={[5, 10, 15, 20, 25, 30]}
-        paginationComponentOptions={{
-          rowsPerPageText: "Filas por página:",
-          rangeSeparatorText: "de",
-          noRowsPerPage: false,
-          selectAllRowsItem: true,
-          selectAllRowsItemText: "Todos"
-        }}
-        customStyles={customStyles}
-      />
-    </div>
-  )
-}
-
-export default TableVideos

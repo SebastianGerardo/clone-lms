@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from 'react'
+import { MoreIcon } from '../../../../../assets/svgs/NormalSvgs'
 import CircularProgress from '../../../../../components/ProgressStatus/CircularProgress'
 import { ApiCiclo } from '../../../../../helpers/ApiAdministracion'
+import {NavLink} from 'react-router-dom'
 
 const Ciclo = () => {
   const [dataApi, setDataApi] = useState(ApiCiclo)
@@ -17,8 +19,6 @@ const Ciclo = () => {
   const dataCiclo = useMemo(() => {
     return dataApi[index]
   })
-
-  console.log(dataCiclo)
 
   return (
     <div className='bg-[#F2F8FF] max-w-max flex flex-col justify-between sm:flex-row md:flex-row lg:flex-row xl:flex-row w-max lg:w-full rounded-2xl p-6 pb-5  gap-10'>
@@ -54,19 +54,15 @@ const Ciclo = () => {
         <div className='flex flex-col'>
 
             {/* ICONO PUNTITOS */}
-          <div className='flex justify-end mr-1'>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10Z" stroke="#9CA3AF" strokeWidth="1.5"/>
-                  <path d="M19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10Z" stroke="#9CA3AF" strokeWidth="1.5"/>
-                  <path d="M12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z" stroke="#9CA3AF" strokeWidth="1.5"/>
-              </svg>
+          <div className='flex justify-end mr-1 cursor-pointer'>
+              <MoreIcon width={20} height={20} color={"#9CA3AF"}/>
           </div>
 
             {/* BOTONES EDITAR */}
           <section className='flex justify-evenly bg-white rounded-lg p-2 text-xs text-[#4B4C53]'>
-              <button className='text-[#0052CA]'>Editar</button>
-              <button>Nuevo</button>
-              <button>Borrar</button>
+                <NavLink className='hover:text-blue-500 transition-all duration-100' to='/dashboard/administracion/edit/ciclos' state={{ logged: true }}>Editar</NavLink>
+                <button className='hover:text-blue-500 transition-all duration-100'>Nuevo</button>
+                <button className='hover:text-blue-500 transition-all duration-100'>Borrar</button>
           </section>
 
             {/* FECHA INICIO */}

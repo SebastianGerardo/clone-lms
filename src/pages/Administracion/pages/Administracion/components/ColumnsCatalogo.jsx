@@ -2,11 +2,21 @@ import React from "react";
 import water from "../../../../../assets/icons/water.svg";
 import computer from "../../../../../assets/icons/computer.svg";
 import cuadricula from "../../../../../assets/icons/cuadricula.svg";
-import { useNavigate } from "react-router-dom";
-import { NameTable } from "../../../../../components/Tables/TableComponents";
 import ProgressBar from "../../../../../components/ProgressStatus/ProgressBar";
+import { NameTable } from "../../../../../components/Tables/TableComponents";
+import ButtonManager from "../../../../../components/Buttons/ButtonManager";
 
-export const columnsTableCursos = [
+
+export const ContentTableCatalogo = () => {
+  return (
+    <div className="flex justify-between sm:justify-normal sm:gap-32">
+      <h1 className="font-bold text-2xl">{nombre}</h1>
+      <ButtonManager />
+    </div>
+  );
+};
+
+export const columnsCatalogo = [
   {
     name: <NameTable name="Curso" />,
     cell: (row) => {
@@ -40,11 +50,7 @@ export const columnsTableCursos = [
   {
     name: <NameTable name="Nivel" />,
     cell: (row) => (
-      <select
-        className="w-[4.2rem] bg-transparent focus:outline-none"
-        name=""
-        id=""
-      >
+      <select className="w-[4.2rem]" name="" id="">
         {row.nivel.map((item, index) => {
           return (
             <option className="text-gray-500" key={index} value={item}>
@@ -83,25 +89,11 @@ export const columnsTableCursos = [
   },
   {
     name: "",
-    cell: (row) => <NagivateTo />,
+    cell: (row) => <div className="flex items-center gap-3">°°°</div>,
     center: true,
     width: "3rem",
   },
 ];
-
-const NagivateTo = () => {
-  const navigate = useNavigate();
-
-  const cursoInfo = () => {
-    navigate(`curso-info/1`, { state: { logged: true } });
-  };
-
-  return (
-    <div onClick={cursoInfo} className="flex items-center gap-3 cursor-pointer">
-      °°°
-    </div>
-  );
-};
 
 const CurseIcon = {
   water: water,
