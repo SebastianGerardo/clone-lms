@@ -1,7 +1,7 @@
 import React from 'react'
 import TableBasic from '../../../../components/Tables/TableBasic'
 import { ApiVideos } from '../../../../helpers/ApiVideos'
-import { columnsVideos, ContentTableVideos } from './components/ColumnsVideos'
+import { columnsVideos, ContentTableVideos } from './components/TableVideos'
 // import TableVideos from './components/TableVideos'
 
 const Videos = () => {
