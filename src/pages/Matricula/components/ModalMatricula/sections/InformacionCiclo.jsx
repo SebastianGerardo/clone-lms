@@ -4,7 +4,7 @@ const InformacionCiclo = () => {
   return (
     <div className="text-center">
       <h1 className="text-xl font-medium">Información del Ciclo</h1>
-      <table className="mx-auto mt-3">
+      <table className="mx-auto my-10">
         <thead>
           <tr className="grid grid-cols-[40px_93.79px_89.29px] gap-6">
             <th className="font-semibold">Aula</th>
@@ -25,7 +25,7 @@ const InformacionCiclo = () => {
             <h2>Costo: S/.200</h2>
         </div>
         <div>
-            <h2>Promoción Fecha Limite 20 de Abril Dscto 15% </h2>
+            <h2>Promoción: Descuento del 15% si se realiza el pago antes del 20 de Abril.</h2>
         </div>
       </div>
     </div>

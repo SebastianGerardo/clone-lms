@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
-const RegistrarAlumno = ({handleChange, formData}) => {
+const RegistrarPadre = ({ handleChange, formData }) => {
   return (
     <div className="text-start flex flex-col gap-4">
       <div className="w-full h-33 font-semibold text-22 leading-33 text-black">
-        Información del Alumno
+        Información del Apoderado
       </div>
       <form className="flex flex-col sm:grid sm:grid-cols-3 sm:grid-rows-3 gap-y-3 gap-x-8">
         {/* NOMBRE */}
@@ -14,10 +14,10 @@ const RegistrarAlumno = ({handleChange, formData}) => {
               Nombre
             </span>
             <input
-              value={formData?.nombreAlumno}
+              value={formData?.nombreApoderado}
               onChange={handleChange}
               type="text"
-              name="nombreAlumno"
+              name="nombreApoderado"
               placeholder="Diego"
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />
@@ -31,10 +31,10 @@ const RegistrarAlumno = ({handleChange, formData}) => {
               Apellido
             </span>
             <input
-              value={formData?.apellidoAlumno}
+              value={formData?.apellidoApoderado}
               onChange={handleChange}
               type="text"
-              name="apellidoAlumno"
+              name="apellidoApoderado"
               placeholder="Ramirez"
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />
@@ -45,14 +45,14 @@ const RegistrarAlumno = ({handleChange, formData}) => {
         <div className="w-full">
           <label className="flex flex-col gap-y-1">
             <span className="block text-sm font-medium text-gray-400">
-              Nivel
+              Dirección
             </span>
             <input
-              value={formData?.nivelAlumno}
+              value={formData?.direccionApoderado}
               onChange={handleChange}
               type="text"
-              name="nivelAlumno"
-              placeholder="Secundaria"
+              name="direccionApoderado"
+              placeholder="Calle Leonardo da Vinci, 7"
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />
           </label>
@@ -66,19 +66,25 @@ const RegistrarAlumno = ({handleChange, formData}) => {
           <div className="flex items-center gap-3">
             <select
               className="w-20 max-h-[3rem] bg-formButton border border-slate-300 rounded-lg p-3 focus:outline-none disabled:bg-gray-300/50 disabled:text-gray-500"
-              name="tipoDocumentoAlumno"
+              name="tipoDocumentoApoderado"
               onChange={handleChange}
             >
               <option value="">---</option>
-              <option selected={formData.tipoDocumentoAlumno == "DNI"} value="DNI">DNI</option>
-              <option selected={formData.tipoDocumentoAlumno == "Carnet de Extranjeria"} value="Carnet de Extranjeria">Carnet de Extranjeria</option>
-              <option selected={formData.tipoDocumentoAlumno == "Pasaporte"} value="Pasaporte">Pasaporte</option>
+              <option selected={formData?.tipoDocumentoApoderado == "DNI"} value="DNI">
+                DNI
+              </option>
+              <option selected={formData?.tipoDocumentoApoderado == "Carnet de Extranjeria"} value="Carnet de Extranjeria">
+                Carnet de Extranjeria
+              </option>
+              <option selected={formData?.tipoDocumentoApoderado == "Pasaporte"} value="Pasaporte">
+                Pasaporte
+              </option>
             </select>
             <input
-              value={formData?.dniAlumno}
+              value={formData?.dniApoderado}
               onChange={handleChange}
               type="text"
-              name="dniAlumno"
+              name="dniApoderado"
               autoComplete="off"
               placeholder="12345678"
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
@@ -93,10 +99,10 @@ const RegistrarAlumno = ({handleChange, formData}) => {
               Numero de contacto
             </span>
             <input
-              value={formData?.telefonoAlumno}
+              value={formData?.telefonoApoderado}
               onChange={handleChange}
               type="text"
-              name="telefonoAlumno"
+              name="telefonoApoderado"
               placeholder="222444999"
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />
@@ -107,48 +113,31 @@ const RegistrarAlumno = ({handleChange, formData}) => {
         <div className="w-full">
           <label className="flex flex-col gap-y-1">
             <span className="block text-sm font-medium text-gray-400">
-              Grado
+              Parentezco
             </span>
             <input
-              value={formData?.gradoAlumno}
+              value={formData?.parentezco}
               onChange={handleChange}
               type="text"
-              name="gradoAlumno"
-              placeholder="5to"
+              name="parentezco"
+              placeholder="Padre/Madre"
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />
           </label>
         </div>
 
         {/* EMAIL */}
-        <div className="w-full col-start-1 col-end-3">
+        <div className="w-full col-start-1 col-end-4">
           <label className="flex flex-col gap-y-1">
             <span className="block text-sm font-medium text-gray-400">
               Email
             </span>
             <input
-              value={formData?.correoAlumno}
-              onChange={handleChange}
-              type="email"
-              name="correoAlumno"
-              placeholder="example@gmail.com"
-              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-            />
-          </label>
-        </div>
-
-        {/* COLEGIO */}
-        <div className="w-full">
-          <label className="flex flex-col gap-y-1">
-            <span className="block text-sm font-medium text-gray-400">
-              Colegio
-            </span>
-            <input
-              value={formData?.colegioAlumno}
+              value={formData?.correoApoderado}
               onChange={handleChange}
               type="text"
-              name="colegioAlumno"
-              placeholder="I.E.P SAN JOSÉ"
+              name="correoApoderado"
+              placeholder="example@gmail.com"
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />
           </label>
@@ -158,4 +147,4 @@ const RegistrarAlumno = ({handleChange, formData}) => {
   );
 };
 
-export default RegistrarAlumno;
+export default RegistrarPadre;

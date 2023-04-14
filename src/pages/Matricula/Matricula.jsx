@@ -23,24 +23,6 @@ const Matricula = () => {
     setIsOpen(false);
   };
 
-  //
-  const steps = [
-    { title: "Paso 1", description: "Descripción del paso 1" },
-    { title: "Paso 2", description: "Descripción del paso 2" },
-    { title: "Paso 3", description: "Descripción del paso 3" },
-    { title: "Paso 4", description: "Descripción del paso 4" },
-  ];
-
-  const [currentStep, setCurrentStep] = useState(0);
-
-  const handleNextStep = () => {
-    setCurrentStep(currentStep + 1);
-  };
-
-  const handlePrevStep = () => {
-    setCurrentStep(currentStep - 1);
-  };
-
   return (
     <div className="bg-white py-4 px-20 ">
       {/* BOTÓN DE EDITAR */}
@@ -67,7 +49,7 @@ const Matricula = () => {
         ></div>
         <Modal isOpen={isOpen} onClose={handleCloseModal}>
           {/* AQUI VA EL CONTENIDO DEL MODAL */}
-          <ModalMatricula currentStep={currentStep} handleNextStep={handleNextStep} handlePrevStep={handlePrevStep} />
+          <ModalMatricula />
         </Modal>
       </div>
     </div>
