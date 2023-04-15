@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-const CircularProgress = ({ progressCircle = 0, percentage, textContent, colorText, colorRelleno, colorFondo, sizeCircle, fontSize, fontWeight, strokeWidth }) => {
+const CircularProgress = ({ circunference = 45, progressCircle = 0, percentage, textContent, colorText, colorRelleno, colorFondo, sizeCircle, fontSize, fontWeight, strokeWidth }) => {
   const [progress, setProgress] = useState(0);
-  const circleCircumference = 2 * Math.PI * 45;
+  const circleCircumference = 2 * Math.PI * circunference;
   const strokeDashoffset = circleCircumference - (circleCircumference * progressCircle) / 100;
   const strokeWidthCircle = strokeWidth / sizeCircle * 100; // Ajustar el ancho de trazo al tamaño del círculo
   const radius = 45 - strokeWidthCircle / 2; // Ajustar el radio para mantener el borde dentro del viewBox

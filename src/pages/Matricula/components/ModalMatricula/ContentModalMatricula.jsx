@@ -5,7 +5,7 @@ import RegistrarAlumno from "./sections/RegistrarAlumno";
 import RegistrarPadre from "./sections/RegistrarPadre";
 import EmitirComprobante from "./sections/EmitirComprobante";
 
-const ModalMatricula = () => {
+const ContentModalMatricula = ({dataCiclo, mostrarPor}) => {
   const [formData, setFormData] = useState({
     nombreAlumno: "",
     apellidoAlumno: "",
@@ -52,10 +52,10 @@ const ModalMatricula = () => {
   };
 
   const sectionStep = {
-    0: <InformacionCiclo />,
-    1: <RegistrarPadre handleChange={handleChange} formData={formData} />,
-    2: <RegistrarAlumno handleChange={handleChange} formData={formData} />,
-    3: <EmitirComprobante handleChange={handleChange} formData={formData} />,
+    0: <InformacionCiclo dataCiclo={dataCiclo} />,
+    1: <RegistrarPadre handleChange={handleChange} formData={formData} dataCiclo={dataCiclo} />,
+    2: <RegistrarAlumno handleChange={handleChange} formData={formData} dataCiclo={dataCiclo} />,
+    3: <EmitirComprobante handleChange={handleChange} formData={formData} dataCiclo={dataCiclo} />,
   };
 
   const isLastStep = currentStep === Object.keys(sectionStep).length - 1; //comprueba si currentStep es igual a la longitud del objeto sectionStep
@@ -103,4 +103,4 @@ const ModalMatricula = () => {
   );
 };
 
-export default ModalMatricula;
+export default ContentModalMatricula;
