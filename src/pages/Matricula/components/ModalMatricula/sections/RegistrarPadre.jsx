@@ -70,13 +70,24 @@ const RegistrarPadre = ({ handleChange, formData }) => {
               onChange={handleChange}
             >
               <option value="">---</option>
-              <option selected={formData?.tipoDocumentoApoderado == "DNI"} value="DNI">
+              <option
+                selected={formData?.tipoDocumentoApoderado == "DNI"}
+                value="DNI"
+              >
                 DNI
               </option>
-              <option selected={formData?.tipoDocumentoApoderado == "Carnet de Extranjeria"} value="Carnet de Extranjeria">
+              <option
+                selected={
+                  formData?.tipoDocumentoApoderado == "Carnet de Extranjeria"
+                }
+                value="Carnet de Extranjeria"
+              >
                 Carnet de Extranjeria
               </option>
-              <option selected={formData?.tipoDocumentoApoderado == "Pasaporte"} value="Pasaporte">
+              <option
+                selected={formData?.tipoDocumentoApoderado == "Pasaporte"}
+                value="Pasaporte"
+              >
                 Pasaporte
               </option>
             </select>

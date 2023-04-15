@@ -22,10 +22,13 @@ const InformacionCiclo = () => {
       </table>
       <div>
         <div>
-            <h2>Costo: S/.200</h2>
+          <h2>Costo: S/.200</h2>
         </div>
         <div>
-            <h2>Promoción: Descuento del 15% si se realiza el pago antes del 20 de Abril.</h2>
+          <h2>
+            Promoción: Descuento del 15% si se realiza el pago antes del 20 de
+            Abril.
+          </h2>
         </div>
       </div>
     </div>

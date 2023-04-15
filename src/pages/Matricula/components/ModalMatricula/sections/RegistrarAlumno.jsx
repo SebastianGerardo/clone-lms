@@ -1,6 +1,6 @@
 import React from "react";
 
-const RegistrarAlumno = ({handleChange, formData}) => {
+const RegistrarAlumno = ({ handleChange, formData }) => {
   return (
     <div className="text-start flex flex-col gap-4">
       <div className="w-full h-33 font-semibold text-22 leading-33 text-black">
@@ -70,9 +70,26 @@ const RegistrarAlumno = ({handleChange, formData}) => {
               onChange={handleChange}
             >
               <option value="">---</option>
-              <option selected={formData.tipoDocumentoAlumno == "DNI"} value="DNI">DNI</option>
-              <option selected={formData.tipoDocumentoAlumno == "Carnet de Extranjeria"} value="Carnet de Extranjeria">Carnet de Extranjeria</option>
-              <option selected={formData.tipoDocumentoAlumno == "Pasaporte"} value="Pasaporte">Pasaporte</option>
+              <option
+                selected={formData.tipoDocumentoAlumno == "DNI"}
+                value="DNI"
+              >
+                DNI
+              </option>
+              <option
+                selected={
+                  formData.tipoDocumentoAlumno == "Carnet de Extranjeria"
+                }
+                value="Carnet de Extranjeria"
+              >
+                Carnet de Extranjeria
+              </option>
+              <option
+                selected={formData.tipoDocumentoAlumno == "Pasaporte"}
+                value="Pasaporte"
+              >
+                Pasaporte
+              </option>
             </select>
             <input
               value={formData?.dniAlumno}

@@ -61,7 +61,7 @@ export const SettingIcon = ({isActive}) => {
     )
 }
 
-export const EditIcon = ({isActive, width = 24, height = 24, color, colorChange}) => {
+export const EditIcon = ({isActive, width = 24, height = 24, color = "#292D32", colorChange}) => {
     return (
       <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M11 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22H15C20 22 22 20 22 15V13" stroke={isActive ? colorChange : color} strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"/>
@@ -71,7 +71,7 @@ export const EditIcon = ({isActive, width = 24, height = 24, color, colorChange}
     )
 }
 
-export const SaveIcon = ({isActive, width = 24, height = 24, color, colorChange}) => {
+export const SaveIcon = ({isActive, width = 24, height = 24, color = "#292D32", colorChange}) => {
     return (
       <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M20.5 11.3V7.04001C20.5 3.01001 19.56 2 15.78 2H8.22C4.44 2 3.5 3.01001 3.5 7.04001V18.3C3.5 20.96 4.96001 21.59 6.73001 19.69L6.73999 19.68C7.55999 18.81 8.80999 18.88 9.51999 19.83L10.53 21.18" stroke={isActive ? colorChange : color} strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"/>
@@ -79,6 +79,26 @@ export const SaveIcon = ({isActive, width = 24, height = 24, color, colorChange}
         <path opacity="0.4" d="M9 11H15" stroke={isActive ? colorChange : color} strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"/>
         <path d="M18.2091 14.7698L14.6691 18.3098C14.5291 18.4498 14.3991 18.7098 14.3691 18.8998L14.1791 20.2498C14.1091 20.7398 14.4491 21.0798 14.9391 21.0098L16.2891 20.8198C16.4791 20.7898 16.7491 20.6598 16.8791 20.5198L20.4191 16.9798C21.0291 16.3698 21.3191 15.6598 20.4191 14.7598C19.5291 13.8698 18.8191 14.1598 18.2091 14.7698Z" stroke={isActive ? colorChange : color} strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" stroke-linejoin="round"/>
         <path d="M17.6992 15.2798C17.9992 16.3598 18.8392 17.1998 19.9192 17.4998" stroke={isActive ? colorChange : color} strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" stroke-linejoin="round"/>
+      </svg>
+    )
+}
+
+export const FilterIcon = ({isActive, width = 24, height = 24, color = "#292D32", colorChange}) => {
+    return (
+      <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" >
+        <path d="M19.9 13.5H4.1C2.6 13.5 2 14.14 2 15.73V19.77C2 21.36 2.6 22 4.1 22H19.9C21.4 22 22 21.36 22 19.77V15.73C22 14.14 21.4 13.5 19.9 13.5Z" fill={color} />
+        <path d="M12.9 2H4.1C2.6 2 2 2.64 2 4.23V8.27C2 9.86 2.6 10.5 4.1 10.5H12.9C14.4 10.5 15 9.86 15 8.27V4.23C15 2.64 14.4 2 12.9 2Z" fill={color} />
+      </svg>
+    )
+}
+
+export const FilterIcon2 = ({isActive, width = 24, height = 24, color = "#292D32" , colorChange}) => {
+    return (
+      <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" >
+        <path d="M22 8.52V3.98C22 2.57 21.36 2 19.77 2H15.73C14.14 2 13.5 2.57 13.5 3.98V8.51C13.5 9.93 14.14 10.49 15.73 10.49H19.77C21.36 10.5 22 9.93 22 8.52Z" fill={color} />
+        <path d="M22 19.77V15.73C22 14.14 21.36 13.5 19.77 13.5H15.73C14.14 13.5 13.5 14.14 13.5 15.73V19.77C13.5 21.36 14.14 22 15.73 22H19.77C21.36 22 22 21.36 22 19.77Z" fill={color} />
+        <path d="M10.5 8.52V3.98C10.5 2.57 9.86 2 8.27 2H4.23C2.64 2 2 2.57 2 3.98V8.51C2 9.93 2.64 10.49 4.23 10.49H8.27C9.86 10.5 10.5 9.93 10.5 8.52Z" fill={color} />
+        <path d="M10.5 19.77V15.73C10.5 14.14 9.86 13.5 8.27 13.5H4.23C2.64 13.5 2 14.14 2 15.73V19.77C2 21.36 2.64 22 4.23 22H8.27C9.86 22 10.5 21.36 10.5 19.77Z" fill={color} />
       </svg>
     )
 }
