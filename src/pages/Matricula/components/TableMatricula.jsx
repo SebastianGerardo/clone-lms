@@ -2,10 +2,9 @@ import React from "react";
 import { MoreIcon } from "../../../assets/svgs/NormalSvgs";
 import TableBasic from "../../../components/Tables/TableBasic";
 import { NameTable } from "../../../components/Tables/TableComponents";
-import { ApiCiclos } from "../../../helpers/ApiMatricula";
 import escudo from "../../../assets/icons/escudo.svg";
 
-export const TableMatriculaPersonalized = ({ handleOpenModal }) => {
+export const TableMatriculaPersonalized = ({ handleOpenModal, data }) => {
   const columnsDataMatricula = [
     {
       name: <NameTable name="Ciclos" />,
@@ -70,5 +69,5 @@ export const TableMatriculaPersonalized = ({ handleOpenModal }) => {
     },
   ];
 
-  return <TableBasic columns={columnsDataMatricula} data={ApiCiclos} />;
+  return <TableBasic columns={columnsDataMatricula} data={data} />;
 };

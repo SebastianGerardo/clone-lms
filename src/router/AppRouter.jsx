@@ -13,7 +13,8 @@ import Videos from '../pages/Administracion/pages/TableVideos/Videos'
 import Matricula from '../pages/Matricula/Matricula'
 import CursoMain from '../pages/Cursos/pages/CursoMain/CursoMain'
 import CursoVideo from '../pages/Cursos/pages/CursoVideo/CursoVideo'
-import Configuracion from '../pages/Configuracion/Configuracion'
+import Perfil from '../pages/Perfil/Perfil'
+import ConfiguracionAdministracion from '../pages/Administracion/pages/Configuracion/Configuracion'
 
 const AppRouter = () => {
   return (
@@ -26,15 +27,17 @@ const AppRouter = () => {
               <Route path='edit/alumno' element={<FormAlumnoRegistro />} />
               <Route path='edit/padre' element={<FormPadreRegistro />} />
               <Route path='edit/videos' element={<Videos />} />
+                {/* CONFIGURACION */}
+              <Route path='configuracion' element={<ConfiguracionAdministracion />} />
             </Route>
             <Route path='estadisticas' element={<Estadisticas/>} />
             <Route path='cursos' element={<Cursos />}>
               <Route index element={<CursoMain/>} />
               <Route path='curso-info/:id' element={<CursoVideo/>} />
             </Route>
-            <Route path='perfil' />
+            <Route path='perfil' element={<Perfil />} />
             <Route path='matricula' element={<Matricula />} />
-            <Route path='configuracion' element={<Configuracion />} />
+            <Route path='configuracion' />
         </Route>
     </Routes>
   )

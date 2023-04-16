@@ -27,7 +27,7 @@ const InformacionCiclo = ({dataCiclo}) => {
 
 
   return (
-    <div className="text-center">
+    <div className="text-center ">
       <h1 className="text-xl font-medium">Información del Ciclo</h1>
       {/* <table className="mx-auto my-10">
         <thead>

@@ -61,7 +61,7 @@ const ContentModalMatricula = ({dataCiclo, mostrarPor}) => {
   const isLastStep = currentStep === Object.keys(sectionStep).length - 1; //comprueba si currentStep es igual a la longitud del objeto sectionStep
 
   return (
-    <div className="w-[55rem] ">
+    <div className="lg:w-[55rem]">
       <div>
         <StepProgressBar steps={4} currentStep={currentStep} />
       </div>

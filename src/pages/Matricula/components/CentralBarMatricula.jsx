@@ -3,13 +3,17 @@ import { FilterIcon, FilterIcon2 } from "../../../assets/svgs/ActiveSvgs";
 import { SearchIcon } from "../../../assets/svgs/NormalSvgs";
 import ButtonManager from "../../../components/Buttons/ButtonManager";
 
-export const CentralBarMatricula = ({ dataCiclos, mostrarPor, setMostrarPor }) => {
+export const CentralBarMatricula = ({ dataCiclos, mostrarPor, setMostrarPor, setDataCiclosFiltrados, dataCiclosFiltrados }) => {
+    const handleSearch = (e) => {
+      const { value } = e.target;
+      setDataCiclosFiltrados(value);
+    }
     return (
       <div className="flex flex-col gap-y-2 mb-4 ">
         <h1 className="font-bold text-2xl text-center min-[1235px]:text-start">
           Matricula
         </h1>
-        <section className="flex flex-col min-[1235px]:flex-row min-[1235px]:justify-around items-center gap-y-4">
+        <section className="flex flex-col min-[885px]:flex-row min-[800px]:justify-between  min-[1235px]:flex-row min-[1235px]:justify-around items-center gap-y-4">
           {/* TOTAL DE VIDEOS */}
           <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#0052CA] text-white">
             <p>Total de ciclos</p>
@@ -24,6 +28,8 @@ export const CentralBarMatricula = ({ dataCiclos, mostrarPor, setMostrarPor }) =
                 <SearchIcon color="#A4B2CD" />
               </div>
               <input
+                onChange={handleSearch}
+                value={dataCiclosFiltrados}
                 type="text"
                 name="search"
                 id="search"

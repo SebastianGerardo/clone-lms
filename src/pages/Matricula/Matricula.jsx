@@ -16,7 +16,14 @@ export default function Matricula() {
   const [selectCicloId, setSelectCicloId] = useState(null);
   const [mostrarPor, setMostrarPor] = useState(true);
   const [loader, setLoader] = useState(true);
+  const [dataCiclosFiltrados, setDataCiclosFiltrados] = useState("");
 
+  const dataFiltrada = dataCiclos.filter((ciclo) => {
+    return (
+      ciclo.nombre &&
+      ciclo.nombre.toLowerCase().includes(dataCiclosFiltrados.toLowerCase())
+    );
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,8 +46,10 @@ export default function Matricula() {
   };
 
   return (
-    <div className="bg-white py-4 px-20 ">
+    <div className="bg-white py-4 px-10 lg:px-20 ">
       <CentralBarMatricula
+        setDataCiclosFiltrados={setDataCiclosFiltrados}
+        dataCiclosFiltrados={dataCiclosFiltrados}
         dataCiclos={dataCiclos}
         mostrarPor={mostrarPor}
         setMostrarPor={setMostrarPor}
@@ -54,14 +63,14 @@ export default function Matricula() {
           ) : (
             <AnimatePresence>
               <motion.section
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }} 
-              className="grid grid-cols-1 gap-y-4 lg:grid-cols-4 mt-4 lg:gap-y-0"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 md:grid-cols-4 md:gap-x-14 mt-4 md:gap-y-0 "
               >
-                {dataCiclos.length > 0 &&
-                  dataCiclos.map((item, index) => (
+                {dataFiltrada.length > 0 &&
+                  dataFiltrada.map((item, index) => (
                     <div
                       key={item.id}
                       onClick={() => handleOpenModal(item.id)}
@@ -76,23 +85,24 @@ export default function Matricula() {
               </motion.section>
             </AnimatePresence>
           )
+        ) : loader ? (
+          <AnimatePresence>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+            >
+              <TableMatriculaPersonalized
+                handleOpenModal={handleOpenModal}
+                data={dataFiltrada}
+              />
+            </motion.div>
+          </AnimatePresence>
         ) : (
-          loader ? (
-            <AnimatePresence>
-              <motion.div 
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }} 
-              >
-                <TableMatriculaPersonalized handleOpenModal={handleOpenModal} />
-              </motion.div>
-            </AnimatePresence>
-          ) : (
-            <div className="flex justify-center items-center h-[20rem]">
-              <Ripples color="#2563EB" />
-            </div>
-          )
+          <div className="flex justify-center items-center h-[20rem]">
+            <Ripples color="#2563EB" />
+          </div>
         )}
         <Modal isOpen={isOpen} onClose={handleCloseModal}>
           <ContentModalMatricula

@@ -45,7 +45,7 @@ const LinksSidebar = () => {
   const LinksSistema = [
     {
       name: "Configuración",
-      icon: <SettingIcon />,
+      icon: <SettingIcon colorChange={"#fff"} />,
       to: "/dashboard/configuracion",
     },
   ];
