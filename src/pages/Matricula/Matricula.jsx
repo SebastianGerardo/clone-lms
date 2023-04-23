@@ -2,13 +2,23 @@ import React, { useCallback, useRef, useState } from "react";
 import Modal from "../../components/Modal/Modal";
 import ContentModalMatricula from "./components/ModalMatricula/ContentModalMatricula";
 import { ApiCiclos } from "../../helpers/ApiMatricula";
-import escudo from "../../assets/icons/escudo.svg";
+import ciclo_uni from "../../assets/img/ciclo-uni.png";
+import ciclo_unasam from "../../assets/img/ciclo-unasam.png";
+import ciclo_pucp from "../../assets/img/ciclo-pucp.png";
+import ciclo_catolica from "../../assets/img/ciclo-catolica.png";
 import { useMemo } from "react";
 import { TableMatriculaPersonalized } from "./components/TableMatricula";
 import { CentralBarMatricula } from "./components/CentralBarMatricula";
 import { Ripples } from "@uiball/loaders";
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
+const cicloImg = {
+  "Ciclo Pre Uni": ciclo_uni,
+  "Ciclo Católica": ciclo_catolica,
+  "Ciclo Medicina": ciclo_pucp,
+  "Ciclo Unasam": ciclo_unasam,
+}
 
 export default function Matricula() {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,7 +86,10 @@ export default function Matricula() {
                       onClick={() => handleOpenModal(item.id)}
                       className="cursor-pointer mx-auto flex flex-col gap-y-4 justify-center items-center rounded-xl w-[10rem] h-[10rem] bg-blue-200/70"
                     >
-                      <img src={escudo} alt="escudo" />
+                      <div className="w-20 object-cover">
+                      <img src={cicloImg[item.nombre]} alt="escudo" className="w-full h-full" />
+
+                      </div>
                       <h1 className="text-center font-poppins text-blue-600">
                         {item.nombre}
                       </h1>

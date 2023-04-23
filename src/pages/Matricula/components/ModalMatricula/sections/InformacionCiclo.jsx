@@ -2,19 +2,20 @@ import React, { useMemo, useState } from "react";
 import Select from "../../../../../components/Inputs/Select";
 import CircularProgress from "../../../../../components/ProgressStatus/CircularProgress";
 
-const InformacionCiclo = ({dataCiclo}) => {
-  
-  const dataFiltrada = dataCiclo.aulas.map(({id, nombre}) => ({
+const InformacionCiclo = ({ dataCiclo }) => {
+  const dataFiltrada = dataCiclo.aulas.map(({ id, nombre }) => ({
     value: id,
     label: nombre,
-  }))
-  
+  }));
+
   const options = dataFiltrada;
-  const [aulaSeleccionada, setAulaSeleccionada] = useState(dataFiltrada[0].value);
+  const [aulaSeleccionada, setAulaSeleccionada] = useState(
+    dataFiltrada[0].value
+  );
 
   const DataAulaSeleccionada = useMemo(() => {
     return dataCiclo.aulas.find((aula) => aula.id === aulaSeleccionada);
-  }, [aulaSeleccionada])
+  }, [aulaSeleccionada]);
 
   const cantAlumnoMatriculado = DataAulaSeleccionada.disponible;
   const cantTotalAula = DataAulaSeleccionada.capacidad;
@@ -24,7 +25,6 @@ const InformacionCiclo = ({dataCiclo}) => {
   const handleChange = (selectedOption) => {
     setAulaSeleccionada(selectedOption.value);
   };
-
 
   return (
     <div className="text-center ">
@@ -51,16 +51,16 @@ const InformacionCiclo = ({dataCiclo}) => {
           onChange={handleChange}
           classes={"min-w-[12rem]"}
         />
-        <CircularProgress 
-        circunference={37}
-        sizeCircle={145}
-        strokeWidth={25}
-        progressCircle={cantAlumnosRestantes}
-        colorFondo={"#ECEFF7"}
-        colorRelleno={"#A0CFCF"}
-        textContent={`${parseInt(cantAlumnosRestantes)} %`}
-        fontWeight={"bold"}
-        fontSize={"1rem"}
+        <CircularProgress
+          circunference={37}
+          sizeCircle={145}
+          strokeWidth={25}
+          progressCircle={cantAlumnosRestantes}
+          colorFondo={"#ECEFF7"}
+          colorRelleno={"#A0CFCF"}
+          textContent={`${parseInt(cantAlumnosRestantes)} %`}
+          fontWeight={"bold"}
+          fontSize={"1rem"}
         />
       </div>
       <div>

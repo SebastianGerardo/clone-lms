@@ -1,12 +1,79 @@
 import React, { useState } from "react";
+import { usePayment } from "../../../../../hooks/usePayment";
 
 const EmitirComprobante = ({ handleChange, formData }) => {
+  const [formValues, setFormValues] = useState({
+    fechaMatricula: getFechaActual(),
+    montoPago: "",
+    tipoDePago: "",
+    modalidadDePago: "",
+    ciclo: "",
+    local: "",
+  });
+
+  function handleChange(event) {
+    setFormValues({ ...formValues, [event.target.name]: event.target.value });
+  }
+
+  function getFechaActual() {
+    const fecha = new Date();
+    const mes =
+      fecha.getMonth() + 1 < 10
+        ? `0${fecha.getMonth() + 1}`
+        : fecha.getMonth() + 1;
+    const dia = fecha.getDate() < 10 ? `0${fecha.getDate()}` : fecha.getDate();
+    return `${fecha.getFullYear()}-${mes}-${dia}`;
+  }
+
+  // const { payment } = usePayment(
+  //   250, // total
+  //   true, // si es plazo es true
+  //   100, // commission
+  //   2, // Cuantos meses
+  //   1 //tasa de interes
+  // );
+
+  // console.log("installmentAmount", payment.installmentAmount);
+  // console.log("totalWithCommission", payment.totalWithCommission);
+  // console.log(usePayment(150, true,  0,  2,  0 ));
+  // console.log("payment", payment);
+
   return (
     <div className="text-start flex flex-col gap-4">
       <div className="w-full h-33 font-semibold text-22 leading-33 text-black">
         Generar Pago
       </div>
       <form className="flex flex-col sm:grid sm:grid-cols-3 sm:grid-rows-3 gap-y-3 gap-x-8">
+        
+
+        {/* MODALIDAD DE PAGO */}
+        <div className="w-full flex flex-col gap-y-1">
+          <span className="block text-sm font-medium text-gray-400">
+            Modalidad de pago
+          </span>
+          <div className="flex items-center gap-3">
+            <select
+              className="w-full max-h-[3rem] bg-formButton border border-slate-300 rounded-lg p-3 focus:outline-none disabled:bg-gray-300/50 disabled:text-gray-500 text-[0.925rem]"
+              name="modalidadDePago"
+              onChange={handleChange}
+            >
+              <option value="">---</option>
+              <option
+                selected={formData.modalidadDePago == "contado"}
+                value="contado"
+              >
+                Contado
+              </option>
+              <option
+                selected={formData.modalidadDePago == "plazos"}
+                value="plazos"
+              >
+                Plazos
+              </option>
+            </select>
+          </div>
+        </div>
+
         {/* MONTO */}
         <div className="w-full">
           <label className="flex flex-col gap-y-1">
@@ -18,13 +85,14 @@ const EmitirComprobante = ({ handleChange, formData }) => {
               value={formData.montoPago}
               type="text"
               name="montoPago"
+              disabled
               placeholder="Monto pagado"
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />
           </label>
         </div>
-        {/* TIPO DE PAGO */}
 
+        {/* FORMA DE PAGO */}
         <div className="w-full flex flex-col gap-y-1">
           <span className="block text-sm font-medium text-gray-400">
             Forma de Pago
@@ -58,33 +126,7 @@ const EmitirComprobante = ({ handleChange, formData }) => {
           </div>
         </div>
 
-        {/* MODALIDAD DE PAGO */}
-        <div className="w-full flex flex-col gap-y-1">
-          <span className="block text-sm font-medium text-gray-400">
-            Modalidad de pago
-          </span>
-          <div className="flex items-center gap-3">
-            <select
-              className="w-full max-h-[3rem] bg-formButton border border-slate-300 rounded-lg p-3 focus:outline-none disabled:bg-gray-300/50 disabled:text-gray-500 text-[0.925rem]"
-              name="modalidadDePago"
-              onChange={handleChange}
-            >
-              <option value="">---</option>
-              <option
-                selected={formData.modalidadDePago == "contado"}
-                value="contado"
-              >
-                Contado
-              </option>
-              <option
-                selected={formData.modalidadDePago == "plazos"}
-                value="plazos"
-              >
-                Plazos
-              </option>
-            </select>
-          </div>
-        </div>
+        
 
         {/* CICLO */}
         <div className="w-full flex flex-col gap-y-1">
@@ -112,6 +154,25 @@ const EmitirComprobante = ({ handleChange, formData }) => {
           </div>
         </div>
 
+        {/* LOCAL */}
+        <div className="w-full flex flex-col gap-y-1">
+          <span className="block text-sm font-medium text-gray-400">Local</span>
+          <div className="flex items-center gap-3">
+            <select
+              className="w-full max-h-[3rem] bg-formButton border border-slate-300 rounded-lg p-3 focus:outline-none disabled:bg-gray-300/50 disabled:text-gray-500 text-[0.925rem]"
+              name="local"
+              onChange={handleChange}
+            >
+              <option value="">---</option>
+              <option selected={formData.local == "Local_1"} value="Local_1">
+                Local-1
+              </option>
+              <option selected={formData.local == "Local_2"} value="Local_2">
+                Local-2
+              </option>
+            </select>
+          </div>
+        </div>
         {/* AULA-SECCIÓN */}
         <div className="w-full flex flex-col gap-y-1">
           <span className="block text-sm font-medium text-gray-400">
@@ -152,26 +213,6 @@ const EmitirComprobante = ({ handleChange, formData }) => {
           </div>
         </div>
 
-        {/* USUARIO-ATENCIÓN */}
-        <div className="w-full flex flex-col gap-y-1">
-          <span className="block text-sm font-medium text-gray-400">Local</span>
-          <div className="flex items-center gap-3">
-            <select
-              className="w-full max-h-[3rem] bg-formButton border border-slate-300 rounded-lg p-3 focus:outline-none disabled:bg-gray-300/50 disabled:text-gray-500 text-[0.925rem]"
-              name="local"
-              onChange={handleChange}
-            >
-              <option value="">---</option>
-              <option selected={formData.local == "Local_1"} value="Local_1">
-                Local-1
-              </option>
-              <option selected={formData.local == "Local_2"} value="Local_2">
-                Local-2
-              </option>
-            </select>
-          </div>
-        </div>
-
         {/* FECHA */}
         <div className="flex flex-col gap-y-2">
           <label className="block text-sm font-medium text-gray-400">
@@ -180,36 +221,26 @@ const EmitirComprobante = ({ handleChange, formData }) => {
           <input
             type="date"
             onChange={handleChange}
-            value={formData.fechaMatricula}
+            value={formValues.fechaMatricula}
             name="fechaMatricula"
-            className="w-full p-3 h-[3rem] block rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-          />
-        </div>
-        {/* HORA - MATRICULA */}
-        <div className="flex flex-col gap-y-2">
-          <label className="block text-sm font-medium text-gray-400">
-            Hora Matricula
-          </label>
-          <input
-            onChange={handleChange}
-            value={formData.horaMatricula}
-            type="time"
-            name="horaMatricula"
             className="w-full p-3 h-[3rem] block rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
           />
         </div>
 
         {/* USUARIO-ATENCIÓN */}
-        <div className="flex flex-col gap-y-2">
-          <label className="block text-sm font-medium text-gray-400">
-            Usuario que atendió
-          </label>
-          <input
-            value={`${formData.nombreApoderado} ${formData.apellidoApoderado}`}
-            type="text"
-            disabled
-            className="w-full p-3 h-[3rem] block rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-          />
+        <div className="col-span-2">
+          {/* USUARIO-ATENCIÓN */}
+          <div className="flex flex-col gap-y-2">
+            <label className="block text-sm font-medium text-gray-400">
+              Usuario que atendió
+            </label>
+            <input
+              value={`${formData.nombreApoderado} ${formData.apellidoApoderado}`}
+              type="text"
+              disabled
+              className="w-full p-3 h-[3rem] block rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
+            />
+          </div>
         </div>
       </form>
     </div>

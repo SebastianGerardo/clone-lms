@@ -7,57 +7,6 @@ const RegistrarPadre = ({ handleChange, formData }) => {
         Información del Apoderado
       </div>
       <form className="flex flex-col sm:grid sm:grid-cols-3 sm:grid-rows-3 gap-y-3 gap-x-8">
-        {/* NOMBRE */}
-        <div className="w-full">
-          <label className="flex flex-col gap-y-1">
-            <span className="block text-sm font-medium text-gray-400">
-              Nombre
-            </span>
-            <input
-              value={formData?.nombreApoderado}
-              onChange={handleChange}
-              type="text"
-              name="nombreApoderado"
-              placeholder="Diego"
-              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-            />
-          </label>
-        </div>
-
-        {/* APELLIDO */}
-        <div className="w-full">
-          <label className="flex flex-col gap-y-1">
-            <span className="block text-sm font-medium text-gray-400">
-              Apellido
-            </span>
-            <input
-              value={formData?.apellidoApoderado}
-              onChange={handleChange}
-              type="text"
-              name="apellidoApoderado"
-              placeholder="Ramirez"
-              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-            />
-          </label>
-        </div>
-
-        {/* NIVEL */}
-        <div className="w-full">
-          <label className="flex flex-col gap-y-1">
-            <span className="block text-sm font-medium text-gray-400">
-              Dirección
-            </span>
-            <input
-              value={formData?.direccionApoderado}
-              onChange={handleChange}
-              type="text"
-              name="direccionApoderado"
-              placeholder="Calle Leonardo da Vinci, 7"
-              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-            />
-          </label>
-        </div>
-
         {/* TIPO DE DOCUMENTO */}
         <div className="w-full flex flex-col gap-y-1">
           <span className="block text-sm font-medium text-gray-400">
@@ -103,6 +52,73 @@ const RegistrarPadre = ({ handleChange, formData }) => {
           </div>
         </div>
 
+        {/* NOMBRE */}
+        <div className="w-full">
+          <label className="flex flex-col gap-y-1">
+            <span className="block text-sm font-medium text-gray-400">
+              Nombre
+            </span>
+            <input
+              value={formData?.nombreApoderado}
+              onChange={handleChange}
+              type="text"
+              name="nombreApoderado"
+              placeholder="Diego"
+              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
+            />
+          </label>
+        </div>
+
+        {/* APELLIDO-MATERNO */}
+        <div className="w-full">
+          <label className="flex flex-col gap-y-1">
+            <span className="block text-sm font-medium text-gray-400">
+              Apellido Paterno
+            </span>
+            <input
+              value={formData?.apellidoApoderado}
+              onChange={handleChange}
+              type="text"
+              name="apellidoPaterno"
+              placeholder="Ramirez"
+              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
+            />
+          </label>
+        </div>
+
+        {/* APELLIDO-MATERNO */}
+        <div className="w-full">
+          <label className="flex flex-col gap-y-1">
+            <span className="block text-sm font-medium text-gray-400">
+              Apellido Materno
+            </span>
+            <input
+              value={formData?.apellidoApoderado}
+              onChange={handleChange}
+              type="text"
+              name="apellidoMaterno"
+              placeholder="Ramirez"
+              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
+            />
+          </label>
+        </div>
+        {/* NIVEL */}
+        <div className="w-full">
+          <label className="flex flex-col gap-y-1">
+            <span className="block text-sm font-medium text-gray-400">
+              Dirección
+            </span>
+            <input
+              value={formData?.direccionApoderado}
+              onChange={handleChange}
+              type="text"
+              name="direccionApoderado"
+              placeholder="Calle Leonardo da Vinci, 7"
+              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
+            />
+          </label>
+        </div>
+
         {/* NUMERO DE CONTACTO */}
         <div className="w-full">
           <label className="flex flex-col gap-y-1">
@@ -120,8 +136,8 @@ const RegistrarPadre = ({ handleChange, formData }) => {
           </label>
         </div>
 
-        {/* GRADO */}
-        <div className="w-full">
+        {/* PARENTEZCO */}
+        <div className="w-full  col-start-1 col-end-2">
           <label className="flex flex-col gap-y-1">
             <span className="block text-sm font-medium text-gray-400">
               Parentezco
@@ -138,20 +154,22 @@ const RegistrarPadre = ({ handleChange, formData }) => {
         </div>
 
         {/* EMAIL */}
-        <div className="w-full col-start-1 col-end-4">
-          <label className="flex flex-col gap-y-1">
-            <span className="block text-sm font-medium text-gray-400">
-              Email
-            </span>
-            <input
-              value={formData?.correoApoderado}
-              onChange={handleChange}
-              type="text"
-              name="correoApoderado"
-              placeholder="example@gmail.com"
-              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-            />
-          </label>
+        <div className="col-span-2">
+          <div className="w-full col-start-0  col-end-3">
+            <label className="flex flex-col gap-y-1">
+              <span className="block text-sm font-medium text-gray-400">
+                Email
+              </span>
+              <input
+                value={formData?.correoApoderado}
+                onChange={handleChange}
+                type="text"
+                name="correoApoderado"
+                placeholder="example@gmail.com"
+                className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
+              />
+            </label>
+          </div>
         </div>
       </form>
     </div>
