@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Ciclos = () => {
+const CicloForm = () => {
   const [colorBoton, setColorBoton] = useState(false);
   const [active, setActive] = useState(true);
 
@@ -186,7 +186,7 @@ const Ciclos = () => {
                     Fecha de Inicio
                   </span>
                   <input
-                    disabled={!active}
+                    disabled={active}
                     type="date"
                     name="fechaInicio"
                     placeholder="..."
@@ -298,7 +298,7 @@ const Ciclos = () => {
                     defaultValue="Elige"
                     name="formasPago"
                   >
-                    <option value="">Targeta</option>
+                    <option value="">Tarjeta</option>
                     <option value="">Efectivo</option>
                     <option value="">Credito</option>
                   </select>
@@ -388,4 +388,4 @@ const Ciclos = () => {
     </div>
   );
 };
-export default Ciclos;
+export default CicloForm;

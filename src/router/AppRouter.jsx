@@ -15,8 +15,10 @@ import CursoMain from '../pages/Cursos/pages/CursoMain/CursoMain'
 import CursoVideo from '../pages/Cursos/pages/CursoVideo/CursoVideo'
 import Perfil from '../pages/Perfil/Perfil'
 import ConfiguracionAdministracion from '../pages/Administracion/pages/Configuracion/Configuracion'
-import Ciclos from '../pages/Administracion/pages/Administracion/components/CicloForm/Ciclos'
 import Alumnos from '../pages/Administracion/pages/Tablas/TableAlumnos/Alumnos'
+import Apoderados from '../pages/Administracion/pages/Tablas/TableApoderados/Apoderados'
+import Ciclos from '../pages/Administracion/pages/Tablas/TableCiclos/Ciclos'
+import CicloForm from '../pages/Administracion/pages/Formularios/Ciclo/CicloForm'
 
 const AppRouter = () => {
   return (
@@ -29,9 +31,11 @@ const AppRouter = () => {
                 {/* CREACION DE USUARIOS */}
               <Route path='edit/alumno' element={<Alumnos />} />
               <Route path='edit/alumno/:codigoAlumno' element={<FormAlumnoRegistro />} />
-              <Route path='edit/padre' element={<FormPadreRegistro />} />
+              <Route path='edit/padre' element={<Apoderados />} />
+              <Route path='edit/apoderado/:dniApoderado' element={<FormPadreRegistro />} />
               <Route path='edit/videos' element={<Videos />} />
               <Route path='edit/ciclos' element={<Ciclos />} />
+              <Route path='edit/ciclos/:idCiclo' element={<CicloForm />} />
 
                 {/* CONFIGURACION */}
               <Route path='configuracion' element={<ConfiguracionAdministracion />} />

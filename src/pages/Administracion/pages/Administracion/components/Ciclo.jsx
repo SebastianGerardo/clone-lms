@@ -1,11 +1,11 @@
 import React, { useMemo, useState } from 'react'
 import { MoreIcon } from '../../../../../assets/svgs/NormalSvgs'
 import CircularProgress from '../../../../../components/ProgressStatus/CircularProgress'
-import { ApiCiclo } from '../../../../../helpers/ApiAdministracion'
 import {NavLink} from 'react-router-dom'
+import { ApiCiclos } from '../../../../../helpers/ApiMatricula'
 
 const Ciclo = () => {
-  const [dataApi, setDataApi] = useState(ApiCiclo)
+  const [dataApi, setDataApi] = useState(ApiCiclos)
   const [index, setIndex] = useState(0)
   const [selectedCicloId, setSelectedCicloId] = useState(dataApi.length > 0 ? dataApi[0].id : null)
 
@@ -33,10 +33,11 @@ const Ciclo = () => {
         </div>
         <div className='h-full flex flex-col justify-center items-center gap-2'>
             <CircularProgress 
+              circunference= {41}
               percentage={10} 
               sizeCircle={230}
               progressCircle={dataCiclo.process}
-              textContent={dataCiclo.nombre}
+              textContent={dataCiclo.process + "%"}
               colorText={"#0052CA"} 
               colorFondo={"#ccc"} 
               colorRelleno={"#3751FE"}
