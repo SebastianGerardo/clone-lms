@@ -28,6 +28,7 @@ const ContentModalMatricula = ({dataCiclo, mostrarPor}) => {
     ciclo: "",
     aula: "",
     modalidadDePago: "",
+    cuotas: "1",
     montoPago: "",
     fechaMatricula: "",
     horaMatricula: "",

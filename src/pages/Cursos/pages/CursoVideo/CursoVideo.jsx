@@ -2,12 +2,13 @@ import React from 'react'
 import VideoPlyr from './components/VideoPlyr'
 import profeImg from '../../../../assets/img/user-img.svg'
 import { ApiCursoVideo } from '../../../../helpers/ApiCursos'
+import YoutubePlyr from './components/YoutubePlyr'
 
 const CursoVideo = () => {
   return (
     <div className='grid grid-cols-1 min-[820px]:grid-cols-[65%_35%] lg:grid-cols-[70%_30%]'>
       <section>
-        <VideoPlyr/>
+        <YoutubePlyr videoId={"2ZOBqKZsWG4"}/>
         <section className='flex flex-col gap-4 p-4 text-gray-400'>
           <h1 className='text-xl font-semibold text-black'>Nombre del curso</h1>
           <div className='flex gap-4 text-sm'>
