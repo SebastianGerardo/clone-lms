@@ -15,6 +15,7 @@ import CursoMain from '../pages/Cursos/pages/CursoMain/CursoMain'
 import CursoVideo from '../pages/Cursos/pages/CursoVideo/CursoVideo'
 import Perfil from '../pages/Perfil/Perfil'
 import ConfiguracionAdministracion from '../pages/Administracion/pages/Configuracion/Configuracion'
+import Ciclos from '../pages/Administracion/pages/Administracion/components/CicloForm/Ciclos'
 
 const AppRouter = () => {
   return (
@@ -22,11 +23,14 @@ const AppRouter = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<PrivateRouter><DashboardRouter/></PrivateRouter>}>
             <Route path='administracion' element={<DashboardAdministracion/>}>
+
               <Route index element={<Administracion/>} />
                 {/* CREACION DE USUARIOS */}
               <Route path='edit/alumno' element={<FormAlumnoRegistro />} />
               <Route path='edit/padre' element={<FormPadreRegistro />} />
               <Route path='edit/videos' element={<Videos />} />
+              <Route path='edit/ciclos' element={<Ciclos />} />
+
                 {/* CONFIGURACION */}
               <Route path='configuracion' element={<ConfiguracionAdministracion />} />
             </Route>
@@ -38,6 +42,7 @@ const AppRouter = () => {
             <Route path='perfil' element={<Perfil />} />
             <Route path='matricula' element={<Matricula />} />
             <Route path='configuracion' />
+            
         </Route>
     </Routes>
   )

@@ -49,6 +49,9 @@ const LinksSidebar = () => {
       to: "/dashboard/configuracion",
     },
   ];
+  
+
+  
 
   return (
     <section className="flex flex-col justify-between h-full text-sm">
