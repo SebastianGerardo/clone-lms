@@ -64,9 +64,9 @@ export const SettingIcon = ({isActive, width = 24, height = 24, color = "#292D32
 export const EditIcon = ({isActive, width = 24, height = 24, color = "#292D32", colorChange}) => {
     return (
       <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M11 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22H15C20 22 22 20 22 15V13" stroke={isActive ? colorChange : color} strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"/>
-        <path d="M16.04 3.02001L8.16 10.9C7.86 11.2 7.56 11.79 7.5 12.22L7.07 15.23C6.91 16.32 7.68 17.08 8.77 16.93L11.78 16.5C12.2 16.44 12.79 16.14 13.1 15.84L20.98 7.96001C22.34 6.60001 22.98 5.02001 20.98 3.02001C18.98 1.02001 17.4 1.66001 16.04 3.02001Z" stroke={isActive ? colorChange : color} strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" stroke-linejoin="round"/>
-        <path d="M14.91 4.1499C15.58 6.5399 17.45 8.4099 19.85 9.0899" stroke={isActive ? colorChange : color} strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" stroke-linejoin="round" />
+        <path d="M11 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22H15C20 22 22 20 22 15V13" stroke={isActive ? colorChange : color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M16.04 3.02001L8.16 10.9C7.86 11.2 7.56 11.79 7.5 12.22L7.07 15.23C6.91 16.32 7.68 17.08 8.77 16.93L11.78 16.5C12.2 16.44 12.79 16.14 13.1 15.84L20.98 7.96001C22.34 6.60001 22.98 5.02001 20.98 3.02001C18.98 1.02001 17.4 1.66001 16.04 3.02001Z" stroke={isActive ? colorChange : color} strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M14.91 4.1499C15.58 6.5399 17.45 8.4099 19.85 9.0899" stroke={isActive ? colorChange : color} strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     )
 }
@@ -74,11 +74,11 @@ export const EditIcon = ({isActive, width = 24, height = 24, color = "#292D32", 
 export const SaveIcon = ({isActive, width = 24, height = 24, color = "#292D32", colorChange}) => {
     return (
       <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M20.5 11.3V7.04001C20.5 3.01001 19.56 2 15.78 2H8.22C4.44 2 3.5 3.01001 3.5 7.04001V18.3C3.5 20.96 4.96001 21.59 6.73001 19.69L6.73999 19.68C7.55999 18.81 8.80999 18.88 9.51999 19.83L10.53 21.18" stroke={isActive ? colorChange : color} strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"/>
-        <path opacity="0.4" d="M8 7H16" stroke={isActive ? colorChange : color} strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"/>
-        <path opacity="0.4" d="M9 11H15" stroke={isActive ? colorChange : color} strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"/>
-        <path d="M18.2091 14.7698L14.6691 18.3098C14.5291 18.4498 14.3991 18.7098 14.3691 18.8998L14.1791 20.2498C14.1091 20.7398 14.4491 21.0798 14.9391 21.0098L16.2891 20.8198C16.4791 20.7898 16.7491 20.6598 16.8791 20.5198L20.4191 16.9798C21.0291 16.3698 21.3191 15.6598 20.4191 14.7598C19.5291 13.8698 18.8191 14.1598 18.2091 14.7698Z" stroke={isActive ? colorChange : color} strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" stroke-linejoin="round"/>
-        <path d="M17.6992 15.2798C17.9992 16.3598 18.8392 17.1998 19.9192 17.4998" stroke={isActive ? colorChange : color} strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" stroke-linejoin="round"/>
+        <path d="M20.5 11.3V7.04001C20.5 3.01001 19.56 2 15.78 2H8.22C4.44 2 3.5 3.01001 3.5 7.04001V18.3C3.5 20.96 4.96001 21.59 6.73001 19.69L6.73999 19.68C7.55999 18.81 8.80999 18.88 9.51999 19.83L10.53 21.18" stroke={isActive ? colorChange : color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path opacity="0.4" d="M8 7H16" stroke={isActive ? colorChange : color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path opacity="0.4" d="M9 11H15" stroke={isActive ? colorChange : color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M18.2091 14.7698L14.6691 18.3098C14.5291 18.4498 14.3991 18.7098 14.3691 18.8998L14.1791 20.2498C14.1091 20.7398 14.4491 21.0798 14.9391 21.0098L16.2891 20.8198C16.4791 20.7898 16.7491 20.6598 16.8791 20.5198L20.4191 16.9798C21.0291 16.3698 21.3191 15.6598 20.4191 14.7598C19.5291 13.8698 18.8191 14.1598 18.2091 14.7698Z" stroke={isActive ? colorChange : color} strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M17.6992 15.2798C17.9992 16.3598 18.8392 17.1998 19.9192 17.4998" stroke={isActive ? colorChange : color} strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     )
 }
@@ -106,8 +106,8 @@ export const FilterIcon2 = ({isActive, width = 24, height = 24, color = "#292D32
 export const UserIcon = ({isActive, width = 24, height = 24, color = "#292D32" , colorChange}) => {
     return (
       <svg className="group-hover:text-blue-600 inline-block mr-2" width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12.1601 10.87C12.0601 10.86 11.9401 10.86 11.8301 10.87C9.45006 10.79 7.56006 8.84 7.56006 6.44C7.56006 3.99 9.54006 2 12.0001 2C14.4501 2 16.4401 3.99 16.4401 6.44C16.4301 8.84 14.5401 10.79 12.1601 10.87Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round" className={` ${isActive ? "#2563EB" : 'text-[#999999]'} group-hover:text-[#2563EB]`}/>
-        <path d="M7.15997 14.56C4.73997 16.18 4.73997 18.82 7.15997 20.43C9.90997 22.27 14.42 22.27 17.17 20.43C19.59 18.81 19.59 16.17 17.17 14.56C14.43 12.73 9.91997 12.73 7.15997 14.56Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round" className={` ${isActive ? "#2563EB" : 'text-[#999999]'} group-hover:text-[#2563EB]`}/>
+        <path d="M12.1601 10.87C12.0601 10.86 11.9401 10.86 11.8301 10.87C9.45006 10.79 7.56006 8.84 7.56006 6.44C7.56006 3.99 9.54006 2 12.0001 2C14.4501 2 16.4401 3.99 16.4401 6.44C16.4301 8.84 14.5401 10.79 12.1601 10.87Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={` ${isActive ? "#2563EB" : 'text-[#999999]'} group-hover:text-[#2563EB]`}/>
+        <path d="M7.15997 14.56C4.73997 16.18 4.73997 18.82 7.15997 20.43C9.90997 22.27 14.42 22.27 17.17 20.43C19.59 18.81 19.59 16.17 17.17 14.56C14.43 12.73 9.91997 12.73 7.15997 14.56Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={` ${isActive ? "#2563EB" : 'text-[#999999]'} group-hover:text-[#2563EB]`}/>
       </svg>
     )
 }
@@ -115,9 +115,9 @@ export const UserIcon = ({isActive, width = 24, height = 24, color = "#292D32" ,
 export const BookIcon3 = ({isActive, width = 24, height = 24, color = "#292D32" , colorChange}) => {
     return (
       <svg className="inline-block mr-2" width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M22 4.66994V16.74C22 17.7 21.22 18.5999 20.26 18.7199L19.93 18.76C17.75 19.05 14.39 20.1599 12.47 21.2199C12.21 21.3699 11.78 21.3699 11.51 21.2199L11.47 21.2C9.54997 20.15 6.20003 19.05 4.03003 18.76L3.73999 18.7199C2.77999 18.5999 2 17.7 2 16.74V4.65993C2 3.46993 2.96997 2.56994 4.15997 2.66994C6.25997 2.83994 9.43997 3.89997 11.22 5.00997L11.47 5.15993C11.76 5.33994 12.24 5.33994 12.53 5.15993L12.7 5.04995C13.33 4.65995 14.13 4.26994 15 3.91994V7.99996L17 6.66994L19 7.99996V2.77999C19.27 2.72999 19.53 2.69995 19.77 2.67995H19.83C21.02 2.57995 22 3.46994 22 4.66994Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round" className={` ${isActive ? "#2563EB" : 'text-[#999999]'} group-hover:text-[#2563EB]`}/>
-        <path d="M12 5.48999V20.49" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round" className={` ${isActive ? "#2563EB" : 'text-[#999999]'} group-hover:text-[#2563EB]`} />
-        <path d="M19 2.78003V8L17 6.66998L15 8V3.91998C16.31 3.39998 17.77 2.98003 19 2.78003Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round" className={` ${isActive ? "#2563EB" : 'text-[#999999]'} group-hover:text-[#2563EB]`} />
+        <path d="M22 4.66994V16.74C22 17.7 21.22 18.5999 20.26 18.7199L19.93 18.76C17.75 19.05 14.39 20.1599 12.47 21.2199C12.21 21.3699 11.78 21.3699 11.51 21.2199L11.47 21.2C9.54997 20.15 6.20003 19.05 4.03003 18.76L3.73999 18.7199C2.77999 18.5999 2 17.7 2 16.74V4.65993C2 3.46993 2.96997 2.56994 4.15997 2.66994C6.25997 2.83994 9.43997 3.89997 11.22 5.00997L11.47 5.15993C11.76 5.33994 12.24 5.33994 12.53 5.15993L12.7 5.04995C13.33 4.65995 14.13 4.26994 15 3.91994V7.99996L17 6.66994L19 7.99996V2.77999C19.27 2.72999 19.53 2.69995 19.77 2.67995H19.83C21.02 2.57995 22 3.46994 22 4.66994Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={` ${isActive ? "#2563EB" : 'text-[#999999]'} group-hover:text-[#2563EB]`}/>
+        <path d="M12 5.48999V20.49" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={` ${isActive ? "#2563EB" : 'text-[#999999]'} group-hover:text-[#2563EB]`} />
+        <path d="M19 2.78003V8L17 6.66998L15 8V3.91998C16.31 3.39998 17.77 2.98003 19 2.78003Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={` ${isActive ? "#2563EB" : 'text-[#999999]'} group-hover:text-[#2563EB]`} />
       </svg>
     )
 }
@@ -125,10 +125,10 @@ export const BookIcon3 = ({isActive, width = 24, height = 24, color = "#292D32" 
 export const NoteIcon2 = ({isActive, width = 24, height = 24, color = "#292D32" , colorChange}) => {
     return (
       <svg className="inline-block mr-2" width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M21.6601 10.44L20.6801 14.62C19.8401 18.23 18.1801 19.69 15.0601 19.39C14.5601 19.35 14.0201 19.26 13.4401 19.12L11.7601 18.72C7.59006 17.73 6.30006 15.67 7.28006 11.49L8.26006 7.30001C8.46006 6.45001 8.70006 5.71001 9.00006 5.10001C10.1701 2.68001 12.1601 2.03001 15.5001 2.82001L17.1701 3.21001C21.3601 4.19001 22.6401 6.26001 21.6601 10.44Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round" className={` ${isActive ? "#2563EB" : 'text-[#999999]'} group-hover:text-[#2563EB]`}/>
-        <path d="M15.06 19.39C14.44 19.81 13.66 20.16 12.71 20.47L11.13 20.99C7.15998 22.27 5.06997 21.2 3.77997 17.23L2.49997 13.28C1.21997 9.30998 2.27997 7.20998 6.24997 5.92998L7.82997 5.40998C8.23997 5.27998 8.62997 5.16998 8.99997 5.09998C8.69997 5.70998 8.45997 6.44998 8.25997 7.29998L7.27997 11.49C6.29997 15.67 7.58998 17.73 11.76 18.72L13.44 19.12C14.02 19.26 14.56 19.35 15.06 19.39Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round" className={` ${isActive ? "#2563EB" : 'text-[#999999]'} group-hover:text-[#2563EB]`}/>
-        <path d="M12.64 8.53003L17.49 9.76003" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round" className={` ${isActive ? "#2563EB" : 'text-[#999999]'} group-hover:text-[#2563EB]`}/>
-        <path d="M11.66 12.4L14.56 13.14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round" className={` ${isActive ? "#2563EB" : 'text-[#999999]'} group-hover:text-[#2563EB]`}/>
+        <path d="M21.6601 10.44L20.6801 14.62C19.8401 18.23 18.1801 19.69 15.0601 19.39C14.5601 19.35 14.0201 19.26 13.4401 19.12L11.7601 18.72C7.59006 17.73 6.30006 15.67 7.28006 11.49L8.26006 7.30001C8.46006 6.45001 8.70006 5.71001 9.00006 5.10001C10.1701 2.68001 12.1601 2.03001 15.5001 2.82001L17.1701 3.21001C21.3601 4.19001 22.6401 6.26001 21.6601 10.44Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={` ${isActive ? "#2563EB" : 'text-[#999999]'} group-hover:text-[#2563EB]`}/>
+        <path d="M15.06 19.39C14.44 19.81 13.66 20.16 12.71 20.47L11.13 20.99C7.15998 22.27 5.06997 21.2 3.77997 17.23L2.49997 13.28C1.21997 9.30998 2.27997 7.20998 6.24997 5.92998L7.82997 5.40998C8.23997 5.27998 8.62997 5.16998 8.99997 5.09998C8.69997 5.70998 8.45997 6.44998 8.25997 7.29998L7.27997 11.49C6.29997 15.67 7.58998 17.73 11.76 18.72L13.44 19.12C14.02 19.26 14.56 19.35 15.06 19.39Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={` ${isActive ? "#2563EB" : 'text-[#999999]'} group-hover:text-[#2563EB]`}/>
+        <path d="M12.64 8.53003L17.49 9.76003" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={` ${isActive ? "#2563EB" : 'text-[#999999]'} group-hover:text-[#2563EB]`}/>
+        <path d="M11.66 12.4L14.56 13.14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={` ${isActive ? "#2563EB" : 'text-[#999999]'} group-hover:text-[#2563EB]`}/>
       </svg>
     ) 
 }

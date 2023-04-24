@@ -26,7 +26,6 @@ const InformacionCiclo = ({ dataCiclo }) => {
     setAulaSeleccionada(selectedOption.value);
   };
 
-  console.log(DataAulaSeleccionada);
   const alumnosRegistrados =
     DataAulaSeleccionada.capacidad - DataAulaSeleccionada.disponible;
 

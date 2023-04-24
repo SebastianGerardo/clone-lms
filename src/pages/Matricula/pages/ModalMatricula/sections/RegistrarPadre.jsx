@@ -17,24 +17,20 @@ const RegistrarPadre = ({ handleChange, formData }) => {
               className="w-20 max-h-[3rem] bg-formButton border border-slate-300 rounded-lg p-3 focus:outline-none disabled:bg-gray-300/50 disabled:text-gray-500"
               name="tipoDocumentoApoderado"
               onChange={handleChange}
+              defaultValue={formData?.tipoDocumentoApoderado}
             >
               <option value="">---</option>
               <option
-                selected={formData?.tipoDocumentoApoderado == "DNI"}
                 value="DNI"
               >
                 DNI
               </option>
               <option
-                selected={
-                  formData?.tipoDocumentoApoderado == "Carnet de Extranjeria"
-                }
                 value="Carnet de Extranjeria"
               >
                 Carnet de Extranjeria
               </option>
               <option
-                selected={formData?.tipoDocumentoApoderado == "Pasaporte"}
                 value="Pasaporte"
               >
                 Pasaporte

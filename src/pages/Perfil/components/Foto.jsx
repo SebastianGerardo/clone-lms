@@ -1,5 +1,5 @@
 import React from "react";
-import Prueba from '../../../assets/img/prueba.jpg';
+import fotoAlumno from "../../../assets/img/prueba.jpg";
 
 const Foto = () => {
   return (
@@ -19,33 +19,26 @@ const Foto = () => {
 
             {/* FORMULARIO */}
             <form className="flex flex-col sm:grid sm:grid-cols-3 sm:grid-rows-3 gap-y-3 gap-x-8">
-
               <div className="w-full col-start-1 col-end-4">
-                <div className="flex flex-col items-center mt-3">
                   {/* SVG DE USUARIO */}
-                  <img
-          src=""
-          alt="Foto de usuario"
-          className="mt-0"
-        />                  
+                <div className="flex flex-col items-center mt-3 rounded-full w-32 h-32 object-cover">
+                  <img src={fotoAlumno} alt="Foto de usuario" className="mt-0 rounded-full w-full h-full" />
                 </div>
 
                 <div className="flex flex-wrap items-center mt-3 justify-center lg:justify-normal gap-3">
                   {/* IMPORTAR IMAGEN */}
-                  <button
-                    type="submit"
-                    className="w-full max-w-max md:flex-1 border border-slate-300 bg-gray-200 text-gray-800 px-5 py-3 rounded-md text-xs"
+                  <div
+                    className="cursor-pointer w-full max-w-max md:flex-1 border border-slate-300 bg-gray-200 text-gray-800 px-5 py-3 rounded-md text-xs"
                   >
                     IMPORTAR IMAGEN
-                  </button>
+                  </div>
 
                   {/* GUARDAR CAMBIOS */}
-                  <button
-                    type="submit"
-                    className="w-full mb-0 max-w-max md:flex-1 border border-slate-300 bg-blue-700 text-white px-5 py-3 rounded-md text-xs"
+                  <div
+                    className="cursor-pointer w-full mb-0 max-w-max md:flex-1 border border-slate-300 bg-blue-700 text-white px-5 py-3 rounded-md text-xs"
                   >
                     GUARDAR CAMBIOS
-                  </button>
+                  </div>
                 </div>
               </div>
             </form>

@@ -31,9 +31,9 @@ const FormPadreRegistro = () => {
               >
                   {/* ICONO EDITAR */}
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M11 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22H15C20 22 22 20 22 15V13" stroke={colorBoton ? '#fff' : '#3B82F6'} strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"/>
-                  <path d="M16.04 3.02001L8.16 10.9C7.86 11.2 7.56 11.79 7.5 12.22L7.07 15.23C6.91 16.32 7.68 17.08 8.77 16.93L11.78 16.5C12.2 16.44 12.79 16.14 13.1 15.84L20.98 7.96001C22.34 6.60001 22.98 5.02001 20.98 3.02001C18.98 1.02001 17.4 1.66001 16.04 3.02001Z" stroke={colorBoton ? '#fff' : '#3B82F6'} strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" stroke-linejoin="round"/>
-                  <path d="M14.91 4.1499C15.58 6.5399 17.45 8.4099 19.85 9.0899" stroke={colorBoton ? '#fff' : '#3B82F6'} strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" stroke-linejoin="round"/>
+                  <path d="M11 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22H15C20 22 22 20 22 15V13" stroke={colorBoton ? '#fff' : '#3B82F6'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M16.04 3.02001L8.16 10.9C7.86 11.2 7.56 11.79 7.5 12.22L7.07 15.23C6.91 16.32 7.68 17.08 8.77 16.93L11.78 16.5C12.2 16.44 12.79 16.14 13.1 15.84L20.98 7.96001C22.34 6.60001 22.98 5.02001 20.98 3.02001C18.98 1.02001 17.4 1.66001 16.04 3.02001Z" stroke={colorBoton ? '#fff' : '#3B82F6'} strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M14.91 4.1499C15.58 6.5399 17.45 8.4099 19.85 9.0899" stroke={colorBoton ? '#fff' : '#3B82F6'} strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
                 <span>Edit</span>
               </button>
@@ -50,11 +50,11 @@ const FormPadreRegistro = () => {
                   {/* ICONO GUARDAR */}
                 
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M20.5 11.3V7.04001C20.5 3.01001 19.56 2 15.78 2H8.22C4.44 2 3.5 3.01001 3.5 7.04001V18.3C3.5 20.96 4.96001 21.59 6.73001 19.69L6.73999 19.68C7.55999 18.81 8.80999 18.88 9.51999 19.83L10.53 21.18" stroke={colorBoton ? '#fff' : '#22C55E'} strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"/>
-                  <path opacity="0.4" d="M8 7H16" stroke={colorBoton ? '#fff' : '#22C55E'} strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"/>
-                  <path opacity="0.4" d="M9 11H15" stroke={colorBoton ? '#fff' : '#22C55E'} strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"/>
-                  <path d="M18.2091 14.7698L14.6691 18.3098C14.5291 18.4498 14.3991 18.7098 14.3691 18.8998L14.1791 20.2498C14.1091 20.7398 14.4491 21.0798 14.9391 21.0098L16.2891 20.8198C16.4791 20.7898 16.7491 20.6598 16.8791 20.5198L20.4191 16.9798C21.0291 16.3698 21.3191 15.6598 20.4191 14.7598C19.5291 13.8698 18.8191 14.1598 18.2091 14.7698Z" stroke={colorBoton ? '#fff' : '#22C55E'} strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" stroke-linejoin="round"/>
-                  <path d="M17.6992 15.2798C17.9992 16.3598 18.8392 17.1998 19.9192 17.4998" stroke={colorBoton ? '#fff' : '#22C55E'} strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" stroke-linejoin="round"/>
+                  <path d="M20.5 11.3V7.04001C20.5 3.01001 19.56 2 15.78 2H8.22C4.44 2 3.5 3.01001 3.5 7.04001V18.3C3.5 20.96 4.96001 21.59 6.73001 19.69L6.73999 19.68C7.55999 18.81 8.80999 18.88 9.51999 19.83L10.53 21.18" stroke={colorBoton ? '#fff' : '#22C55E'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path opacity="0.4" d="M8 7H16" stroke={colorBoton ? '#fff' : '#22C55E'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path opacity="0.4" d="M9 11H15" stroke={colorBoton ? '#fff' : '#22C55E'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M18.2091 14.7698L14.6691 18.3098C14.5291 18.4498 14.3991 18.7098 14.3691 18.8998L14.1791 20.2498C14.1091 20.7398 14.4491 21.0798 14.9391 21.0098L16.2891 20.8198C16.4791 20.7898 16.7491 20.6598 16.8791 20.5198L20.4191 16.9798C21.0291 16.3698 21.3191 15.6598 20.4191 14.7598C19.5291 13.8698 18.8191 14.1598 18.2091 14.7698Z" stroke={colorBoton ? '#fff' : '#22C55E'} strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M17.6992 15.2798C17.9992 16.3598 18.8392 17.1998 19.9192 17.4998" stroke={colorBoton ? '#fff' : '#22C55E'} strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
 
                 <span>Guardar</span>
