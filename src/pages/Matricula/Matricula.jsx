@@ -119,6 +119,7 @@ export default function Matricula() {
         )}
         <Modal isOpen={isOpen} onClose={handleCloseModal}>
           <ContentModalMatricula
+            handleCloseModal={handleCloseModal}
             mostrarPor={mostrarPor}
             dataCiclo={cicloSeleccionado}
           />

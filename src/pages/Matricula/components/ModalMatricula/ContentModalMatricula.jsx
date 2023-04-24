@@ -4,8 +4,9 @@ import InformacionCiclo from "./sections/InformacionCiclo";
 import RegistrarAlumno from "./sections/RegistrarAlumno";
 import RegistrarPadre from "./sections/RegistrarPadre";
 import EmitirComprobante from "./sections/EmitirComprobante";
+import { Toast } from "../../../../components/Alertas/SweetAlerts";
 
-const ContentModalMatricula = ({dataCiclo, mostrarPor}) => {
+const ContentModalMatricula = ({dataCiclo, mostrarPor, handleCloseModal}) => {
   const [formData, setFormData] = useState({
     nombreAlumno: "",
     apellidoAlumno: "",
@@ -17,7 +18,8 @@ const ContentModalMatricula = ({dataCiclo, mostrarPor}) => {
     correoAlumno: "",
     colegioAlumno: "",
     nombreApoderado: "",
-    apellidoApoderado: "",
+    apellidoPaternoApoderado: "",
+    apellidoMaternoApoderado: "",
     direccionApoderado: "",
     tipoDocumentoApoderado: "",
     dniApoderado: "",
@@ -51,6 +53,25 @@ const ContentModalMatricula = ({dataCiclo, mostrarPor}) => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const [dataLocal, setDataLocal] = useState(() => {
+    const saveDataLocal = localStorage.getItem('dataLocal')
+    if (saveDataLocal) {
+      return JSON.parse(saveDataLocal)
+    } else {
+      return []
+    }
+  })
+
+  const handleMatricular = () => {
+    setDataLocal([...dataLocal, formData])
+    localStorage.setItem('dataLocal', JSON.stringify([...dataLocal, formData]))
+    handleCloseModal()
+    Toast.fire({
+      icon: 'success',
+      title: 'Alumno matriculado exitosamente!'
+    })
+  }
 
   const sectionStep = {
     0: <InformacionCiclo dataCiclo={dataCiclo} />,
@@ -92,8 +113,7 @@ const ContentModalMatricula = ({dataCiclo, mostrarPor}) => {
                   ? "bg-green-500  hover:bg-green-700 cursor-pointer"
                   : "bg-blue-500"
               } hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`}
-              onClick={handleNextStep}
-              disabled={currentStep === Object.keys(sectionStep).length - 1}
+              onClick={currentStep !== 3 ? handleNextStep : handleMatricular}
             >
               {isLastStep ? "Pagar" : "Siguiente"}
             </button>

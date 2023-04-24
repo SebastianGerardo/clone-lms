@@ -69,17 +69,17 @@ const RegistrarPadre = ({ handleChange, formData }) => {
           </label>
         </div>
 
-        {/* APELLIDO-MATERNO */}
+        {/* APELLIDO-PATERNO */}
         <div className="w-full">
           <label className="flex flex-col gap-y-1">
             <span className="block text-sm font-medium text-gray-400">
               Apellido Paterno
             </span>
             <input
-              value={formData?.apellidoApoderado}
+              value={formData?.apellidoPaternoApoderado}
               onChange={handleChange}
               type="text"
-              name="apellidoPaterno"
+              name="apellidoPaternoApoderado"
               placeholder="Ramirez"
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />
@@ -93,10 +93,10 @@ const RegistrarPadre = ({ handleChange, formData }) => {
               Apellido Materno
             </span>
             <input
-              value={formData?.apellidoApoderado}
+              value={formData?.apellidoMaternoApoderado}
               onChange={handleChange}
               type="text"
-              name="apellidoMaterno"
+              name="apellidoMaternoApoderado"
               placeholder="Ramirez"
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />

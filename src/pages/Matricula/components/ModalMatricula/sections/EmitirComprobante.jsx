@@ -6,7 +6,6 @@ const EmitirComprobante = ({ handleChange, formData, dataCiclo }) => {
     dataCiclo.precio, // MontoTotal
     formData.cuotas // Tiempo
   );
-  console.log("formValues", dataCiclo.aulas);
 
   return (
     <div className="text-start flex flex-col gap-4">
@@ -21,7 +20,7 @@ const EmitirComprobante = ({ handleChange, formData, dataCiclo }) => {
             Nombre Apoderado
           </label>
           <input
-            value={`${formData.nombreApoderado} ${formData.apellidoApoderado}`}
+            value={`${formData.nombreApoderado} ${formData.apellidoPaternoApoderado} ${formData.apellidoMaternoApoderado}`}
             type="text"
             disabled
             className="w-full p-3 h-[3rem] block rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
