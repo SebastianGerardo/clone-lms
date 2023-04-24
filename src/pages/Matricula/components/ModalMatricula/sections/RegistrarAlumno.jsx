@@ -141,7 +141,7 @@ const RegistrarAlumno = ({ handleChange, formData }) => {
         </div>
 
         {/* EMAIL */}
-        <div className="w-full col-start-1 col-end-3">
+        <div className="w-full col-start-1 col-end-4">
           <label className="flex flex-col gap-y-1">
             <span className="block text-sm font-medium text-gray-400">
               Email
