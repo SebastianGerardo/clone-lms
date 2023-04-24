@@ -1,12 +1,54 @@
 import React, { useState } from "react";
+import {useParams} from 'react-router-dom'
+import { Toast } from "../../../../../components/Alertas/SweetAlerts";
+import fotoAlumno from "../../../../../assets/img/prueba.jpg";
 
 const FormAlumnoRegistro = () => {
-
+  const {codigoAlumno} = useParams()
   const [colorBoton, setColorBoton] = useState(false)
   const [active, setActive] = useState(true)
+  const [cambio, setCambio] = useState(false)
 
   const activarInput = () => {
     setActive(!active)
+    setCambio(false)
+    if (!active && cambio) {
+      Toast.fire({
+        icon: 'success',
+        title: 'Datos actualizados correctamente'
+      })
+    }
+  }
+
+  const [dataAlumnosLocal, setDataAlumnosLocal] = useState(() => {
+    const dataLocal = localStorage.getItem('dataLocal')
+    if (dataLocal) {
+        return JSON.parse(dataLocal)
+    } else {
+        return []
+    }
+  })
+  
+  const alumnoInfo = dataAlumnosLocal.find(alumno => alumno.dniAlumno === codigoAlumno)
+
+  const [dataAlumno, setDataAlumno] = useState({
+    nombreAlumno: alumnoInfo.nombreAlumno,
+    apellidoAlumno: alumnoInfo.apellidoAlumno,
+    nivelAlumno: alumnoInfo.nivelAlumno,
+    tipoDocumentoAlumno: alumnoInfo.tipoDocumentoAlumno,
+    dniAlumno: alumnoInfo.dniAlumno,
+    telefonoAlumno: alumnoInfo.telefonoAlumno,
+    gradoAlumno: alumnoInfo.gradoAlumno,
+    correoAlumno: alumnoInfo.correoAlumno,
+    colegioAlumno: alumnoInfo.colegioAlumno,
+  })
+
+  const handleChange = (e) => {
+    setCambio(true)
+    setDataAlumno({
+      ...dataAlumno,
+      [e.target.name]: e.target.value,
+    });
   }
 
   return (
@@ -68,13 +110,13 @@ const FormAlumnoRegistro = () => {
               {/* INFORMACION DEL ALUMNO */}
             <div className="flex justify-between items-center">
               <img
-                src="https://img.freepik.com/foto-gratis/joven-mujer-colombiana-atractiva-gafas-sol-posando-mientras-pie-junto-al-mar-dia_181624-41580.jpg?w=1800&t=st=1674592279~exp=1674592879~hmac=1276990bc65161f9f68c332774d2e5446f0b6b00d1d865b72e71e8732a58d9f7"
+                src={fotoAlumno}
                 className="w-20 h-20 object-cover rounded-full flex-none"
               />
               <div className="flex-grow text-black text-xl ml-4">
-                Alex M.
+                {dataAlumno.nombreAlumno}
                 <p className="text-left-gray-600 tracking-normal text-xs font-normal leading-6 opacity-50">
-                  Hola.alex@gmail.com
+                  {dataAlumno.correoAlumno}
                 </p>
               </div>
             </div>
@@ -96,7 +138,7 @@ const FormAlumnoRegistro = () => {
                       <span className="block text-sm font-medium text-gray-400">
                           Nombre
                       </span>
-                      <input disabled={active} type="text" name="nombre" placeholder="Diego" className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500" />
+                      <input onChange={handleChange} value={dataAlumno.nombreAlumno} disabled={active} type="text" name="nombreAlumno" placeholder="Diego" className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500" />
                   </label>
                 </div>
 
@@ -106,7 +148,7 @@ const FormAlumnoRegistro = () => {
                       <span className="block text-sm font-medium text-gray-400">
                           Apellido
                       </span>
-                      <input disabled={active} type="text" name="apellido" placeholder="Ramirez" className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500" />
+                      <input onChange={handleChange} value={dataAlumno.apellidoAlumno} disabled={active} type="text" name="apellidoAlumno" placeholder="Ramirez" className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500" />
                   </label>
                 </div>
 
@@ -116,7 +158,7 @@ const FormAlumnoRegistro = () => {
                       <span className="block text-sm font-medium text-gray-400">
                           Nivel
                       </span>
-                      <input disabled={active} type="text" name="nivel" placeholder="Secundaria" className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500" />
+                      <input onChange={handleChange} value={dataAlumno.nivelAlumno} disabled={active} type="text" name="nivelAlumno" placeholder="Secundaria" className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500" />
                   </label>
                 </div>
 
@@ -126,12 +168,12 @@ const FormAlumnoRegistro = () => {
                       Tipo de Documento
                   </span>
                   <div className="flex items-center gap-3">
-                    <select disabled={active} className="w-20 max-h-[3rem] bg-formButton border border-slate-300 rounded-lg p-3 focus:outline-none disabled:bg-gray-300/50 disabled:text-gray-500" defaultValue="Elige" name="tipoDocumento">
-                      <option value="">DNI</option>
-                      <option value="">Carnet de Extranjeria</option>
-                      <option value="">Pasaporte</option>
+                    <select disabled={active} className="w-20 max-h-[3rem] bg-formButton border border-slate-300 rounded-lg p-3 focus:outline-none disabled:bg-gray-300/50 disabled:text-gray-500" name="tipoDocumentoApoderado">
+                      <option selected={dataAlumno.tipoDocumentoApoderado == "DNI"} value="DNI">DNI</option>
+                      <option selected={dataAlumno.tipoDocumentoApoderado == "DNI"} value="Carnet de Extranjeria">Carnet de Extranjeria</option>
+                      <option selected={dataAlumno.tipoDocumentoApoderado == "DNI"} value="Pasaporte">Pasaporte</option>
                     </select>
-                    <input disabled={active} type="text" name="email" placeholder="12345678" className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500" />
+                    <input onChange={handleChange} value={dataAlumno.dniAlumno} disabled={active} type="text" name="dniAlumno" placeholder="12345678" className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500" />
                   </div>
                 </div>
 
@@ -141,7 +183,7 @@ const FormAlumnoRegistro = () => {
                       <span className="block text-sm font-medium text-gray-400">
                           Numero de contacto
                       </span>
-                      <input disabled={active} type="text" name="numeroContacto" placeholder="222444999" className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500" />
+                      <input onChange={handleChange} value={dataAlumno.telefonoAlumno} disabled={active} type="text" name="telefonoAlumno" placeholder="222444999" className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500" />
                   </label>
                 </div>
 
@@ -151,7 +193,7 @@ const FormAlumnoRegistro = () => {
                       <span className="block text-sm font-medium text-gray-400">
                           Grado
                       </span>
-                      <input disabled={active} type="text" name="grado" placeholder="5to" className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500" />
+                      <input onChange={handleChange} value={dataAlumno.gradoAlumno} disabled={active} type="text" name="gradoAlumno" placeholder="5to" className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500" />
                   </label>
                 </div>
 
@@ -161,7 +203,7 @@ const FormAlumnoRegistro = () => {
                       <span className="block text-sm font-medium text-gray-400">
                           Email
                       </span>
-                      <input disabled={active} type="text" name="correo" placeholder="example@gmail.com" className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500" />
+                      <input onChange={handleChange} value={dataAlumno.correoAlumno} disabled={active} type="text" name="correoAlumno" placeholder="example@gmail.com" className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500" />
                   </label>
                 </div>
                 
@@ -171,7 +213,7 @@ const FormAlumnoRegistro = () => {
                       <span className="block text-sm font-medium text-gray-400">
                           Colegio
                       </span>
-                      <input disabled={active} type="text" name="colegio" placeholder="I.E.P SAN JOSÉ" className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500" />
+                      <input onChange={handleChange} value={dataAlumno.colegioAlumno} disabled={active} type="text" name="colegioAlumno" className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500" />
                   </label>
                 </div>
                 
@@ -180,11 +222,11 @@ const FormAlumnoRegistro = () => {
                   <span className="block text-sm font-medium text-gray-400">
                       Estado
                   </span>
-                  <select disabled={active} className="max-h-[3rem] w-full rounded-lg p-3 bg-formButton border border-slate-300 focus:outline-none disabled:bg-gray-300/50 disabled:text-gray-500" defaultValue="sinValidar" name="tipoDocumento">
-                    <option value="sinValidar">Sin validar</option>
-                    <option value="registrado">Registrado</option>
-                    <option value="cActivo">C.Activo</option>
-                    <option value="cInactivo">C.Inactivo</option>
+                  <select disabled={active} className="max-h-[3rem] w-full rounded-lg p-3 bg-formButton border border-slate-300 focus:outline-none disabled:bg-gray-300/50 disabled:text-gray-500" name="estadoCuenta">
+                    <option selected={dataAlumno.estadoCuenta == "Sin validar"} value="Sin validar">Sin validar</option>
+                    <option selected={dataAlumno.estadoCuenta == "registrado"} value="registrado">Registrado</option>
+                    <option selected={dataAlumno.estadoCuenta == "cActivo"} value="cActivo">C.Activo</option>
+                    <option selected={dataAlumno.estadoCuenta == "cInactivo"} value="cInactivo">C.Inactivo</option>
                   </select>
                 </div>
 

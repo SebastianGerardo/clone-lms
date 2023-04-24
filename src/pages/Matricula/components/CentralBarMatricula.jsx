@@ -2,6 +2,7 @@ import React from "react";
 import { FilterIcon, FilterIcon2 } from "../../../assets/svgs/ActiveSvgs";
 import { SearchIcon } from "../../../assets/svgs/NormalSvgs";
 import ButtonManager from "../../../components/Buttons/ButtonManager";
+import {NavLink} from "react-router-dom"
 
 export const CentralBarMatricula = ({ dataCiclos, mostrarPor, setMostrarPor, setDataCiclosFiltrados, dataCiclosFiltrados }) => {
     const handleSearch = (e) => {
@@ -65,6 +66,13 @@ export const CentralBarMatricula = ({ dataCiclos, mostrarPor, setMostrarPor, set
                 isActive={mostrarPor}
               />
             </button>
+            <NavLink
+              state={{logged: true}}
+              to="/dashboard/administracion/edit/alumno"
+              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`}
+            >
+              Alumnos registrados
+            </NavLink>
           </div>
         </section>
       </div>

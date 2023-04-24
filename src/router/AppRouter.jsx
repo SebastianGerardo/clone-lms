@@ -9,13 +9,14 @@ import FormAlumnoRegistro from '../pages/Administracion/pages/Formularios/Alumno
 import DashboardAdministracion from '../pages/Administracion/RouteAdministracion'
 import Administracion from '../pages/Administracion/pages/Administracion/Administracion'
 import FormPadreRegistro from '../pages/Administracion/pages/Formularios/Padres/FormPadreRegistro'
-import Videos from '../pages/Administracion/pages/TableVideos/Videos'
+import Videos from '../pages/Administracion/pages/Tablas/TableVideos/Videos'
 import Matricula from '../pages/Matricula/Matricula'
 import CursoMain from '../pages/Cursos/pages/CursoMain/CursoMain'
 import CursoVideo from '../pages/Cursos/pages/CursoVideo/CursoVideo'
 import Perfil from '../pages/Perfil/Perfil'
 import ConfiguracionAdministracion from '../pages/Administracion/pages/Configuracion/Configuracion'
 import Ciclos from '../pages/Administracion/pages/Administracion/components/CicloForm/Ciclos'
+import Alumnos from '../pages/Administracion/pages/Tablas/TableAlumnos/Alumnos'
 
 const AppRouter = () => {
   return (
@@ -26,7 +27,8 @@ const AppRouter = () => {
 
               <Route index element={<Administracion/>} />
                 {/* CREACION DE USUARIOS */}
-              <Route path='edit/alumno' element={<FormAlumnoRegistro />} />
+              <Route path='edit/alumno' element={<Alumnos />} />
+              <Route path='edit/alumno/:codigoAlumno' element={<FormAlumnoRegistro />} />
               <Route path='edit/padre' element={<FormPadreRegistro />} />
               <Route path='edit/videos' element={<Videos />} />
               <Route path='edit/ciclos' element={<Ciclos />} />

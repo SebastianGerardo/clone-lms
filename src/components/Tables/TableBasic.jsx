@@ -30,6 +30,7 @@ const TableBasic = ({ columns, data, pagPerPage = 5, tableTitle }) => {
           selectAllRowsItemText: "Todos",
         }}
         customStyles={customStyles}
+        noDataComponent={<p className="text-base text-gray-400">No hay información para mostrar</p>}
       />
     </div>
   );

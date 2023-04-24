@@ -1,8 +1,7 @@
 import React from 'react'
-import DataTable from 'react-data-table-component'
-import ButtonManager from '../../../../../components/Buttons/ButtonManager'
-import { NameTable } from '../../../../../components/Tables/TableComponents'
-import { ApiVideos } from '../../../../../helpers/ApiVideos'
+import ButtonManager from '../../../../../../components/Buttons/ButtonManager'
+import { NameTable } from '../../../../../../components/Tables/TableComponents'
+import { ApiVideos } from '../../../../../../helpers/ApiVideos'
 
 export const ContentTableVideos = () => {
     return (

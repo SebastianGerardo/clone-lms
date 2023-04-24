@@ -48,7 +48,7 @@ const EmitirComprobante = ({ handleChange, formData, dataCiclo }) => {
               Ciclo
             </span>
             <input
-              value={dataCiclo.nombre}
+              value={formData.ciclo}
               type="text"
               name="montoPago"
               disabled

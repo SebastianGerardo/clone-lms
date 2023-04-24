@@ -61,14 +61,9 @@ const Ciclo = () => {
 
             {/* BOTONES EDITAR */}
           <section className='flex justify-evenly bg-white rounded-lg p-2 text-xs text-[#4B4C53]'>
-          <section className='flex justify-evenly bg-white rounded-lg p-2 text-xs text-[#4B4C53]'>
                 <NavLink className='hover:text-blue-500 transition-all duration-100' to='/dashboard/administracion/edit/ciclos' state={{ logged: true }}>Editar</NavLink>
-                <NavLink  className='hover:text-blue-500 transition-all duration-100' to='/dashboard/administracion/edit/ciclos'             activeClassName="active" state={{ logged: true }}>Nuevo</NavLink>
+                <NavLink  className='hover:text-blue-500 transition-all duration-100' to='/dashboard/administracion/edit/ciclos' state={{ logged: true }}>Nuevo</NavLink>
                 <button className='hover:text-blue-500 transition-all duration-100'>Borrar</button>
-
-
-          </section>
-
           </section>
 
             {/* FECHA INICIO */}

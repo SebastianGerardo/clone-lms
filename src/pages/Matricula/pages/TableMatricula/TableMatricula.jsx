@@ -1,19 +1,27 @@
 import React from "react";
-import { MoreIcon } from "../../../assets/svgs/NormalSvgs";
-import TableBasic from "../../../components/Tables/TableBasic";
-import { NameTable } from "../../../components/Tables/TableComponents";
-import escudo from "../../../assets/icons/escudo.svg";
+import { MoreIcon } from "../../../../assets/svgs/NormalSvgs";
+import TableBasic from "../../../../components/Tables/TableBasic";
+import { NameTable } from "../../../../components/Tables/TableComponents";
+import escudo from "../../../../assets/icons/escudo.svg";
 
-export const TableMatriculaPersonalized = ({ handleOpenModal, data }) => {
+export const TableMatriculaPersonalized = ({
+  handleOpenModal,
+  data,
+  cicloImg,
+}) => {
   const columnsDataMatricula = [
     {
       name: <NameTable name="Ciclos" />,
       cell: (row) => (
-        <section className="flex items-center justify-center gap-1">
-          <div className="cursor-pointer mx-auto flex flex-col gap-y-4 justify-center items-center rounded-xl w-[3rem] h-[3rem] bg-blue-200/70">
-            <img src={escudo} alt="escudo" className="w-[1.5rem] h-[1.5rem]" />
+        <section className="flex items-center justify-start gap-1 min-w-[140px]">
+          <div className="w-8 h-8 object-cover">
+            <img
+              src={cicloImg[row.nombre]}
+              alt="escudo"
+              className="w-full h-full"
+            />
           </div>
-          <p className="text-gray-500 font-bold w-[3.5rem] truncate text-center">
+          <p className="text-gray-500 font-bold w-full truncate text-center">
             {row.nombre}
           </p>
         </section>

@@ -3,6 +3,7 @@ export const ApiCiclos = [
         id: 1,
         nombre: 'Ciclo Pre Uni',
         precio: 200,
+        aulasDisponibles: 3,
         aulas : [
             {
                 id: 1,
@@ -28,6 +29,7 @@ export const ApiCiclos = [
         id: 2,
         nombre: 'Ciclo Católica',
         precio: 300,
+        aulasDisponibles: 2,
         aulas : [
             {
                 id: 1,
@@ -47,6 +49,7 @@ export const ApiCiclos = [
         id: 3,
         nombre: 'Ciclo Medicina',
         precio: 150,
+        aulasDisponibles: 4,
         aulas : [
             {
                 id: 1,
@@ -78,12 +81,13 @@ export const ApiCiclos = [
         id: 4,
         nombre: 'Ciclo Unasam',
         precio: 250,
+        aulasDisponibles: 1,
         aulas : [
             {
                 id: 1,
                 capacidad: 10,
                 nombre: 'Aula A',
-                disponible: 10,
+                disponible: 0,
             },
             {
                 id: 2,
