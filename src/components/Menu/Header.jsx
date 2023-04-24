@@ -5,7 +5,7 @@ import {NavLink} from 'react-router-dom'
 import { SettingIcon } from "../../assets/svgs/ActiveSvgs";
 
 const Header = () => {
-  const {setShowMenu, showMenu} = useContext(UserContext)
+  const {setShowMenu, showMenu, usuarioLogin} = useContext(UserContext)
   
   return (
     <header className="flex py-4 px-8 flex-col min-[790px]:flex-row items-center justify-between gap-4">
@@ -24,7 +24,7 @@ const Header = () => {
         {/*  */}
         <div className="flex flex-col mx-auto pr-14 md:p-0 items-center justify-center text-center md:justify-start min-[790px]:hidden min-[925px]:flex">
           <h1 className="text-2xl md:text-3xl font-bold text-black">
-            <span className="text-blue-600 text-xl font-bold"><span className="text-black">Hola</span> Alex</span>
+            <span className="text-blue-600 text-xl font-bold"><span className="text-black">Hola</span> {usuarioLogin?.user?.name}</span>
           </h1>
             <p className="text-gray-400 text-xs">¿Cómo estás hoy?</p>
         </div>

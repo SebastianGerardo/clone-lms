@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import userImg from "../../assets/img/user-img.svg";
 import { motion, AnimatePresence } from 'framer-motion';
 import { Logout } from './MenuLogic';
 import { ArrowDownIcon, LogoutIcon } from '../../assets/svgs/NormalSvgs';
+import { UserContext } from '../../context/ContextLms';
 
 const PerfilHamburguesa = () => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const {usuarioLogin} = useContext(UserContext); 
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -29,7 +31,7 @@ const PerfilHamburguesa = () => {
           <img src={userImg} alt="" className="w-full h-full object-cover" />
         </div>
         <div className="flex flex-col text-start">
-          <span>José M.</span>
+          <span>{usuarioLogin?.user?.name} {usuarioLogin?.user?.paternal_surname?.split("", 1)}.</span>
           <span className="text-sm text-gray-500">
             Administrador 
           </span>

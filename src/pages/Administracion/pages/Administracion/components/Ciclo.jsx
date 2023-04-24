@@ -10,7 +10,6 @@ const Ciclo = () => {
   const [selectedCicloId, setSelectedCicloId] = useState(dataApi.length > 0 ? dataApi[0].id : null)
 
   const handleCicloClick = (ciclo) => {
-    setActive(!isActive);
     if (index + 1 !== ciclo) {
       setIndex(ciclo - 1)
       setSelectedCicloId(ciclo)

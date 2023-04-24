@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useMemo } from 'react'
-import profeImg from '../../../assets/img/profesor-img.svg'
+import profeImg from '../../../assets/img/user-img.svg'
 import { ArrowDownIcon2 } from '../../../assets/svgs/NormalSvgs'
 import CircularProgress from '../../../components/ProgressStatus/CircularProgress'
 import { ApiProfesor } from '../../../helpers/ApiEstadisticas'
