@@ -19,7 +19,7 @@ import Alumnos from '../pages/Administracion/pages/Tablas/TableAlumnos/Alumnos'
 import Apoderados from '../pages/Administracion/pages/Tablas/TableApoderados/Apoderados'
 import Ciclos from '../pages/Administracion/pages/Tablas/TableCiclos/Ciclos'
 import CicloForm from '../pages/Administracion/pages/Formularios/Ciclo/CicloForm'
-
+import Configuracion from '../pages/Configuracion/Configuracion'
 const AppRouter = () => {
   return (
     <Routes>
@@ -47,7 +47,7 @@ const AppRouter = () => {
             </Route>
             <Route path='perfil' element={<Perfil />} />
             <Route path='matricula' element={<Matricula />} />
-            <Route path='configuracion' />
+            <Route path='configuracion' element={<Configuracion/>} /> 
             
         </Route>
     </Routes>
