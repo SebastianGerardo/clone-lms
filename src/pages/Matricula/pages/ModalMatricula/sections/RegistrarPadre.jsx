@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { InputBasic } from "../../../../../components/Inputs/InputBasic";
+import { InputBasicNumber } from "../../../../../components/Inputs/InputNumber";
+import useInputNumber from "../../../../../hooks/useInputNumber";
 
 const RegistrarPadre = ({ handleChange, formData }) => {
+  const { handleKeyDown } = useInputNumber();
   return (
     <div className="text-start flex flex-col gap-4">
       <div className="w-full h-33 font-semibold text-22 leading-33 text-black">
@@ -29,6 +33,7 @@ const RegistrarPadre = ({ handleChange, formData }) => {
             <input
               value={formData?.dniApoderado}
               onChange={handleChange}
+              onKeyDown={handleKeyDown}
               type="text"
               name="dniApoderado"
               autoComplete="off"
@@ -40,90 +45,19 @@ const RegistrarPadre = ({ handleChange, formData }) => {
         </div>
 
         {/* NOMBRE */}
-        <div className="w-full">
-          <label className="flex flex-col gap-y-1">
-            <span className="block text-sm font-medium text-gray-400">
-              Nombre
-            </span>
-            <input
-              value={formData?.nombreApoderado}
-              onChange={handleChange}
-              type="text"
-              name="nombreApoderado"
-              placeholder="Diego"
-              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-            />
-          </label>
-        </div>
+        <InputBasic pHolder={"Diego"} data={formData?.nombreApoderado} labelName={"Nombre"} onChange={handleChange} name={"nombreApoderado"} />
 
         {/* APELLIDO-PATERNO */}
-        <div className="w-full">
-          <label className="flex flex-col gap-y-1">
-            <span className="block text-sm font-medium text-gray-400">
-              Apellido Paterno
-            </span>
-            <input
-              value={formData?.apellidoPaternoApoderado}
-              onChange={handleChange}
-              type="text"
-              name="apellidoPaternoApoderado"
-              placeholder="Ramirez"
-              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-            />
-          </label>
-        </div>
+        <InputBasic pHolder={"Ramirez"} data={formData?.apellidoPaternoApoderado} labelName={"Apellido Paterno"} onChange={handleChange} name={"apellidoPaternoApoderado"} />
 
         {/* APELLIDO-MATERNO */}
-        <div className="w-full">
-          <label className="flex flex-col gap-y-1">
-            <span className="block text-sm font-medium text-gray-400">
-              Apellido Materno
-            </span>
-            <input
-              value={formData?.apellidoMaternoApoderado}
-              onChange={handleChange}
-              type="text"
-              name="apellidoMaternoApoderado"
-              placeholder="Ramirez"
-              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-            />
-          </label>
-        </div>
+        <InputBasic pHolder={"Sanchez"} data={formData?.apellidoMaternoApoderado} labelName={"Apellido Materno"} onChange={handleChange} name={"apellidoMaternoApoderado"} />
+
         {/* NIVEL */}
-        <div className="w-full">
-          <label className="flex flex-col gap-y-1">
-            <span className="block text-sm font-medium text-gray-400">
-              Dirección
-            </span>
-            <input
-              value={formData?.direccionApoderado}
-              onChange={handleChange}
-              type="text"
-              name="direccionApoderado"
-              placeholder="Calle Leonardo da Vinci, 7"
-              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-            />
-          </label>
-        </div>
+        <InputBasic pHolder={"Calle Leonardo da Vinci, 7"} data={formData?.direccionApoderado} labelName={"Dirección"} onChange={handleChange} name={"direccionApoderado"} />
 
         {/* NUMERO DE CONTACTO */}
-        <div className="w-full">
-          <label className="flex flex-col gap-y-1">
-            <span className="block text-sm font-medium text-gray-400">
-              Numero de contacto
-            </span>
-            <input
-              value={formData?.telefonoApoderado}
-              onChange={handleChange}
-              type="text"
-              pattern="[0-9]{8}"
-
-              name="telefonoApoderado"
-              placeholder="222444999"
-              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-            />
-          </label>
-        </div>
+        <InputBasicNumber pHolder={"222444999"} data={formData?.telefonoApoderado} labelName={"Numero de contacto"} onChange={handleChange} name={"telefonoApoderado"} />
 
         {/* PARENTEZCO */}
         <div className="w-full  col-start-1 col-end-2">
@@ -146,20 +80,8 @@ const RegistrarPadre = ({ handleChange, formData }) => {
 
         {/* EMAIL */}
         <div className="col-span-2">
-          <div className="w-full col-start-0  col-end-3">
-            <label className="flex flex-col gap-y-1">
-              <span className="block text-sm font-medium text-gray-400">
-                Email
-              </span>
-              <input
-                value={formData?.correoApoderado}
-                onChange={handleChange}
-                type="text"
-                name="correoApoderado"
-                placeholder="example@gmail.com"
-                className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-              />
-            </label>
+          <div className="w-full col-start-0 col-end-3">
+            <InputBasic pHolder={"example@gmail.com"} data={formData?.correoApoderado} labelName={"Email"} onChange={handleChange} name={"correoApoderado"} type={"email"} />
           </div>
         </div>
       </form>
