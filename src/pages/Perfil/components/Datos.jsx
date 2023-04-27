@@ -89,6 +89,9 @@ const Datos = () => {
                     name="dni"
                     placeholder="DNI"
                     className="p-3 mt-[0.3125rem] h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
+                    pattern="[0-9]{8}"
+                    title="Ingresa un número de 8 dígitos"
+                    required
                   />
                 </label>
               </div>
@@ -131,6 +134,7 @@ const Datos = () => {
                   <input
                     type="text"
                     name="telefono"
+                    pattern="[0-9]{8}"
                     placeholder="Teléfono"
                     className="p-3 mt-[0.3125rem] h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
                   />

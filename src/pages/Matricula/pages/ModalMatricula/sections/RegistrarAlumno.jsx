@@ -43,6 +43,7 @@ const RegistrarAlumno = ({ handleChange, formData }) => {
               type="text"
               name="dniAlumno"
               autoComplete="off"
+              pattern="[0-9]{8}"
               placeholder="12345678"
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />
@@ -113,6 +114,7 @@ const RegistrarAlumno = ({ handleChange, formData }) => {
               onChange={handleChange}
               type="text"
               name="telefonoAlumno"
+              pattern="[0-10]{9}"
               placeholder="222444999"
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />

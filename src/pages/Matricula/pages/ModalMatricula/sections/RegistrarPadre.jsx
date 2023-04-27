@@ -20,21 +20,11 @@ const RegistrarPadre = ({ handleChange, formData }) => {
               defaultValue={formData?.tipoDocumentoApoderado}
             >
               <option value="">---</option>
-              <option
-                value="DNI"
-              >
-                DNI
-              </option>
-              <option
-                value="Carnet de Extranjeria"
-              >
+              <option value="DNI">DNI</option>
+              <option value="Carnet de Extranjeria">
                 Carnet de Extranjeria
               </option>
-              <option
-                value="Pasaporte"
-              >
-                Pasaporte
-              </option>
+              <option value="Pasaporte">Pasaporte</option>
             </select>
             <input
               value={formData?.dniApoderado}
@@ -42,6 +32,7 @@ const RegistrarPadre = ({ handleChange, formData }) => {
               type="text"
               name="dniApoderado"
               autoComplete="off"
+              pattern="[0-9]{8}"
               placeholder="12345678"
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />
@@ -125,6 +116,8 @@ const RegistrarPadre = ({ handleChange, formData }) => {
               value={formData?.telefonoApoderado}
               onChange={handleChange}
               type="text"
+              pattern="[0-9]{8}"
+
               name="telefonoApoderado"
               placeholder="222444999"
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
@@ -138,14 +131,16 @@ const RegistrarPadre = ({ handleChange, formData }) => {
             <span className="block text-sm font-medium text-gray-400">
               Parentezco
             </span>
-            <input
+            <select
               value={formData?.parentezco}
               onChange={handleChange}
-              type="text"
               name="parentezco"
-              placeholder="Padre/Madre"
-              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-            />
+              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
+            >
+              <option value="Padre">Padre</option>
+              <option value="Madre">Madre</option>
+              <option value="Madre">Tutor</option>
+            </select>
           </label>
         </div>
 

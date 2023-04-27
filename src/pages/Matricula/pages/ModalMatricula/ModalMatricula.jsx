@@ -76,8 +76,9 @@ const ContentModalMatricula = ({dataCiclo, mostrarPor, handleCloseModal}) => {
 
   const sectionStep = {
     0: <InformacionCiclo dataCiclo={dataCiclo} />,
-    1: <RegistrarPadre handleChange={handleChange} formData={formData} dataCiclo={dataCiclo} />,
-    2: <RegistrarAlumno handleChange={handleChange} formData={formData} dataCiclo={dataCiclo} />,
+    1: <RegistrarAlumno handleChange={handleChange} formData={formData} dataCiclo={dataCiclo} />,
+
+    2: <RegistrarPadre handleChange={handleChange} formData={formData} dataCiclo={dataCiclo} />,
     3: <EmitirComprobante handleChange={handleChange} formData={formData} dataCiclo={dataCiclo} />,
   };
 
