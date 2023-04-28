@@ -1,40 +1,23 @@
 import React, { useState } from "react";
-import StepProgressBar from "../../../../components/ProgressStatus/StepProgressBar";
 import RegistrarEmpresa from "./sections/RegistrarEmpresa";
 import RegistrarEmpresa2 from "./sections/RegistrarEmpresa2";
-import Tabla from "./sections/Tabla";
-import { Toast } from "../../../../components/Alertas/SweetAlerts";
+import StepProgressBar from "../../../../../../components/ProgressStatus/StepProgressBar";
+import { Toast } from "../../../../../../components/Alertas/SweetAlerts";
+import { crearEmpresa } from "../../../../../../helpers/ApiConfiguracion";
 
-const Empresa = ({dataCiclo, mostrarPor, handleCloseModal}) => {
+const ModalEmpresa = ({dataCiclo, setRecargarTabla,recargarTabla , handleCloseModal}) => {
+  const token = localStorage.getItem("token");
   const [formData, setFormData] = useState({
-    nombreAlumno: "",
-    apellidoAlumno: "",
-    nivelAlumno: "",
-    tipoDocumentoAlumno: "",
-    dniAlumno: "",
-    telefonoAlumno: "",
-    gradoAlumno: "",
-    correoAlumno: "",
-    colegioAlumno: "",
-    estadoCuenta: "Sin validar",
-    nombreApoderado: "",
-    apellidoPaternoApoderado: "",
-    apellidoMaternoApoderado: "",
-    direccionApoderado: "",
-    tipoDocumentoApoderado: "",
-    dniApoderado: "",
-    telefonoApoderado: "",
-    parentezco: "",
-    correoApoderado: "",
-    tipoDePago: "",
-    ciclo: dataCiclo?.nombre,
-    aula: "",
-    modalidadDePago: "",
-    cuotas: "1",
-    montoPago: "",
-    fechaMatricula: "",
-    horaMatricula: "",
-    local: "",
+    tradeName: "",
+    shortName: "", 
+    socialReason: "",
+    ruc: "",
+    country: "",
+    ubigean: "",
+    mobile: "",
+    email: "",
+    website: "",
+    agent: "",
   });
 
   const [currentStep, setCurrentStep] = useState(0);
@@ -54,30 +37,28 @@ const Empresa = ({dataCiclo, mostrarPor, handleCloseModal}) => {
     });
   };
 
-  const [dataLocal, setDataLocal] = useState(() => {
-    const saveDataLocal = localStorage.getItem('dataLocal')
-    if (saveDataLocal) {
-      return JSON.parse(saveDataLocal)
-    } else {
-      return []
-    }
-  })
-
   const handleMatricular = () => {
-    setDataLocal([...dataLocal, formData])
-    localStorage.setItem('dataLocal', JSON.stringify([...dataLocal, formData]))
-    handleCloseModal()
-    Toast.fire({
-      icon: 'success',
-      title: 'Alumno matriculado exitosamente!'
+    crearEmpresa(token, formData).then((res) => {
+      console.log(res)
+      if(res.statusCode == 200) {
+        Toast.fire({
+          icon: 'success',
+          title: 'Empresa Registrada exitosamente!'
+        })
+        handleCloseModal()
+        setRecargarTabla(!recargarTabla)
+      } else if (res.statusCode == 400) {
+        Toast.fire({
+          icon: 'error',
+          title: res.message.length > 0 && res.message[0]
+        })
+      }
     })
   }
 
   const sectionStep = {
     0: <RegistrarEmpresa handleChange={handleChange} formData={formData} dataCiclo={dataCiclo} />,
-
     1: <RegistrarEmpresa2 handleChange={handleChange} formData={formData} dataCiclo={dataCiclo} />,
-    2: <Tabla handleChange={handleChange} formData={formData} dataCiclo={dataCiclo} />,
   };
 
   const isLastStep = currentStep === Object.keys(sectionStep).length - 1; //comprueba si currentStep es igual a la longitud del objeto sectionStep
@@ -85,7 +66,7 @@ const Empresa = ({dataCiclo, mostrarPor, handleCloseModal}) => {
   return (
     <div className="lg:w-[55rem]">
       <div>
-        <StepProgressBar steps={3} currentStep={currentStep} />
+        <StepProgressBar steps={2} currentStep={currentStep} />
       </div>
       <div>
         {sectionStep[currentStep]}
@@ -94,7 +75,7 @@ const Empresa = ({dataCiclo, mostrarPor, handleCloseModal}) => {
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               onClick={handleNextStep}
-              disabled={currentStep === 4 - 1}
+              disabled={currentStep === 3 - 1}
             >
               Siguiente
             </button>
@@ -109,11 +90,11 @@ const Empresa = ({dataCiclo, mostrarPor, handleCloseModal}) => {
             </button>
             <button
               className={`${
-                currentStep === 3
+                currentStep === 2
                   ? "bg-green-500  hover:bg-green-700 cursor-pointer"
                   : "bg-blue-500"
               } hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`}
-              onClick={currentStep !== 2 ? handleNextStep : handleMatricular}
+              onClick={currentStep !== 1 ? handleNextStep : handleMatricular}
             >
               {isLastStep ? "Pagar" : "Siguiente"}
             </button>
@@ -124,4 +105,4 @@ const Empresa = ({dataCiclo, mostrarPor, handleCloseModal}) => {
   );
 };
 
-export default Empresa;
+export default ModalEmpresa;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { InputBasic } from "../../../../../components/Inputs/InputBasic";
-import { InputBasicNumber } from "../../../../../components/Inputs/InputNumber";
-import useInputNumber from "../../../../../hooks/useInputNumber";
+import { InputBasic } from "../../../../../../../components/Inputs/InputBasic";
+import { InputBasicNumber } from "../../../../../../../components/Inputs/InputNumber";
+import useInputNumber from "../../../../../../../hooks/useInputNumber";
 
 const RegistrarLocal2 = ({ handleChange, formData }) => {
   const { handleKeyDown } = useInputNumber();
@@ -120,37 +120,37 @@ const RegistrarLocal2 = ({ handleChange, formData }) => {
 
         <div className="col-span-2">
           {/*Direccion Legal */}
-          <InputBasicNumber
+          <InputBasic
             pHolder={"Jr. Huaylas Nro 220"}
-            data={formData?.telefonoApoderado}
+            data={formData?.address}
             labelName={"Dirección legal"}
             onChange={handleChange}
-            name={"direccionLegal"}
+            name={"address"}
           />
         </div>
         {/* NUMERO DE TELEFONO */}
         <InputBasicNumber
           pHolder={"043-422110"}
-          data={formData?.telefonoApoderado}
+          data={formData?.mobile}
           labelName={"Teléfono"}
           onChange={handleChange}
-          name={"telefono"}
+          name={"mobile"}
         />
         {/* email */}
-        <InputBasicNumber
+        <InputBasic
           pHolder={"consultas@ae.edu.pe"}
-          data={formData?.telefonoApoderado}
+          data={formData?.email}
           labelName={"email"}
           onChange={handleChange}
           name={"email"}
         />
         {/* Página web */}
-        <InputBasicNumber
+        <InputBasic
           pHolder={"www.academiaencinas.edu.pe"}
-          data={formData?.telefonoApoderado}
+          data={formData?.website}
           labelName={"Página web"}
           onChange={handleChange}
-          name={"paginaWeb"}
+          name={"website"}
         />
         {/* Total de salones // Total de oficinas */}
         <div className="w-full grid grid-cols-2">
@@ -159,8 +159,10 @@ const RegistrarLocal2 = ({ handleChange, formData }) => {
               Total de salones
             </span>
             <input
+              onChange={handleChange}
               type="number"
-              name="totalDeSalones"
+              value={formData?.totalLocals}
+              name="totalLocals"
               placeholder="15"
               className="p-3 mt-[0.3125rem] h-[3rem] block w-[6.5rem] rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />
@@ -171,7 +173,9 @@ const RegistrarLocal2 = ({ handleChange, formData }) => {
             </span>
             <input
               type="number"
-              name="totalDeOficinas"
+              name="company"
+              onChange={handleChange}
+              value={formData?.company}
               placeholder="8"
               className="p-3 mt-[0.3125rem] h-[3rem] block w-[6.5rem]  rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />

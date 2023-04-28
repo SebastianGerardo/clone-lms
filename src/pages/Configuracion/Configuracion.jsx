@@ -1,5 +1,4 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import Empresa from "./components/Empresa";
 import Locales from "./components/Locales";
 import DatosAcademicos from "./components/DatosAcademicos";
 import ConfiguracionPerfil from "./components/ConfiguracionPerfil";
@@ -13,6 +12,9 @@ import {
 } from "../../assets/svgs/ActiveSvgs";
 import { Ripples } from "@uiball/loaders";
 import { AnimatePresence, motion } from "framer-motion";
+import Empresa from "./components/Empresa/Empresa";
+import Local from "./components/Local/Local";
+import Salones from "./components/Salones/Salones";
 
 export default function Configuracion() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -132,11 +134,11 @@ const validarUbicacion = () => {
     },
     Locales: {
       title: "Locales",
-      content: <Locales />,
+      content: <Local />,
     },
     Salones: {
       title: "Salones",
-      content: <DatosAcademicos />,
+      content: <Salones />,
     },
     Cursos: {
       title: "Cursos",

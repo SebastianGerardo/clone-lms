@@ -1,24 +1,24 @@
 import React from "react";
 
-const RegistrarLocal = ({ handleChange, formData }) => {
+const RegistrarEmpresa = ({ handleChange, formData }) => {
   return (
     <div className="text-start flex flex-col gap-4">
       <div className="w-full h-33 font-semibold text-22 leading-33 text-black">
-        Información de Identidad del Local
+        Información de Identidad de la Empresa
       </div>
       <form className="flex flex-col sm:grid sm:grid-cols-3 sm:grid-rows-3 gap-y-3 gap-x-8">
-        {/* Empresa*/}
+        {/* Nombre Comercial */}
         <div className="w-full">
           <label className="flex flex-col gap-y-1">
             <span className="block text-sm font-medium text-gray-400">
-            Empresa
+              Nombre Comercial
             </span>
             <input
-              value={formData?.nombreAlumno}
+              value={formData?.tradeName}
               onChange={handleChange}
               type="text"
-              name="empresa"
-              placeholder="Empresa de Servicios Educativos Albert Einstein - Academia Encinas"
+              name="tradeName"
+              placeholder="Academia Encinas"
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />
           </label>
@@ -31,46 +31,75 @@ const RegistrarLocal = ({ handleChange, formData }) => {
               Razón Social
             </span>
             <input
-              value={formData?.apellidoAlumno}
+              value={formData?.socialReason}
               onChange={handleChange}
               type="text"
-              name="razonSocial"
+              name="socialReason"
               placeholder="Empresa de Servicios Educativos Albert Einstein - Academia Encinas"
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />
           </label>
         </div>
 
-        {/* Codigo Local UGEL */}
+        {/* Tipo de Documento */}
         <div className="w-full">
           <label className="flex flex-col gap-y-1">
             <span className="block text-sm font-medium text-gray-400">
-            Codigo Local UGEL
+              Ruc
             </span>
             <input
-              value={formData?.nivelAlumno}
+              value={formData?.ruc}
               onChange={handleChange}
-              type="codigoLocalUgel"
+              type="number"
               name="ruc"
-              placeholder="408973"
+              placeholder="RUC"
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />
           </label>
         </div>
-        <div className="w-full col-span-2">
+
+        {/* Número de documento */}
+        <div className="w-full">
           <label className="flex flex-col gap-y-1">
+            <span className="block text-sm font-medium text-gray-400">
+              Número de ubigeo
+            </span>
+            <input
+              value={formData?.ubigean}
+              onChange={handleChange}
+              type="number"
+              name="ubigean"
+              placeholder="20406889191"
+              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
+            />
           </label>
         </div>
 
+        {/* Nombre corto */}
+        <div className="w-full">
+          <label className="flex flex-col gap-y-1">
+            <span className="block text-sm font-medium text-gray-400">
+              Nombre corto
+            </span>
+            <input
+              value={formData?.shortName}
+              onChange={handleChange}
+              type="text"
+              name="shortName"
+              placeholder="ESEAE SRL"
+              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
+            />
+          </label>
+        </div>
 
         {/* País */}
-        <div className="w-full col-span-3">
+        <div className="w-full col-start-1 col-end-4">
           <label className="flex flex-col gap-y-1">
             <span className="block text-sm font-medium text-gray-400">
               País
             </span>
 
-            <select className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500">
+            <select defaultValue={formData?.country} name="country" onChange={handleChange} className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500">
               <option value="">Selecciona un país</option>
               <option value="Argentina">Argentina</option>
               <option value="Bolivia">Bolivia</option>
@@ -99,14 +128,9 @@ const RegistrarLocal = ({ handleChange, formData }) => {
             </select>
           </label>
         </div>
-        <div className="w-full col-span-2">
-          <label className="flex flex-col gap-y-1">
-          </label>
-        </div>
-
       </form>
     </div>
   );
 };
 
-export default RegistrarLocal;
+export default RegistrarEmpresa;

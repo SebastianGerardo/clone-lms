@@ -1,40 +1,23 @@
 import React, { useState } from "react";
-import StepProgressBar from "../../../../components/ProgressStatus/StepProgressBar";
+import { Toast } from "../../../../../../components/Alertas/SweetAlerts";
+import StepProgressBar from "../../../../../../components/ProgressStatus/StepProgressBar";
+import { crearLocal } from "../../../../../../helpers/ApiConfiguracion";
 import RegistrarLocal from "./sections/RegistrarLocal";
 import RegistrarLocal2 from "./sections/RegistrarLocal2";
-import Tabla from "./sections/Tabla";
-import { Toast } from "../../../../components/Alertas/SweetAlerts";
 
-const Locales = ({dataCiclo, mostrarPor, handleCloseModal}) => {
+const ModalLocal = ({dataCiclo, mostrarPor, handleCloseModal, recargarTabla, setRecargarTabla}) => {
+  const token = localStorage.getItem("token");
   const [formData, setFormData] = useState({
-    nombreAlumno: "",
-    apellidoAlumno: "",
-    nivelAlumno: "",
-    tipoDocumentoAlumno: "",
-    dniAlumno: "",
-    telefonoAlumno: "",
-    gradoAlumno: "",
-    correoAlumno: "",
-    colegioAlumno: "",
-    estadoCuenta: "Sin validar",
-    nombreApoderado: "",
-    apellidoPaternoApoderado: "",
-    apellidoMaternoApoderado: "",
-    direccionApoderado: "",
-    tipoDocumentoApoderado: "",
-    dniApoderado: "",
-    telefonoApoderado: "",
-    parentezco: "",
-    correoApoderado: "",
-    tipoDePago: "",
-    ciclo: dataCiclo?.nombre,
-    aula: "",
-    modalidadDePago: "",
-    cuotas: "1",
-    montoPago: "",
-    fechaMatricula: "",
-    horaMatricula: "",
-    local: "",
+    name: "",
+    ugelCode: "",
+    country: "",
+    ubigean: "",
+    address: "",
+    mobile: "",
+    email: "",
+    website: "",
+    totalLocals: "",
+    company: "",
   });
 
   const [currentStep, setCurrentStep] = useState(0);
@@ -54,30 +37,28 @@ const Locales = ({dataCiclo, mostrarPor, handleCloseModal}) => {
     });
   };
 
-  const [dataLocal, setDataLocal] = useState(() => {
-    const saveDataLocal = localStorage.getItem('dataLocal')
-    if (saveDataLocal) {
-      return JSON.parse(saveDataLocal)
-    } else {
-      return []
-    }
-  })
-
   const handleMatricular = () => {
-    setDataLocal([...dataLocal, formData])
-    localStorage.setItem('dataLocal', JSON.stringify([...dataLocal, formData]))
-    handleCloseModal()
-    Toast.fire({
-      icon: 'success',
-      title: 'Alumno matriculado exitosamente!'
+    crearLocal(token, formData).then((res) => {
+      console.log(res)
+      if(res.statusCode == 200) {
+        Toast.fire({
+          icon: 'success',
+          title: 'Local Registrado exitósamente!'
+        })
+        handleCloseModal()
+        setRecargarTabla(!recargarTabla)
+      } else if (res.statusCode == 400) {
+        Toast.fire({
+          icon: 'error',
+          title: res.message.length > 0 && res.message[0]
+        })
+      }
     })
   }
 
   const sectionStep = {
     0: <RegistrarLocal handleChange={handleChange} formData={formData} dataCiclo={dataCiclo} />,
-
     1: <RegistrarLocal2 handleChange={handleChange} formData={formData} dataCiclo={dataCiclo} />,
-    2: <Tabla handleChange={handleChange} formData={formData} dataCiclo={dataCiclo} />,
   };
 
   const isLastStep = currentStep === Object.keys(sectionStep).length - 1; //comprueba si currentStep es igual a la longitud del objeto sectionStep
@@ -85,7 +66,7 @@ const Locales = ({dataCiclo, mostrarPor, handleCloseModal}) => {
   return (
     <div className="lg:w-[55rem]">
       <div>
-        <StepProgressBar steps={3} currentStep={currentStep} />
+        <StepProgressBar steps={2} currentStep={currentStep} />
       </div>
       <div>
         {sectionStep[currentStep]}
@@ -94,7 +75,7 @@ const Locales = ({dataCiclo, mostrarPor, handleCloseModal}) => {
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               onClick={handleNextStep}
-              disabled={currentStep === 4 - 1}
+              disabled={currentStep === 3 - 1}
             >
               Siguiente
             </button>
@@ -109,11 +90,11 @@ const Locales = ({dataCiclo, mostrarPor, handleCloseModal}) => {
             </button>
             <button
               className={`${
-                currentStep === 3
+                currentStep === 2
                   ? "bg-green-500  hover:bg-green-700 cursor-pointer"
                   : "bg-blue-500"
               } hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`}
-              onClick={currentStep !== 2 ? handleNextStep : handleMatricular}
+              onClick={currentStep !== 1 ? handleNextStep : handleMatricular}
             >
               {isLastStep ? "Pagar" : "Siguiente"}
             </button>
@@ -124,4 +105,4 @@ const Locales = ({dataCiclo, mostrarPor, handleCloseModal}) => {
   );
 };
 
-export default Locales;
+export default ModalLocal;
