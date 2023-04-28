@@ -15,6 +15,10 @@ body {
   grid-template-columns: auto 1px auto;
 }
 
+.triangle-up {
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
 /* BREAKPOINTS PERSONALIZADOS */
 
 @media screen and (max-height: 622px) {

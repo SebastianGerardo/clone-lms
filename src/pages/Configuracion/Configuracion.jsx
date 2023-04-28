@@ -1,123 +1,234 @@
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import Empresa from "./components/Empresa";
 import Locales from "./components/Locales";
 import DatosAcademicos from "./components/DatosAcademicos";
 import ConfiguracionPerfil from "./components/ConfiguracionPerfil";
+import Cursos from "./components/Cursos/pages/Cursos/Cursos";
+import Capitulos from "./components/Cursos/pages/Capitulos/Capitulos";
+import {
+  BookIcon3,
+  NoteIcon2,
+  SettingIcon2,
+  UserIcon,
+} from "../../assets/svgs/ActiveSvgs";
+import { Ripples } from "@uiball/loaders";
+import { AnimatePresence, motion } from "framer-motion";
 
-import { BookIcon3, NoteIcon2, SettingIcon, SettingIcon2, UserIcon } from "../../assets/svgs/ActiveSvgs";
-
-const Configuracion = () => {
-  const [activeTab, setActiveTab] = useState("Datos");
-  const renderTab = () => {
-    switch (activeTab) {
-      case "Empresa":
-        return <Empresa />;
-      case "Locales":
-        return <Locales />;
-
-      case "DatosAcademicos":
-        return <DatosAcademicos />;
-
-      case "Configuracion":
-        return <ConfiguracionPerfil />;
-      default:
-        return null;
-    }
-  };
-
+export default function Configuracion() {
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  const { navigationSections, renderTab, nombreCurso, activeTab } = validarUbicacion();
+  useLayoutEffect(() => {
+    setIsLoaded(false);
+    const timeout = setTimeout(() => {
+      setIsLoaded(true);
+    }, 1000);
+    return () => clearTimeout(timeout);
+  }, [activeTab]);
+  
   return (
-    <div className="bg-white h-full py-6 px-4 sm:px-20">
-      {/* BOTÓN DE EDITAR */}
-      <div className="flex items-center justify-between mb-3">
-        {/* BOTÓN DE ALUMNO */}
-        <div className="w-full h-33 font-semibold text-xl  leading-33 text-black">
-          Configuración{" "}
-        </div>
-      </div>
-
-      <div className="w-full">
+    <section className="2xl:flex 2xl:flex-col 2xl:items-center">
+      <div className="bg-white w-full h-full py-6 px-0 sm:px-20 mx-0 2xl:max-w-[1400px]">
         <div className="w-full">
-          {/* INFORMACION */}
-          <div className="flex justify-between items-center"></div>
-
           <div className="w-full mb-6 flex flex-col gap-y-8 sm:gap-3">
             {/*  NAV */}
-            <nav className="flex sm:border-b justify-center sm:justify-start mt-3 flex-wrap w-full sm:w-max mx-auto lg:mx-0 text-[#999999]">
-              <button
-                className={`group w-max cursor-pointer px-6 mx-0 text-left py-3 border-b-2 sm:text-basic transition-all duration-100 hover:text-blue-600 hover:border-blue-600 ${
-                  activeTab == "Empresa"
-                    ? "border-blue-600 text-blue-600"
-                    : "border-[#D9D9D9]"
-                }`}
-                onClick={() => setActiveTab("Empresa")}
-              >
-                <UserIcon isActive={activeTab == "Empresa"} colorChange={"#2563EB"} />
-                Empresa
-              </button>
-
-              <button
-                className={`group w-max cursor-pointer px-6 mx-0 text-left py-3 border-b-2 sm:text-basic transition-all duration-100 hover:text-blue-600 hover:border-blue-600 ${
-                  activeTab == "Locales"
-                    ? "border-blue-600 text-blue-600"
-                    : "border-[#D9D9D9]"
-                }`}
-                onClick={() => setActiveTab("Locales")}
-              >
-                <BookIcon3 isActive={activeTab == "Locales"} colorChange={"#2563EB"} />
-                Locales
-              </button>
-              <button
-                className={`group w-max cursor-pointer px-6 mx-0 text-left py-3 border-b-2 sm:text-basic transition-all duration-100 hover:text-blue-600 hover:border-blue-600 ${
-                  activeTab == "DatosAcademicos"
-                    ? "border-blue-600 text-blue-600"
-                    : "border-[#D9D9D9]"
-                }`}
-                onClick={() => setActiveTab("DatosAcademicos")}
-              >
-                <NoteIcon2 isActive={activeTab == "DatosAcademicos"} colorChange={"#2563EB"} />
-                Salones
-              </button>
-              <button
-                className={`flex gap-2 group w-max cursor-pointer px-6 mx-0 text-left py-3 border-b-2 sm:text-basic transition-all duration-100 hover:text-blue-600 hover:border-blue-600 ${
-                  activeTab == "Configuracion"
-                    ? "border-blue-600 text-blue-600"
-                    : "border-[#D9D9D9]"
-                }`}
-                onClick={() => setActiveTab("Configuracion")}
-              >
-                <SettingIcon2 isActive={activeTab == "Configuracion"} colorChange={"#2563EB"} />
-                Cursos
-              </button>
-              <button
-                className={`flex gap-2 group w-max cursor-pointer px-6 mx-0 text-left py-3 border-b-2 sm:text-basic transition-all duration-100 hover:text-blue-600 hover:border-blue-600 ${
-                  activeTab == "Configuracion"
-                    ? "border-blue-600 text-blue-600"
-                    : "border-[#D9D9D9]"
-                }`}
-                onClick={() => setActiveTab("Configuracion")}
-              >
-                <SettingIcon2 isActive={activeTab == "Configuracion"} colorChange={"#2563EB"} />
-                Cursos en Semanas
-              </button>
-              <button
-                className={`flex gap-2 group w-max cursor-pointer px-6 mx-0 text-left py-3 border-b-2 sm:text-basic transition-all duration-100 hover:text-blue-600 hover:border-blue-600 ${
-                  activeTab == "Configuracion"
-                    ? "border-blue-600 text-blue-600"
-                    : "border-[#D9D9D9]"
-                }`}
-                onClick={() => setActiveTab("Configuracion")}
-              >
-                <SettingIcon2 isActive={activeTab == "Configuracion"} colorChange={"#2563EB"} />
-                Learning Path
-              </button>
-              
+            <nav className="w-full mx-auto overflow-auto flex 2xl:justify-center mt-3 text-[#999999] ocultar-barra">
+              {navigationSections.map((item, index) => (
+                <Navigation
+                  key={index}
+                  nameActive={item.name}
+                  icon={item.icon}
+                  {...item.props}
+                />
+              ))}
             </nav>
 
-            <main>{renderTab()}</main>
+            <main>
+              <div className="flex items-center justify-between mb-3">
+                <div className="text-center sm:text-start sm:pl-8 w-full h-33 font-semibold text-xl leading-33 text-black">
+                  Configuración {`> ${renderTab[activeTab]?.title}`}{" "}
+                  {nombreCurso && <span>{`> ${nombreCurso}`}</span>}
+                </div>
+              </div>
+              {isLoaded ? (
+                <AnimatePresence>
+                <motion.span
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {renderTab[activeTab]?.content}
+                </motion.span>
+              </AnimatePresence>
+              ) : (
+                <div className="flex justify-center items-center h-[20rem]">
+                  <Ripples color="#2563EB" />
+                </div>
+              )}
+            </main>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+  );
+}
+
+const Navigation = ({
+  activeTab,
+  nameActive,
+  setActiveTab,
+  setNombreCurso,
+  icon,
+  setCursoActual
+}) => {
+  return (
+    <button
+      className={`flex gap-2 group w-max cursor-pointer px-6 mx-0 text-left py-3 border-b-2 sm:text-basic transition-all duration-100 hover:text-blue-600 hover:border-blue-600 ${
+        activeTab == nameActive
+          ? "border-blue-600 text-blue-600"
+          : "border-[#D9D9D9]"
+      }`}
+      onClick={() => {
+        setActiveTab(nameActive), setNombreCurso(null), setCursoActual("Cursos");
+      }}
+    >
+      {icon}
+      <p className="truncate">{nameActive}</p>
+    </button>
   );
 };
-export default Configuracion;
+
+const validarUbicacion = () => {
+  const [activeTab, setActiveTab] = useState("Empresa");
+  const [cursoActual, setCursoActual] = useState("Cursos");
+  const [nombreCurso, setNombreCurso] = useState(null);
+
+  const cursoComponent = {
+    Cursos: {
+      title: "Cursos",
+      content: (
+        <Cursos
+          setCursoActual={setCursoActual}
+          setNombreCurso={setNombreCurso}
+        />
+      ),
+    },
+    Capitulos: {
+      title: "Capitulos",
+      content: (
+        <Capitulos
+          setCursoActual={setCursoActual}
+          setNombreCurso={setNombreCurso}
+        />
+      ),
+    },
+  };
+  
+  const renderTab = {
+    Empresa: {
+      title: "Empresa",
+      content: <Empresa />,
+    },
+    Locales: {
+      title: "Locales",
+      content: <Locales />,
+    },
+    Salones: {
+      title: "Salones",
+      content: <DatosAcademicos />,
+    },
+    Cursos: {
+      title: "Cursos",
+      content: cursoComponent[cursoActual]?.content,
+    },
+    "Cursos en Semanas": {
+      title: "Cursos en Semanas",
+      content: <ConfiguracionPerfil />,
+    },
+    "Learning Path": {
+      title: "Learning Path",
+      content: <ConfiguracionPerfil />,
+    },
+  };
+
+  const propsNavigation = {
+    setNombreCurso: setNombreCurso,
+    activeTab: activeTab,
+    setActiveTab: setActiveTab,
+    setCursoActual: setCursoActual,
+  };
+
+  const navigationSections = [
+    {
+      name: "Empresa",
+      icon: (
+        <UserIcon isActive={activeTab == "Empresa"} colorChange={"#2563EB"} />
+      ),
+      props: { ...propsNavigation },
+    },
+    {
+      name: "Locales",
+      icon: (
+        <BookIcon3 isActive={activeTab == "Locales"} colorChange={"#2563EB"} />
+      ),
+      props: { ...propsNavigation },
+    },
+    {
+      name: "Salones",
+      icon: (
+        <NoteIcon2
+          isActive={activeTab == "Salones"}
+          colorChange={"#2563EB"}
+        />
+      ),
+      props: { ...propsNavigation },
+    },
+    {
+      name: "Cursos",
+      icon: (
+        <SettingIcon2
+          isActive={activeTab == "Cursos"}
+          colorChange={"#2563EB"}
+        />
+      ),
+      props: { ...propsNavigation },
+    },
+    {
+      name: "Cursos en Semanas",
+      icon: (
+        <SettingIcon2
+          isActive={activeTab == "Cursos en Semanas"}
+          colorChange={"#2563EB"}
+        />
+      ),
+      props: { ...propsNavigation },
+    },
+    {
+      name: "Learning Path",
+      icon: (
+        <BookIcon3 isActive={activeTab == "Learning Path"} colorChange={"#2563EB"} />
+      ),
+      props: { ...propsNavigation },
+    },
+    {
+      name: "Locales",
+      icon: (
+        <SettingIcon2
+          isActive={activeTab == "Locales"}
+          colorChange={"#2563EB"}
+        />
+      ),
+      props: { ...propsNavigation },
+    },
+  ];
+
+  const props = {
+    navigationSections,
+    renderTab,
+    nombreCurso,
+    activeTab,
+  };
+
+  return props;
+};

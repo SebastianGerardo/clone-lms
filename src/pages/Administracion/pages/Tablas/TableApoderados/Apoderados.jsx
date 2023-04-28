@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import TableBasic from '../../../../../components/Tables/TableBasic'
+import { NombreTabla } from '../../../../../components/Tables/TableComponents'
 import { columnsApoderados, ContentTableApoderados } from './components/TableApoderados'
 
 const Apoderados = () => {
@@ -31,7 +32,7 @@ const Apoderados = () => {
   return (
     <section className='p-8'>
       <div className='max-w-[1200px] mx-auto flex flex-col gap-y-12'>
-          <TableBasic columns={columnsApoderados} data={filtrarApoderados} tableTitle={<ContentTableApoderados handleSearch={handleSearch} />} />
+          <TableBasic columns={columnsApoderados} data={filtrarApoderados} title={<NombreTabla children={<ContentTableApoderados handleSearch={handleSearch} />}/>} />
       </div>
     </section>
   )

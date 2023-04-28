@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import TableBasic from '../../../../../components/Tables/TableBasic'
+import { NombreTabla } from '../../../../../components/Tables/TableComponents'
 import { ApiCiclos } from '../../../../../helpers/ApiMatricula'
 import { columnsCiclos, ContentTableCiclos } from './components/TableCiclos'
 
@@ -22,7 +23,7 @@ const Ciclos = () => {
   return (
     <section className='p-8'>
       <div className='max-w-[1200px] mx-auto flex flex-col gap-y-12'>
-          <TableBasic columns={columnsCiclos} data={filtrarCiclos} tableTitle={<ContentTableCiclos handleSearch={handleSearch} />} />
+          <TableBasic columns={columnsCiclos} data={filtrarCiclos} title={<NombreTabla children={<ContentTableCiclos handleSearch={handleSearch} />}/>} />
       </div>
     </section>
   )

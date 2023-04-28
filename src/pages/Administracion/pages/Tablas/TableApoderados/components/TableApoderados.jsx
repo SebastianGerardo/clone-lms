@@ -20,12 +20,12 @@ export const ContentTableApoderados = ({handleSearch}) => {
   return (
     <div className="flex flex-col gap-y-2 mb-4 ">
       <h1 className="font-bold text-2xl text-center min-[1235px]:text-start">
-        Alumnos
+        Apoderados
       </h1>
       <section className="flex flex-col min-[1235px]:flex-row min-[1235px]:justify-around items-center gap-y-4">
         {/* TOTAL DE VIDEOS */}
         <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#0052CA] text-white">
-          <p>Total de alumnos</p>
+          <p>Total de apoderados</p>
           <span className="text-white/80">
             {"("}
             {apiAlumnos.length}

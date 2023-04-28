@@ -2,7 +2,7 @@ import React from "react";
 import DataTable from 'react-data-table-component'
 import { NombreTabla } from "./TableComponents";
 
-const TableBasic = ({ columns, data, pagPerPage = 5, tableTitle }) => {
+const TableBasic = (props) => {
 
   const customStyles = {
     rows: {
@@ -16,11 +16,9 @@ const TableBasic = ({ columns, data, pagPerPage = 5, tableTitle }) => {
   return (
     <div>
       <DataTable
-        title={<NombreTabla children={tableTitle}/>}
-        columns={columns}
-        data={data}
+        // title={<NombreTabla children={props.tableTitle}/>}
         pagination
-        paginationPerPage={pagPerPage}
+        paginationPerPage={5}
         paginationRowsPerPageOptions={[5, 10, 15, 20, 25, 30]}
         paginationComponentOptions={{
           rowsPerPageText: "Filas por página:",
@@ -31,6 +29,7 @@ const TableBasic = ({ columns, data, pagPerPage = 5, tableTitle }) => {
         }}
         customStyles={customStyles}
         noDataComponent={<p className="text-base text-gray-400">No hay información para mostrar</p>}
+        {...props}
       />
     </div>
   );

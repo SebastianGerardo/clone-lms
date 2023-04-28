@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import TableBasic from '../../../../../components/Tables/TableBasic'
+import { NombreTabla } from '../../../../../components/Tables/TableComponents'
 import { columnsAlumnos, ContentTableAlumnos } from './components/TableAlumnos'
 
 const Alumnos = () => {
@@ -29,7 +30,7 @@ const Alumnos = () => {
   return (
     <section className='p-8'>
       <div className='max-w-[1200px] mx-auto flex flex-col gap-y-12'>
-          <TableBasic columns={columnsAlumnos} data={filtrarAlumnos} tableTitle={<ContentTableAlumnos handleSearch={handleSearch} />} />
+          <TableBasic columns={columnsAlumnos} data={filtrarAlumnos} title={<NombreTabla children={<ContentTableAlumnos handleSearch={handleSearch} />}/>} />
       </div>
     </section>
   )

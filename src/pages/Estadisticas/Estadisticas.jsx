@@ -11,7 +11,7 @@ const Estadisticas = () => {
         <div className='max-w-[1024px] mx-auto flex flex-col gap-y-12'>
             <EstadisticasVideo />
             <EstadisticasProfesor />
-            <TableBasic columns={columnsDataEstadisticas} data={ApiAlumno} tableTitle="Alumnos" />
+            <TableBasic columns={columnsDataEstadisticas} data={ApiAlumno} title="Alumnos" />
         </div>
     </section>
   )
