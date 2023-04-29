@@ -13,19 +13,16 @@ const Salones = ({setCursoActual, setNombreCurso}) => {
   const [dataLocales, setDataLocales] = useState([]);
   const [infoSalon, setInfoSalon] = useState({})
   const [recargarTabla, setRecargarTabla] = useState(false);
-  
 
   useEffect(() => {
     TraeDataSalones(token).then((res) => {
       setDataSalones(res.data);
-      console.log(res)
     });
   }, [recargarTabla])
 
   useEffect(() => {
     TraeDataLocales(token).then((res) => {
       setDataLocales(res.data);
-      console.log(res)
     });
   }, [recargarTabla])
 
@@ -43,7 +40,9 @@ const Salones = ({setCursoActual, setNombreCurso}) => {
     setNombreCurso: setNombreCurso,
     dataSalones: dataSalones,
     setInfoSalon: setInfoSalon,
-    handleOpenModal: handleOpenModal
+    handleOpenModal: handleOpenModal,
+    setRecargarTabla: setRecargarTabla,
+    recargarTabla: recargarTabla,
   });
 
   return (

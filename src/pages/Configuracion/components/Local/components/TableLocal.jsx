@@ -4,8 +4,9 @@ import { NameTable } from "../../../../../components/Tables/TableComponents";
 import editIcon from "../../../../../assets/icons/editIcon.png";
 import deleteIcon from "../../../../../assets/icons/deleteIcon.png";
 import Swal from "sweetalert2";
+import { eliminarLocal } from "../../../../../helpers/ApiConfiguracion";
 
-export const ColumnsLocal = ({handleOpenModal, setDataLocal}) => {
+export const ColumnsLocal = ({handleOpenModal, setDataLocal, recargarTabla, setRecargarTabla}) => {
   const columnsLocal = [
       {
         name: <NameTable name="Orden" />,
@@ -53,7 +54,7 @@ export const ColumnsLocal = ({handleOpenModal, setDataLocal}) => {
                   </div>
               </div>
               <div
-              onClick={deleteAlert}
+              onClick={() => deleteAlert(row.id, setRecargarTabla, recargarTabla )}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-[25px] h-[25px] object-cover">
@@ -112,7 +113,7 @@ export const ContentTableLocal = ({handleOpenModal, dataLocales}) => {
   );
 };
 
-const deleteAlert = () => {
+const deleteAlert = (id, setRecargarTabla, recargarTabla) => {
   Swal.fire({
     title: '¿Estas seguro de eliminar este local?',
     text: "No podras revertir esta accion!",
@@ -124,11 +125,23 @@ const deleteAlert = () => {
     cancelButtonText: 'Cancelar'
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire(
-        'Eliminado!',
-        'El local ha sido eliminado.',
-        'success'
-      )
+      const token = localStorage.getItem("token");
+      eliminarLocal(token, id).then((res) => {
+        if (res.statusCode == 200) {
+          Swal.fire(
+            'Eliminado!',
+            'El local ha sido eliminado.',
+            'success'
+          )
+          setRecargarTabla(!recargarTabla)
+        } else {
+          Swal.fire(
+            'Error!',
+            'No se pudo eliminar el local.',
+            'error'
+          )
+        }
+      })
     }
   })
 }

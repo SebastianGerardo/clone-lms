@@ -52,6 +52,22 @@ export const cambiarEmpresa = async (bearer, registro, id) => {
   }
 };
 
+export const eliminarEmpresa = async (bearer, id) => {
+  try {
+    const fetchResponse = await fetch(`${URL}/companies/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${bearer}`,
+      },
+    });
+    const data = await fetchResponse.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
 //APIS LOCALES
 
 export const TraeDataLocales = async (bearer) => {
@@ -69,23 +85,6 @@ export const TraeDataLocales = async (bearer) => {
     return error;
   }
 };
-
-export const TraeDataLocal = async (bearer, id) => {
-  try {
-    const fetchResponse = await fetch(`${URL}/locals/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${bearer}`,
-      },
-    });
-    const data = await fetchResponse.json();
-    return data;
-  } catch (error) {
-    return error;
-  }
-};
-
 
 export const CambiaDataLocal = async (bearer, registro, id) => {
   try {
@@ -113,6 +112,22 @@ export const crearLocal = async (bearer, registro) => {
         Authorization: `Bearer ${bearer}`,
       },
       body: JSON.stringify(registro),
+    });
+    const data = await fetchResponse.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const eliminarLocal = async (bearer, id) => {
+  try {
+    const fetchResponse = await fetch(`${URL}/locals/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${bearer}`,
+      },
     });
     const data = await fetchResponse.json();
     return data;
@@ -172,6 +187,23 @@ export const cambiarSalon = async (bearer, registro, id) => {
     return error;
   }
 };
+
+export const eliminarSalon = async (bearer, id) => {
+  try {
+    const fetchResponse = await fetch(`${URL}/classrooms/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${bearer}`,
+      },
+    });
+    const data = await fetchResponse.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
 //APIS DE PRUEBA
 export const ApiConfiguracionCursos = [
   {

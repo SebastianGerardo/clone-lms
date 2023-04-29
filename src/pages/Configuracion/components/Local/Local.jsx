@@ -12,6 +12,7 @@ const Local = ({setCursoActual, setNombreCurso}) => {
   const [dataLocales, setDataLocales] = useState([]);
   const [recargarTabla, setRecargarTabla] = useState(false);
   const [dataLocal, setDataLocal] = useState({})
+  const [dataEmpresas, setDataEmpresas] = useState([])
   
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -26,10 +27,10 @@ const Local = ({setCursoActual, setNombreCurso}) => {
     setCursoActual: setCursoActual,
     setNombreCurso: setNombreCurso,
     setDataLocal: setDataLocal,
-    handleOpenModal: handleOpenModal
+    handleOpenModal: handleOpenModal,
+    recargarTabla: recargarTabla,
+    setRecargarTabla: setRecargarTabla
   });
-
-  const [dataEmpresas, setDataEmpresas] = useState([])
 
 
   useEffect(() => {

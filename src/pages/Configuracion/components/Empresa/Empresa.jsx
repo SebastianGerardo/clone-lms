@@ -11,23 +11,13 @@ const Empresa = ({setCursoActual, setNombreCurso}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dataEmpresa, setDataEmpresa] = useState([]);
   const [infoEmpresa, setInfoEmpresa] = useState({})
-  const [nuevoCurso, setNuevoCurso] = useState({ nombreCurso: "" });
   const [recargarTabla, setRecargarTabla] = useState(false);
-  
 
   useEffect(() => {
     TraeDataEmpresa(token).then((res) => {
       setDataEmpresa(res.data);
-      console.log(res)
     });
   }, [recargarTabla])
-
-  const handleChange = (e) => {
-    setNuevoCurso({
-      ...nuevoCurso,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -38,14 +28,13 @@ const Empresa = ({setCursoActual, setNombreCurso}) => {
     setIsOpen(false);
   };
 
-  const crearCurso = (e) => {
-    e.preventDefault();
-  };
   const {columnsEmpresa} = ColumnsEmpresa({
     setCursoActual: setCursoActual,
     setNombreCurso: setNombreCurso,
     setInfoEmpresa: setInfoEmpresa,
     handleOpenModal: handleOpenModal,
+    recargarTabla: recargarTabla,
+    setRecargarTabla: setRecargarTabla,
   });
   return (
     <section className="p-8 pt-0">

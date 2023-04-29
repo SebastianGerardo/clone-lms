@@ -4,8 +4,9 @@ import { NameTable } from "../../../../../components/Tables/TableComponents";
 import editIcon from "../../../../../assets/icons/editIcon.png";
 import deleteIcon from "../../../../../assets/icons/deleteIcon.png";
 import Swal from "sweetalert2";
+import { eliminarEmpresa } from "../../../../../helpers/ApiConfiguracion";
 
-export const ColumnsEmpresa = ({setCursoActual, setNombreCurso, handleOpenModal, setInfoEmpresa}) => {
+export const ColumnsEmpresa = ({setCursoActual, setNombreCurso, handleOpenModal, setInfoEmpresa, setRecargarTabla, recargarTabla }) => {
   const columnsEmpresa = [
       {
         name: <NameTable name="Orden" />,
@@ -53,7 +54,7 @@ export const ColumnsEmpresa = ({setCursoActual, setNombreCurso, handleOpenModal,
                   </div>
               </div>
               <div
-              onClick={deleteAlert}
+              onClick={() => deleteAlert(row.id, setRecargarTabla, recargarTabla)}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-[25px] h-[25px] object-cover">
@@ -121,7 +122,7 @@ export const ContentTableEmpresa = ({handleOpenModal, ApiConfiguracionCursos, da
   );
 };
 
-const deleteAlert = () => {
+const deleteAlert = (id, setRecargarTabla, recargarTabla) => {
   Swal.fire({
     title: '¿Estas seguro de eliminar esta empresa?',
     text: "No podras revertir esta accion!",
@@ -133,11 +134,23 @@ const deleteAlert = () => {
     cancelButtonText: 'Cancelar'
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire(
-        'Eliminado!',
-        'La empresa ha sido eliminada.',
-        'success'
-      )
+      const token = localStorage.getItem("token");
+      eliminarEmpresa(token, id).then((res)=>{
+        if(res.statusCode == 200) {
+          Swal.fire(
+            'Eliminada!',
+            'La empresa ha sido eliminada.',
+            'success'
+          )
+          setRecargarTabla(!recargarTabla)
+        } else {
+          Swal.fire(
+            'Error!',
+            'No se pudo eliminar la empresa.',
+            'error'
+          )
+        }
+      })
     }
   })
 }
