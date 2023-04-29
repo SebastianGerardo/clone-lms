@@ -10,12 +10,10 @@ const Empresa = ({setCursoActual, setNombreCurso}) => {
   const token = localStorage.getItem('token')
   const [isOpen, setIsOpen] = useState(false);
   const [dataEmpresa, setDataEmpresa] = useState([]);
+  const [infoEmpresa, setInfoEmpresa] = useState({})
   const [nuevoCurso, setNuevoCurso] = useState({ nombreCurso: "" });
   const [recargarTabla, setRecargarTabla] = useState(false);
-  const {columnsEmpresa} = ColumnsEmpresa({
-    setCursoActual: setCursoActual,
-    setNombreCurso: setNombreCurso,
-  });
+  
 
   useEffect(() => {
     TraeDataEmpresa(token).then((res) => {
@@ -36,13 +34,19 @@ const Empresa = ({setCursoActual, setNombreCurso}) => {
   };
 
   const handleCloseModal = () => {
+    setInfoEmpresa({})
     setIsOpen(false);
   };
 
   const crearCurso = (e) => {
     e.preventDefault();
   };
-
+  const {columnsEmpresa} = ColumnsEmpresa({
+    setCursoActual: setCursoActual,
+    setNombreCurso: setNombreCurso,
+    setInfoEmpresa: setInfoEmpresa,
+    handleOpenModal: handleOpenModal,
+  });
   return (
     <section className="p-8 pt-0">
       <ContentTableEmpresa dataEmpresa={dataEmpresa} handleOpenModal={handleOpenModal} ApiConfiguracionCursos={ApiConfiguracionCursos} />
@@ -57,7 +61,7 @@ const Empresa = ({setCursoActual, setNombreCurso}) => {
         />
       </div>
       <Modal isOpen={isOpen} onClose={handleCloseModal}>
-        <ModalEmpresa handleCloseModal={handleCloseModal} setRecargarTabla={setRecargarTabla} recargarTabla={recargarTabla} />
+        <ModalEmpresa infoEmpresa={infoEmpresa} handleCloseModal={handleCloseModal} setRecargarTabla={setRecargarTabla} recargarTabla={recargarTabla} />
       </Modal>
     </section>
   );

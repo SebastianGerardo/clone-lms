@@ -32,7 +32,7 @@ const RegistrarEmpresa2 = ({ handleChange, formData }) => {
           name={"mobile"}
         />
         {/* email */}
-        <InputBasicNumber
+        <InputBasic
           pHolder={"consultas@ae.edu.pe"}
           data={formData?.email}
           labelName={"Correo"}

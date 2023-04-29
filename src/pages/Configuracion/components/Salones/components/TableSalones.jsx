@@ -10,7 +10,7 @@ export const ColumnsSalones = ({setCursoActual, setNombreCurso}) => {
       {
         name: <NameTable name="Local" />,
         cell: (row) => (
-          <p className="mt-[0.10rem] font-semibold">{row.local}</p>
+          <p className="mt-[0.10rem] font-semibold">{row.local.name}</p>
         ),
         width: "12rem",
         sortable: true,

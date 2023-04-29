@@ -213,16 +213,6 @@ const validarUbicacion = () => {
       ),
       props: { ...propsNavigation },
     },
-    {
-      name: "Locales",
-      icon: (
-        <SettingIcon2
-          isActive={activeTab == "Locales"}
-          colorChange={"#2563EB"}
-        />
-      ),
-      props: { ...propsNavigation },
-    },
   ];
 
   const props = {

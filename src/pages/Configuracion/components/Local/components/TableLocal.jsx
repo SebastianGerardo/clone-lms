@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 export const ColumnsLocal = ({handleOpenModal, setDataLocal}) => {
   const columnsLocal = [
       {
-        name: <NameTable name="Codigo" />,
+        name: <NameTable name="Orden" />,
         cell: (row, index) => (
           <p className="mt-[0.10rem] font-semibold">{index + 1}</p>
         ),
@@ -73,7 +73,7 @@ export const ColumnsLocal = ({handleOpenModal, setDataLocal}) => {
   }
 }
 
-export const ContentTableLocal = ({handleOpenModal, ApiConfiguracionCursos, dataLocales}) => {
+export const ContentTableLocal = ({handleOpenModal, dataLocales}) => {
   return (
     <div className="flex flex-col gap-y-2 mb-4 p-0">
       <section className="flex flex-col min-[1235px]:flex-row min-[1235px]:justify-around items-center gap-y-4">
@@ -114,7 +114,7 @@ export const ContentTableLocal = ({handleOpenModal, ApiConfiguracionCursos, data
 
 const deleteAlert = () => {
   Swal.fire({
-    title: '¿Estas seguro de eliminar esta empresa?',
+    title: '¿Estas seguro de eliminar este local?',
     text: "No podras revertir esta accion!",
     icon: 'warning',
     showCancelButton: true,
@@ -126,7 +126,7 @@ const deleteAlert = () => {
     if (result.isConfirmed) {
       Swal.fire(
         'Eliminado!',
-        'La empresa ha sido eliminada.',
+        'El local ha sido eliminado.',
         'success'
       )
     }

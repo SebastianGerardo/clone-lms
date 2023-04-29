@@ -10,9 +10,9 @@ const Local = ({setCursoActual, setNombreCurso}) => {
   const token = localStorage.getItem('token')
   const [isOpen, setIsOpen] = useState(false);
   const [dataLocales, setDataLocales] = useState([]);
-  const [nuevoCurso, setNuevoCurso] = useState({ nombreCurso: "" });
   const [recargarTabla, setRecargarTabla] = useState(false);
   const [dataLocal, setDataLocal] = useState({})
+  
   const handleOpenModal = () => {
     setIsOpen(true);
   };
@@ -28,19 +28,18 @@ const Local = ({setCursoActual, setNombreCurso}) => {
     setDataLocal: setDataLocal,
     handleOpenModal: handleOpenModal
   });
+
   const [dataEmpresas, setDataEmpresas] = useState([])
 
 
   useEffect(() => {
     TraeDataLocales(token).then((res) => {
       setDataLocales(res.data);
-      console.log(res)
     });
   }, [recargarTabla])
 
   useEffect(() => {
     TraeDataEmpresa(token).then((res) => {
-      console.log(res)
       setDataEmpresas(res.data)
     });
   }, [recargarTabla])

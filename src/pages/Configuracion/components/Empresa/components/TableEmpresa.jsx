@@ -5,12 +5,12 @@ import editIcon from "../../../../../assets/icons/editIcon.png";
 import deleteIcon from "../../../../../assets/icons/deleteIcon.png";
 import Swal from "sweetalert2";
 
-export const ColumnsEmpresa = ({setCursoActual, setNombreCurso}) => {
+export const ColumnsEmpresa = ({setCursoActual, setNombreCurso, handleOpenModal, setInfoEmpresa}) => {
   const columnsEmpresa = [
       {
-        name: <NameTable name="Codigo" />,
-        cell: (row) => (
-          <p className="mt-[0.10rem] font-semibold">{row.id}</p>
+        name: <NameTable name="Orden" />,
+        cell: (row, index) => (
+          <p className="mt-[0.10rem] font-semibold">{index + 1}</p>
         ),
         width: "5rem",
         sortable: true,
@@ -45,7 +45,7 @@ export const ColumnsEmpresa = ({setCursoActual, setNombreCurso}) => {
         cell: (row) => (
           <div className="flex gap-2">
               <div
-              onClick={()=>{setCursoActual("Capitulos"), setNombreCurso(row.nombre)}}
+              onClick={()=>{handleOpenModal(), setInfoEmpresa(row)}}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-6 h-6 object-cover">

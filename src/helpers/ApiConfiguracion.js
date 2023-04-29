@@ -37,6 +37,25 @@ export const crearEmpresa = async (bearer, registro) => {
   }
 };
 
+export const cambiarEmpresa = async (bearer, registro, id) => {
+  console.log(registro);
+  console.log(bearer);
+  try {
+    const fetchResponse = await fetch(`${URL}/companies/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${bearer}`,
+      },
+      body: JSON.stringify(registro),
+    });
+    const data = await fetchResponse.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
 //APIS LOCALES
 
 export const TraeDataLocales = async (bearer) => {
