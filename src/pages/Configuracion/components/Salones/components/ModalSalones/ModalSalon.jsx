@@ -1,50 +1,27 @@
 import React, { useState } from "react";
 import RegistrarSalon from "./sections/RegistrarSalon";
 import { Toast } from "../../../../../../components/Alertas/SweetAlerts";
-import { crearSalon } from "../../../../../../helpers/ApiConfiguracion";
+import { cambiarSalon, crearSalon } from "../../../../../../helpers/ApiConfiguracion";
 
-const ModalSalon = ({ dataCiclo, handleCloseModal, recargarTabla, setRecargarTabla }) => {
-  const token = localStorage.getItem("token");
-  const [formData, setFormData] = useState({
-    pavilion: "",
-    piso: "",
-    code: "",
-    totalStudents: "",
-    local: "",
-  });
+const ModalSalon = ({ handleCloseModal, recargarTabla, setRecargarTabla, dataLocales, infoSalon }) => {
+  
+  const {handleMatricular, formData, setFormData} = enviarData({infoSalon, handleCloseModal, recargarTabla, setRecargarTabla})
 
   const handleChange = (e) => {
+    const value =
+    e.target.name === "local" ? Number(e.target.value) : e.target.value;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [e.target.name]: value,
     });
-  };
-
-  const handleMatricular = () => {
-    crearSalon(token, formData).then((res) => {
-      console.log(res)
-      if(res.statusCode == 200) {
-        Toast.fire({
-          icon: 'success',
-          title: 'Aula Registrada exitósamente!'
-        })
-        handleCloseModal()
-        setRecargarTabla(!recargarTabla)
-      } else if (res.statusCode == 400) {
-        Toast.fire({
-          icon: 'error',
-          title: res.message.length > 0 && res.message[0]
-        })
-      }
-    })
   };
 
   return (
     <div className="lg:w-[55rem]">
       <RegistrarSalon
+        dataLocales={dataLocales}
         handleChange={handleChange}
         formData={formData}
-        dataCiclo={dataCiclo}
       />
       <div className="flex justify-end pt-4">
         <button
@@ -59,3 +36,57 @@ const ModalSalon = ({ dataCiclo, handleCloseModal, recargarTabla, setRecargarTab
 };
 
 export default ModalSalon;
+
+const enviarData = ({infoSalon, handleCloseModal, recargarTabla, setRecargarTabla}) => {
+  const token = localStorage.getItem("token");
+  const [formData, setFormData] = useState({
+    pavilion: infoSalon?.pavilion || "",
+    piso: infoSalon?.piso || "",
+    code: infoSalon?.code|| "",
+    totalStudents: infoSalon?.totalStudents || "",
+    local: infoSalon?.local?.id || "",
+  });
+
+  const handleMatricular = () => {
+    if (Object.values(infoSalon).length > 0) {
+      cambiarSalon(token, formData, infoSalon.id).then((res) => {
+        console.log(res)
+        if(res.statusCode == 200) {
+          Toast.fire({
+            icon: 'success',
+            title: 'Aula Registrada exitósamente!'
+          })
+          handleCloseModal()
+          setRecargarTabla(!recargarTabla)
+        } else if (res.statusCode == 400) {
+          Toast.fire({
+            icon: 'error',
+            title: res.message.length > 0 && res.message[0]
+          })
+        }
+      })
+    } else {
+      crearSalon(token, formData).then((res) => {
+        console.log(res)
+        if(res.statusCode == 200) {
+          Toast.fire({
+            icon: 'success',
+            title: 'Aula Registrada exitósamente!'
+          })
+          handleCloseModal()
+          setRecargarTabla(!recargarTabla)
+        } else if (res.statusCode == 400) {
+          Toast.fire({
+            icon: 'error',
+            title: res.message.length > 0 && res.message[0]
+          })
+        }
+      })
+    }
+  };
+  return {
+    handleMatricular,
+    formData,
+    setFormData
+  }
+} 

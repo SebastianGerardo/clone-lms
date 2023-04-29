@@ -5,7 +5,7 @@ import editIcon from "../../../../../assets/icons/editIcon.png";
 import deleteIcon from "../../../../../assets/icons/deleteIcon.png";
 import Swal from "sweetalert2";
 
-export const ColumnsSalones = ({setCursoActual, setNombreCurso}) => {
+export const ColumnsSalones = ({setCursoActual, setNombreCurso, handleOpenModal, setInfoSalon}) => {
   const columnsSalones = [
       {
         name: <NameTable name="Local" />,
@@ -52,7 +52,7 @@ export const ColumnsSalones = ({setCursoActual, setNombreCurso}) => {
         cell: (row) => (
           <div className="flex gap-2">
               <div
-              onClick={()=>{setCursoActual("Capitulos"), setNombreCurso(row.nombre)}}
+              onClick={()=>{handleOpenModal(), setInfoSalon(row)}}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-6 h-6 object-cover">

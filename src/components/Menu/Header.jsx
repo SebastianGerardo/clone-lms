@@ -24,7 +24,7 @@ const Header = () => {
         {/*  */}
         <div className="flex flex-col mx-auto pr-14 md:p-0 items-center justify-center text-center md:justify-start min-[790px]:hidden min-[925px]:flex">
           <h1 className="text-2xl md:text-3xl font-bold text-black">
-            <span className="text-blue-600 text-xl font-bold"><span className="text-black">Hola</span> {usuarioLogin?.user?.name?.split(" ", 1)}</span>
+            <span className="text-blue-600 text-xl font-bold"><span className="text-black">Hola</span> {usuarioLogin?.user?.names?.split(" ", 1)}</span>
           </h1>
             <p className="text-gray-400 text-xs">¿Cómo estás hoy?</p>
         </div>

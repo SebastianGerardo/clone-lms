@@ -19,8 +19,6 @@ export const TraeDataEmpresa = async (bearer) => {
 };
 
 export const crearEmpresa = async (bearer, registro) => {
-  console.log(registro);
-  console.log(bearer);
   try {
     const fetchResponse = await fetch(`${URL}/companies`, {
       method: "POST",
@@ -38,8 +36,6 @@ export const crearEmpresa = async (bearer, registro) => {
 };
 
 export const cambiarEmpresa = async (bearer, registro, id) => {
-  console.log(registro);
-  console.log(bearer);
   try {
     const fetchResponse = await fetch(`${URL}/companies/${id}`, {
       method: "PUT",
@@ -92,8 +88,6 @@ export const TraeDataLocal = async (bearer, id) => {
 
 
 export const CambiaDataLocal = async (bearer, registro, id) => {
-  console.log(registro);
-  console.log(bearer);
   try {
     const fetchResponse = await fetch(`${URL}/locals/${id}`, {
       method: "PUT",
@@ -111,8 +105,6 @@ export const CambiaDataLocal = async (bearer, registro, id) => {
 };
 
 export const crearLocal = async (bearer, registro) => {
-  console.log(registro);
-  console.log(bearer);
   try {
     const fetchResponse = await fetch(`${URL}/locals`, {
       method: "POST",
@@ -148,8 +140,6 @@ export const TraeDataSalones = async (bearer) => {
 };
 
 export const crearSalon = async (bearer, registro) => {
-  console.log(registro);
-  console.log(bearer);
   try {
     const fetchResponse = await fetch(`${URL}/classrooms`, {
       method: "POST",
@@ -166,6 +156,22 @@ export const crearSalon = async (bearer, registro) => {
   }
 };
 
+export const cambiarSalon = async (bearer, registro, id) => {
+  try {
+    const fetchResponse = await fetch(`${URL}/classrooms/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${bearer}`,
+      },
+      body: JSON.stringify(registro),
+    });
+    const data = await fetchResponse.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
 //APIS DE PRUEBA
 export const ApiConfiguracionCursos = [
   {

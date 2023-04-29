@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../../../../components/Modal/Modal";
 import TableBasic from "../../../../components/Tables/TableBasic";
-import { ApiConfiguracionCursos, TraeDataSalones, crearSalon } from "../../../../helpers/ApiConfiguracion";
+import { ApiConfiguracionCursos, TraeDataSalones, crearSalon, TraeDataLocales } from "../../../../helpers/ApiConfiguracion";
 import {ContentTableSalones, ColumnsSalones } from "./components/TableSalones";
 import { useEffect } from "react";
 import ModalSalon from "./components/ModalSalones/ModalSalon";
@@ -10,17 +10,21 @@ const Salones = ({setCursoActual, setNombreCurso}) => {
   const token = localStorage.getItem('token')
   const [isOpen, setIsOpen] = useState(false);
   const [dataSalones, setDataSalones] = useState([]);
-  const [nuevoCurso, setNuevoCurso] = useState({ nombreCurso: "" });
+  const [dataLocales, setDataLocales] = useState([]);
+  const [infoSalon, setInfoSalon] = useState({})
   const [recargarTabla, setRecargarTabla] = useState(false);
-  const {columnsSalones} = ColumnsSalones({
-    setCursoActual: setCursoActual,
-    setNombreCurso: setNombreCurso,
-    dataSalones: dataSalones,
-  });
+  
 
   useEffect(() => {
     TraeDataSalones(token).then((res) => {
       setDataSalones(res.data);
+      console.log(res)
+    });
+  }, [recargarTabla])
+
+  useEffect(() => {
+    TraeDataLocales(token).then((res) => {
+      setDataLocales(res.data);
       console.log(res)
     });
   }, [recargarTabla])
@@ -30,8 +34,17 @@ const Salones = ({setCursoActual, setNombreCurso}) => {
   };
 
   const handleCloseModal = () => {
+    setInfoSalon({})
     setIsOpen(false);
   };
+
+  const {columnsSalones} = ColumnsSalones({
+    setCursoActual: setCursoActual,
+    setNombreCurso: setNombreCurso,
+    dataSalones: dataSalones,
+    setInfoSalon: setInfoSalon,
+    handleOpenModal: handleOpenModal
+  });
 
   return (
     <section className="p-8 pt-0">
@@ -47,7 +60,7 @@ const Salones = ({setCursoActual, setNombreCurso}) => {
         />
       </div>
       <Modal isOpen={isOpen} onClose={handleCloseModal}>
-        <ModalSalon handleCloseModal={handleCloseModal} setRecargarTabla={setRecargarTabla} recargarTabla={recargarTabla} />
+        <ModalSalon infoSalon={infoSalon} dataLocales={dataLocales} handleCloseModal={handleCloseModal} setRecargarTabla={setRecargarTabla} recargarTabla={recargarTabla} />
       </Modal>
     </section>
   );

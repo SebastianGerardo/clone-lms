@@ -31,7 +31,7 @@ const PerfilHamburguesa = () => {
           <img src={userImg} alt="" className="w-full h-full object-cover" />
         </div>
         <div className="flex flex-col text-start">
-          <span>{usuarioLogin?.user?.name} {usuarioLogin?.user?.paternal_surname?.split("", 1)}.</span>
+          <span>{usuarioLogin?.user?.names} {usuarioLogin?.user?.surnames?.split("", 1)}.</span>
           <span className="text-sm text-gray-500">
             Administrador 
           </span>
