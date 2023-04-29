@@ -11,9 +11,8 @@ const RegistrarLocal2 = ({ handleChange, formData }) => {
         Información de Contacto del Local
       </div>
       <form className="flex flex-col sm:grid sm:grid-cols-3 sm:grid-rows-3 gap-y-3 gap-x-8">
-
         {/* Departamento */}
-        <div className="w-full">
+        {/* <div className="w-full">
           <label className="flex flex-col gap-y-1">
             <span className="block text-sm font-poppins-medium text-black">
               Departamento
@@ -51,9 +50,9 @@ const RegistrarLocal2 = ({ handleChange, formData }) => {
               <option value="Ucayali">Ucayali</option>
             </select>
           </label>
-        </div>
+        </div> */}
         {/* Provincia */}
-        <div className="w-full">
+        {/* <div className="w-full">
           <label className="flex flex-col gap-y-1">
             <span className="block text-sm font-medium text-gray-400">
               Provincia
@@ -81,17 +80,16 @@ const RegistrarLocal2 = ({ handleChange, formData }) => {
               </optgroup>
             </select>
           </label>
-        </div>
+        </div> */}
 
         {/* Distrito */}
-        <div className="w-full">
+        {/* <div className="w-full">
           <label className="flex flex-col gap-y-1">
             <span className="block text-sm font-medium text-gray-400">
               Distrito
             </span>
-            <select className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500">
+            <select defaultValue={"Huanchaco"} className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500">
               {" "}
-              {/* Distritos de Trujillo */}
               <optgroup label="La Libertad">
                 <option value="Trujillo">Trujillo</option>
                 <option value="Huanchaco">Huanchaco</option>
@@ -104,7 +102,6 @@ const RegistrarLocal2 = ({ handleChange, formData }) => {
                   Victor Larco Herrera
                 </option>
               </optgroup>
-              {/* Distritos de Lima */}
               <optgroup label="Lima">
                 <option value="Lima">Lima</option>
                 <option value="Ancón">Ancón</option>
@@ -116,7 +113,7 @@ const RegistrarLocal2 = ({ handleChange, formData }) => {
               </optgroup>
             </select>
           </label>
-        </div>
+        </div> */}
 
         <div className="col-span-2">
           {/*Direccion Legal */}
@@ -154,20 +151,15 @@ const RegistrarLocal2 = ({ handleChange, formData }) => {
         />
         {/* Total de salones // Total de oficinas */}
         <div className="w-full grid grid-cols-2">
-          <label className="flex flex-col gap-y-1 col-span-1">
-            <span className="block text-sm font-poppins-medium text-black">
-              Total de salones
-            </span>
-            <input
-              onChange={handleChange}
-              type="number"
-              value={formData?.totalLocals}
-              name="totalLocals"
-              placeholder="15"
-              className="p-3 mt-[0.3125rem] h-[3rem] block w-[6.5rem] rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-            />
-          </label>
-          <label className="flex flex-col gap-y-1 col-span-1">
+          <InputBasic
+            pHolder={"15"}
+            data={formData?.totalOffices}
+            labelName={"Total de salones"}
+            onChange={handleChange}
+            name={"totalOffices"}
+          />
+          
+          {/* <label className="flex flex-col gap-y-1 col-span-1">
             <span className="block text-sm font-poppins-medium text-black">
               Total de oficinas
             </span>
@@ -179,7 +171,7 @@ const RegistrarLocal2 = ({ handleChange, formData }) => {
               placeholder="8"
               className="p-3 mt-[0.3125rem] h-[3rem] block w-[6.5rem]  rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />
-          </label>
+          </label>  */}
         </div>
       </form>
     </div>

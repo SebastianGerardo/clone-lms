@@ -55,6 +55,42 @@ export const TraeDataLocales = async (bearer) => {
   }
 };
 
+export const TraeDataLocal = async (bearer, id) => {
+  try {
+    const fetchResponse = await fetch(`${URL}/locals/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${bearer}`,
+      },
+    });
+    const data = await fetchResponse.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+
+export const CambiaDataLocal = async (bearer, registro, id) => {
+  console.log(registro);
+  console.log(bearer);
+  try {
+    const fetchResponse = await fetch(`${URL}/locals/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${bearer}`,
+      },
+      body: JSON.stringify(registro),
+    });
+    const data = await fetchResponse.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const crearLocal = async (bearer, registro) => {
   console.log(registro);
   console.log(bearer);

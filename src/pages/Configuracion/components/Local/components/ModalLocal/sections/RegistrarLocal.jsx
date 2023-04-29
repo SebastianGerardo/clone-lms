@@ -1,6 +1,6 @@
 import React from "react";
 
-const RegistrarLocal = ({ handleChange, formData }) => {
+const RegistrarLocal = ({ handleChange, formData, dataEmpresas }) => {
   return (
     <div className="text-start flex flex-col gap-4">
       <div className="w-full h-33 font-semibold text-22 leading-33 text-black">
@@ -11,7 +11,38 @@ const RegistrarLocal = ({ handleChange, formData }) => {
         <div className="w-full">
           <label className="flex flex-col gap-y-1">
             <span className="block text-sm font-medium text-gray-400">
-            Nombre del local
+              Empresa
+            </span>
+            {/* <input
+              value={formData?.ubigean}
+              onChange={handleChange}
+              type="text"
+              name="ubigean"
+              placeholder="123456"
+              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
+            /> */}
+            <select
+              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
+              defaultValue={formData?.company}
+              onChange={handleChange}
+              name="company"
+              id=""
+            >
+              <option value="">Seleccione una empresa</option>
+              {dataEmpresas.length > 0 &&
+                dataEmpresas.map((empresa) => (
+                  <option key={empresa.id} value={empresa.id}>
+                    {empresa.tradeName}
+                  </option>
+                ))}
+            </select>
+          </label>
+        </div>
+
+        <div className="w-full col-span-2">
+          <label className="flex flex-col gap-y-1">
+            <span className="block text-sm font-medium text-gray-400">
+              Nombre del local
             </span>
             <input
               value={formData?.name}
@@ -24,28 +55,11 @@ const RegistrarLocal = ({ handleChange, formData }) => {
           </label>
         </div>
 
-        {/* Razón Social */}
-        <div className="w-full col-span-2">
-          <label className="flex flex-col gap-y-1">
-            <span className="block text-sm font-medium text-gray-400">
-              Razón Social
-            </span>
-            <input
-              value={formData?.apellidoAlumno}
-              onChange={handleChange}
-              type="text"
-              name="razonSocial"
-              placeholder="Empresa de Servicios Educativos Albert Einstein - Academia Encinas"
-              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-            />
-          </label>
-        </div>
-
         {/* Codigo Local UGEL */}
         <div className="w-full">
           <label className="flex flex-col gap-y-1">
             <span className="block text-sm font-medium text-gray-400">
-            Codigo Local UGEL
+              Codigo Local UGEL
             </span>
             <input
               value={formData?.ugelCode}
@@ -57,6 +71,7 @@ const RegistrarLocal = ({ handleChange, formData }) => {
             />
           </label>
         </div>
+
         <div className="w-full col-span-2">
           <label className="flex flex-col gap-y-1">
             <span className="block text-sm font-medium text-gray-400">
@@ -67,7 +82,7 @@ const RegistrarLocal = ({ handleChange, formData }) => {
               onChange={handleChange}
               type="text"
               name="ubigean"
-              placeholder="408973"
+              placeholder="123456"
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />
           </label>
@@ -80,7 +95,12 @@ const RegistrarLocal = ({ handleChange, formData }) => {
               País
             </span>
 
-            <select defaultValue={formData?.country} name="country" onChange={handleChange} className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500">
+            <select
+              defaultValue={formData?.country}
+              name="country"
+              onChange={handleChange}
+              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
+            >
               <option value="">Selecciona un país</option>
               <option value="Argentina">Argentina</option>
               <option value="Bolivia">Bolivia</option>
@@ -110,10 +130,8 @@ const RegistrarLocal = ({ handleChange, formData }) => {
           </label>
         </div>
         <div className="w-full col-span-2">
-          <label className="flex flex-col gap-y-1">
-          </label>
+          <label className="flex flex-col gap-y-1"></label>
         </div>
-
       </form>
     </div>
   );

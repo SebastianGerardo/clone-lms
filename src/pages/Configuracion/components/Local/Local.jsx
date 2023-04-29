@@ -12,10 +12,24 @@ const Local = ({setCursoActual, setNombreCurso}) => {
   const [dataLocales, setDataLocales] = useState([]);
   const [nuevoCurso, setNuevoCurso] = useState({ nombreCurso: "" });
   const [recargarTabla, setRecargarTabla] = useState(false);
+  const [dataLocal, setDataLocal] = useState({})
+  const handleOpenModal = () => {
+    setIsOpen(true);
+  };
+  
+  const handleCloseModal = () => {
+    setDataLocal({})
+    setIsOpen(false);
+  };
+
   const {columnsLocal} = ColumnsLocal({
     setCursoActual: setCursoActual,
     setNombreCurso: setNombreCurso,
+    setDataLocal: setDataLocal,
+    handleOpenModal: handleOpenModal
   });
+  const [dataEmpresas, setDataEmpresas] = useState([])
+
 
   useEffect(() => {
     TraeDataLocales(token).then((res) => {
@@ -24,25 +38,14 @@ const Local = ({setCursoActual, setNombreCurso}) => {
     });
   }, [recargarTabla])
 
-  const handleChange = (e) => {
-    setNuevoCurso({
-      ...nuevoCurso,
-      [e.target.name]: e.target.value,
+  useEffect(() => {
+    TraeDataEmpresa(token).then((res) => {
+      console.log(res)
+      setDataEmpresas(res.data)
     });
-  };
+  }, [recargarTabla])
 
-  const handleOpenModal = () => {
-    setIsOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsOpen(false);
-  };
-
-  const crearCurso = (e) => {
-    e.preventDefault();
-  };
-
+ 
   return (
     <section className="p-8 pt-0">
       <ContentTableLocal dataLocales={dataLocales} handleOpenModal={handleOpenModal} ApiConfiguracionCursos={ApiConfiguracionCursos} />
@@ -57,7 +60,7 @@ const Local = ({setCursoActual, setNombreCurso}) => {
         />
       </div>
       <Modal isOpen={isOpen} onClose={handleCloseModal}>
-        <ModalLocal handleCloseModal={handleCloseModal} setRecargarTabla={setRecargarTabla} recargarTabla={recargarTabla} />
+        <ModalLocal dataLocal={dataLocal} dataEmpresas={dataEmpresas} handleCloseModal={handleCloseModal} setRecargarTabla={setRecargarTabla} recargarTabla={recargarTabla} />
       </Modal>
     </section>
   );
