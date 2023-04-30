@@ -27,7 +27,7 @@ const ContextLms = ({children}) => {
   }, [])
 
   return (
-    <UserContext.Provider value={{usuarioLogin, setUsuarioLogin, showMenu, setShowMenu}}>
+    <UserContext.Provider value={{usuarioLogin, setUsuarioLogin, showMenu, setShowMenu, token}}>
         {children}
     </UserContext.Provider>
   )

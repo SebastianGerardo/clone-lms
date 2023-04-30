@@ -3,14 +3,16 @@ import {SearchIcon } from "../../../../../assets/svgs/NormalSvgs";
 import { NameTable } from "../../../../../components/Tables/TableComponents";
 import editIcon from "../../../../../assets/icons/editIcon.png";
 import deleteIcon from "../../../../../assets/icons/deleteIcon.png";
+import verMas from "../../../../../assets/icons/verMas.png";
 import Swal from "sweetalert2";
+import { eliminarCurso } from "../../../../../helpers/ApiConfiguracion";
 
-export const ColumnsCursos = ({setCursoActual, setNombreCurso}) => {
+export const ColumnsCursos = ({setCursoActual, setNombreCurso, recargarTabla, setRecargarTabla, token, handleOpenModal, setDataCurso}) => {
   const columnsCursos = [
       {
         name: <NameTable name="Codigo" />,
-        cell: (row) => (
-          <p className="mt-[0.10rem] font-semibold">{row.id}</p>
+        cell: (row, index) => (
+          <p className="mt-[0.10rem] font-semibold">{index + 1}</p>
         ),
         width: "5rem",
         sortable: true,
@@ -18,7 +20,7 @@ export const ColumnsCursos = ({setCursoActual, setNombreCurso}) => {
       },
       {
         name: <NameTable name="Curso" />,
-        cell: (row) => row.nombre,
+        cell: (row) => row.name,
         width: "15rem",
         sortable: true,
         center: true,
@@ -36,7 +38,7 @@ export const ColumnsCursos = ({setCursoActual, setNombreCurso}) => {
         cell: (row) => (
           <div className="flex gap-2">
               <div
-              onClick={()=>{setCursoActual("Capitulos"), setNombreCurso(row.nombre)}}
+              onClick={()=>{handleOpenModal(), setDataCurso(row)}}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-6 h-6 object-cover">
@@ -44,7 +46,15 @@ export const ColumnsCursos = ({setCursoActual, setNombreCurso}) => {
                   </div>
               </div>
               <div
-              onClick={deleteAlert}
+              onClick={()=>{setCursoActual("Capitulos"), setNombreCurso(row.name)}}
+              className="cursor-pointer mx-auto"
+              >
+                  <div className="w-6 h-6 object-cover">
+                      <img src={verMas} alt="" className="w-full h-full object-cover" />
+                  </div>
+              </div>
+              <div
+              onClick={() => deleteAlert(row.id, recargarTabla, setRecargarTabla, token)}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-[25px] h-[25px] object-cover">
@@ -64,7 +74,7 @@ export const ColumnsCursos = ({setCursoActual, setNombreCurso}) => {
   }
 }
 
-export const ContentTableCursos = ({handleOpenModal, ApiConfiguracionCursos}) => {
+export const ContentTableCursos = ({handleOpenModal, dataCursos}) => {
   return (
     <div className="flex flex-col gap-y-2 mb-4 p-0">
       {/* <h1 className="font-bold text-2xl text-center min-[1235px]:text-start">
@@ -75,7 +85,7 @@ export const ContentTableCursos = ({handleOpenModal, ApiConfiguracionCursos}) =>
         <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#0052CA] text-white">
           <p>Total de cursos</p>
           <span className="text-white/80">
-            {"("}{ApiConfiguracionCursos.length}{")"}
+            {"("}{dataCursos.length}{")"}
           </span>
         </div>
         {/* INPUT BUSCAR */}
@@ -112,7 +122,7 @@ export const ContentTableCursos = ({handleOpenModal, ApiConfiguracionCursos}) =>
   );
 };
 
-const deleteAlert = () => {
+const deleteAlert = (id, recargarTabla, setRecargarTabla, token) => {
   Swal.fire({
     title: '¿Estas seguro de eliminar este curso?',
     text: "No podras revertir esta accion!",
@@ -124,11 +134,22 @@ const deleteAlert = () => {
     cancelButtonText: 'Cancelar'
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire(
-        'Eliminado!',
-        'El curso ha sido eliminado.',
-        'success'
-      )
+      eliminarCurso(token, id).then((res) => {
+        if (res.statusCode == 200) {
+          Swal.fire(
+            'Eliminado!',
+            'El curso ha sido eliminado.',
+            'success'
+          )
+          setRecargarTabla(!recargarTabla)
+        } else {
+          Swal.fire(
+            'Error!',
+            'No se pudo eliminar el curso.',
+            'error'
+          )
+        }
+      })
     }
   })
 }

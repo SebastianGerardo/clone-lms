@@ -204,6 +204,77 @@ export const eliminarSalon = async (bearer, id) => {
   }
 };
 
+//APIS CURSOS - CAPITULOS - TEMAS
+
+//CURSOS
+
+export const TraeDataCursos = async (bearer) => {
+  try {
+    const fetchResponse = await fetch(`${URL}/courses`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${bearer}`,
+      },
+    });
+    const data = await fetchResponse.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const CrearCurso = async (bearer, registro) => {
+  try {
+    const fetchResponse = await fetch(`${URL}/courses`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${bearer}`,
+      },
+      body: JSON.stringify(registro),
+    });
+    const data = await fetchResponse.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const cambiarCurso = async (bearer, registro, id) => {
+  try {
+    const fetchResponse = await fetch(`${URL}/courses/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${bearer}`,
+      },
+      body: JSON.stringify(registro),
+    });
+    const data = await fetchResponse.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const eliminarCurso = async (bearer, id) => {
+  try {
+    const fetchResponse = await fetch(`${URL}/courses/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${bearer}`,
+      },
+    });
+    const data = await fetchResponse.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+
 //APIS DE PRUEBA
 export const ApiConfiguracionCursos = [
   {
