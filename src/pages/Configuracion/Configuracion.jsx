@@ -105,6 +105,7 @@ const validarUbicacion = () => {
   const [activeTab, setActiveTab] = useState("Empresa");
   const [cursoActual, setCursoActual] = useState("Cursos");
   const [nombreCurso, setNombreCurso] = useState(null);
+  const [cursoSeleccionado, setCursoSeleccionado] = useState("");
 
   const cursoComponent = {
     Cursos: {
@@ -113,6 +114,7 @@ const validarUbicacion = () => {
         <Cursos
           setCursoActual={setCursoActual}
           setNombreCurso={setNombreCurso}
+          setCursoSeleccionado={setCursoSeleccionado}
         />
       ),
     },
@@ -122,6 +124,7 @@ const validarUbicacion = () => {
         <Capitulos
           setCursoActual={setCursoActual}
           setNombreCurso={setNombreCurso}
+          cursoSeleccionado={cursoSeleccionado}
         />
       ),
     },

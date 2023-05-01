@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {SearchIcon } from "../../../../../assets/svgs/NormalSvgs";
 import { NameTable } from "../../../../../components/Tables/TableComponents";
 import editIcon from "../../../../../assets/icons/editIcon.png";
@@ -6,13 +6,16 @@ import deleteIcon from "../../../../../assets/icons/deleteIcon.png";
 import Swal from "sweetalert2";
 import { FilterIcon, FilterIcon2 } from "../../../../../assets/svgs/ActiveSvgs";
 import HoverButton from "../../../../../components/Buttons/AboutButton";
+import { UserContext } from "../../../../../context/ContextLms";
+import { eliminarCapitulo } from "../../../../../helpers/ApiConfiguracion";
 
-export const ColumnsCapitulos = ({cambiarTabla, handleOpenModal}) => {
+export const ColumnsCapitulos = ({handleRecargar,  handleOpenModal, setCapituloSeleccionado}) => {
+  const {token} = useContext(UserContext)
   const columnsCapitulos = [
       {
         name: <NameTable name="Orden" />,
-        cell: (row) => (
-          <p className="mt-[0.10rem] font-semibold">{row.id}</p>
+        cell: (row, index) => (
+          <p className="mt-[0.10rem] font-semibold">{row.order}</p>
         ),
         width: "5rem",
         sortable: true,
@@ -20,7 +23,7 @@ export const ColumnsCapitulos = ({cambiarTabla, handleOpenModal}) => {
       },
       {
         name: <NameTable name="Curso" />,
-        cell: (row) => row.nombre,
+        cell: (row) => row.name,
         width: "15rem",
         sortable: true,
         center: true,
@@ -38,7 +41,7 @@ export const ColumnsCapitulos = ({cambiarTabla, handleOpenModal}) => {
         cell: (row) => (
           <div className="flex gap-2">
               <div
-              onClick={handleOpenModal}
+              onClick={() => {handleOpenModal(), setCapituloSeleccionado(row)}}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-6 h-6 object-cover">
@@ -46,7 +49,7 @@ export const ColumnsCapitulos = ({cambiarTabla, handleOpenModal}) => {
                   </div>
               </div>
               <div
-              onClick={() => deleteAlert(cambiarTabla)}
+              onClick={() => deleteAlert(row.id, token, handleRecargar)}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-[25px] h-[25px] object-cover">
@@ -65,8 +68,7 @@ export const ColumnsCapitulos = ({cambiarTabla, handleOpenModal}) => {
     columnsCapitulos
   }
 }
-
-export const ContentTableCapitulos = ({handleOpenModal, ApiConfiguracionCursos,setCursoActual, setNombreCurso, setCambiarTabla, cambiarTabla}) => {
+export const ContentTableCapitulos = ({handleOpenModal, dataApi,setCursoActual, setNombreCurso, setCambiarTabla, cambiarTabla}) => {
   return (
     <div className="flex flex-col gap-y-2 mb-4 p-0">
       <section className="flex flex-col min-[1235px]:flex-row min-[1235px]:justify-around items-center gap-y-4">
@@ -74,7 +76,7 @@ export const ContentTableCapitulos = ({handleOpenModal, ApiConfiguracionCursos,s
         <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#0052CA] text-white">
           <p>Total de {cambiarTabla ? "capítulos" : "temas"}</p>
           <span className="text-white/80">
-            {"("}{ApiConfiguracionCursos.length}{")"}
+            {"("}{dataApi?.length}{")"}
           </span>
         </div>
         
@@ -115,9 +117,10 @@ export const ContentTableCapitulos = ({handleOpenModal, ApiConfiguracionCursos,s
   );
 };
 
-const deleteAlert = (cambiarTabla) => {
+
+const deleteAlert = (id, token, handleRecargar ) => {
   Swal.fire({
-    title: `¿Estas seguro de eliminar este ${cambiarTabla ? "capítulo" : "tema"}?`,
+    title: `¿Estas seguro de eliminar este capítulo?`,
     text: "No podras revertir esta accion!",
     icon: 'warning',
     showCancelButton: true,
@@ -127,11 +130,16 @@ const deleteAlert = (cambiarTabla) => {
     cancelButtonText: 'Cancelar'
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire(
-        'Eliminado!',
-        `El ${cambiarTabla ? "capítulo" : "tema"} ha sido eliminado.`,
-        'success'
-      )
+      eliminarCapitulo(token, id).then((res) => {
+        if (res.statusCode === 200) {
+          Swal.fire(
+            'Eliminado!',
+            `El capítulo ha sido eliminado.`,
+            'success'
+          )
+          handleRecargar()
+        }
+      })
     }
   })
 }

@@ -13,14 +13,6 @@ const RegistrarLocal = ({ handleChange, formData, dataEmpresas }) => {
             <span className="block text-sm font-medium text-gray-400">
               Empresa
             </span>
-            {/* <input
-              value={formData?.ubigean}
-              onChange={handleChange}
-              type="text"
-              name="ubigean"
-              placeholder="123456"
-              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-            /> */}
             <select
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
               defaultValue={formData?.company}

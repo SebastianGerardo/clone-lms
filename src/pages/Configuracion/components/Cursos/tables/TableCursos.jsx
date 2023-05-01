@@ -7,7 +7,7 @@ import verMas from "../../../../../assets/icons/verMas.png";
 import Swal from "sweetalert2";
 import { eliminarCurso } from "../../../../../helpers/ApiConfiguracion";
 
-export const ColumnsCursos = ({setCursoActual, setNombreCurso, recargarTabla, setRecargarTabla, token, handleOpenModal, setDataCurso}) => {
+export const ColumnsCursos = ({setCursoActual, setNombreCurso, recargarTabla, setRecargarTabla, token, handleOpenModal, setDataCurso, setCursoSeleccionado}) => {
   const columnsCursos = [
       {
         name: <NameTable name="Codigo" />,
@@ -46,7 +46,7 @@ export const ColumnsCursos = ({setCursoActual, setNombreCurso, recargarTabla, se
                   </div>
               </div>
               <div
-              onClick={()=>{setCursoActual("Capitulos"), setNombreCurso(row.name)}}
+              onClick={()=>{setCursoActual("Capitulos"), setNombreCurso(row.name), setCursoSeleccionado(row.id)}}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-6 h-6 object-cover">

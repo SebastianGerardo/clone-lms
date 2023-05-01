@@ -1,17 +1,34 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useEffect } from "react";
 import { InputBasic } from "../../../../../../components/Inputs/InputBasic";
 import Modal from "../../../../../../components/Modal/Modal";
 import TableBasic from "../../../../../../components/Tables/TableBasic";
-import { ApiConfiguracionCursos } from "../../../../../../helpers/ApiConfiguracion";
+import { ApiConfiguracionCursos, cambiarCapitulo, CrearCapitulo, CrearTema, TraeDataCurso } from "../../../../../../helpers/ApiConfiguracion";
 import {ContentTableCapitulos,ColumnsCapitulos} from "../../tables/TableCapitulos";
 import { Ripples } from "@uiball/loaders";
 import { AnimatePresence, motion } from "framer-motion";
+import { UserContext } from "../../../../../../context/ContextLms";
+import Temas from "../Temas/Temas";
+import { Toast } from "../../../../../../components/Alertas/SweetAlerts";
 
-const Capitulos = ({ setCursoActual, setNombreCurso }) => {
+const Capitulos = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
+  const {token} = useContext(UserContext)
   const [isOpen, setIsOpen] = useState(false);
-  const [cambiarTabla, setCambiarTabla] = useState(true);
+  const [cambiarTabla, setCambiarTabla] = useState(true); //Si es true, trae capitulos, si es false trae temas
   const [isLoaded, setIsLoaded] = useState(false);
+  const [recargarTabla, setRecargarTabla] = useState(false);
+  const [dataApi, setDataApi] = useState([]);
+  const [capituloSeleccionado, setCapituloSeleccionado] = useState({});
+
+  const handleRecargar = () => {
+    setRecargarTabla(!recargarTabla);
+  }
+
+  useEffect(() => {
+    TraeDataCurso(token, cursoSeleccionado).then((res) => {
+      setDataApi(res?.data?.chapters)
+    })
+  }, [recargarTabla])
 
   useEffect(() => {
     setIsLoaded(false);
@@ -25,25 +42,30 @@ const Capitulos = ({ setCursoActual, setNombreCurso }) => {
     setIsOpen(true);
   };
 
+  const handleCloseModal = () => {
+    setCapituloSeleccionado({})
+    setIsOpen(false);
+  };
+
   const { columnsCapitulos } = ColumnsCapitulos({
     setCursoActual: setCursoActual,
     setNombreCurso: setNombreCurso,
     handleOpenModal: handleOpenModal,
     cambiarTabla: cambiarTabla,
+    setCapituloSeleccionado: setCapituloSeleccionado,
+    handleRecargar:handleRecargar
   });
 
   return (
-    <section className="p-8 pt-0">
-      <ContentTableCapitulos
-        cambiarTabla={cambiarTabla}
-        setCambiarTabla={setCambiarTabla}
-        setCursoActual={setCursoActual}
-        setNombreCurso={setNombreCurso}
-        handleOpenModal={handleOpenModal}
-        ApiConfiguracionCursos={ApiConfiguracionCursos}
-        setIsLoaded={setIsLoaded}
-      />
-      <div className="max-w-[1200px] mx-auto flex flex-col gap-y-12">
+    <div className="max-w-[1200px] mx-auto flex flex-col gap-y-12">
+        <section className="p-8 pt-0">
+          <ContentTableCapitulos
+            setCursoActual={setCursoActual}
+            setNombreCurso={setNombreCurso}
+            handleOpenModal={handleOpenModal}
+            dataApi={dataApi}
+            setIsLoaded={setIsLoaded}
+          />
         {!isLoaded ? (
           <div className="flex justify-center items-center h-[20rem]">
             <Ripples color="#2563EB" />
@@ -58,7 +80,7 @@ const Capitulos = ({ setCursoActual, setNombreCurso }) => {
             >
               <TableBasic
                 columns={columnsCapitulos}
-                data={ApiConfiguracionCursos}
+                data={dataApi}
                 highlightOnHover
                 striped
                 onRowClicked={(row) => console.log(row)}
@@ -74,42 +96,98 @@ const Capitulos = ({ setCursoActual, setNombreCurso }) => {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
             >
-              <TableBasic
-                columns={columnsCapitulos}
-                data={ApiConfiguracionCursos}
-                highlightOnHover
-                striped
-                onRowClicked={(row) => console.log(row)}
-                pointerOnHover
-              />
+              <Temas dataApi={dataApi} cambiarTabla={cambiarTabla} setCambiarTabla={setCambiarTabla} />
             </motion.span>
           </AnimatePresence>
         )}
+        <ModalCurso handleRecargar={handleRecargar} capituloSeleccionado={capituloSeleccionado} handleCloseModal={handleCloseModal} dataApi={dataApi} token={token} isOpen={isOpen} cursoSeleccionado={cursoSeleccionado} setIsOpen={setIsOpen} cambiarTabla={cambiarTabla}/>
+        </section>
       </div>
-      <ModalCurso isOpen={isOpen} setIsOpen={setIsOpen} cambiarTabla={cambiarTabla}/>
-    </section>
   );
 };
 
 export default Capitulos;
 
-const ModalCurso = ({ isOpen, setIsOpen, cambiarTabla }) => {
-  const handleCloseModal = () => {
-    setIsOpen(false);
+const ModalCurso = ({ isOpen, cursoSeleccionado, token, dataApi, handleCloseModal, capituloSeleccionado, handleRecargar, cambiarTabla }) => {
+  
+  const [nuevoCapitulo, setNuevoCapitulo] = useState({
+    order: "",
+    name: "",
+    course: cursoSeleccionado
+  });
+
+  useEffect(() => {
+    if(Object.values(capituloSeleccionado).length > 0) {
+      setNuevoCapitulo({
+        order: capituloSeleccionado?.order,
+        name: capituloSeleccionado?.name,
+        course: cursoSeleccionado
+      })
+    }
+  }, [capituloSeleccionado])
+
+  const [nuevoTema, setNuevoTema] = useState({
+    name: "",
+    chapter: ""
+  });
+  
+  const handleChange = (e) => {
+    const value =
+      e.target.name === "order" ? Number(e.target.value) : e.target.value;
+    const value2 =
+      e.target.name === "chapter" ? Number(e.target.value) : e.target.value;
+    if (cambiarTabla) {
+      setNuevoCapitulo({
+        ...nuevoCapitulo,
+        [e.target.name]: value,
+      });
+    } else {
+      setNuevoTema({
+        ...nuevoTema,
+        [e.target.name]: value2,
+      });
+    }
   };
 
   const crearCurso = (e) => {
     e.preventDefault();
-    console.log(nuevoCurso);
-  };
-
-  const [nuevoCurso, setNuevoCurso] = useState({});
-
-  const handleChange = (e) => {
-    setNuevoCurso({
-      ...nuevoCurso,
-      [e.target.name]: e.target.value,
-    });
+    if(Object.values(capituloSeleccionado).length > 0) {
+      console.log(capituloSeleccionado)
+      if (cambiarTabla) {
+        cambiarCapitulo(token, nuevoCapitulo,  capituloSeleccionado.id).then((res) => {
+          if(res.statusCode == 200) {
+            Toast.fire({
+              icon: 'success',
+              title: 'Capítulo actualizado exitósamente!'
+            })
+            handleRecargar()
+            handleCloseModal()
+          } else {
+            Toast.fire({
+              icon: 'error',
+              title: 'Error al actualizar el capítulo'
+            })
+          }
+        })
+      }
+    } else {
+      if (cambiarTabla) {
+        CrearCapitulo(token, nuevoCapitulo).then((res) => {
+          Toast.fire({
+            icon: 'success',
+            title: 'Capítulo creado exitósamente!'
+          })
+          handleRecargar()
+          handleCloseModal()
+        })
+        console.log(nuevoCapitulo)
+      } else {
+        console.log(nuevoTema)
+        CrearTema(token, nuevoTema).then((res) => {
+          console.log(res)
+        })
+      }
+    }
   };
 
   return (
@@ -121,22 +199,44 @@ const ModalCurso = ({ isOpen, setIsOpen, cambiarTabla }) => {
           onSubmit={crearCurso}
         >
           <div className="flex flex-col sm:flex-row gap-2">
-            <div className="w-20">
-              <InputBasic
-                pHolder={"123..."}
-                data={cambiarTabla? nuevoCurso.ordenCapitulo : nuevoCurso.ordenTema}
-                labelName={"Orden"}
+            {cambiarTabla ? (
+              <div className="w-20">
+                <InputBasic
+                  pHolder={"123..."}
+                  data={nuevoCapitulo?.order}
+                  labelName={"Orden"}
+                  onChange={handleChange}
+                  name={"order"}
+                  required={true}
+                />
+              </div>
+            ) : (
+              <label className="flex flex-col gap-y-1">
+                <span className="block text-sm font-medium text-gray-400">
+                  Capitulos
+                </span>
+                <select
+                className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
+                defaultValue={nuevoTema?.chapter}
                 onChange={handleChange}
-                name={cambiarTabla ? "ordenCapitulo" : "ordenTema"}
-                required={true}
-              />
-            </div>
+                name="chapter"
+              >
+                <option value="">Seleccione un capítulo</option>
+                {dataApi.length > 0 &&
+                  dataApi.map((capitulos) => (
+                    <option key={capitulos?.id} value={capitulos?.id}>
+                      {capitulos?.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            )}
             <InputBasic
               pHolder={"Teoría de exponentes"}
-              data={cambiarTabla ? nuevoCurso.nombreCapitulo : nuevoCurso.nombreTema}
+              data={cambiarTabla ? nuevoCapitulo?.name : nuevoTema?.name}
               labelName={`Nombre del ${cambiarTabla ? "Capítulo" : "Tema"}`}
               onChange={handleChange}
-              name={cambiarTabla ? "nombreCapitulo" : "nombreTema"}
+              name={"name"}
               required={true}
             />
           </div>

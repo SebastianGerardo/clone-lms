@@ -8,7 +8,7 @@ import { UserContext } from "../../../../../../context/ContextLms";
 import { TraeDataCursos, CrearCurso, cambiarCurso } from "../../../../../../helpers/ApiConfiguracion";
 import {ContentTableCursos, ColumnsCursos } from "../../tables/TableCursos";
 
-const Cursos = ({setCursoActual, setNombreCurso}) => {
+const Cursos = ({setCursoActual, setNombreCurso, setCursoSeleccionado}) => {
   const {token} = useContext(UserContext)
   const [isOpen, setIsOpen] = useState(false);
   const [dataCursos, setDataCursos] = useState([]);
@@ -37,7 +37,8 @@ const Cursos = ({setCursoActual, setNombreCurso}) => {
     setDataCurso: setDataCurso,
     recargarTabla: recargarTabla,
     setRecargarTabla: setRecargarTabla,
-    token: token
+    token: token,
+    setCursoSeleccionado: setCursoSeleccionado
   });
 
   return (
