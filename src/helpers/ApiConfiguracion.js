@@ -292,6 +292,22 @@ export const eliminarCurso = async (bearer, id) => {
 
 //API CAPITULOS
 
+export const TraeDataCapitulo = async (bearer, id) => {
+  try {
+    const fetchResponse = await fetch(`${URL}/chapters/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${bearer}`,
+      },
+    });
+    const data = await fetchResponse.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const CrearCapitulo = async (bearer, registro) => {
   try {
     const fetchResponse = await fetch(`${URL}/chapters`, {

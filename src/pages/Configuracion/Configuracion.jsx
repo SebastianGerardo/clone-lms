@@ -1,7 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
-import Locales from "./components/Locales";
-import DatosAcademicos from "./components/DatosAcademicos";
-import ConfiguracionPerfil from "./components/ConfiguracionPerfil";
+import React, { useLayoutEffect, useState } from "react";
 import Cursos from "./components/Cursos/pages/Cursos/Cursos";
 import {
   BookIcon3,
@@ -149,11 +146,11 @@ const validarUbicacion = () => {
     },
     "Cursos en Semanas": {
       title: "Cursos en Semanas",
-      content: <ConfiguracionPerfil />,
+      content: <></>,
     },
     "Learning Path": {
       title: "Learning Path",
-      content: <ConfiguracionPerfil />,
+      content: <></>,
     },
   };
 
