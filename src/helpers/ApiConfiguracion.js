@@ -376,6 +376,40 @@ export const CrearTema = async (bearer, registro) => {
     return error;
   }
 };
+
+export const cambiarTema = async (bearer, registro, id) => {
+  try {
+    const fetchResponse = await fetch(`${URL}/issues/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${bearer}`,
+      },
+      body: JSON.stringify(registro),
+    });
+    const data = await fetchResponse.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const eliminarTema = async (bearer, id) => {
+  try {
+    const fetchResponse = await fetch(`${URL}/issues/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${bearer}`,
+      },
+    });
+    const data = await fetchResponse.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
 //APIS DE PRUEBA
 export const ApiConfiguracionCursos = [
   {

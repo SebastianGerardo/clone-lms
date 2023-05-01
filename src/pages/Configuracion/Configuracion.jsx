@@ -3,7 +3,6 @@ import Locales from "./components/Locales";
 import DatosAcademicos from "./components/DatosAcademicos";
 import ConfiguracionPerfil from "./components/ConfiguracionPerfil";
 import Cursos from "./components/Cursos/pages/Cursos/Cursos";
-import Capitulos from "./components/Cursos/pages/Capitulos/Capitulos";
 import {
   BookIcon3,
   NoteIcon2,
@@ -15,6 +14,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Empresa from "./components/Empresa/Empresa";
 import Local from "./components/Local/Local";
 import Salones from "./components/Salones/Salones";
+import CapitulosYTemas from "./components/Cursos/pages/CapitulosYTemas";
 
 export default function Configuracion() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -121,7 +121,7 @@ const validarUbicacion = () => {
     Capitulos: {
       title: "Capitulos",
       content: (
-        <Capitulos
+        <CapitulosYTemas
           setCursoActual={setCursoActual}
           setNombreCurso={setNombreCurso}
           cursoSeleccionado={cursoSeleccionado}

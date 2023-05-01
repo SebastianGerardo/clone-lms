@@ -8,9 +8,9 @@ import { FilterIcon, FilterIcon2 } from "../../../../../assets/svgs/ActiveSvgs";
 import HoverButton from "../../../../../components/Buttons/AboutButton";
 import { UserContext } from "../../../../../context/ContextLms";
 import { eliminarCapitulo } from "../../../../../helpers/ApiConfiguracion";
+import { Toast } from "../../../../../components/Alertas/SweetAlerts";
 
-export const ColumnsCapitulos = ({handleRecargar,  handleOpenModal, setCapituloSeleccionado}) => {
-  const {token} = useContext(UserContext)
+export const ColumnsCapitulos = ({handleRecargar,  handleOpenModal, setCapituloSeleccionado, token}) => {
   const columnsCapitulos = [
       {
         name: <NameTable name="Orden" />,
@@ -138,6 +138,11 @@ const deleteAlert = (id, token, handleRecargar ) => {
             'success'
           )
           handleRecargar()
+        } else {
+          Toast.fire({
+            icon: "error",
+            title: "Ocurrió un error al eliminar el capítulo",
+          });
         }
       })
     }

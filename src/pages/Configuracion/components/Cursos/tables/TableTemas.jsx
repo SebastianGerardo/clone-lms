@@ -3,13 +3,15 @@ import { NameTable } from "../../../../../components/Tables/TableComponents";
 import editIcon from "../../../../../assets/icons/editIcon.png";
 import deleteIcon from "../../../../../assets/icons/deleteIcon.png";
 import Swal from "sweetalert2";
+import { Toast } from "../../../../../components/Alertas/SweetAlerts";
+import { eliminarTema } from "../../../../../helpers/ApiConfiguracion";
 
-export const ColumnsTemas = ({setCursoActual, setNombreCurso}) => {
+export const ColumnsTemas = ({handleOpenModal, setTemaSeleccionado, token, handleRecargar}) => {
   const columnsTemas = [
       {
         name: <NameTable name="Codigo" />,
-        cell: (row) => (
-          <p className="mt-[0.10rem] font-semibold">{row.id}</p>
+        cell: (row, index) => (
+          <p className="mt-[0.10rem] font-semibold">{index + 1}</p>
         ),
         width: "5rem",
         sortable: true,
@@ -17,7 +19,7 @@ export const ColumnsTemas = ({setCursoActual, setNombreCurso}) => {
       },
       {
         name: <NameTable name="Curso" />,
-        cell: (row) => row.nombre,
+        cell: (row) => row?.name,
         width: "15rem",
         sortable: true,
         center: true,
@@ -25,7 +27,7 @@ export const ColumnsTemas = ({setCursoActual, setNombreCurso}) => {
       {
         name: <NameTable name="Cantidad de capitulos" />,
         cell: (row) => {
-          return <p className="mt-[0.10rem] font-semibold">{row.cantidadCapitulos}</p>;
+          return <p className="mt-[0.10rem] font-semibold">{row?.cantidadCapitulos}</p>;
         },
         sortable: true,
         center: true,
@@ -35,7 +37,7 @@ export const ColumnsTemas = ({setCursoActual, setNombreCurso}) => {
         cell: (row) => (
           <div className="flex gap-2">
               <div
-              onClick={()=>{setCursoActual("Capitulos"), setNombreCurso(row.nombre)}}
+              onClick={()=>{handleOpenModal(), setTemaSeleccionado(row)}}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-6 h-6 object-cover">
@@ -43,7 +45,7 @@ export const ColumnsTemas = ({setCursoActual, setNombreCurso}) => {
                   </div>
               </div>
               <div
-              onClick={deleteAlert}
+              onClick={() => deleteAlert(token, row.id, handleRecargar)}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-[25px] h-[25px] object-cover">
@@ -63,23 +65,33 @@ export const ColumnsTemas = ({setCursoActual, setNombreCurso}) => {
   }
 }
 
-const deleteAlert = () => {
+const deleteAlert = (token, id,handleRecargar) => {
   Swal.fire({
-    title: '¿Estas seguro de eliminar este curso?',
-    text: "No podras revertir esta accion!",
+    title: '¿Estas seguro de eliminar este tema?',
+    text: "No podras revertir esta acción!",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: '¡Si, eliminar!',
+    confirmButtonText: '¡Sí, eliminar!',
     cancelButtonText: 'Cancelar'
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire(
-        'Eliminado!',
-        'El curso ha sido eliminado.',
-        'success'
-      )
+      eliminarTema(token, id).then((res) => {
+        if (res.statusCode == 200) {
+          Swal.fire(
+            'Eliminado!',
+            'El tema ha sido eliminado.',
+            'success'
+          )
+          handleRecargar();
+        } else {
+          Toast.fire({
+            icon: "error",
+            title: "Ocurrió un error al eliminar el tema",
+          })
+        }
+      });
     }
   })
 }
