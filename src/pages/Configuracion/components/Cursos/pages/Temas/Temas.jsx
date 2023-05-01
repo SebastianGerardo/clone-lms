@@ -15,20 +15,12 @@ import { ColumnsTemas } from "../../tables/TableTemas";
 
 const Temas = (props) => {
   
-  const [dataTemas, setDataTemas] = useState([]);
-
   const { columnsTemas } = ColumnsTemas({
     handleOpenModal: props.handleOpenModal,
     setTemaSeleccionado: props.setTemaSeleccionado,
     token: props.token,
     handleRecargar: props.handleRecargar,
   });
-
-  useEffect(() => {
-    TraeDataTemas(props.token).then((res) => {
-      setDataTemas(res.data);
-    });
-  }, [props.recargarTabla]);
 
   const propsModal = {
     handleRecargar: props.handleRecargar,
@@ -39,13 +31,14 @@ const Temas = (props) => {
     cursoSeleccionado: props.cursoSeleccionado,
     dataApi: props.dataApi,
     temaSeleccionado: props.temaSeleccionado,
+    temasFiltrados: props.temasFiltrados,
   }
 
   return (
     <>
       <TableBasic
         columns={columnsTemas}
-        data={dataTemas}
+        data={props.temasFiltrados}
         highlightOnHover
         striped
         onRowClicked={(row) => console.log(row)}

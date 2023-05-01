@@ -17,6 +17,7 @@ const CapitulosYTemas = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) 
   const [dataApi, setDataApi] = useState([]);
   const [capituloSeleccionado, setCapituloSeleccionado] = useState({});
   const [temaSeleccionado, setTemaSeleccionado] = useState({});
+  const [temasFiltrados, setTemasFiltrados] = useState([]); //Filtrar temas por capitulo
 
   const handleRecargar = () => {
     setRecargarTabla(!recargarTabla);
@@ -25,6 +26,8 @@ const CapitulosYTemas = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) 
   useEffect(() => {
     TraeDataCurso(token, cursoSeleccionado).then((res) => {
       setDataApi(res?.data?.chapters)
+      const issuesData = res?.data?.chapters?.map((item) => item.issues).filter((issues) => issues && issues.length > 0).flat();
+      setTemasFiltrados(issuesData)
     })
   }, [recargarTabla])
 
@@ -50,6 +53,8 @@ const CapitulosYTemas = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) 
     setTemaSeleccionado:setTemaSeleccionado,
     temaSeleccionado:temaSeleccionado,
     recargarTabla:recargarTabla,
+    temasFiltrados:temasFiltrados,
+dataApi:dataApi,
   }
 
   const propsComunes = {
