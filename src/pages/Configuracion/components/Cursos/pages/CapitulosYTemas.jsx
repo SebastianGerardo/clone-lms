@@ -49,6 +49,7 @@ const CapitulosYTemas = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) 
   const propsTema = {
     setTemaSeleccionado:setTemaSeleccionado,
     temaSeleccionado:temaSeleccionado,
+    recargarTabla:recargarTabla,
   }
 
   const propsComunes = {

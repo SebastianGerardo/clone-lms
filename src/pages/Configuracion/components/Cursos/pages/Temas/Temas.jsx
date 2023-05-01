@@ -28,7 +28,7 @@ const Temas = (props) => {
     TraeDataTemas(props.token).then((res) => {
       setDataTemas(res.data);
     });
-  }, []);
+  }, [props.recargarTabla]);
 
   const propsModal = {
     handleRecargar: props.handleRecargar,
