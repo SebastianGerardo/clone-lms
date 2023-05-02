@@ -6,7 +6,6 @@ import Modal from "../../../../../../components/Modal/Modal";
 import TableBasic from "../../../../../../components/Tables/TableBasic";
 import { UserContext } from "../../../../../../context/ContextLms";
 import {
-  ApiConfiguracionCursos,
   cambiarTema,
   CrearTema,
   TraeDataTemas,

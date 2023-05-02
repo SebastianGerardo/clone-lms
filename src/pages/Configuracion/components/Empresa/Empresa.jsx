@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../../../../components/Modal/Modal";
 import TableBasic from "../../../../components/Tables/TableBasic";
-import { ApiConfiguracionCursos, TraeDataEmpresa } from "../../../../helpers/ApiConfiguracion";
+import { TraeDataEmpresa } from "../../../../helpers/ApiConfiguracion";
 import {ContentTableEmpresa, ColumnsEmpresa } from "./components/TableEmpresa";
 import ModalEmpresa from "./components/ModalEmpresa/ModalEmpresa";
 import { useEffect } from "react";
@@ -38,7 +38,7 @@ const Empresa = ({setCursoActual, setNombreCurso}) => {
   });
   return (
     <section className="p-8 pt-0">
-      <ContentTableEmpresa dataEmpresa={dataEmpresa} handleOpenModal={handleOpenModal} ApiConfiguracionCursos={ApiConfiguracionCursos} />
+      <ContentTableEmpresa dataEmpresa={dataEmpresa} handleOpenModal={handleOpenModal} />
       <div className="max-w-[1200px] mx-auto flex flex-col gap-y-12">
         <TableBasic
           columns={columnsEmpresa}

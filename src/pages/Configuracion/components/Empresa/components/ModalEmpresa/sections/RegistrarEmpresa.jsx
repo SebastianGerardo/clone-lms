@@ -59,7 +59,7 @@ const RegistrarEmpresa = ({ handleChange, formData }) => {
         </div>
 
         {/* Número de documento */}
-        <div className="w-full">
+        {/* <div className="w-full">
           <label className="flex flex-col gap-y-1">
             <span className="block text-sm font-medium text-gray-400">
               Número de ubigeo
@@ -73,7 +73,7 @@ const RegistrarEmpresa = ({ handleChange, formData }) => {
               className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
             />
           </label>
-        </div>
+        </div> */}
 
         {/* Nombre corto */}
         <div className="w-full">

@@ -3,14 +3,14 @@ import RegistrarEmpresa from "./sections/RegistrarEmpresa";
 import RegistrarEmpresa2 from "./sections/RegistrarEmpresa2";
 import StepProgressBar from "../../../../../../components/ProgressStatus/StepProgressBar";
 import { Toast } from "../../../../../../components/Alertas/SweetAlerts";
-import { cambiarEmpresa, crearEmpresa } from "../../../../../../helpers/ApiConfiguracion";
+import { cambiarEmpresa, crearEmpresa, TraeDepartamentos, TraeProvincia, TraeUbicaciones } from "../../../../../../helpers/ApiConfiguracion";
+import { useEffect } from "react";
 
 const ModalEmpresa = ({infoEmpresa, setRecargarTabla,recargarTabla , handleCloseModal}) => {
   
+  const {formData, setFormData, handleMatricular, dataUbicacion, handleSelect, dataProvincia,dataDepartamento, formUbicacion} = enviarData({infoEmpresa, handleCloseModal, setRecargarTabla, recargarTabla})
 
-  const {formData, setFormData, handleMatricular} = enviarData({infoEmpresa, handleCloseModal, setRecargarTabla, recargarTabla})
-
-  const {handleNextStep, handlePrevStep, isLastStep, sectionStep, currentStep} = sectionsModal({formData, setFormData})
+  const {handleNextStep, handlePrevStep, isLastStep, sectionStep, currentStep} = sectionsModal({formData, setFormData, dataUbicacion, handleSelect,dataProvincia,dataDepartamento, formUbicacion})
   
   return (
     <div className="lg:w-[55rem]">
@@ -58,18 +58,87 @@ export default ModalEmpresa;
 
 const enviarData = ({infoEmpresa, handleCloseModal, setRecargarTabla, recargarTabla}) => {
   const token = localStorage.getItem("token");
+  
+  const [formUbicacion, setFormUbicacion] = useState({
+    departamento: "",
+    provincia: "",
+    distrito: "",
+  })
   const [formData, setFormData] = useState({
     tradeName: infoEmpresa?.tradeName || "",
     shortName: infoEmpresa?.shortName || "", 
     socialReason: infoEmpresa?.socialReason || "",
     ruc: infoEmpresa?.ruc || "",
     country: infoEmpresa?.country || "",
-    ubigean: infoEmpresa?.ubigean || "",
+    ubigean: `${formUbicacion.departamento}${formUbicacion.provincia}${formUbicacion.distrito}` ,
     mobile: infoEmpresa?.mobile || "",
     email: infoEmpresa?.email || "",
     website: infoEmpresa?.website || "",
     agent: infoEmpresa?.agent || "",
   });
+  const [dataUbicacion, setDataUbicacion] = useState([])
+  const [dataDepartamento, setDataDepartamento] = useState([])
+  const [dataProvincia, setDataProvincia] = useState([])
+  useEffect(() => {
+    setFormUbicacion({
+      departamento: infoEmpresa?.ubigean?.substring(0, 2) || "",
+      provincia: infoEmpresa?.ubigean?.substring(2, 4) || "",
+      distrito: infoEmpresa?.ubigean?.substring(4, 6) || "",
+    })
+  }, [])
+
+  useEffect(() => {
+    TraeUbicaciones(token).then((res) => {
+      setDataUbicacion(res.data)
+    })
+  }, [])
+
+  const handleSelect = async (e) => {
+    const { name, value } = e.target;
+  
+    switch (name) {
+      case "departamento":
+        
+        setFormUbicacion({
+          ...formUbicacion,
+          departamento: value,
+        });
+        break;
+      case "provincia":
+        
+        setFormUbicacion({
+          ...formUbicacion,
+          provincia: value,
+        });
+        break;
+      case "distrito":
+        // newUbigeo = ubigeo.slice(0, 4) + value;
+        setFormUbicacion({
+          ...formUbicacion,
+          distrito: value,
+        });
+        setFormData({
+          ...formData,
+          ubigean: `${formUbicacion.departamento}${formUbicacion.provincia}${value}` ,
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  useEffect(() => {
+    if(formUbicacion.departamento != "") {
+      TraeDepartamentos(token, formUbicacion.departamento).then((res) => {
+        setDataDepartamento(res.data);
+      });
+    } 
+    if (formUbicacion.provincia != "") {
+      TraeProvincia(token, formUbicacion?.departamento, formUbicacion.provincia).then((res) => {
+        setDataProvincia(res.data);
+      });
+    }
+  }, [formUbicacion])
 
   const handleMatricular = () => {
     if (Object.values(infoEmpresa).length > 0) {
@@ -111,11 +180,16 @@ const enviarData = ({infoEmpresa, handleCloseModal, setRecargarTabla, recargarTa
   return {
     formData,
     setFormData,
-    handleMatricular
+    handleMatricular,
+    dataUbicacion,
+    handleSelect,
+    dataDepartamento,
+    dataProvincia,
+    formUbicacion
   }
 }
 
-const sectionsModal = ({formData, setFormData}) => {
+const sectionsModal = ({formData, setFormData, dataUbicacion, handleSelect, dataProvincia,dataDepartamento, formUbicacion}) => {
   const [currentStep, setCurrentStep] = useState(0);
 
   const handleNextStep = () => {
@@ -135,7 +209,7 @@ const sectionsModal = ({formData, setFormData}) => {
 
   const sectionStep = {
     0: <RegistrarEmpresa handleChange={handleChange} formData={formData} />,
-    1: <RegistrarEmpresa2 handleChange={handleChange} formData={formData} />,
+    1: <RegistrarEmpresa2 formUbicacion={formUbicacion} dataProvincia={dataProvincia} dataDepartamento={dataDepartamento} handleSelect={handleSelect} dataUbicacion={dataUbicacion} handleChange={handleChange} formData={formData} />,
   };
 
   const isLastStep = currentStep === Object.keys(sectionStep).length - 1; 

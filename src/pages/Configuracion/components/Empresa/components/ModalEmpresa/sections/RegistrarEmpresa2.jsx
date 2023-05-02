@@ -3,7 +3,7 @@ import { InputBasic } from "../../../../../../../components/Inputs/InputBasic";
 import { InputBasicNumber } from "../../../../../../../components/Inputs/InputNumber";
 import useInputNumber from "../../../../../../../hooks/useInputNumber";
 
-const RegistrarEmpresa2 = ({ handleChange, formData }) => {
+const RegistrarEmpresa2 = ({ handleChange, formData, dataUbicacion, handleSelect, dataProvincia,dataDepartamento, formUbicacion }) => {
   const { handleKeyDown } = useInputNumber();
   return (
     <div className="text-start flex flex-col gap-4">
@@ -12,6 +12,50 @@ const RegistrarEmpresa2 = ({ handleChange, formData }) => {
       </div>
       <form className="flex flex-col sm:grid sm:grid-cols-3 sm:grid-rows-3 gap-y-3 gap-x-8">
         {/* AQUI VA LO DE ABAJO */}
+
+        <div className="w-full">
+          <label className="flex flex-col gap-y-1">
+            <span className="block text-sm font-medium text-gray-400">
+              Departamento
+            </span>
+            <select defaultValue={formUbicacion?.departamento} name="departamento" onChange={(e) => handleSelect(e)} className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500">
+              <option value="">TODOS</option>
+              {dataUbicacion?.length > 0 && dataUbicacion?.map((item) => (
+                <option key={item?.departament} value={item?.departament}>{item?.name}</option>
+              ))}
+            </select>
+          </label>
+        </div>
+
+        <div className="w-full">
+          <label className="flex flex-col gap-y-1">
+            <span className="block text-sm font-medium text-gray-400">
+              Provincia
+            </span>
+
+            <select defaultValue={formUbicacion?.provincia} name="provincia" onChange={(e) => handleSelect(e)} className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500">
+              <option value="">TODOS</option>
+              
+              {dataDepartamento?.length > 0 && dataDepartamento?.map((item) => (
+                <option key={item?.province} value={item?.province}>{item?.name}</option>
+              ))}
+            </select>
+          </label>
+        </div>
+
+        <div className="w-full">
+          <label className="flex flex-col gap-y-1">
+            <span className="block text-sm font-medium text-gray-400">
+              Distrito
+            </span>
+            <select defaultValue={formUbicacion?.distrito} name="distrito" onChange={(e) => handleSelect(e)} className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500">
+              <option value="">TODOS</option>
+              {dataProvincia?.length > 0 && dataProvincia?.map((item) => (
+                <option key={item?.district} value={item?.district}>{item?.name}</option>
+              ))}
+            </select>
+          </label>
+        </div> 
 
           {/*Direccion Legal */}
         {/* <div className="col-span-2">
@@ -62,101 +106,3 @@ const RegistrarEmpresa2 = ({ handleChange, formData }) => {
 
 export default RegistrarEmpresa2;
 
-{/* {/* Departamento 
-<div className="w-full">
-<label className="flex flex-col gap-y-1">
-  <span className="block text-sm font-medium text-gray-400">
-    Departamento
-  </span>
-  <select className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500">
-    <option value="">Selecciona un departamento</option>
-    <option value="amazonas">Amazonas</option>
-    <option value="ancash">Ancash</option>
-    <option value="apurimac">Apurímac</option>
-    <option value="arequipa">Arequipa</option>
-    <option value="ayacucho">Ayacucho</option>
-    <option value="cajamarca">Cajamarca</option>
-    <option value="callao">Callao</option>
-    <option value="cusco">Cusco</option>
-    <option value="huancavelica">Huancavelica</option>
-    <option value="huanuco">Huánuco</option>
-    <option value="ica">Ica</option>
-    <option value="junin">Junín</option>
-    <option value="la-libertad">La Libertad</option>
-    <option value="lambayeque">Lambayeque</option>
-    <option value="lima">Lima</option>
-    <option value="loreto">Loreto</option>
-    <option value="madre-de-dios">Madre de Dios</option>
-    <option value="moquegua">Moquegua</option>
-    <option value="pasco">Pasco</option>
-    <option value="piura">Piura</option>
-    <option value="puno">Puno</option>
-    <option value="san-martin">San Martín</option>
-    <option value="tacna">Tacna</option>
-    <option value="tumbes">Tumbes</option>
-    <option value="ucayali">Ucayali</option>
-  </select>
-</label>
-</div>
-
-<div className="w-full">
-<label className="flex flex-col gap-y-1">
-  <span className="block text-sm font-medium text-gray-400">
-    Provincia
-  </span>
-
-  <select className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500">
-    {" "}
-    <optgroup label="La Libertad">
-      <option value="trujillo">Trujillo</option>
-      <option value="ascope">Ascope</option>
-      <option value="chepen">Chepén</option>
-      <option value="pacasmayo">Pacasmayo</option>
-      <option value="julcan">Julcán</option>
-    </optgroup>
-    <optgroup label="Lima">
-      <option value="lima">Lima</option>
-      <option value="barranca">Barranca</option>
-      <option value="cajatambo">Cajatambo</option>
-      <option value="canta">Canta</option>
-      <option value="cañete">Cañete</option>
-      <option value="huaral">Huaral</option>
-      <option value="huaura">Huaura</option>
-      <option value="oyon">Oyón</option>
-      <option value="yauyos">Yauyos</option>
-    </optgroup>
-  </select>
-</label>
-</div>
-
-<div className="w-full">
-<label className="flex flex-col gap-y-1">
-  <span className="block text-sm font-medium text-gray-400">
-    Distrito
-  </span>
-  <select className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500">
-    {" "}
-    <optgroup label="La Libertad">
-      <option value="Trujillo">Trujillo</option>
-      <option value="Huanchaco">Huanchaco</option>
-      <option value="Laredo">Laredo</option>
-      <option value="Moche">Moche</option>
-      <option value="Poroto">Poroto</option>
-      <option value="Salaverry">Salaverry</option>
-      <option value="Simbal">Simbal</option>
-      <option value="Victor Larco Herrera">
-        Victor Larco Herrera
-      </option>
-    </optgroup>
-    <optgroup label="Lima">
-      <option value="Lima">Lima</option>
-      <option value="Ancón">Ancón</option>
-      <option value="Ate">Ate</option>
-      <option value="Barranco">Barranco</option>
-      <option value="Breña">Breña</option>
-      <option value="Carabayllo">Carabayllo</option>
-      <option value="Chaclacayo">Chaclacayo</option>
-    </optgroup>
-  </select>
-</label>
-</div>  */}

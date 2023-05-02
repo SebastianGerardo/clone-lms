@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../../../../components/Modal/Modal";
 import TableBasic from "../../../../components/Tables/TableBasic";
-import { ApiConfiguracionCursos, TraeDataSalones, crearSalon, TraeDataLocales } from "../../../../helpers/ApiConfiguracion";
+import { TraeDataSalones, crearSalon, TraeDataLocales } from "../../../../helpers/ApiConfiguracion";
 import {ContentTableSalones, ColumnsSalones } from "./components/TableSalones";
 import { useEffect } from "react";
 import ModalSalon from "./components/ModalSalones/ModalSalon";
@@ -47,7 +47,7 @@ const Salones = ({setCursoActual, setNombreCurso}) => {
 
   return (
     <section className="p-8 pt-0">
-      <ContentTableSalones dataSalones={dataSalones} handleOpenModal={handleOpenModal} ApiConfiguracionCursos={ApiConfiguracionCursos} />
+      <ContentTableSalones dataSalones={dataSalones} handleOpenModal={handleOpenModal} />
       <div className="max-w-[1200px] mx-auto flex flex-col gap-y-12">
         <TableBasic
           columns={columnsSalones}

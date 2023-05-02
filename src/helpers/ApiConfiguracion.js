@@ -426,24 +426,51 @@ export const eliminarTema = async (bearer, id) => {
   }
 };
 
-//APIS DE PRUEBA
-export const ApiConfiguracionCursos = [
-  {
-    id: 1,
-    nombre: "Algebra",
-    cantidadCapitulos: 0,
-    capitulos: [
-      {
-        id: 1,
-        nombre: "Capitulo 1",
-        cantidadLecciones: 0,
-        temas: [
-          {
-            id: 1,
-            nombre: "Teoria de exponentes",
-          },
-        ],
+//APIS UBICACIONES
+export const TraeUbicaciones = async (bearer) => {
+  try {
+    const fetchResponse = await fetch(`${URL}/locations`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${bearer}`,
       },
-    ],
-  },
-];
+    });
+    const data = await fetchResponse.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const TraeDepartamentos = async (bearer, idDepartamento) => {
+  try {
+    const fetchResponse = await fetch(`${URL}/locations/${idDepartamento}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${bearer}`,
+      },
+    });
+    const data = await fetchResponse.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const TraeProvincia = async (bearer, idDepartamento, idProvincia) => {
+  try {
+    const fetchResponse = await fetch(`${URL}/locations/${idDepartamento}/${idProvincia}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${bearer}`,
+      },
+    });
+    const data = await fetchResponse.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+};

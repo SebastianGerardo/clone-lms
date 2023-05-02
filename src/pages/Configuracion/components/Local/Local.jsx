@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../../../../components/Modal/Modal";
 import TableBasic from "../../../../components/Tables/TableBasic";
-import { ApiConfiguracionCursos, TraeDataEmpresa, TraeDataLocales } from "../../../../helpers/ApiConfiguracion";
+import { TraeDataEmpresa, TraeDataLocales } from "../../../../helpers/ApiConfiguracion";
 import {ContentTableLocal, ColumnsLocal } from "./components/TableLocal";
 import { useEffect } from "react";
 import ModalLocal from "./components/ModalLocal/ModalLocal";
@@ -48,7 +48,7 @@ const Local = ({setCursoActual, setNombreCurso}) => {
  
   return (
     <section className="p-8 pt-0">
-      <ContentTableLocal dataLocales={dataLocales} handleOpenModal={handleOpenModal} ApiConfiguracionCursos={ApiConfiguracionCursos} />
+      <ContentTableLocal dataLocales={dataLocales} handleOpenModal={handleOpenModal} />
       <div className="max-w-[1200px] mx-auto flex flex-col gap-y-12">
         <TableBasic
           columns={columnsLocal}
