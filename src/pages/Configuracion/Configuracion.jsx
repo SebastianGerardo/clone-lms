@@ -12,6 +12,7 @@ import Empresa from "./components/Empresa/Empresa";
 import Local from "./components/Local/Local";
 import Salones from "./components/Salones/Salones";
 import CapitulosYTemas from "./components/Cursos/pages/CapitulosYTemas";
+import Ciclos from "./components/Ciclos/Ciclos";
 
 export default function Configuracion() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -144,9 +145,9 @@ const validarUbicacion = () => {
       title: "Cursos",
       content: cursoComponent[cursoActual]?.content,
     },
-    "Cursos en Semanas": {
-      title: "Cursos en Semanas",
-      content: <></>,
+    "Ciclos": {
+      title: "Ciclos",
+      content: <Ciclos />,
     },
     "Learning Path": {
       title: "Learning Path",
@@ -197,10 +198,10 @@ const validarUbicacion = () => {
       props: { ...propsNavigation },
     },
     {
-      name: "Cursos en Semanas",
+      name: "Ciclos",
       icon: (
         <SettingIcon2
-          isActive={activeTab == "Cursos en Semanas"}
+          isActive={activeTab == "Ciclos"}
           colorChange={"#2563EB"}
         />
       ),
