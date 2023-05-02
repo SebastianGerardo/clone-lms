@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Toast } from "../../../../../../components/Alertas/SweetAlerts";
 import StepProgressBar from "../../../../../../components/ProgressStatus/StepProgressBar";
-import {CambiaDataLocal, crearLocal} from "../../../../../../helpers/ApiConfiguracion";
+import {CambiaDataLocal, crearLocal, TraeDepartamentos, TraeProvincia, TraeUbicaciones} from "../../../../../../helpers/ApiConfiguracion";
 import RegistrarLocal from "./sections/RegistrarLocal";
 import RegistrarLocal2 from "./sections/RegistrarLocal2";
 
 const ModalLocal = ({ handleCloseModal, recargarTabla, setRecargarTabla, dataEmpresas, dataLocal}) => {
-  const {handleChange, handleCrear, formData} = enviarData({
+  const {handleChange, handleCrear, formData, formUbicacion, dataUbicacion, dataDepartamento, dataProvincia, handleSelect} = enviarData({
     handleCloseModal: handleCloseModal,
     recargarTabla: recargarTabla,
     setRecargarTabla: setRecargarTabla,
@@ -17,6 +17,11 @@ const ModalLocal = ({ handleCloseModal, recargarTabla, setRecargarTabla, dataEmp
     handleChange: handleChange, 
     formData: formData,
     dataEmpresas: dataEmpresas,
+    dataUbicacion: dataUbicacion,
+    dataDepartamento: dataDepartamento,
+    dataProvincia: dataProvincia,
+    handleSelect: handleSelect,
+    formUbicacion: formUbicacion,
   })
 
   return (
@@ -63,6 +68,98 @@ const ModalLocal = ({ handleCloseModal, recargarTabla, setRecargarTabla, dataEmp
 
 export default ModalLocal;
 
+const useUbicaciones = ({dataLocal, token, setFormData, formData}) => {
+  const [dataDepartamento, setDataDepartamento] = useState([])
+  const [dataProvincia, setDataProvincia] = useState([])
+  const [dataUbicacion, setDataUbicacion] = useState([])
+  
+  const [formUbicacion, setFormUbicacion] = useState({
+    departamento: "",
+    provincia: "",
+    distrito: "",
+  })
+
+  useEffect(() => {
+    TraeUbicaciones(token).then((res) => {
+      setDataUbicacion(res.data)
+    })
+  }, [])
+
+  useEffect(() => {
+    console.log("dataLocal))")
+    setFormUbicacion({
+      departamento: dataLocal?.ubigean?.substring(0, 2) || "",
+      provincia: dataLocal?.ubigean?.substring(2, 4) || "",
+      distrito: dataLocal?.ubigean?.substring(4, 6) || "",
+    })
+  }, [])
+
+  
+  useEffect(() => {
+    if(formUbicacion.departamento != "") {
+      TraeDepartamentos(token, formUbicacion?.departamento).then((res) => {
+        setDataDepartamento(res.data);
+      });
+    } 
+    if (formUbicacion.provincia != "") {
+      TraeProvincia(token, formUbicacion?.departamento, formUbicacion?.provincia).then((res) => {
+        setDataProvincia(res.data);
+      });
+    }
+  }, [formUbicacion])
+
+  const handleSelect = async (e) => {
+    const { name, value } = e.target;
+  
+    switch (name) {
+      case "departamento":
+        setFormUbicacion({
+          ...formUbicacion,
+          departamento: value,
+        });
+        setFormData({
+          ...formData,
+          ubigean: `${value}${formUbicacion.provincia}${formUbicacion.distrito}` ,
+        });
+        console.log("departamento")
+        break;
+      case "provincia":
+        console.log("provincia")
+        setFormUbicacion({
+          ...formUbicacion,
+          provincia: value,
+        });
+        setFormData({
+          ...formData,
+          ubigean: `${formUbicacion.departamento}${value}${formUbicacion.distrito}` ,
+        });
+        break;
+      case "distrito":
+        console.log("distrito")
+        setFormUbicacion({
+          ...formUbicacion,
+          distrito: value,
+        });
+        setFormData({
+          ...formData,
+          ubigean: `${formUbicacion.departamento}${formUbicacion.provincia}${value}` ,
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  return {
+    formUbicacion,
+    dataUbicacion,
+    dataDepartamento,
+    dataProvincia,
+    handleSelect
+  }
+}
+
+
 const enviarData = ({setRecargarTabla, recargarTabla,handleCloseModal, dataLocal }) => {
   const token = localStorage.getItem("token");
   const [formData, setFormData] = useState({
@@ -78,6 +175,12 @@ const enviarData = ({setRecargarTabla, recargarTabla,handleCloseModal, dataLocal
     company: dataLocal?.company?.id || "",
   });
   
+  const {formUbicacion, dataUbicacion, dataDepartamento, dataProvincia, handleSelect} = useUbicaciones({dataLocal, token, setFormData, formData})
+
+  console.log("dataLocal", dataLocal)
+  console.log("dataLocal", formData.ubigean)
+  console.log("dataLocal", formUbicacion)
+
   const handleChange = (e) => {
     const value =
       e.target.name === "company" ? Number(e.target.value) : e.target.value;
@@ -125,11 +228,16 @@ const enviarData = ({setRecargarTabla, recargarTabla,handleCloseModal, dataLocal
   return {
     handleChange,
     handleCrear,
-    formData
+    formData,
+    formUbicacion, 
+    dataUbicacion, 
+    dataDepartamento, 
+    dataProvincia, 
+    handleSelect
   }
 }
 
-const sectionsModal = ({handleChange, formData, dataEmpresas}) => {
+const sectionsModal = ({handleChange, formData, dataEmpresas, formUbicacion, dataUbicacion, dataDepartamento, dataProvincia, handleSelect}) => {
   const [currentStep, setCurrentStep] = useState(0);
 
   const handleNextStep = () => {
@@ -152,6 +260,11 @@ const sectionsModal = ({handleChange, formData, dataEmpresas}) => {
       <RegistrarLocal2
         handleChange={handleChange}
         formData={formData}
+        formUbicacion={formUbicacion}
+        dataUbicacion={dataUbicacion}
+        dataDepartamento={dataDepartamento}
+        dataProvincia={dataProvincia}
+        handleSelect={handleSelect}
       />
     ),
   };
