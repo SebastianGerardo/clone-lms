@@ -27,14 +27,7 @@ export const ColumnsSemanas = ({handleRecargar,  handleOpenModal, setCapituloSel
       },
       {
         name: <NameTable name="Curso" />,
-        cell: (row) => row?.course,
-        width: "15rem",
-        sortable: true,
-        center: true,
-      },
-      {
-        name: <NameTable name="Learning Path" />,
-        cell: (row) => row?.learningPath,
+        cell: (row) => row?.coursesWeeks?.name,
         width: "15rem",
         sortable: true,
         center: true,
@@ -62,7 +55,6 @@ export const ColumnsSemanas = ({handleRecargar,  handleOpenModal, setCapituloSel
   
           </div>
         ),
-        width: "12rem",
         sortable: true,
         center: true,
       },

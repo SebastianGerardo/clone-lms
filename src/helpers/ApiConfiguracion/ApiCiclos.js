@@ -15,6 +15,22 @@ export const TraeDataCiclos = async (bearer) => {
       return error;
     }
   };
+
+export const TraeDataCiclo = async (bearer,id) => {
+    try {
+      const fetchResponse = await fetch(`${URL}/cycles/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${bearer}`,
+        },
+      });
+      const data = await fetchResponse.json();
+      return data;
+    } catch (error) {
+      return error;
+    }
+  };
   
   export const crearCiclo = async (bearer, registro) => {
     try {

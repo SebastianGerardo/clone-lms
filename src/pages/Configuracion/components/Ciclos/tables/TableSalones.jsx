@@ -12,24 +12,23 @@ export const ColumnsSalones = ({handleRecargar,  handleOpenModal, setCapituloSel
       {
         name: <NameTable name="Orden" />,
         cell: (row, index) => (
-          <p className="mt-[0.10rem] font-semibold">{row.order}</p>
+          <p className="mt-[0.10rem] font-semibold">{index + 1}</p>
         ),
         width: "5rem",
         sortable: true,
         center: true,
       },
       {
-        name: <NameTable name="Curso" />,
-        cell: (row) => row.name,
+        name: <NameTable name="Salón" />,
+        cell: (row) => <p className="mt-[0.10rem] font-semibold">Salón {row?.classroom?.pavilion}</p>,
         width: "15rem",
         sortable: true,
         center: true,
       },
       {
-        name: <NameTable name="Capitulos" />,
-        cell: (row) => {
-          return <p className="mt-[0.10rem] font-semibold">{row.cantidadCapitulos}</p>;
-        },
+        name: <NameTable name="Codigo" />,
+        cell: (row) => <p className="mt-[0.10rem] font-semibold">{row?.classroom?.code}</p>,
+        width: "15rem",
         sortable: true,
         center: true,
       },
@@ -56,7 +55,6 @@ export const ColumnsSalones = ({handleRecargar,  handleOpenModal, setCapituloSel
   
           </div>
         ),
-        width: "12rem",
         sortable: true,
         center: true,
       },

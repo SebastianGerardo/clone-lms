@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { UserContext } from "../../../../../context/ContextLms";
 import Salones from "./Salones/Salones";
 import { TraeDataSalones } from "../../../../../helpers/ApiConfiguracion/ApiSalones";
+import { TraeDataCiclo } from "../../../../../helpers/ApiConfiguracion/ApiCiclos";
 
 const CiclosPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
   const {token} = useContext(UserContext)
@@ -17,19 +18,27 @@ const CiclosPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
   const [capituloSeleccionado, setCapituloSeleccionado] = useState({});
   const [temaSeleccionado, setTemaSeleccionado] = useState({});
   const [temasFiltrados, setTemasFiltrados] = useState([]); //Filtrar temas por capitulo
+  const [dataApi, setDataApi] = useState([]); //Data que se muestra en la tabla
+
+  console.log(cursoSeleccionado?.id)
 
   const handleRecargar = () => {
     setRecargarTabla(!recargarTabla);
   }
 
   useEffect(() => {
-    console.log("recargando tabla")
     TraeDataSalones(token).then((res) => {
-      console.log("recargando tabla")
       setDataSalones(res?.data)
-      console.log(res)
     })
   }, [recargarTabla])
+  
+  useEffect(() => {
+    TraeDataCiclo(token, cursoSeleccionado?.id).then((res) => {
+      console.log(res?.data)
+      setDataApi(res?.data)
+    })
+  }, [recargarTabla])
+
 
   useEffect(() => {
     setIsLoaded(false);
@@ -68,6 +77,7 @@ const CiclosPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
   }
 
   const propsCapitulos = {
+    dataApi:dataApi,
     setCapituloSeleccionado:setCapituloSeleccionado
   }
 

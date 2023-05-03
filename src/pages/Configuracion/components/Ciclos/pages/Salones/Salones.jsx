@@ -32,7 +32,7 @@ const Salones = (props) => {
     <>
       <TableBasic
         columns={columnsSalones}
-        data={props?.cursoSeleccionado?.cyclesClassrooms}
+        data={props?.dataApi?.cyclesClassrooms}
         highlightOnHover
         striped
         onRowClicked={(row) => console.log(row)}
