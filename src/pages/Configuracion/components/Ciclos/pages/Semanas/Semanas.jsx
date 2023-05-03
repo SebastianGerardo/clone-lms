@@ -4,13 +4,13 @@ import { InputBasic } from "../../../../../../components/Inputs/InputBasic";
 import Modal from "../../../../../../components/Modal/Modal";
 import TableBasic from "../../../../../../components/Tables/TableBasic";
 import { cambiarCapitulo, CrearCapitulo, TraeDataCurso } from "../../../../../../helpers/ApiConfiguracion";
-import {ColumnsCapitulos} from "../../tables/TableCapitulos";
+import {ColumnsSemanas} from "../../tables/TableSemanas";
 import { Toast } from "../../../../../../components/Alertas/SweetAlerts";
 import { InputBasicNumber } from "../../../../../../components/Inputs/InputNumber";
 
-const Capitulos = (props) => {
+const Semanas = (props) => {
 
-  const { columnsCapitulos } = ColumnsCapitulos({
+  const { columnsSemanas } = ColumnsSemanas({
     handleOpenModal: props.handleOpenModal,
     setCapituloSeleccionado: props.setCapituloSeleccionado,
     handleRecargar: props.handleRecargar,
@@ -29,21 +29,21 @@ const Capitulos = (props) => {
   return (
     <>
       <TableBasic
-        columns={columnsCapitulos}
+        columns={columnsSemanas}
         data={props.dataApi}
         highlightOnHover
         striped
         onRowClicked={(row) => console.log(row)}
         pointerOnHover
       />
-      <ModalCurso {...propsModal} />
+      <ModalSemanas {...propsModal} />
     </>
   );
 };
 
-export default Capitulos;
+export default Semanas;
 
-const ModalCurso = ({ isOpen, cursoSeleccionado, token, handleCloseModal, capituloSeleccionado, handleRecargar }) => {
+const ModalSemanas = ({ isOpen, cursoSeleccionado, token, handleCloseModal, capituloSeleccionado, handleRecargar }) => {
   
   const [nuevoCapitulo, setNuevoCapitulo] = useState({
     order: "",

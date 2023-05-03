@@ -1,42 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
 import {SearchIcon } from "../../../../../assets/svgs/NormalSvgs";
 import { NameTable } from "../../../../../components/Tables/TableComponents";
 import editIcon from "../../../../../assets/icons/editIcon.png";
 import deleteIcon from "../../../../../assets/icons/deleteIcon.png";
 import Swal from "sweetalert2";
-import { eliminarLocal } from "../../../../../helpers/ApiConfiguracion";
+import { FilterIcon, FilterIcon2 } from "../../../../../assets/svgs/ActiveSvgs";
+import HoverButton from "../../../../../components/Buttons/AboutButton";
+import { UserContext } from "../../../../../context/ContextLms";
+import { eliminarCapitulo } from "../../../../../helpers/ApiConfiguracion";
+import { Toast } from "../../../../../components/Alertas/SweetAlerts";
 
-export const ColumnsLocal = ({handleOpenModal, setDataLocal, recargarTabla, setRecargarTabla}) => {
-  const columnsLocal = [
+export const ColumnsSemanas = ({handleRecargar,  handleOpenModal, setCapituloSeleccionado, token}) => {
+  const columnsSemanas = [
       {
         name: <NameTable name="Orden" />,
         cell: (row, index) => (
-          <p className="mt-[0.10rem] font-semibold">{index + 1}</p>
+          <p className="mt-[0.10rem] font-semibold">{row.order}</p>
         ),
         width: "5rem",
         sortable: true,
         center: true,
       },
       {
-        name: <NameTable name="Nombre del Local" />,
-        cell: (row) => (
-          <p className="mt-[0.10rem] font-semibold">{row.name}</p>
-        ),
-        width: "12rem",
-        sortable: true,
-        center: true,
-      },
-      {
-        name: <NameTable name="Email" />,
-        cell: (row) => row.email,
+        name: <NameTable name="Curso" />,
+        cell: (row) => row.name,
         width: "15rem",
         sortable: true,
         center: true,
       },
       {
-        name: <NameTable name="Página Web" />,
+        name: <NameTable name="Capitulos" />,
         cell: (row) => {
-          return <p className="mt-[0.10rem] font-semibold">{row.website}</p>;
+          return <p className="mt-[0.10rem] font-semibold">{row.cantidadCapitulos}</p>;
         },
         sortable: true,
         center: true,
@@ -46,7 +41,7 @@ export const ColumnsLocal = ({handleOpenModal, setDataLocal, recargarTabla, setR
         cell: (row) => (
           <div className="flex gap-2">
               <div
-              onClick={()=>{handleOpenModal(), setDataLocal(row)}}
+              onClick={() => {handleOpenModal(), setCapituloSeleccionado(row)}}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-6 h-6 object-cover">
@@ -54,7 +49,7 @@ export const ColumnsLocal = ({handleOpenModal, setDataLocal, recargarTabla, setR
                   </div>
               </div>
               <div
-              onClick={() => deleteAlert(row.id, setRecargarTabla, recargarTabla )}
+              onClick={() => deleteAlert(row.id, token, handleRecargar)}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-[25px] h-[25px] object-cover">
@@ -70,21 +65,21 @@ export const ColumnsLocal = ({handleOpenModal, setDataLocal, recargarTabla, setR
       },
   ];
   return {
-    columnsLocal
+    columnsSemanas
   }
 }
-
-export const ContentTableLocal = ({handleOpenModal, dataLocales}) => {
+export const ContentTableSemanas = ({handleOpenModal, dataApi,setCursoActual, setNombreCurso, setCambiarTabla, cambiarTabla}) => {
   return (
     <div className="flex flex-col gap-y-2 mb-4 p-0">
       <section className="flex flex-col min-[1235px]:flex-row min-[1235px]:justify-around items-center gap-y-4">
         {/* TOTAL DE VIDEOS */}
         <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#0052CA] text-white">
-          <p>Total de locales</p>
+          <p>Total de semanas</p>
           <span className="text-white/80">
-            {"("}{dataLocales.length}{")"}
+            {"("}{dataApi?.length}{")"}
           </span>
         </div>
+        
         {/* INPUT BUSCAR */}
         <form className="w-full min-[790px]:w-auto">
           <div className="relative">
@@ -104,8 +99,17 @@ export const ContentTableLocal = ({handleOpenModal, dataLocales}) => {
         </form>
         {/* BOTONES PARA FILTRAR */}
         <div className="flex gap-4">
+          {/* <span onClick={() => {setCambiarTabla(true)}}>
+            <HoverButton colorChange={cambiarTabla ? "bg-[#0052CA]" : "bg-white"} text={<FilterIcon isActive={cambiarTabla} colorChange={"#fff"} color="#292D32" />} dialog={"Capitulos"}/>
+          </span>
+          <span onClick={() => {setCambiarTabla(false)}}>
+            <HoverButton colorChange={cambiarTabla ? "bg-white" : "bg-[#0052CA]"} text={<FilterIcon2 isActive={cambiarTabla} colorChange={"#292D32"} color="#fff" />} dialog={"Temas"}/>
+          </span> */}
           <button onClick={handleOpenModal} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
-            <span className="truncate">+ Nuevo local</span>
+            <span className="truncate">+ Agregar curso </span>
+          </button>
+          <button onClick={() => {setCursoActual("Cursos"), setNombreCurso(null)}} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
+            <span className="truncate">Retroceder</span>
           </button>
         </div>
       </section>
@@ -113,9 +117,10 @@ export const ContentTableLocal = ({handleOpenModal, dataLocales}) => {
   );
 };
 
-const deleteAlert = (id, setRecargarTabla, recargarTabla) => {
+
+const deleteAlert = (id, token, handleRecargar ) => {
   Swal.fire({
-    title: '¿Estas seguro de eliminar este local?',
+    title: `¿Estas seguro de eliminar este capítulo?`,
     text: "No podras revertir esta accion!",
     icon: 'warning',
     showCancelButton: true,
@@ -125,21 +130,19 @@ const deleteAlert = (id, setRecargarTabla, recargarTabla) => {
     cancelButtonText: 'Cancelar'
   }).then((result) => {
     if (result.isConfirmed) {
-      const token = localStorage.getItem("token");
-      eliminarLocal(token, id).then((res) => {
-        if (res.statusCode == 200) {
+      eliminarCapitulo(token, id).then((res) => {
+        if (res.statusCode === 200) {
           Swal.fire(
             'Eliminado!',
-            'El local ha sido eliminado.',
+            `El capítulo ha sido eliminado.`,
             'success'
           )
-          setRecargarTabla(!recargarTabla)
+          handleRecargar()
         } else {
-          Swal.fire(
-            'Error!',
-            'No se pudo eliminar el local.',
-            'error'
-          )
+          Toast.fire({
+            icon: "error",
+            title: "Ocurrió un error al eliminar el capítulo",
+          });
         }
       })
     }

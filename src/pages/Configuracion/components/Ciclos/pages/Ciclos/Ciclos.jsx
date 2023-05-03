@@ -1,24 +1,32 @@
 import React, { useContext, useState } from "react";
 import { useEffect } from "react";
 import { Toast } from "../../../../../../components/Alertas/SweetAlerts";
-import { InputBasic } from "../../../../../../components/Inputs/InputBasic";
 import Modal from "../../../../../../components/Modal/Modal";
 import TableBasic from "../../../../../../components/Tables/TableBasic";
 import { UserContext } from "../../../../../../context/ContextLms";
-import { TraeDataCursos, CrearCurso, cambiarCurso } from "../../../../../../helpers/ApiConfiguracion";
-import {ContentTableCursos, ColumnsCursos } from "../../tables/TableCursos";
+import { TraeDataCiclos, cambiarCiclo, crearCiclo } from "../../../../../../helpers/ApiConfiguracion/ApiCiclos";
+import { TraeDataLearning } from "../../../../../../helpers/ApiConfiguracion/ApiLearningPath";
+import ModalCiclo from "../../modalContent/ModalCiclo";
+import {ContentTableCiclos, ColumnsCiclos } from "../../tables/TableCiclos";
 
-const Cursos = ({setCursoActual, setNombreCurso, setCursoSeleccionado}) => {
+const Ciclos = ({setCursoActual, setNombreCurso, setCursoSeleccionado}) => {
   const {token} = useContext(UserContext)
   const [isOpen, setIsOpen] = useState(false);
-  const [dataCursos, setDataCursos] = useState([]);
-  const [dataCurso, setDataCurso] = useState({});
+  const [dataCiclos, setDataCiclos] = useState([]);
+  const [dataLearning, setDataLearning] = useState([]);
+  const [dataSeleccionada, setDataSeleccionada] = useState({});
   const [recargarTabla, setRecargarTabla] = useState(false);
 
   useEffect(() => {
-    TraeDataCursos(token).then((res) => {
-      setDataCursos(res.data)
-    })
+    TraeDataCiclos(token).then((res) => {
+      setDataCiclos(res.data);
+    });
+  }, [recargarTabla])
+  
+  useEffect(() => {
+    TraeDataLearning(token).then((res) => {
+      setDataLearning(res.data);
+    });
   }, [recargarTabla])
 
   const handleOpenModal = () => {
@@ -26,15 +34,15 @@ const Cursos = ({setCursoActual, setNombreCurso, setCursoSeleccionado}) => {
   };
 
   const handleCloseModal = () => {
-    setDataCurso({});
+    setDataSeleccionada({});
     setIsOpen(false);
   };
 
-  const {columnsCursos} = ColumnsCursos({
+  const {columnsCiclos} = ColumnsCiclos({
     setCursoActual: setCursoActual,
     setNombreCurso: setNombreCurso,
     handleOpenModal: handleOpenModal,
-    setDataCurso: setDataCurso,
+    setDataSeleccionada: setDataSeleccionada,
     recargarTabla: recargarTabla,
     setRecargarTabla: setRecargarTabla,
     token: token,
@@ -43,11 +51,11 @@ const Cursos = ({setCursoActual, setNombreCurso, setCursoSeleccionado}) => {
 
   return (
     <section className="p-8 pt-0">
-      <ContentTableCursos handleOpenModal={handleOpenModal} dataCursos={dataCursos} />
+      <ContentTableCiclos handleOpenModal={handleOpenModal} dataCiclos={dataCiclos} />
       <div className="max-w-[1200px] mx-auto flex flex-col gap-y-12">
         <TableBasic
-          columns={columnsCursos}
-          data={dataCursos}
+          columns={columnsCiclos}
+          data={dataCiclos}
           highlightOnHover
           striped
           onRowClicked={(row) => console.log(row)}
@@ -55,30 +63,35 @@ const Cursos = ({setCursoActual, setNombreCurso, setCursoSeleccionado}) => {
         />
       </div>
       <Modal isOpen={isOpen} onClose={handleCloseModal}>
-        <SeccionModal token={token} dataCurso={dataCurso} setRecargarTabla={setRecargarTabla} recargarTabla={recargarTabla} setIsOpen={setIsOpen} />
+        <SeccionModal dataLearning={dataLearning} token={token} dataSeleccionada={dataSeleccionada} setRecargarTabla={setRecargarTabla} recargarTabla={recargarTabla} setIsOpen={setIsOpen} />
       </Modal>
     </section>
   );
 };
 
-export default Cursos;
+export default Ciclos;
 
-const SeccionModal = ({dataCurso, token, setRecargarTabla, recargarTabla, setIsOpen}) => {
-  const [nuevoCurso, setNuevoCurso] = useState({ 
-    name: dataCurso.name || ""
+const SeccionModal = ({dataSeleccionada, token, setRecargarTabla, recargarTabla, setIsOpen, dataLearning}) => {
+  const [formData, setFormData] = useState({ 
+    costo: dataSeleccionada?.costo|| "",
+    start: dataSeleccionada?.start || "",
+    learningPath: dataSeleccionada?.learningPath || "",
   });
 
   const handleChange = (e) => {
-    setNuevoCurso({
-      ...nuevoCurso,
-      [e.target.name]: e.target.value,
+    const value =
+      e.target.name != "start" ? Number(e.target.value) : e.target.value;
+    setFormData({
+      ...formData,
+      [e.target.name]: value,
     });
   };
 
-  const CrearNuevoCurso = (e) => {
+  const enviarDatos = (e) => {
     e.preventDefault();
-    if(Object.values(dataCurso).length > 0){
-      cambiarCurso(token, nuevoCurso, dataCurso.id).then((res) => {
+    console.log(formData)
+    if(Object.values(dataSeleccionada).length > 0){
+      cambiarCiclo(token, formData, dataSeleccionada.id).then((res) => {
         if(res.statusCode == 200) {
           Toast.fire({
             icon: 'success',
@@ -94,11 +107,12 @@ const SeccionModal = ({dataCurso, token, setRecargarTabla, recargarTabla, setIsO
         }
       })
     } else {
-      CrearCurso(token, nuevoCurso).then((res) => {
+      crearCiclo(token, formData).then((res) => {
+        console.log(res)
         if(res.statusCode == 200) {
           Toast.fire({
             icon: 'success',
-            title: 'Curso registrado exitósamente!'
+            title: 'Ruta registrada exitósamente!'
           })
           setRecargarTabla(!recargarTabla)
           setIsOpen(false)
@@ -113,27 +127,6 @@ const SeccionModal = ({dataCurso, token, setRecargarTabla, recargarTabla, setIsO
   };
 
   return (
-    <>
-      <h1 className="font-medium">Agregar nuevo curso</h1>
-        <div className="p-8 pt-6 pb-0">
-          <form
-            className="flex flex-col items-center xl:items-end gap-2"
-            onSubmit={CrearNuevoCurso}
-          >
-            <InputBasic
-              pHolder={"Algebra"}
-              data={nuevoCurso.name}
-              labelName={"Nombre del Curso"}
-              onChange={handleChange}
-              name={"name"}
-            />
-            <button
-              className={`bg-green-500 hover:bg-green-700 cursor-pointer text-white py-2 px-2 rounded xl:relative xl:left-10 xl:top-2`}
-            >
-              Agregar
-            </button>
-          </form>
-        </div>
-    </>
+    <ModalCiclo dataLearning={dataLearning} handleChange={handleChange} enviarDatos={enviarDatos} formData={formData} />
   )
 }

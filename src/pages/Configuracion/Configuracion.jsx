@@ -12,7 +12,9 @@ import Empresa from "./components/Empresa/Empresa";
 import Local from "./components/Local/Local";
 import Salones from "./components/Salones/Salones";
 import CapitulosYTemas from "./components/Cursos/pages/CapitulosYTemas";
-import Ciclos from "./components/Ciclos/Ciclos";
+import LearningPath from "./components/LearningPath/pages/LearningPath/LearningPath";
+import SemanasPage from "./components/LearningPath/pages/SemanasPage";
+import Ciclos from "./components/Ciclos/pages/Ciclos/Ciclos";
 
 export default function Configuracion() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -127,6 +129,52 @@ const validarUbicacion = () => {
       ),
     },
   };
+
+  const rutaComponent = {
+    Cursos: {
+      title: "Learning Path",
+      content: (
+        <LearningPath
+          setCursoActual={setCursoActual}
+          setNombreCurso={setNombreCurso}
+          setCursoSeleccionado={setCursoSeleccionado}
+        />
+      ),
+    },
+    Capitulos: {
+      title: "Areas",
+      content: (
+        <SemanasPage
+          setCursoActual={setCursoActual}
+          setNombreCurso={setNombreCurso}
+          cursoSeleccionado={cursoSeleccionado}
+        />
+      ),
+    },
+  };
+
+  const cicloComponent = {
+    Cursos: {
+      title: "Ciclos",
+      content: (
+        <Ciclos
+          setCursoActual={setCursoActual}
+          setNombreCurso={setNombreCurso}
+          setCursoSeleccionado={setCursoSeleccionado}
+        />
+      ),
+    },
+    Capitulos: {
+      title: "Salones",
+      content: (
+        <SemanasPage
+          setCursoActual={setCursoActual}
+          setNombreCurso={setNombreCurso}
+          cursoSeleccionado={cursoSeleccionado}
+        />
+      ),
+    },
+  }
   
   const renderTab = {
     Empresa: {
@@ -147,11 +195,11 @@ const validarUbicacion = () => {
     },
     "Ciclos": {
       title: "Ciclos",
-      content: <Ciclos />,
+      content: cicloComponent[cursoActual]?.content,
     },
     "Learning Path": {
       title: "Learning Path",
-      content: <></>,
+      content: rutaComponent[cursoActual]?.content,
     },
   };
 

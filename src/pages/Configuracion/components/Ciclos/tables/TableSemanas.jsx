@@ -10,8 +10,8 @@ import { UserContext } from "../../../../../context/ContextLms";
 import { eliminarCapitulo } from "../../../../../helpers/ApiConfiguracion";
 import { Toast } from "../../../../../components/Alertas/SweetAlerts";
 
-export const ColumnsCapitulos = ({handleRecargar,  handleOpenModal, setCapituloSeleccionado, token}) => {
-  const columnsCapitulos = [
+export const ColumnsSemanas = ({handleRecargar,  handleOpenModal, setCapituloSeleccionado, token}) => {
+  const columnsSemanas = [
       {
         name: <NameTable name="Orden" />,
         cell: (row, index) => (
@@ -65,16 +65,16 @@ export const ColumnsCapitulos = ({handleRecargar,  handleOpenModal, setCapituloS
       },
   ];
   return {
-    columnsCapitulos
+    columnsSemanas
   }
 }
-export const ContentTableCapitulos = ({handleOpenModal, dataApi,setCursoActual, setNombreCurso, setCambiarTabla, cambiarTabla}) => {
+export const ContentTableSemanas = ({handleOpenModal, dataApi,setCursoActual, setNombreCurso, setCambiarTabla, cambiarTabla}) => {
   return (
     <div className="flex flex-col gap-y-2 mb-4 p-0">
       <section className="flex flex-col min-[1235px]:flex-row min-[1235px]:justify-around items-center gap-y-4">
         {/* TOTAL DE VIDEOS */}
         <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#0052CA] text-white">
-          <p>Total de {cambiarTabla ? "capítulos" : "temas"}</p>
+          <p>Total de semanas</p>
           <span className="text-white/80">
             {"("}{dataApi?.length}{")"}
           </span>
@@ -99,14 +99,14 @@ export const ContentTableCapitulos = ({handleOpenModal, dataApi,setCursoActual, 
         </form>
         {/* BOTONES PARA FILTRAR */}
         <div className="flex gap-4">
-          <span onClick={() => {setCambiarTabla(true)}}>
+          {/* <span onClick={() => {setCambiarTabla(true)}}>
             <HoverButton colorChange={cambiarTabla ? "bg-[#0052CA]" : "bg-white"} text={<FilterIcon isActive={cambiarTabla} colorChange={"#fff"} color="#292D32" />} dialog={"Capitulos"}/>
           </span>
           <span onClick={() => {setCambiarTabla(false)}}>
             <HoverButton colorChange={cambiarTabla ? "bg-white" : "bg-[#0052CA]"} text={<FilterIcon2 isActive={cambiarTabla} colorChange={"#292D32"} color="#fff" />} dialog={"Temas"}/>
-          </span>
+          </span> */}
           <button onClick={handleOpenModal} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
-            <span className="truncate">+ Nuevo {cambiarTabla ? "capítulo" : "tema"}</span>
+            <span className="truncate">+ Agregar curso </span>
           </button>
           <button onClick={() => {setCursoActual("Cursos"), setNombreCurso(null)}} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
             <span className="truncate">Retroceder</span>

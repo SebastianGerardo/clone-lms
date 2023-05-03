@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
 import { useEffect } from "react";
-import { TraeDataCurso } from "../../../../../helpers/ApiConfiguracion";
-import {ContentTableCapitulos} from "../tables/TableCapitulos";
+import {ContentTableSemanas} from "../tables/TableSemanas";
 import { Ripples } from "@uiball/loaders";
 import { AnimatePresence, motion } from "framer-motion";
 import { UserContext } from "../../../../../context/ContextLms";
-import Temas from "./Temas/Temas";
-import Capitulos from "./Capitulos/Capitulos";
+import Semanas from "./Semanas/Semanas";
+import { TraeDataSemanas } from "../../../../../helpers/ApiConfiguracion/ApiSemanas";
+import { TraeLearning } from "../../../../../helpers/ApiConfiguracion/ApiLearningPath";
 
-const CapitulosYTemas = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
+const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
   const {token} = useContext(UserContext)
   const [isOpen, setIsOpen] = useState(false);
   const [cambiarTabla, setCambiarTabla] = useState(true); //Si es true, trae capitulos, si es false trae temas
@@ -23,11 +23,12 @@ const CapitulosYTemas = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) 
     setRecargarTabla(!recargarTabla);
   }
 
+  console.log(cursoSeleccionado)
+
   useEffect(() => {
-    TraeDataCurso(token, cursoSeleccionado).then((res) => {
-      setDataApi(res?.data?.chapters)
-      const issuesData = res?.data?.chapters?.map((item) => item.issues).filter((issues) => issues && issues.length > 0).flat();
-      setTemasFiltrados(issuesData)
+    TraeLearning(token, cursoSeleccionado).then((res) => {
+      // setDataApi(res?.data?.chapters)
+      console.log(res)
     })
   }, [recargarTabla])
 
@@ -75,7 +76,7 @@ dataApi:dataApi,
   return (
     <div className="max-w-[1200px] mx-auto flex flex-col gap-y-12">
         <section className="p-8 pt-0">
-          <ContentTableCapitulos
+          <ContentTableSemanas
             setCursoActual={setCursoActual}
             setNombreCurso={setNombreCurso}
             handleOpenModal={handleOpenModal}
@@ -88,17 +89,6 @@ dataApi:dataApi,
           <div className="flex justify-center items-center h-[20rem]">
             <Ripples color="#2563EB" />
           </div>
-        ) : cambiarTabla ? (
-          <AnimatePresence>
-            <motion.span
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            >
-                <Capitulos {...propsCapitulos} {...propsComunes}  />
-            </motion.span>
-          </AnimatePresence>
         ) : (
           <AnimatePresence>
             <motion.span
@@ -107,13 +97,13 @@ dataApi:dataApi,
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
             >
-              <Temas {...propsTema} {...propsComunes} />
+                <Semanas {...propsCapitulos} {...propsComunes}  />
             </motion.span>
           </AnimatePresence>
-        )}
+        )} 
         </section>
       </div>
   );
 };
 
-export default CapitulosYTemas;
+export default SemanasPage;

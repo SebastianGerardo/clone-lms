@@ -5,10 +5,10 @@ import editIcon from "../../../../../assets/icons/editIcon.png";
 import deleteIcon from "../../../../../assets/icons/deleteIcon.png";
 import verMas from "../../../../../assets/icons/verMas.png";
 import Swal from "sweetalert2";
-import { eliminarCurso } from "../../../../../helpers/ApiConfiguracion";
+import { eliminarLearning } from "../../../../../helpers/ApiConfiguracion/ApiLearningPath";
 
-export const ColumnsCursos = ({setCursoActual, setNombreCurso, recargarTabla, setRecargarTabla, token, handleOpenModal, setDataCurso, setCursoSeleccionado}) => {
-  const columnsCursos = [
+export const ColumnsRutas = ({setCursoActual, setNombreCurso, recargarTabla, setRecargarTabla, token, handleOpenModal, setDataSeleccionada, setCursoSeleccionado}) => {
+  const columnsRutas = [
       {
         name: <NameTable name="Codigo" />,
         cell: (row, index) => (
@@ -38,7 +38,7 @@ export const ColumnsCursos = ({setCursoActual, setNombreCurso, recargarTabla, se
         cell: (row) => (
           <div className="flex gap-2">
               <div
-              onClick={()=>{handleOpenModal(), setDataCurso(row)}}
+              onClick={()=>{handleOpenModal(), setDataSeleccionada(row)}}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-6 h-6 object-cover">
@@ -70,11 +70,11 @@ export const ColumnsCursos = ({setCursoActual, setNombreCurso, recargarTabla, se
       },
   ];
   return {
-    columnsCursos
+    columnsRutas
   }
 }
 
-export const ContentTableCursos = ({handleOpenModal, dataCursos}) => {
+export const ContentTableRutas = ({handleOpenModal, dataLearning}) => {
   return (
     <div className="flex flex-col gap-y-2 mb-4 p-0">
       {/* <h1 className="font-bold text-2xl text-center min-[1235px]:text-start">
@@ -83,9 +83,9 @@ export const ContentTableCursos = ({handleOpenModal, dataCursos}) => {
       <section className="flex flex-col min-[1235px]:flex-row min-[1235px]:justify-around items-center gap-y-4">
         {/* TOTAL DE VIDEOS */}
         <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#0052CA] text-white">
-          <p>Total de cursos</p>
+          <p>Rutas de aprendizaje</p>
           <span className="text-white/80">
-            {"("}{dataCursos.length}{")"}
+            {"("}{dataLearning?.length}{")"}
           </span>
         </div>
         {/* INPUT BUSCAR */}
@@ -114,7 +114,7 @@ export const ContentTableCursos = ({handleOpenModal, dataCursos}) => {
             <FilterIcon2 color="#292D32" />
           </button> */}
           <button onClick={handleOpenModal} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
-            <span className="truncate">+ Nuevo curso</span>
+            <span className="truncate">+ Nueva ruta</span>
           </button>
         </div>
       </section>
@@ -124,7 +124,7 @@ export const ContentTableCursos = ({handleOpenModal, dataCursos}) => {
 
 const deleteAlert = (id, recargarTabla, setRecargarTabla, token) => {
   Swal.fire({
-    title: '¿Estas seguro de eliminar este curso?',
+    title: '¿Estas seguro de eliminar esta ruta?',
     text: "No podras revertir esta accion!",
     icon: 'warning',
     showCancelButton: true,
@@ -134,18 +134,18 @@ const deleteAlert = (id, recargarTabla, setRecargarTabla, token) => {
     cancelButtonText: 'Cancelar'
   }).then((result) => {
     if (result.isConfirmed) {
-      eliminarCurso(token, id).then((res) => {
+      eliminarLearning(token, id).then((res) => {
         if (res.statusCode == 200) {
           Swal.fire(
-            'Eliminado!',
-            'El curso ha sido eliminado.',
+            'Eliminada!',
+            'La ruta ha sido eliminada.',
             'success'
           )
           setRecargarTabla(!recargarTabla)
         } else {
           Swal.fire(
             'Error!',
-            'No se pudo eliminar el curso.',
+            'No se pudo eliminar la ruta.',
             'error'
           )
         }
