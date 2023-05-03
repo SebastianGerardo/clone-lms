@@ -85,7 +85,7 @@ export const ContentTableCursos = ({handleOpenModal, dataCursos}) => {
         <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#0052CA] text-white">
           <p>Total de cursos</p>
           <span className="text-white/80">
-            {"("}{dataCursos.length}{")"}
+            {"("}{dataCursos?.length}{")"}
           </span>
         </div>
         {/* INPUT BUSCAR */}

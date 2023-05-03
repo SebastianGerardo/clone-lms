@@ -6,7 +6,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { UserContext } from "../../../../../context/ContextLms";
 import Semanas from "./Semanas/Semanas";
 import { TraeDataSemanas } from "../../../../../helpers/ApiConfiguracion/ApiSemanas";
-import { TraeLearning } from "../../../../../helpers/ApiConfiguracion/ApiLearningPath";
+import { TraeDataLearning } from "../../../../../helpers/ApiConfiguracion/ApiLearningPath";
+import { TraeDataCursos } from "../../../../../helpers/ApiConfiguracion/ApiCursos";
 
 const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
   const {token} = useContext(UserContext)
@@ -15,6 +16,8 @@ const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [recargarTabla, setRecargarTabla] = useState(false);
   const [dataApi, setDataApi] = useState([]);
+  const [dataSemanas, setDataSemanas] = useState([]);
+  const [dataCursos, setDataCursos] = useState([]);
   const [capituloSeleccionado, setCapituloSeleccionado] = useState({});
   const [temaSeleccionado, setTemaSeleccionado] = useState({});
   const [temasFiltrados, setTemasFiltrados] = useState([]); //Filtrar temas por capitulo
@@ -23,12 +26,21 @@ const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
     setRecargarTabla(!recargarTabla);
   }
 
-  console.log(cursoSeleccionado)
+  useEffect(() => {
+    TraeDataLearning(token).then((res) => {
+      setDataApi(res?.data)
+    })
+  }, [recargarTabla])
 
   useEffect(() => {
-    TraeLearning(token, cursoSeleccionado).then((res) => {
-      // setDataApi(res?.data?.chapters)
-      console.log(res)
+    TraeDataSemanas(token).then((res) => {
+      setDataSemanas(res?.data)
+    })
+  }, [recargarTabla])
+  
+  useEffect(() => {
+    TraeDataCursos(token).then((res) => {
+      setDataCursos(res?.data)
     })
   }, [recargarTabla])
 
@@ -55,7 +67,6 @@ const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
     temaSeleccionado:temaSeleccionado,
     recargarTabla:recargarTabla,
     temasFiltrados:temasFiltrados,
-dataApi:dataApi,
   }
 
   const propsComunes = {
@@ -70,7 +81,10 @@ dataApi:dataApi,
   }
 
   const propsCapitulos = {
-    setCapituloSeleccionado:setCapituloSeleccionado
+    dataSemanas:dataSemanas,
+    dataCursos:dataCursos,
+    setCapituloSeleccionado:setCapituloSeleccionado,
+    dataApi:dataApi,
   }
 
   return (
@@ -80,7 +94,7 @@ dataApi:dataApi,
             setCursoActual={setCursoActual}
             setNombreCurso={setNombreCurso}
             handleOpenModal={handleOpenModal}
-            dataApi={dataApi}
+            dataSemanas={dataSemanas}
             setIsLoaded={setIsLoaded}
             setCambiarTabla={setCambiarTabla}
             cambiarTabla={cambiarTabla}

@@ -15,6 +15,7 @@ import CapitulosYTemas from "./components/Cursos/pages/CapitulosYTemas";
 import LearningPath from "./components/LearningPath/pages/LearningPath/LearningPath";
 import SemanasPage from "./components/LearningPath/pages/SemanasPage";
 import Ciclos from "./components/Ciclos/pages/Ciclos/Ciclos";
+import CiclosPage from "./components/Ciclos/pages/CiclosPage";
 
 export default function Configuracion() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -167,7 +168,7 @@ const validarUbicacion = () => {
     Capitulos: {
       title: "Salones",
       content: (
-        <SemanasPage
+        <CiclosPage
           setCursoActual={setCursoActual}
           setNombreCurso={setNombreCurso}
           cursoSeleccionado={cursoSeleccionado}
@@ -175,7 +176,7 @@ const validarUbicacion = () => {
       ),
     },
   }
-  
+
   const renderTab = {
     Empresa: {
       title: "Empresa",

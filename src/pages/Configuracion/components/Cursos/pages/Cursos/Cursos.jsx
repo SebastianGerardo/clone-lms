@@ -5,7 +5,7 @@ import { InputBasic } from "../../../../../../components/Inputs/InputBasic";
 import Modal from "../../../../../../components/Modal/Modal";
 import TableBasic from "../../../../../../components/Tables/TableBasic";
 import { UserContext } from "../../../../../../context/ContextLms";
-import { TraeDataCursos, CrearCurso, cambiarCurso } from "../../../../../../helpers/ApiConfiguracion";
+import { CrearCurso, cambiarCurso, TraeDataCursos } from "../../../../../../helpers/ApiConfiguracion";
 import {ContentTableCursos, ColumnsCursos } from "../../tables/TableCursos";
 
 const Cursos = ({setCursoActual, setNombreCurso, setCursoSeleccionado}) => {

@@ -1,13 +1,11 @@
 import React, { useContext, useState } from "react";
 import { useEffect } from "react";
-import {ContentTableSemanas} from "../tables/TableSemanas";
+import {ContentTableSalones} from "../tables/TableSalones";
 import { Ripples } from "@uiball/loaders";
 import { AnimatePresence, motion } from "framer-motion";
 import { UserContext } from "../../../../../context/ContextLms";
-import Semanas from "./Semanas/Semanas";
-import { TraeDataSemanas } from "../../../../../helpers/ApiConfiguracion/ApiSemanas";
-import { TraeLearning } from "../../../../../helpers/ApiConfiguracion/ApiLearningPath";
-import Ciclos from "./Ciclos/Ciclos";
+import Salones from "./Salones/Salones";
+import { TraeDataSalones } from "../../../../../helpers/ApiConfiguracion/ApiSalones";
 
 const CiclosPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
   const {token} = useContext(UserContext)
@@ -15,7 +13,7 @@ const CiclosPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
   const [cambiarTabla, setCambiarTabla] = useState(true); //Si es true, trae capitulos, si es false trae temas
   const [isLoaded, setIsLoaded] = useState(false);
   const [recargarTabla, setRecargarTabla] = useState(false);
-  const [dataApi, setDataApi] = useState([]);
+  const [dataSalones, setDataSalones] = useState([]);
   const [capituloSeleccionado, setCapituloSeleccionado] = useState({});
   const [temaSeleccionado, setTemaSeleccionado] = useState({});
   const [temasFiltrados, setTemasFiltrados] = useState([]); //Filtrar temas por capitulo
@@ -24,14 +22,14 @@ const CiclosPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
     setRecargarTabla(!recargarTabla);
   }
 
-  console.log(cursoSeleccionado)
-
-  // useEffect(() => {
-  //   TraeLearning(token, cursoSeleccionado).then((res) => {
-  //     // setDataApi(res?.data?.chapters)
-  //     console.log(res)
-  //   })
-  // }, [recargarTabla])
+  useEffect(() => {
+    console.log("recargando tabla")
+    TraeDataSalones(token).then((res) => {
+      console.log("recargando tabla")
+      setDataSalones(res?.data)
+      console.log(res)
+    })
+  }, [recargarTabla])
 
   useEffect(() => {
     setIsLoaded(false);
@@ -56,14 +54,13 @@ const CiclosPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
     temaSeleccionado:temaSeleccionado,
     recargarTabla:recargarTabla,
     temasFiltrados:temasFiltrados,
-dataApi:dataApi,
   }
 
   const propsComunes = {
     handleOpenModal: handleOpenModal,
     handleCloseModal: handleCloseModal,
     cursoSeleccionado:cursoSeleccionado,
-    dataApi:dataApi, 
+    dataSalones:dataSalones, 
     token:token,
     isOpen:isOpen,
     handleRecargar:handleRecargar,
@@ -77,11 +74,11 @@ dataApi:dataApi,
   return (
     <div className="max-w-[1200px] mx-auto flex flex-col gap-y-12">
         <section className="p-8 pt-0">
-          <ContentTableSemanas
+          <ContentTableSalones
             setCursoActual={setCursoActual}
             setNombreCurso={setNombreCurso}
             handleOpenModal={handleOpenModal}
-            dataApi={dataApi}
+            cyclesClassrooms={cursoSeleccionado?.cyclesClassrooms}
             setIsLoaded={setIsLoaded}
             setCambiarTabla={setCambiarTabla}
             cambiarTabla={cambiarTabla}
@@ -98,7 +95,7 @@ dataApi:dataApi,
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
             >
-                <Ciclos {...propsCapitulos} {...propsComunes}  />
+                <Salones {...propsCapitulos} {...propsComunes}  />
             </motion.span>
           </AnimatePresence>
         ) : (

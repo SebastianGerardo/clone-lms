@@ -1,38 +1,41 @@
-import React, { useContext } from "react";
+import React from "react";
 import {SearchIcon } from "../../../../../assets/svgs/NormalSvgs";
 import { NameTable } from "../../../../../components/Tables/TableComponents";
 import editIcon from "../../../../../assets/icons/editIcon.png";
 import deleteIcon from "../../../../../assets/icons/deleteIcon.png";
 import Swal from "sweetalert2";
-import { FilterIcon, FilterIcon2 } from "../../../../../assets/svgs/ActiveSvgs";
-import HoverButton from "../../../../../components/Buttons/AboutButton";
-import { UserContext } from "../../../../../context/ContextLms";
-import { eliminarCapitulo } from "../../../../../helpers/ApiConfiguracion";
 import { Toast } from "../../../../../components/Alertas/SweetAlerts";
+import { eliminarSemana } from "../../../../../helpers/ApiConfiguracion/ApiSemanas";
 
 export const ColumnsSemanas = ({handleRecargar,  handleOpenModal, setCapituloSeleccionado, token}) => {
   const columnsSemanas = [
       {
         name: <NameTable name="Orden" />,
         cell: (row, index) => (
-          <p className="mt-[0.10rem] font-semibold">{row.order}</p>
+          <p className="mt-[0.10rem] font-semibold">{index + 1}</p>
         ),
-        width: "5rem",
+        width: "8rem",
         sortable: true,
         center: true,
       },
       {
-        name: <NameTable name="Curso" />,
+        name: <NameTable name="Semana" />,
         cell: (row) => row.name,
         width: "15rem",
         sortable: true,
         center: true,
       },
       {
-        name: <NameTable name="Capitulos" />,
-        cell: (row) => {
-          return <p className="mt-[0.10rem] font-semibold">{row.cantidadCapitulos}</p>;
-        },
+        name: <NameTable name="Curso" />,
+        cell: (row) => row?.course,
+        width: "15rem",
+        sortable: true,
+        center: true,
+      },
+      {
+        name: <NameTable name="Learning Path" />,
+        cell: (row) => row?.learningPath,
+        width: "15rem",
         sortable: true,
         center: true,
       },
@@ -68,7 +71,7 @@ export const ColumnsSemanas = ({handleRecargar,  handleOpenModal, setCapituloSel
     columnsSemanas
   }
 }
-export const ContentTableSemanas = ({handleOpenModal, dataApi,setCursoActual, setNombreCurso, setCambiarTabla, cambiarTabla}) => {
+export const ContentTableSemanas = ({handleOpenModal, dataSemanas,setCursoActual, setNombreCurso, setCambiarTabla, cambiarTabla}) => {
   return (
     <div className="flex flex-col gap-y-2 mb-4 p-0">
       <section className="flex flex-col min-[1235px]:flex-row min-[1235px]:justify-around items-center gap-y-4">
@@ -76,7 +79,7 @@ export const ContentTableSemanas = ({handleOpenModal, dataApi,setCursoActual, se
         <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#0052CA] text-white">
           <p>Total de semanas</p>
           <span className="text-white/80">
-            {"("}{dataApi?.length}{")"}
+            {"("}{dataSemanas?.length}{")"}
           </span>
         </div>
         
@@ -120,28 +123,28 @@ export const ContentTableSemanas = ({handleOpenModal, dataApi,setCursoActual, se
 
 const deleteAlert = (id, token, handleRecargar ) => {
   Swal.fire({
-    title: `¿Estas seguro de eliminar este capítulo?`,
-    text: "No podras revertir esta accion!",
+    title: `¿Estas seguro de eliminar esta semana?`,
+    text: "No podrás revertir esta acción!",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: '¡Si, eliminar!',
+    confirmButtonText: '¡Sí, eliminar!',
     cancelButtonText: 'Cancelar'
   }).then((result) => {
     if (result.isConfirmed) {
-      eliminarCapitulo(token, id).then((res) => {
+      eliminarSemana(token, id).then((res) => {
         if (res.statusCode === 200) {
           Swal.fire(
-            'Eliminado!',
-            `El capítulo ha sido eliminado.`,
+            'Eliminada!',
+            `La semana ha sido eliminada.`,
             'success'
           )
           handleRecargar()
         } else {
           Toast.fire({
             icon: "error",
-            title: "Ocurrió un error al eliminar el capítulo",
+            title: "Ocurrió un error al eliminar la semana",
           });
         }
       })

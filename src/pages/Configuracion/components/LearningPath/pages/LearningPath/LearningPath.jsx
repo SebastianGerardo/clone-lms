@@ -18,7 +18,6 @@ const LearningPath = ({setCursoActual, setNombreCurso, setCursoSeleccionado}) =>
 
   useEffect(() => {
     TraeDataLearning(token).then((res) => {
-      console.log(res)
       setDataLearning(res.data)
     })
   }, [recargarTabla])
@@ -121,7 +120,7 @@ const SeccionModal = ({dataSeleccionada, token, setRecargarTabla, recargarTabla,
 
   return (
     <>
-      <h1 className="font-medium">Agregar nueva ruta</h1>
+      <h1 className="font-medium">Información de la ruta</h1>
         <div className="p-8 pt-6 pb-0">
           <form
             className="flex flex-col items-center xl:items-end gap-2"
@@ -142,7 +141,7 @@ const SeccionModal = ({dataSeleccionada, token, setRecargarTabla, recargarTabla,
               name={"duration"}
             />
             <InputBasic
-              pHolder={""}
+              pHolder={"www.google.com"}
               data={nuevoLearning.image}
               labelName={"Imagen"}
               onChange={handleChange}

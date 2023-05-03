@@ -10,7 +10,7 @@ import { eliminarLearning } from "../../../../../helpers/ApiConfiguracion/ApiLea
 export const ColumnsRutas = ({setCursoActual, setNombreCurso, recargarTabla, setRecargarTabla, token, handleOpenModal, setDataSeleccionada, setCursoSeleccionado}) => {
   const columnsRutas = [
       {
-        name: <NameTable name="Codigo" />,
+        name: <NameTable name="Orden" />,
         cell: (row, index) => (
           <p className="mt-[0.10rem] font-semibold">{index + 1}</p>
         ),
@@ -19,16 +19,16 @@ export const ColumnsRutas = ({setCursoActual, setNombreCurso, recargarTabla, set
         center: true,
       },
       {
-        name: <NameTable name="Curso" />,
+        name: <NameTable name="Learning Path" />,
         cell: (row) => row.name,
         width: "15rem",
         sortable: true,
         center: true,
       },
       {
-        name: <NameTable name="Cantidad de capitulos" />,
+        name: <NameTable name="Duracion" />,
         cell: (row) => {
-          return <p className="mt-[0.10rem] font-semibold">{row.cantidadCapitulos}</p>;
+          return <p className="mt-[0.10rem] font-semibold">{row.duration}Hrs</p>;
         },
         sortable: true,
         center: true,

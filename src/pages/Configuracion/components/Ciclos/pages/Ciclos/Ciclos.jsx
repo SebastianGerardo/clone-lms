@@ -75,7 +75,7 @@ const SeccionModal = ({dataSeleccionada, token, setRecargarTabla, recargarTabla,
   const [formData, setFormData] = useState({ 
     costo: dataSeleccionada?.costo|| "",
     start: dataSeleccionada?.start || "",
-    learningPath: dataSeleccionada?.learningPath || "",
+    learningPath: dataSeleccionada?.learningPath?.id || "",
   });
 
   const handleChange = (e) => {
@@ -89,7 +89,6 @@ const SeccionModal = ({dataSeleccionada, token, setRecargarTabla, recargarTabla,
 
   const enviarDatos = (e) => {
     e.preventDefault();
-    console.log(formData)
     if(Object.values(dataSeleccionada).length > 0){
       cambiarCiclo(token, formData, dataSeleccionada.id).then((res) => {
         if(res.statusCode == 200) {

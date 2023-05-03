@@ -1,17 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import {SearchIcon } from "../../../../../assets/svgs/NormalSvgs";
 import { NameTable } from "../../../../../components/Tables/TableComponents";
 import editIcon from "../../../../../assets/icons/editIcon.png";
 import deleteIcon from "../../../../../assets/icons/deleteIcon.png";
 import Swal from "sweetalert2";
-import { FilterIcon, FilterIcon2 } from "../../../../../assets/svgs/ActiveSvgs";
-import HoverButton from "../../../../../components/Buttons/AboutButton";
-import { UserContext } from "../../../../../context/ContextLms";
-import { eliminarCapitulo } from "../../../../../helpers/ApiConfiguracion";
 import { Toast } from "../../../../../components/Alertas/SweetAlerts";
+import { eliminarCicloSalon } from "../../../../../helpers/ApiConfiguracion/ApiCiclosxSalon";
 
-export const ColumnsSemanas = ({handleRecargar,  handleOpenModal, setCapituloSeleccionado, token}) => {
-  const columnsSemanas = [
+export const ColumnsSalones = ({handleRecargar,  handleOpenModal, setCapituloSeleccionado, token}) => {
+  const columnsSalones = [
       {
         name: <NameTable name="Orden" />,
         cell: (row, index) => (
@@ -65,18 +62,18 @@ export const ColumnsSemanas = ({handleRecargar,  handleOpenModal, setCapituloSel
       },
   ];
   return {
-    columnsSemanas
+    columnsSalones
   }
 }
-export const ContentTableSemanas = ({handleOpenModal, dataApi,setCursoActual, setNombreCurso, setCambiarTabla, cambiarTabla}) => {
+export const ContentTableSalones = ({handleOpenModal, cyclesClassrooms,setCursoActual, setNombreCurso, setCambiarTabla, cambiarTabla}) => {
   return (
     <div className="flex flex-col gap-y-2 mb-4 p-0">
       <section className="flex flex-col min-[1235px]:flex-row min-[1235px]:justify-around items-center gap-y-4">
         {/* TOTAL DE VIDEOS */}
         <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#0052CA] text-white">
-          <p>Total de semanas</p>
+          <p>Total de salones</p>
           <span className="text-white/80">
-            {"("}{dataApi?.length}{")"}
+            {"("}{cyclesClassrooms?.length}{")"}
           </span>
         </div>
         
@@ -106,10 +103,10 @@ export const ContentTableSemanas = ({handleOpenModal, dataApi,setCursoActual, se
             <HoverButton colorChange={cambiarTabla ? "bg-white" : "bg-[#0052CA]"} text={<FilterIcon2 isActive={cambiarTabla} colorChange={"#292D32"} color="#fff" />} dialog={"Temas"}/>
           </span> */}
           <button onClick={handleOpenModal} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
-            <span className="truncate">+ Agregar curso </span>
+            <span className="truncate">+ Agregar salón </span>
           </button>
           <button onClick={() => {setCursoActual("Cursos"), setNombreCurso(null)}} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
-            <span className="truncate">Retroceder</span>
+            <span className="truncate">Volver</span>
           </button>
         </div>
       </section>
@@ -120,8 +117,8 @@ export const ContentTableSemanas = ({handleOpenModal, dataApi,setCursoActual, se
 
 const deleteAlert = (id, token, handleRecargar ) => {
   Swal.fire({
-    title: `¿Estas seguro de eliminar este capítulo?`,
-    text: "No podras revertir esta accion!",
+    title: `¿Estás seguro de eliminar este salón?`,
+    text: "No podrás revertir esta acción!",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -130,18 +127,18 @@ const deleteAlert = (id, token, handleRecargar ) => {
     cancelButtonText: 'Cancelar'
   }).then((result) => {
     if (result.isConfirmed) {
-      eliminarCapitulo(token, id).then((res) => {
+      eliminarCicloSalon(token, id).then((res) => {
         if (res.statusCode === 200) {
           Swal.fire(
             'Eliminado!',
-            `El capítulo ha sido eliminado.`,
+            `El salón ha sido eliminado.`,
             'success'
           )
           handleRecargar()
         } else {
           Toast.fire({
             icon: "error",
-            title: "Ocurrió un error al eliminar el capítulo",
+            title: "Ocurrió un error al eliminar el salón",
           });
         }
       })
