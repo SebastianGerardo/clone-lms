@@ -16,6 +16,7 @@ export const validarUbicacion = () => {
     const [nombreCurso, setNombreCurso] = useState(null);
     const [cursoSeleccionado, setCursoSeleccionado] = useState("");
     const [nombreContenido, setNombreContenido] = useState(null);
+    const [dataContenido, setDataContenido] = useState({}); 
 
     const cursoComponent = {
       Cursos: {
@@ -49,6 +50,7 @@ export const validarUbicacion = () => {
             setCursoActual={setCursoActual}
             setNombreCurso={setNombreCurso}
             setCursoSeleccionado={setCursoSeleccionado}
+            setDataContenido={setDataContenido}
           />
         ),
       },
@@ -60,6 +62,7 @@ export const validarUbicacion = () => {
             setNombreCurso={setNombreCurso}
             cursoSeleccionado={cursoSeleccionado}
             setNombreContenido={setNombreContenido}
+            dataContenido={dataContenido}
           />
         ),
       },

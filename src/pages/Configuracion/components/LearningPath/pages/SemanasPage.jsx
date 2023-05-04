@@ -6,11 +6,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { UserContext } from "../../../../../context/ContextLms";
 import Semanas from "./Semanas/Semanas";
 import { TraeDataSemanas } from "../../../../../helpers/ApiConfiguracion/ApiSemanas";
-import { TraeDataLearning } from "../../../../../helpers/ApiConfiguracion/ApiLearningPath";
+import { TraeDataLearning, TraeLearning } from "../../../../../helpers/ApiConfiguracion/ApiLearningPath";
 import { TraeDataCursos } from "../../../../../helpers/ApiConfiguracion/ApiCursos";
 import Cursos from "./Cursos/Cursos";
 
-const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado, setNombreContenido }) => {
+const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado, setNombreContenido, dataContenido }) => {
   const {token} = useContext(UserContext)
   const [isOpen, setIsOpen] = useState(false);
   const [cambiarTabla, setCambiarTabla] = useState(true); //Si es true, trae capitulos, si es false trae temas
@@ -23,6 +23,7 @@ const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado, setNom
   const [temaSeleccionado, setTemaSeleccionado] = useState({});
   const [temasFiltrados, setTemasFiltrados] = useState([]); //Filtrar temas por capitulo
   const [dataSeleccionada, setDataSeleccionada] = useState({}); //Data seleccionada de la tabla
+  const [dataLearning, setDataLearning] = useState([]); //Data de la tabla de capitulos
 
   const handleRecargar = () => {
     setRecargarTabla(!recargarTabla);
@@ -40,6 +41,12 @@ const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado, setNom
     })
   }, [recargarTabla])
   
+  useEffect(() => {
+    TraeLearning(token, dataContenido?.id).then((res) => {
+      setDataLearning(res?.data)
+    })
+  }, [recargarTabla])
+
   useEffect(() => {
     TraeDataCursos(token).then((res) => {
       setDataCursos(res?.data)
@@ -90,6 +97,7 @@ const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado, setNom
     setNombreContenido:setNombreContenido,
     setCambiarTabla:setCambiarTabla,
     setDataSeleccionada:setDataSeleccionada,
+    dataLearning:dataLearning,
   }
 
   return (

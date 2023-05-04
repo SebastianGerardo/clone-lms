@@ -7,7 +7,7 @@ import verMas from "../../../../../assets/icons/verMas.png";
 import Swal from "sweetalert2";
 import { eliminarLearning } from "../../../../../helpers/ApiConfiguracion/ApiLearningPath";
 
-export const ColumnsRutas = ({setCursoActual, setNombreCurso, recargarTabla, setRecargarTabla, token, handleOpenModal, setDataSeleccionada, setCursoSeleccionado}) => {
+export const ColumnsRutas = ({setCursoActual, setNombreCurso, recargarTabla, setRecargarTabla, token, handleOpenModal, setDataSeleccionada, setCursoSeleccionado, setDataContenido}) => {
   const columnsRutas = [
       {
         name: <NameTable name="Orden" />,
@@ -28,7 +28,7 @@ export const ColumnsRutas = ({setCursoActual, setNombreCurso, recargarTabla, set
       {
         name: <NameTable name="Duracion" />,
         cell: (row) => {
-          return <p className="mt-[0.10rem] font-semibold">{row.duration}Smns.</p>;
+          return <p className="mt-[0.10rem] font-semibold">{row.duration} Semanas</p>;
         },
         sortable: true,
         center: true,
@@ -46,7 +46,7 @@ export const ColumnsRutas = ({setCursoActual, setNombreCurso, recargarTabla, set
                   </div>
               </div>
               <div
-              onClick={()=>{setCursoActual("Capitulos"), setNombreCurso(row.name), setCursoSeleccionado(row.id)}}
+              onClick={()=>{setCursoActual("Capitulos"), setNombreCurso(row.name), setCursoSeleccionado(row.id), setDataContenido(row)}}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-6 h-6 object-cover">

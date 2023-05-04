@@ -9,7 +9,7 @@ import { UserContext } from "../../../../../../context/ContextLms";
 import { cambiarLearning, crearLearning, TraeDataLearning } from "../../../../../../helpers/ApiConfiguracion/ApiLearningPath";
 import {ContentTableRutas, ColumnsRutas } from "../../tables/TableLearningPath";
 
-const LearningPath = ({setCursoActual, setNombreCurso, setCursoSeleccionado}) => {
+const LearningPath = ({setCursoActual, setNombreCurso, setCursoSeleccionado, setDataContenido}) => {
   const {token} = useContext(UserContext)
   const [isOpen, setIsOpen] = useState(false);
   const [dataLearning, setDataLearning] = useState([]);
@@ -18,6 +18,7 @@ const LearningPath = ({setCursoActual, setNombreCurso, setCursoSeleccionado}) =>
 
   useEffect(() => {
     TraeDataLearning(token).then((res) => {
+      console.log(res.data)
       setDataLearning(res.data)
     })
   }, [recargarTabla])
@@ -39,7 +40,8 @@ const LearningPath = ({setCursoActual, setNombreCurso, setCursoSeleccionado}) =>
     recargarTabla: recargarTabla,
     setRecargarTabla: setRecargarTabla,
     token: token,
-    setCursoSeleccionado: setCursoSeleccionado
+    setCursoSeleccionado: setCursoSeleccionado,
+    setDataContenido: setDataContenido,
   });
 
   return (
@@ -56,7 +58,7 @@ const LearningPath = ({setCursoActual, setNombreCurso, setCursoSeleccionado}) =>
         />
       </div>
       <Modal isOpen={isOpen} onClose={handleCloseModal}>
-        <SeccionModal token={token} dataSeleccionada={dataSeleccionada} setRecargarTabla={setRecargarTabla} recargarTabla={recargarTabla} setIsOpen={setIsOpen} />
+        <SeccionModal token={token} setDataContenido={setDataContenido} dataSeleccionada={dataSeleccionada} setRecargarTabla={setRecargarTabla} recargarTabla={recargarTabla} setIsOpen={setIsOpen} />
       </Modal>
     </section>
   );
@@ -64,7 +66,7 @@ const LearningPath = ({setCursoActual, setNombreCurso, setCursoSeleccionado}) =>
 
 export default LearningPath;
 
-const SeccionModal = ({dataSeleccionada, token, setRecargarTabla, recargarTabla, setIsOpen}) => {
+const SeccionModal = ({dataSeleccionada, token, setRecargarTabla, recargarTabla, setIsOpen, setDataContenido, }) => {
   const [nuevoLearning, setNuevoLearning] = useState({ 
     name: dataSeleccionada.name || "",
     duration: dataSeleccionada.duration || "",

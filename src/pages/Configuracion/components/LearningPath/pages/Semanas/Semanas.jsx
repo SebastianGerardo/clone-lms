@@ -26,11 +26,13 @@ const Semanas = (props) => {
     dataApi:props.dataApi
   }
 
+  console.log(props.dataLearning.weeks)
+
   return (
     <>
       <TableBasic
         columns={columnsSemanas}
-        data={props.dataSemanas}
+        data={props?.dataLearning?.weeks}
         highlightOnHover
         striped
         onRowClicked={(row) => console.log(row)}

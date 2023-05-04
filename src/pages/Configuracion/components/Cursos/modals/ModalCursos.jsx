@@ -3,12 +3,21 @@ import { Toast } from "../../../../../components/Alertas/SweetAlerts";
 import { InputBasic } from "../../../../../components/Inputs/InputBasic";
 import { useState } from "react";
 import Modal from "../../../../../components/Modal/Modal";
+import { useEffect } from "react";
 
 export const ModalCursos = ({dataCurso, token, setRecargarTabla, recargarTabla, setIsOpen, isOpen, handleCloseModal}) => {
     const [nuevoCurso, setNuevoCurso] = useState({ 
-      name: dataCurso.name || ""
+      name: ""
     });
-  
+
+    const validarCursoEscogido = Object.values(dataCurso).length > 0
+
+    useEffect(() => {
+      setNuevoCurso({
+        name: dataCurso?.name || ""
+      })
+    }, [dataCurso])
+
     const handleChange = (e) => {
       setNuevoCurso({
         ...nuevoCurso,
@@ -16,9 +25,9 @@ export const ModalCursos = ({dataCurso, token, setRecargarTabla, recargarTabla, 
       });
     };
   
-    const CrearNuevoCurso = (e) => {
+    const enviarData = (e) => {
       e.preventDefault();
-      if(Object.values(dataCurso).length > 0){
+      if(validarCursoEscogido){
         cambiarCurso(token, nuevoCurso, dataCurso.id).then((res) => {
           if(res.statusCode == 200) {
             Toast.fire({
@@ -55,11 +64,11 @@ export const ModalCursos = ({dataCurso, token, setRecargarTabla, recargarTabla, 
   
     return (
       <Modal isOpen={isOpen} onClose={handleCloseModal}>
-        <h1 className="font-medium">Agregar nuevo curso</h1>
+        <h1 className="font-medium">{validarCursoEscogido ? "Editar" : "Agregar nuevo"} curso</h1>
           <div className="p-8 pt-6 pb-0">
             <form
               className="flex flex-col items-center xl:items-end gap-2"
-              onSubmit={CrearNuevoCurso}
+              onSubmit={enviarData}
             >
               <InputBasic
                 pHolder={"Algebra"}
@@ -69,9 +78,9 @@ export const ModalCursos = ({dataCurso, token, setRecargarTabla, recargarTabla, 
                 name={"name"}
               />
               <button
-                className={`bg-green-500 hover:bg-green-700 cursor-pointer text-white py-2 px-2 rounded xl:relative xl:left-10 xl:top-2`}
+                className={`bg-green-500 hover:bg-green-700 transition-all duration-150 cursor-pointer text-white py-2 px-2 rounded xl:relative xl:left-10 xl:top-2`}
               >
-                Agregar
+                {validarCursoEscogido ? "Editar" : "Agregar"}
               </button>
             </form>
           </div>

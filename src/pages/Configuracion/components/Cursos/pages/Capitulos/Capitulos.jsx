@@ -26,11 +26,13 @@ const Capitulos = (props) => {
     contenidoSeleccionado:props.contenidoSeleccionado,
   }
 
+  const ordenarData = props?.dataApi?.sort((a, b) => a.order - b.order)
+
   return (
     <>
       <TableBasic
         columns={columnsCapitulos}
-        data={props.dataApi}
+        data={ordenarData}
         highlightOnHover
         striped
         onRowClicked={(row) => console.log(row)}
