@@ -33,6 +33,13 @@ export const ColumnsSalones = ({handleRecargar,  handleOpenModal, setCapituloSel
         center: true,
       },
       {
+        name: <NameTable name="Max. Alumnos" />,
+        cell: (row) => <p className="mt-[0.10rem] font-semibold">{row?.classroom?.totalStudents}</p>,
+        width: "15rem",
+        sortable: true,
+        center: true,
+      },
+      {
         name: <NameTable name="Acciones" />,
         cell: (row) => (
           <div className="flex gap-2">

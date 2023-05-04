@@ -2,24 +2,26 @@ import { useEffect, useState } from "react";
 import { InputBasic } from "../../../../../components/Inputs/InputBasic";
 import Modal from "../../../../../components/Modal/Modal";
 import { Toast } from "../../../../../components/Alertas/SweetAlerts";
-import { crearCicloSalon } from "../../../../../helpers/ApiConfiguracion/ApiCiclosxSalon";
+import { cambiarCicloSalon, crearCicloSalon } from "../../../../../helpers/ApiConfiguracion/ApiCiclosxSalon";
 
 export const ModalSalones = ({ isOpen, cursoSeleccionado, token, handleCloseModal, capituloSeleccionado, handleRecargar, dataSalones }) => {
 
     const [formData, setFormData] = useState({
       cycle: cursoSeleccionado,
-      classroom: "",
+      classroom: capituloSeleccionado?.classroom?.id || "",
     });
-  
+
     const salonSeleccionado = dataSalones.find((salon) => salon.id == formData.classroom)
-  
+
     useEffect(() => {
-        setFormData({
-          cycle: cursoSeleccionado?.id || "",
-          classroom: capituloSeleccionado?.classroom || "",
+      setFormData({
+        cycle: cursoSeleccionado?.id || "",
+        classroom: capituloSeleccionado?.classroom?.id || "",
       })
     }, [capituloSeleccionado])
-  
+
+    console.log(formData)
+
     const handleChange = (e) => {
       setFormData({
         ...formData,
@@ -30,21 +32,21 @@ export const ModalSalones = ({ isOpen, cursoSeleccionado, token, handleCloseModa
     const crearCurso = (e) => {
       e.preventDefault();
       if(Object.values(capituloSeleccionado).length > 0) {
-        //   cambiarCapitulo(token, formData,  capituloSeleccionado.id).then((res) => {
-        //     if(res.statusCode == 200) {
-        //       Toast.fire({
-        //         icon: 'success',
-        //         title: 'Capítulo actualizado exitósamente!'
-        //       })
-        //       handleRecargar()
-        //       handleCloseModal()
-        //     } else {
-        //       Toast.fire({
-        //         icon: 'error',
-        //         title: res.message.length > 0 && res.message[0]
-        //       })
-        //     }
-        //   })
+          cambiarCicloSalon(token, formData,  capituloSeleccionado.id).then((res) => {
+            if(res.statusCode == 200) {
+              Toast.fire({
+                icon: 'success',
+                title: 'Capítulo actualizado exitósamente!'
+              })
+              handleRecargar()
+              handleCloseModal()
+            } else {
+              Toast.fire({
+                icon: 'error',
+                title: res.message.length > 0 && res.message[0]
+              })
+            }
+          })
         } else {
           crearCicloSalon(token, formData).then((res) => {
             if (res.statusCode == 200) {
@@ -66,7 +68,7 @@ export const ModalSalones = ({ isOpen, cursoSeleccionado, token, handleCloseModa
   
     return (
       <Modal isOpen={isOpen} onClose={handleCloseModal}>
-        <h1 className="font-medium">Agregar nuevo salón</h1>
+        <h1 className="font-medium">{Object.values(capituloSeleccionado).length > 0 ? "Editar" : "Agregar nuevo"} salón</h1>
         <div className="p-8 pt-6 pb-0">
           <form
             className="flex flex-col items-center xl:items-end gap-2"
@@ -92,7 +94,7 @@ export const ModalSalones = ({ isOpen, cursoSeleccionado, token, handleCloseModa
                   </span>
                   <select
                     className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-                    defaultValue={formData?.classroom}
+                    defaultValue={capituloSeleccionado?.classroom?.id}
                     onChange={handleChange}
                     name="classroom"
                   >

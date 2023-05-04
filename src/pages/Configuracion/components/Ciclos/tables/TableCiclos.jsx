@@ -10,7 +10,7 @@ import { eliminarCiclo } from "../../../../../helpers/ApiConfiguracion/ApiCiclos
 export const ColumnsCiclos = ({setCursoActual, setNombreCurso, recargarTabla, setRecargarTabla, token, handleOpenModal, setDataSeleccionada, setCursoSeleccionado}) => {
   const columnsCiclos = [
       {
-        name: <NameTable name="Codigo" />,
+        name: <NameTable name="Orden" />,
         cell: (row, index) => (
           <p className="mt-[0.10rem] font-semibold">{index + 1}</p>
         ),
@@ -19,7 +19,7 @@ export const ColumnsCiclos = ({setCursoActual, setNombreCurso, recargarTabla, se
         center: true,
       },
       {
-        name: <NameTable name="Curso" />,
+        name: <NameTable name="Learning Path" />,
         cell: (row) => row.learningPath?.name,
         width: "15rem",
         sortable: true,
@@ -40,7 +40,7 @@ export const ColumnsCiclos = ({setCursoActual, setNombreCurso, recargarTabla, se
       {
         name: <NameTable name="Duracion" />,
         cell: (row) => {
-          return <p className="mt-[0.10rem] font-semibold">{row.learningPath?.duration}Hrs</p>;
+          return <p className="mt-[0.10rem] font-semibold">{row.learningPath?.duration}Smns.</p>;
         },
         sortable: true,
         center: true,
