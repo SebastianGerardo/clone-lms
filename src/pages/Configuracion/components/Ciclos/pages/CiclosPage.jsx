@@ -97,7 +97,7 @@ const CiclosPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
           <div className="flex justify-center items-center h-[20rem]">
             <Ripples color="#2563EB" />
           </div>
-        ) : cambiarTabla ? (
+          ) : (
           <AnimatePresence>
             <motion.span
             initial={{ opacity: 0, y: -10 }}
@@ -106,17 +106,6 @@ const CiclosPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
             transition={{ duration: 0.2 }}
             >
                 <Salones {...propsCapitulos} {...propsComunes}  />
-            </motion.span>
-          </AnimatePresence>
-        ) : (
-          <AnimatePresence>
-            <motion.span
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            >
-              {/* <Temas {...propsTema} {...propsComunes} /> */}
             </motion.span>
           </AnimatePresence>
         )}

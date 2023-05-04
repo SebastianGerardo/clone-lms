@@ -1,12 +1,10 @@
 import React, { useContext, useState } from "react";
 import { useEffect } from "react";
-import { Toast } from "../../../../../../components/Alertas/SweetAlerts";
-import Modal from "../../../../../../components/Modal/Modal";
 import TableBasic from "../../../../../../components/Tables/TableBasic";
 import { UserContext } from "../../../../../../context/ContextLms";
-import { TraeDataCiclos, cambiarCiclo, crearCiclo } from "../../../../../../helpers/ApiConfiguracion/ApiCiclos";
+import { TraeDataCiclos } from "../../../../../../helpers/ApiConfiguracion/ApiCiclos";
 import { TraeDataLearning } from "../../../../../../helpers/ApiConfiguracion/ApiLearningPath";
-import ModalCiclo from "../../modalContent/ModalCiclo";
+import { ModalCiclo } from "../../modals/ModalCiclo";
 import {ContentTableCiclos, ColumnsCiclos } from "../../tables/TableCiclos";
 
 const Ciclos = ({setCursoActual, setNombreCurso, setCursoSeleccionado}) => {
@@ -62,70 +60,9 @@ const Ciclos = ({setCursoActual, setNombreCurso, setCursoSeleccionado}) => {
           pointerOnHover
         />
       </div>
-      <Modal isOpen={isOpen} onClose={handleCloseModal}>
-        <SeccionModal dataLearning={dataLearning} token={token} dataSeleccionada={dataSeleccionada} setRecargarTabla={setRecargarTabla} recargarTabla={recargarTabla} setIsOpen={setIsOpen} />
-      </Modal>
+        <ModalCiclo isOpen={isOpen} handleCloseModal={handleCloseModal} dataLearning={dataLearning} token={token} dataSeleccionada={dataSeleccionada} setRecargarTabla={setRecargarTabla} recargarTabla={recargarTabla} setIsOpen={setIsOpen} />
     </section>
   );
 };
 
 export default Ciclos;
-
-const SeccionModal = ({dataSeleccionada, token, setRecargarTabla, recargarTabla, setIsOpen, dataLearning}) => {
-  const [formData, setFormData] = useState({ 
-    costo: dataSeleccionada?.costo|| "",
-    start: dataSeleccionada?.start || "",
-    learningPath: dataSeleccionada?.learningPath?.id || "",
-  });
-
-  const handleChange = (e) => {
-    const value =
-      e.target.name != "start" ? Number(e.target.value) : e.target.value;
-    setFormData({
-      ...formData,
-      [e.target.name]: value,
-    });
-  };
-
-  const enviarDatos = (e) => {
-    e.preventDefault();
-    if(Object.values(dataSeleccionada).length > 0){
-      cambiarCiclo(token, formData, dataSeleccionada.id).then((res) => {
-        if(res.statusCode == 200) {
-          Toast.fire({
-            icon: 'success',
-            title: 'Curso registrado exitósamente!'
-          })
-          setRecargarTabla(!recargarTabla)
-          setIsOpen(false)
-        } else if (res.statusCode == 400) {
-          Toast.fire({
-            icon: 'error',
-            title: res.message.length > 0 && res.message[0]
-          })
-        }
-      })
-    } else {
-      crearCiclo(token, formData).then((res) => {
-        console.log(res)
-        if(res.statusCode == 200) {
-          Toast.fire({
-            icon: 'success',
-            title: 'Ruta registrada exitósamente!'
-          })
-          setRecargarTabla(!recargarTabla)
-          setIsOpen(false)
-        } else if (res.statusCode == 400) {
-          Toast.fire({
-            icon: 'error',
-            title: res.message.length > 0 && res.message[0]
-          })
-        }
-      })
-    }
-  };
-
-  return (
-    <ModalCiclo dataLearning={dataLearning} handleChange={handleChange} enviarDatos={enviarDatos} formData={formData} />
-  )
-}
