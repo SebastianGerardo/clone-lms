@@ -3,11 +3,12 @@ import {SearchIcon } from "../../../../../assets/svgs/NormalSvgs";
 import { NameTable } from "../../../../../components/Tables/TableComponents";
 import editIcon from "../../../../../assets/icons/editIcon.png";
 import deleteIcon from "../../../../../assets/icons/deleteIcon.png";
+import verMas from "../../../../../assets/icons/verMas.png";
 import Swal from "sweetalert2";
 import { Toast } from "../../../../../components/Alertas/SweetAlerts";
 import { eliminarSemana } from "../../../../../helpers/ApiConfiguracion/ApiSemanas";
 
-export const ColumnsSemanas = ({handleRecargar,  handleOpenModal, setCapituloSeleccionado, token}) => {
+export const ColumnsSemanas = (props) => {
   const columnsSemanas = [
       {
         name: <NameTable name="Orden" />,
@@ -37,7 +38,7 @@ export const ColumnsSemanas = ({handleRecargar,  handleOpenModal, setCapituloSel
         cell: (row) => (
           <div className="flex gap-2">
               <div
-              onClick={() => {handleOpenModal(), setCapituloSeleccionado(row)}}
+              onClick={() => {props.handleOpenModal(), props.setCapituloSeleccionado(row)}}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-6 h-6 object-cover">
@@ -45,7 +46,15 @@ export const ColumnsSemanas = ({handleRecargar,  handleOpenModal, setCapituloSel
                   </div>
               </div>
               <div
-              onClick={() => deleteAlert(row.id, token, handleRecargar)}
+              onClick={()=>{props.setCambiarTabla(false), props.setNombreContenido(row.name), props.setDataSeleccionada(row.id)}}
+              className="cursor-pointer mx-auto"
+              >
+                  <div className="w-6 h-6 object-cover">
+                      <img src={verMas} alt="" className="w-full h-full object-cover" />
+                  </div>
+              </div>
+              <div
+              onClick={() => deleteAlert(row.id, props.token, props.handleRecargar)}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-[25px] h-[25px] object-cover">
@@ -64,12 +73,22 @@ export const ColumnsSemanas = ({handleRecargar,  handleOpenModal, setCapituloSel
   }
 }
 export const ContentTableSemanas = ({handleOpenModal, dataSemanas,setCursoActual, setNombreCurso, setCambiarTabla, cambiarTabla}) => {
+
+  const handleRetroceder = () => {
+    if (cambiarTabla) {
+      setCursoActual("Cursos")
+      setNombreCurso(null)
+    } else {
+      setCambiarTabla(true)
+    }
+  }
+
   return (
     <div className="flex flex-col gap-y-2 mb-4 p-0">
       <section className="flex flex-col min-[1235px]:flex-row min-[1235px]:justify-around items-center gap-y-4">
         {/* TOTAL DE VIDEOS */}
         <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#0052CA] text-white">
-          <p>Total de semanas</p>
+          <p>Total de {cambiarTabla ? "semanas" : "cursos"}</p>
           <span className="text-white/80">
             {"("}{dataSemanas?.length}{")"}
           </span>
@@ -82,7 +101,6 @@ export const ContentTableSemanas = ({handleOpenModal, dataSemanas,setCursoActual
               <SearchIcon color="#A4B2CD" />
             </div>
             <input
-              //   onChange={handleSearch}
               type="text"
               name="search"
               id="search"
@@ -94,17 +112,13 @@ export const ContentTableSemanas = ({handleOpenModal, dataSemanas,setCursoActual
         </form>
         {/* BOTONES PARA FILTRAR */}
         <div className="flex gap-4">
-          {/* <span onClick={() => {setCambiarTabla(true)}}>
-            <HoverButton colorChange={cambiarTabla ? "bg-[#0052CA]" : "bg-white"} text={<FilterIcon isActive={cambiarTabla} colorChange={"#fff"} color="#292D32" />} dialog={"Capitulos"}/>
-          </span>
-          <span onClick={() => {setCambiarTabla(false)}}>
-            <HoverButton colorChange={cambiarTabla ? "bg-white" : "bg-[#0052CA]"} text={<FilterIcon2 isActive={cambiarTabla} colorChange={"#292D32"} color="#fff" />} dialog={"Temas"}/>
-          </span> */}
-          <button onClick={handleOpenModal} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
-            <span className="truncate">+ Agregar curso </span>
-          </button>
-          <button onClick={() => {setCursoActual("Cursos"), setNombreCurso(null)}} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
-            <span className="truncate">Retroceder</span>
+          {!cambiarTabla && (
+            <button onClick={handleOpenModal} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
+              <span className="truncate">+ Agregar curso </span>
+            </button>
+          )}
+          <button onClick={handleRetroceder} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
+            <span className="truncate">Volver</span>
           </button>
         </div>
       </section>

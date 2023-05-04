@@ -8,8 +8,9 @@ import Semanas from "./Semanas/Semanas";
 import { TraeDataSemanas } from "../../../../../helpers/ApiConfiguracion/ApiSemanas";
 import { TraeDataLearning } from "../../../../../helpers/ApiConfiguracion/ApiLearningPath";
 import { TraeDataCursos } from "../../../../../helpers/ApiConfiguracion/ApiCursos";
+import Cursos from "./Cursos/Cursos";
 
-const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
+const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado, setNombreContenido }) => {
   const {token} = useContext(UserContext)
   const [isOpen, setIsOpen] = useState(false);
   const [cambiarTabla, setCambiarTabla] = useState(true); //Si es true, trae capitulos, si es false trae temas
@@ -21,6 +22,7 @@ const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
   const [capituloSeleccionado, setCapituloSeleccionado] = useState({});
   const [temaSeleccionado, setTemaSeleccionado] = useState({});
   const [temasFiltrados, setTemasFiltrados] = useState([]); //Filtrar temas por capitulo
+  const [dataSeleccionada, setDataSeleccionada] = useState({}); //Data seleccionada de la tabla
 
   const handleRecargar = () => {
     setRecargarTabla(!recargarTabla);
@@ -62,7 +64,7 @@ const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
     setIsOpen(false);
   };
 
-  const propsTema = {
+  const propsCursos = {
     setTemaSeleccionado:setTemaSeleccionado,
     temaSeleccionado:temaSeleccionado,
     recargarTabla:recargarTabla,
@@ -80,11 +82,14 @@ const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
     capituloSeleccionado:capituloSeleccionado,
   }
 
-  const propsCapitulos = {
+  const propsSemanas = {
     dataSemanas:dataSemanas,
     dataCursos:dataCursos,
     setCapituloSeleccionado:setCapituloSeleccionado,
     dataApi:dataApi,
+    setNombreContenido:setNombreContenido,
+    setCambiarTabla:setCambiarTabla,
+    setDataSeleccionada:setDataSeleccionada,
   }
 
   return (
@@ -103,6 +108,17 @@ const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
           <div className="flex justify-center items-center h-[20rem]">
             <Ripples color="#2563EB" />
           </div>
+        ) : cambiarTabla ? (
+          <AnimatePresence>
+            <motion.span
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            >
+                <Semanas {...propsSemanas} {...propsComunes}  />
+            </motion.span>
+          </AnimatePresence>
         ) : (
           <AnimatePresence>
             <motion.span
@@ -111,7 +127,7 @@ const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
             >
-                <Semanas {...propsCapitulos} {...propsComunes}  />
+                <Cursos {...propsCursos} {...propsComunes}  />
             </motion.span>
           </AnimatePresence>
         )} 

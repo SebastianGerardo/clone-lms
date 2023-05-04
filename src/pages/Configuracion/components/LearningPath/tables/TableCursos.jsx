@@ -6,8 +6,8 @@ import Swal from "sweetalert2";
 import { Toast } from "../../../../../components/Alertas/SweetAlerts";
 import { eliminarTema } from "../../../../../helpers/ApiConfiguracion";
 
-export const ColumnsTemas = ({handleOpenModal, setTemaSeleccionado, token, handleRecargar}) => {
-  const columnsTemas = [
+export const ColumnsCursos = ({handleOpenModal, setTemaSeleccionado, token, handleRecargar}) => {
+  const columnsCursos = [
       {
         name: <NameTable name="Codigo" />,
         cell: (row, index) => (
@@ -61,7 +61,7 @@ export const ColumnsTemas = ({handleOpenModal, setTemaSeleccionado, token, handl
       },
   ];
   return {
-    columnsTemas
+    columnsCursos
   }
 }
 
