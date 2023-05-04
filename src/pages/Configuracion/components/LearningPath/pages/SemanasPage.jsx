@@ -103,6 +103,7 @@ const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado, setNom
             setIsLoaded={setIsLoaded}
             setCambiarTabla={setCambiarTabla}
             cambiarTabla={cambiarTabla}
+            setNombreContenido={setNombreContenido}
           />
         {!isLoaded ? (
           <div className="flex justify-center items-center h-[20rem]">

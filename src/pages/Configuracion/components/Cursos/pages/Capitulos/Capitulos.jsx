@@ -7,9 +7,12 @@ const Capitulos = (props) => {
 
   const { columnsCapitulos } = ColumnsCapitulos({
     handleOpenModal: props.handleOpenModal,
-    setCapituloSeleccionado: props.setCapituloSeleccionado,
     handleRecargar: props.handleRecargar,
     token: props.token,
+    setNombreContenido: props.setNombreContenido,
+    setCambiarTabla: props.setCambiarTabla,
+    setCapituloSeleccionado: props.setCapituloSeleccionado,
+    setContenidoSeleccionado: props.setContenidoSeleccionado,
   });
 
   const propsModal = {
@@ -18,7 +21,9 @@ const Capitulos = (props) => {
     handleCloseModal:props.handleCloseModal, 
     token:props.token,
     isOpen:props.isOpen, 
-    cursoSeleccionado:props.cursoSeleccionado
+    cursoSeleccionado:props.cursoSeleccionado,
+    dataApi:props.dataApi,
+    contenidoSeleccionado:props.contenidoSeleccionado,
   }
 
   return (

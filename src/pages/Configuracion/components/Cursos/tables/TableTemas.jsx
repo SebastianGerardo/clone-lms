@@ -9,7 +9,7 @@ import { eliminarTema } from "../../../../../helpers/ApiConfiguracion";
 export const ColumnsTemas = ({handleOpenModal, setTemaSeleccionado, token, handleRecargar}) => {
   const columnsTemas = [
       {
-        name: <NameTable name="Codigo" />,
+        name: <NameTable name="Order" />,
         cell: (row, index) => (
           <p className="mt-[0.10rem] font-semibold">{index + 1}</p>
         ),
@@ -18,17 +18,8 @@ export const ColumnsTemas = ({handleOpenModal, setTemaSeleccionado, token, handl
         center: true,
       },
       {
-        name: <NameTable name="Curso" />,
+        name: <NameTable name="Nombre del tema" />,
         cell: (row) => row?.name,
-        width: "15rem",
-        sortable: true,
-        center: true,
-      },
-      {
-        name: <NameTable name="Cantidad de capitulos" />,
-        cell: (row) => {
-          return <p className="mt-[0.10rem] font-semibold">{row?.cantidadCapitulos}</p>;
-        },
         sortable: true,
         center: true,
       },

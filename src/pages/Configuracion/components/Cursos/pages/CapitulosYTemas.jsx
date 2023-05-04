@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useEffect } from "react";
-import { TraeDataCurso } from "../../../../../helpers/ApiConfiguracion";
+import { TraeDataCapitulo, TraeDataCurso } from "../../../../../helpers/ApiConfiguracion";
 import {ContentTableCapitulos} from "../tables/TableCapitulos";
 import { Ripples } from "@uiball/loaders";
 import { AnimatePresence, motion } from "framer-motion";
@@ -8,7 +8,7 @@ import { UserContext } from "../../../../../context/ContextLms";
 import Temas from "./Temas/Temas";
 import Capitulos from "./Capitulos/Capitulos";
 
-const CapitulosYTemas = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) => {
+const CapitulosYTemas = ({ setCursoActual, setNombreCurso, cursoSeleccionado, setNombreContenido }) => {
   const {token} = useContext(UserContext)
   const [isOpen, setIsOpen] = useState(false);
   const [cambiarTabla, setCambiarTabla] = useState(true); //Si es true, trae capitulos, si es false trae temas
@@ -16,18 +16,19 @@ const CapitulosYTemas = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) 
   const [recargarTabla, setRecargarTabla] = useState(false);
   const [dataApi, setDataApi] = useState([]);
   const [capituloSeleccionado, setCapituloSeleccionado] = useState({});
+  const [contenidoSeleccionado, setContenidoSeleccionado] = useState({}); 
   const [temaSeleccionado, setTemaSeleccionado] = useState({});
   const [temasFiltrados, setTemasFiltrados] = useState([]); //Filtrar temas por capitulo
+  const [dataTemas, setDataTemas] = useState([]);
 
   const handleRecargar = () => {
     setRecargarTabla(!recargarTabla);
   }
 
   useEffect(() => {
+    console.log(contenidoSeleccionado?.id)
     TraeDataCurso(token, cursoSeleccionado).then((res) => {
       setDataApi(res?.data?.chapters)
-      const issuesData = res?.data?.chapters?.map((item) => item.issues).filter((issues) => issues && issues.length > 0).flat();
-      setTemasFiltrados(issuesData)
     })
   }, [recargarTabla])
 
@@ -54,7 +55,6 @@ const CapitulosYTemas = ({ setCursoActual, setNombreCurso, cursoSeleccionado }) 
     temaSeleccionado:temaSeleccionado,
     recargarTabla:recargarTabla,
     temasFiltrados:temasFiltrados,
-dataApi:dataApi,
   }
 
   const propsComunes = {
@@ -66,16 +66,24 @@ dataApi:dataApi,
     isOpen:isOpen,
     handleRecargar:handleRecargar,
     capituloSeleccionado:capituloSeleccionado,
+    contenidoSeleccionado:contenidoSeleccionado,
+    dataTemas:dataTemas,
+    setDataTemas:setDataTemas,
   }
 
   const propsCapitulos = {
-    setCapituloSeleccionado:setCapituloSeleccionado
+    setNombreContenido:setNombreContenido,
+    setCapituloSeleccionado:setCapituloSeleccionado,
+    setCambiarTabla:setCambiarTabla,
+    setContenidoSeleccionado:setContenidoSeleccionado,
   }
 
   return (
     <div className="max-w-[1200px] mx-auto flex flex-col gap-y-12">
         <section className="p-8 pt-0">
           <ContentTableCapitulos
+            setNombreContenido={setNombreContenido}
+            setContenidoSeleccionado={setContenidoSeleccionado}
             setCursoActual={setCursoActual}
             setNombreCurso={setNombreCurso}
             handleOpenModal={handleOpenModal}

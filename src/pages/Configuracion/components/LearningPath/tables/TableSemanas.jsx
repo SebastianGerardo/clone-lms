@@ -72,7 +72,7 @@ export const ColumnsSemanas = (props) => {
     columnsSemanas
   }
 }
-export const ContentTableSemanas = ({handleOpenModal, dataSemanas,setCursoActual, setNombreCurso, setCambiarTabla, cambiarTabla}) => {
+export const ContentTableSemanas = ({handleOpenModal, dataSemanas,setCursoActual, setNombreCurso, setCambiarTabla, cambiarTabla, setNombreContenido}) => {
 
   const handleRetroceder = () => {
     if (cambiarTabla) {
@@ -80,6 +80,7 @@ export const ContentTableSemanas = ({handleOpenModal, dataSemanas,setCursoActual
       setNombreCurso(null)
     } else {
       setCambiarTabla(true)
+      setNombreContenido(null)
     }
   }
 

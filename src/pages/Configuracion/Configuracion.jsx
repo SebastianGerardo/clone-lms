@@ -7,7 +7,7 @@ import { validarUbicacion } from "./ValidarUbicacion";
 export default function Configuracion() {
   const [isLoaded, setIsLoaded] = useState(false);
   
-  const { navigationSections, renderTab, nombreCurso, activeTab } = validarUbicacion();
+  const { navigationSections, renderTab, nombreCurso, activeTab, nombreContenido } = validarUbicacion();
   useLayoutEffect(() => {
     setIsLoaded(false);
     const timeout = setTimeout(() => {
@@ -37,7 +37,7 @@ export default function Configuracion() {
               <div className="flex items-center justify-between mb-3">
                 <div className="capitalize text-center sm:text-start sm:pl-8 w-full h-33 font-semibold text-xl leading-33 text-black">
                   Configuración {`> ${renderTab[activeTab]?.title}`}{" "}
-                  {nombreCurso && <span>{`> ${nombreCurso}`}</span>}
+                  {nombreCurso && <span>{`> ${nombreCurso}`}</span>} {nombreContenido && <span>{`> ${nombreContenido}`}</span>}
                 </div>
               </div>
               {isLoaded ? (
@@ -70,7 +70,8 @@ const Navigation = ({
   setActiveTab,
   setNombreCurso,
   icon,
-  setCursoActual
+  setCursoActual,
+  setNombreContenido
 }) => {
   return (
     <button
@@ -80,7 +81,7 @@ const Navigation = ({
           : "border-[#D9D9D9]"
       }`}
       onClick={() => {
-        setActiveTab(nameActive), setNombreCurso(null), setCursoActual("Cursos");
+        setActiveTab(nameActive), setNombreCurso(null), setCursoActual("Cursos"), setNombreContenido(null);
       }}
     >
       {icon}

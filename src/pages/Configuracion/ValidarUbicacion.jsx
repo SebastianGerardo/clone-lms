@@ -16,7 +16,7 @@ export const validarUbicacion = () => {
     const [nombreCurso, setNombreCurso] = useState(null);
     const [cursoSeleccionado, setCursoSeleccionado] = useState("");
     const [nombreContenido, setNombreContenido] = useState(null);
-  
+
     const cursoComponent = {
       Cursos: {
         title: "Cursos",
@@ -35,6 +35,7 @@ export const validarUbicacion = () => {
             setCursoActual={setCursoActual}
             setNombreCurso={setNombreCurso}
             cursoSeleccionado={cursoSeleccionado}
+            setNombreContenido={setNombreContenido}
           />
         ),
       },
@@ -119,6 +120,8 @@ export const validarUbicacion = () => {
       activeTab: activeTab,
       setActiveTab: setActiveTab,
       setCursoActual: setCursoActual,
+      nombreContenido: nombreContenido,
+      setNombreContenido: setNombreContenido,
     };
   
     const navigationSections = [
@@ -180,6 +183,7 @@ export const validarUbicacion = () => {
       renderTab,
       nombreCurso,
       activeTab,
+      nombreContenido,
     };
   
     return props;

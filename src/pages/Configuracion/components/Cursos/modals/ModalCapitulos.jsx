@@ -5,7 +5,7 @@ import { cambiarCapitulo, CrearCapitulo } from "../../../../../helpers/ApiConfig
 import { Toast } from "../../../../../components/Alertas/SweetAlerts";
 import { InputBasicNumber } from "../../../../../components/Inputs/InputNumber";
 
-export const ModalCapitulos = ({ isOpen, cursoSeleccionado, token, handleCloseModal, capituloSeleccionado, handleRecargar }) => {
+export const ModalCapitulos = ({ isOpen, cursoSeleccionado, token, handleCloseModal, capituloSeleccionado, handleRecargar, dataApi }) => {
   
     const [nuevoCapitulo, setNuevoCapitulo] = useState({
       order: "",

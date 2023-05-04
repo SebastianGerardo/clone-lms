@@ -28,7 +28,7 @@ export const ColumnsRutas = ({setCursoActual, setNombreCurso, recargarTabla, set
       {
         name: <NameTable name="Duracion" />,
         cell: (row) => {
-          return <p className="mt-[0.10rem] font-semibold">{row.duration}Hrs</p>;
+          return <p className="mt-[0.10rem] font-semibold">{row.duration}Smns.</p>;
         },
         sortable: true,
         center: true,

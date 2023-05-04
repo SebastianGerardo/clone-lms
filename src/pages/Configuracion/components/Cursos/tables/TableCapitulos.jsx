@@ -1,16 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import {SearchIcon } from "../../../../../assets/svgs/NormalSvgs";
 import { NameTable } from "../../../../../components/Tables/TableComponents";
 import editIcon from "../../../../../assets/icons/editIcon.png";
 import deleteIcon from "../../../../../assets/icons/deleteIcon.png";
+import verMas from "../../../../../assets/icons/verMas.png";
 import Swal from "sweetalert2";
-import { FilterIcon, FilterIcon2 } from "../../../../../assets/svgs/ActiveSvgs";
-import HoverButton from "../../../../../components/Buttons/AboutButton";
-import { UserContext } from "../../../../../context/ContextLms";
 import { eliminarCapitulo } from "../../../../../helpers/ApiConfiguracion";
 import { Toast } from "../../../../../components/Alertas/SweetAlerts";
 
-export const ColumnsCapitulos = ({handleRecargar,  handleOpenModal, setCapituloSeleccionado, token}) => {
+export const ColumnsCapitulos = ({handleRecargar,  handleOpenModal, setCapituloSeleccionado, token, setNombreContenido, setCambiarTabla, setContenidoSeleccionado}) => {
   const columnsCapitulos = [
       {
         name: <NameTable name="Orden" />,
@@ -22,16 +20,22 @@ export const ColumnsCapitulos = ({handleRecargar,  handleOpenModal, setCapituloS
         center: true,
       },
       {
-        name: <NameTable name="Curso" />,
+        name: <NameTable name="Capitulo" />,
         cell: (row) => row.name,
         width: "15rem",
         sortable: true,
         center: true,
       },
       {
-        name: <NameTable name="Capitulos" />,
+        name: <NameTable name="Cantidad de capitulos" />,
         cell: (row) => {
-          return <p className="mt-[0.10rem] font-semibold">{row.cantidadCapitulos}</p>;
+          return (
+          <div className="mt-[0.10rem] font-semibold flex gap-1">
+              {row?.issues?.map((element) => (
+              <div className="py-1 px-2 bg-green-400 text-green-700" key={element.id}>
+                <p>{element.name}</p>
+              </div>))}
+          </div>)
         },
         sortable: true,
         center: true,
@@ -46,6 +50,14 @@ export const ColumnsCapitulos = ({handleRecargar,  handleOpenModal, setCapituloS
               >
                   <div className="w-6 h-6 object-cover">
                       <img src={editIcon} alt="" className="w-full h-full object-cover" />
+                  </div>
+              </div>
+              <div
+              onClick={()=>{setNombreContenido(row.name), setCambiarTabla(false), setContenidoSeleccionado(row)}}
+              className="cursor-pointer mx-auto"
+              >
+                  <div className="w-6 h-6 object-cover">
+                      <img src={verMas} alt="" className="w-full h-full object-cover" />
                   </div>
               </div>
               <div
@@ -68,7 +80,7 @@ export const ColumnsCapitulos = ({handleRecargar,  handleOpenModal, setCapituloS
     columnsCapitulos
   }
 }
-export const ContentTableCapitulos = ({handleOpenModal, dataApi,setCursoActual, setNombreCurso, setCambiarTabla, cambiarTabla}) => {
+export const ContentTableCapitulos = ({handleOpenModal, dataApi,setCursoActual, setNombreCurso, setCambiarTabla, cambiarTabla, setContenidoSeleccionado, setNombreContenido}) => {
   return (
     <div className="flex flex-col gap-y-2 mb-4 p-0">
       <section className="flex flex-col min-[1235px]:flex-row min-[1235px]:justify-around items-center gap-y-4">
@@ -99,18 +111,18 @@ export const ContentTableCapitulos = ({handleOpenModal, dataApi,setCursoActual, 
         </form>
         {/* BOTONES PARA FILTRAR */}
         <div className="flex gap-4">
-          <span onClick={() => {setCambiarTabla(true)}}>
-            <HoverButton colorChange={cambiarTabla ? "bg-[#0052CA]" : "bg-white"} text={<FilterIcon isActive={cambiarTabla} colorChange={"#fff"} color="#292D32" />} dialog={"Capitulos"}/>
-          </span>
-          <span onClick={() => {setCambiarTabla(false)}}>
-            <HoverButton colorChange={cambiarTabla ? "bg-white" : "bg-[#0052CA]"} text={<FilterIcon2 isActive={cambiarTabla} colorChange={"#292D32"} color="#fff" />} dialog={"Temas"}/>
-          </span>
           <button onClick={handleOpenModal} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
             <span className="truncate">+ Nuevo {cambiarTabla ? "capítulo" : "tema"}</span>
           </button>
-          <button onClick={() => {setCursoActual("Cursos"), setNombreCurso(null)}} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
-            <span className="truncate">Retroceder</span>
-          </button>
+          {cambiarTabla ? (
+            <button onClick={() => {setCursoActual("Cursos"), setNombreCurso(null)}} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
+              <span className="truncate">Retroceder</span>
+            </button>
+          ) : (
+            <button onClick={() => {setCambiarTabla(true), setContenidoSeleccionado({}), setNombreContenido(null)}} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
+              <span className="truncate">Retroceder</span>
+            </button>
+          )}
         </div>
       </section>
     </div>

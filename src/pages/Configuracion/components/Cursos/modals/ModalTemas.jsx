@@ -8,13 +8,13 @@ export const ModalTemas = (props) => {
   
     const [nuevoTema, setNuevoTema] = useState({
       name: "",
-      chapter: "",
+      chapter: props.contenidoSeleccionado?.id,
     });
-  
+
     useEffect(() => {
         setNuevoTema({
           name: props.temaSeleccionado.name || "",
-          chapter: props.capituloSeleccionado.id || "",
+          chapter: props.contenidoSeleccionado?.id || "",
       })
       }, [props.temaSeleccionado])
   
@@ -77,25 +77,7 @@ export const ModalTemas = (props) => {
             onSubmit={enviarData}
           >
             <div className="flex flex-col gap-2">
-              <label className="flex flex-col gap-y-1">
-                <span className="block text-sm font-medium text-gray-400">
-                  Capitulos
-                </span>
-                <select
-                  className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-                  defaultValue={nuevoTema?.chapter}
-                  onChange={handleChange}
-                  name="chapter"
-                >
-                  <option value="">Seleccione un capítulo</option>
-                  {props.dataApi?.length > 0 &&
-                    props.dataApi?.map((capitulos) => (
-                      <option key={capitulos?.id} value={capitulos?.id}>
-                        {capitulos?.name}
-                      </option>
-                    ))}
-                </select>
-              </label>
+              
               <InputBasic
                 pHolder={"Teoría de exponentes"}
                 data={nuevoTema?.name}
