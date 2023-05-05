@@ -28,8 +28,7 @@ export const ColumnsSemanas = (props) => {
       },
       {
         name: <NameTable name="Curso" />,
-        cell: (row) => row?.coursesWeeks?.name,
-        width: "15rem",
+        cell: (row) => <p className="text-gray-400 italic text-xs">{row?.coursesWeeks?.name || "Aún no ha agregado cursos a esta semana"}</p>,
         sortable: true,
         center: true,
       },
@@ -37,14 +36,14 @@ export const ColumnsSemanas = (props) => {
         name: <NameTable name="Acciones" />,
         cell: (row) => (
           <div className="flex gap-2">
-              <div
+              {/* <div
               onClick={() => {props.handleOpenModal(), props.setCapituloSeleccionado(row)}}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-6 h-6 object-cover">
                       <img src={editIcon} alt="" className="w-full h-full object-cover" />
                   </div>
-              </div>
+              </div> */}
               <div
               onClick={()=>{props.setCambiarTabla(false), props.setNombreContenido(row.name), props.setDataSeleccionada(row.id)}}
               className="cursor-pointer mx-auto"
@@ -64,6 +63,7 @@ export const ColumnsSemanas = (props) => {
   
           </div>
         ),
+        width: "12rem",
         sortable: true,
         center: true,
       },

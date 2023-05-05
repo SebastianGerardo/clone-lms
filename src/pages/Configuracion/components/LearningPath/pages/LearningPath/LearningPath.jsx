@@ -70,7 +70,8 @@ const SeccionModal = ({dataSeleccionada, token, setRecargarTabla, recargarTabla,
   const [nuevoLearning, setNuevoLearning] = useState({ 
     name: dataSeleccionada.name || "",
     duration: dataSeleccionada.duration || "",
-    image: dataSeleccionada.image || ""
+    image: dataSeleccionada.image || "",
+    description: dataSeleccionada.description || "",
   });
 
   const handleChange = (e) => {
@@ -89,7 +90,7 @@ const SeccionModal = ({dataSeleccionada, token, setRecargarTabla, recargarTabla,
         if(res.statusCode == 200) {
           Toast.fire({
             icon: 'success',
-            title: 'Curso registrado exitósamente!'
+            title: 'Ruta actualizada exitósamente!'
           })
           setRecargarTabla(!recargarTabla)
           setIsOpen(false)
@@ -125,7 +126,7 @@ const SeccionModal = ({dataSeleccionada, token, setRecargarTabla, recargarTabla,
       <h1 className="font-medium">Información de la ruta</h1>
         <div className="p-8 pt-6 pb-0">
           <form
-            className="flex flex-col items-center xl:items-end gap-2"
+            className="grid grid-cols-1 xl:grid-cols-2 gap-4 w-[40rem]"
             onSubmit={enviarDatos}
           >
             <InputBasic
@@ -149,11 +150,20 @@ const SeccionModal = ({dataSeleccionada, token, setRecargarTabla, recargarTabla,
               onChange={handleChange}
               name={"image"}
             />
-            <button
-              className={`bg-green-500 hover:bg-green-700 cursor-pointer text-white py-2 px-2 rounded xl:relative xl:left-10 xl:top-2`}
-            >
-              Agregar
-            </button>
+            <InputBasic
+                pHolder={"Descripción del ciclo"}
+                data={nuevoLearning?.description}
+                labelName={`Descripción`}
+                onChange={handleChange}
+                name={"description"}
+              />
+              <div className="col-span-2 flex justify-center">
+                <button
+                  className={` w-max bg-green-500 hover:bg-green-700 cursor-pointer text-white py-2 px-2 rounded `}
+                >
+                  Agregar
+                </button>
+              </div>
           </form>
         </div>
     </>

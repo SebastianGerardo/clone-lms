@@ -16,6 +16,22 @@ export const TraeDataSemanas = async (bearer) => {
     }
   };
   
+export const TraeSemana = async (bearer, id) => {
+    try {
+      const fetchResponse = await fetch(`${URL}/weeks/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${bearer}`,
+        },
+      });
+      const data = await fetchResponse.json();
+      return data;
+    } catch (error) {
+      return error;
+    }
+  };
+  
   export const crearSemana = async (bearer, registro) => {
     try {
       const fetchResponse = await fetch(`${URL}/weeks`, {

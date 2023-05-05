@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Toast } from "../../../../../components/Alertas/SweetAlerts";
 import { InputBasic } from "../../../../../components/Inputs/InputBasic";
 import Modal from "../../../../../components/Modal/Modal";
+import { cambiarCursoSemana, crearCursoSemana } from "../../../../../helpers/ApiConfiguracion/ApiLearningPath";
 
 export const ModalCursos = ({
     token,
@@ -10,40 +11,42 @@ export const ModalCursos = ({
     handleCloseModal,
     handleRecargar,
     temaSeleccionado,
-    capituloSeleccionado
+    capituloSeleccionado,
+    dataCursos,
+    dataSeleccionada
   }) => {
   
     const [formData, setFormData] = useState({
-      name: "",
-      chapter: "",
+      course: "",
+      week: dataSeleccionada,
     });
-  
+
+    console.log("dataSeleccionada", temaSeleccionado);
+
     useEffect(() => {
         setFormData({
-          name: temaSeleccionado.name || "",
-          chapter: capituloSeleccionado.id || "",
+          course: dataSeleccionada.course || "",
+          week: dataSeleccionada || "",
       })
       }, [temaSeleccionado])
   
     const handleChange = (e) => {
-      const value =
-        e.target.name === "chapter" ? Number(e.target.value) : e.target.value;
       setFormData({
         ...formData,
-        [e.target.name]: value,
+        [e.target.name]: Number(e.target.value),
       });
     };
   
     const enviarData = (e) => {
       e.preventDefault();
+      console.log("formData", formData);
       if(Object.values(temaSeleccionado).length > 0) {
-        console.log("editar tema");
-        cambiarTema(token, formData, temaSeleccionado.id).then((res) => {
-          console.log(res);
+        console.log("actualizar")
+        cambiarCursoSemana(token, formData, temaSeleccionado.id).then((res) => {
           if (res.statusCode == 200) {
             Toast.fire({
               icon: "success",
-              title: "Tema editado exitósamente!",
+              title: "Curso actualizado exitósamente!",
             })
             handleRecargar();
             handleCloseModal();
@@ -54,12 +57,12 @@ export const ModalCursos = ({
             })
           }});
       } else {
-        CrearTema(token, formData).then((res) => {
-          console.log(res);
+        console.log("crear")
+        crearCursoSemana(token, formData).then((res) => {
           if (res.statusCode == 200) {
             Toast.fire({
               icon: "success",
-              title: "Tema creado exitósamente!",
+              title: "Curso agregado exitósamente!",
             })
             handleRecargar();
             handleCloseModal();
@@ -86,30 +89,23 @@ export const ModalCursos = ({
             <div className="flex flex-col gap-2">
               <label className="flex flex-col gap-y-1">
                 <span className="block text-sm font-medium text-gray-400">
-                  Capitulos
+                  Cursos
                 </span>
                 <select
                   className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
-                  defaultValue={formData?.chapter}
+                  defaultValue={formData?.course}
                   onChange={handleChange}
-                  name="chapter"
+                  name="course"
                 >
-                  <option value="">Seleccione un capítulo</option>
-                  {dataApi?.length > 0 &&
-                    dataApi?.map((capitulos) => (
+                  <option value="">Seleccione un curso</option>
+                  {dataCursos && dataCursos?.length > 0 &&
+                    dataCursos?.map((capitulos) => (
                       <option key={capitulos?.id} value={capitulos?.id}>
                         {capitulos?.name}
                       </option>
                     ))}
                 </select>
               </label>
-              <InputBasic
-                pHolder={"Teoría de exponentes"}
-                data={formData?.name}
-                labelName={`Nombre del Tema`}
-                onChange={handleChange}
-                name={"name"}
-              />
             </div>
             <button
               className={`bg-green-500 hover:bg-green-700 cursor-pointer text-white py-2 px-2 rounded xl:relative xl:left-10 xl:top-2`}

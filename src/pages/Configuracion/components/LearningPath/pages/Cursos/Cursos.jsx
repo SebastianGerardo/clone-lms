@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TableBasic from "../../../../../../components/Tables/TableBasic";
+import { TraeSemana } from "../../../../../../helpers/ApiConfiguracion/ApiSemanas";
 import { ModalCursos } from "../../modals/ModalCursos";
 import { ColumnsCursos } from "../../tables/TableCursos";
 
 const Cursos = (props) => {
   
-  const { columnsTemas } = ColumnsCursos({
+  const [dataSemana, setDataSemana] = useState([])
+
+  const { columnsCursos } = ColumnsCursos({
     handleOpenModal: props.handleOpenModal,
     setTemaSeleccionado: props.setTemaSeleccionado,
     token: props.token,
@@ -21,14 +24,22 @@ const Cursos = (props) => {
     cursoSeleccionado: props.cursoSeleccionado,
     dataApi: props.dataApi,
     temaSeleccionado: props.temaSeleccionado,
-    temasFiltrados: props.temasFiltrados,
+    dataCursos: props.dataCursos,
+    dataSeleccionada: props.dataSeleccionada,
   }
+
+  useEffect(() => {
+    TraeSemana(props.token, props.dataSeleccionada).then((res) => {
+      console.log(res)
+      setDataSemana(res?.data)
+    })
+  }, [props.recargarTabla])
 
   return (
     <>
       <TableBasic
-        columns={columnsTemas}
-        data={[]}
+        columns={columnsCursos}
+        data={dataSemana?.coursesWeeks}
         highlightOnHover
         striped
         onRowClicked={(row) => console.log(row)}

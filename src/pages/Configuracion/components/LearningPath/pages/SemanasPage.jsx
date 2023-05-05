@@ -5,7 +5,7 @@ import { Ripples } from "@uiball/loaders";
 import { AnimatePresence, motion } from "framer-motion";
 import { UserContext } from "../../../../../context/ContextLms";
 import Semanas from "./Semanas/Semanas";
-import { TraeDataSemanas } from "../../../../../helpers/ApiConfiguracion/ApiSemanas";
+import { TraeDataSemanas, TraeSemana } from "../../../../../helpers/ApiConfiguracion/ApiSemanas";
 import { TraeDataLearning, TraeLearning } from "../../../../../helpers/ApiConfiguracion/ApiLearningPath";
 import { TraeDataCursos } from "../../../../../helpers/ApiConfiguracion/ApiCursos";
 import Cursos from "./Cursos/Cursos";
@@ -21,7 +21,6 @@ const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado, setNom
   const [dataCursos, setDataCursos] = useState([]);
   const [capituloSeleccionado, setCapituloSeleccionado] = useState({});
   const [temaSeleccionado, setTemaSeleccionado] = useState({});
-  const [temasFiltrados, setTemasFiltrados] = useState([]); //Filtrar temas por capitulo
   const [dataSeleccionada, setDataSeleccionada] = useState({}); //Data seleccionada de la tabla
   const [dataLearning, setDataLearning] = useState([]); //Data de la tabla de capitulos
 
@@ -35,12 +34,6 @@ const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado, setNom
     })
   }, [recargarTabla])
 
-  useEffect(() => {
-    TraeDataSemanas(token).then((res) => {
-      setDataSemanas(res?.data)
-    })
-  }, [recargarTabla])
-  
   useEffect(() => {
     TraeLearning(token, dataContenido?.id).then((res) => {
       setDataLearning(res?.data)
@@ -75,9 +68,9 @@ const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado, setNom
     setTemaSeleccionado:setTemaSeleccionado,
     temaSeleccionado:temaSeleccionado,
     recargarTabla:recargarTabla,
-    temasFiltrados:temasFiltrados,
+    dataSeleccionada:dataSeleccionada,
   }
-
+  
   const propsComunes = {
     handleOpenModal: handleOpenModal,
     handleCloseModal: handleCloseModal,
@@ -86,18 +79,17 @@ const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado, setNom
     token:token,
     isOpen:isOpen,
     handleRecargar:handleRecargar,
+    dataCursos:dataCursos,
     capituloSeleccionado:capituloSeleccionado,
   }
-
+  
   const propsSemanas = {
-    dataSemanas:dataSemanas,
-    dataCursos:dataCursos,
+    dataLearning:dataLearning,
     setCapituloSeleccionado:setCapituloSeleccionado,
     dataApi:dataApi,
     setNombreContenido:setNombreContenido,
     setCambiarTabla:setCambiarTabla,
     setDataSeleccionada:setDataSeleccionada,
-    dataLearning:dataLearning,
   }
 
   return (
@@ -107,7 +99,6 @@ const SemanasPage = ({ setCursoActual, setNombreCurso, cursoSeleccionado, setNom
             setCursoActual={setCursoActual}
             setNombreCurso={setNombreCurso}
             handleOpenModal={handleOpenModal}
-            dataSemanas={dataSemanas}
             setIsLoaded={setIsLoaded}
             setCambiarTabla={setCambiarTabla}
             cambiarTabla={cambiarTabla}

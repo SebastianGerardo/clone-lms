@@ -40,7 +40,7 @@ export const ColumnsCiclos = ({setCursoActual, setNombreCurso, recargarTabla, se
       {
         name: <NameTable name="Duracion" />,
         cell: (row) => {
-          return <p className="mt-[0.10rem] font-semibold">{row.learningPath?.duration}Smns.</p>;
+          return <p className="mt-[0.10rem] font-semibold">{row.learningPath?.duration} Semanas</p>;
         },
         sortable: true,
         center: true,

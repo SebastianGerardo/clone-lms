@@ -26,8 +26,6 @@ const Semanas = (props) => {
     dataApi:props.dataApi
   }
 
-  console.log(props.dataLearning.weeks)
-
   return (
     <>
       <TableBasic

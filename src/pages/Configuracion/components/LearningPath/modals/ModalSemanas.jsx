@@ -16,6 +16,7 @@ export const ModalSemanas = ({ isOpen, cursoSeleccionado, token, handleCloseModa
         setFormData({
           name: capituloSeleccionado?.name || "",
           course: capituloSeleccionado?.course || "",
+          description: capituloSeleccionado?.description || "",
           learningPath: cursoSeleccionado || ""
       })
     }, [capituloSeleccionado])

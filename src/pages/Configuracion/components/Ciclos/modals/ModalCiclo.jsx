@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { Toast } from "../../../../../components/Alertas/SweetAlerts";
 import { InputBasic } from "../../../../../components/Inputs/InputBasic";
@@ -8,14 +9,24 @@ import { cambiarCiclo, crearCiclo } from "../../../../../helpers/ApiConfiguracio
 
 export const ModalCiclo = ({isOpen, handleCloseModal, dataSeleccionada, token, setRecargarTabla, recargarTabla, setIsOpen, dataLearning}) => {
     const [formData, setFormData] = useState({ 
-      costo: dataSeleccionada?.costo|| "",
-      start: dataSeleccionada?.start || "",
-      learningPath: dataSeleccionada?.learningPath?.id || "",
+      name: "",
+      costo: "",
+      start: "",
+      learningPath: "",
     });
   
+    useEffect(() => {
+      setFormData({
+        name: dataSeleccionada?.name || "",
+        costo: dataSeleccionada?.costo|| "",
+        start: dataSeleccionada?.start || "",
+        learningPath: dataSeleccionada?.learningPath?.id || "",
+      })
+    }, [dataSeleccionada])
+
     const handleChange = (e) => {
       const value =
-        e.target.name != "start" ? Number(e.target.value) : e.target.value;
+        e.target.name == "costo" || e.target.name == "learningPath"  ? Number(e.target.value) : e.target.value;
       setFormData({
         ...formData,
         [e.target.name]: value,
@@ -29,7 +40,7 @@ export const ModalCiclo = ({isOpen, handleCloseModal, dataSeleccionada, token, s
           if(res.statusCode == 200) {
             Toast.fire({
               icon: 'success',
-              title: 'Curso registrado exitósamente!'
+              title: 'Ciclo actualizado exitósamente!'
             })
             setRecargarTabla(!recargarTabla)
             setIsOpen(false)
@@ -46,7 +57,7 @@ export const ModalCiclo = ({isOpen, handleCloseModal, dataSeleccionada, token, s
           if(res.statusCode == 200) {
             Toast.fire({
               icon: 'success',
-              title: 'Ruta registrada exitósamente!'
+              title: 'Ciclo registrado exitósamente!'
             })
             setRecargarTabla(!recargarTabla)
             setIsOpen(false)
@@ -68,8 +79,18 @@ export const ModalCiclo = ({isOpen, handleCloseModal, dataSeleccionada, token, s
           <div className="w-full h-33 font-semibold text-22 leading-33 text-black">
             Información del ciclo
           </div>
-          <form className="flex flex-col sm:grid sm:grid-cols-2 sm:grid-rows-2 gap-y-3 gap-x-8">
+          <form className="flex flex-col sm:grid sm:grid-cols-3 sm:grid-rows-2 gap-y-3 gap-x-8">
             {/* Costo del Ciclo */}
+            <div className="w-full">
+              <InputBasic
+                pHolder={"Ciclo Prueba - I"}
+                data={formData?.name}
+                labelName={"Nombre del ciclo"}
+                onChange={handleChange}
+                name="name"
+              />
+            </div>
+
             <div className="w-full">
               <InputBasicNumber
                 pHolder={"200"}
@@ -79,7 +100,7 @@ export const ModalCiclo = ({isOpen, handleCloseModal, dataSeleccionada, token, s
                 name="costo"
               />
             </div>
-  
+
             {/* Fecha de Inicio */}
             <div className="w-full">
               <InputBasic
@@ -92,7 +113,7 @@ export const ModalCiclo = ({isOpen, handleCloseModal, dataSeleccionada, token, s
             </div>
   
             {/* Learning Path */}
-            <div className="w-full col-span-2">
+            <div className="w-full col-span-3">
               <label className="flex flex-col gap-y-1">
                 <span className="block text-sm font-medium text-gray-400">
                   Learning Path
@@ -120,7 +141,7 @@ export const ModalCiclo = ({isOpen, handleCloseModal, dataSeleccionada, token, s
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
-            Crear
+            {Object.values(dataSeleccionada).length > 0 ? "Actualizar" : "Crear"}
           </button>
         </div>
       </form>

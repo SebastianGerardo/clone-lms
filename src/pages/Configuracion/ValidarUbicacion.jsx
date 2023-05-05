@@ -161,6 +161,13 @@ export const validarUbicacion = () => {
           />
         ),
         props: { ...propsNavigation },
+      },      
+      {
+        name: "Learning Path",
+        icon: (
+          <BookIcon3 isActive={activeTab == "Learning Path"} colorChange={"#2563EB"} />
+        ),
+        props: { ...propsNavigation },
       },
       {
         name: "Ciclos",
@@ -169,13 +176,6 @@ export const validarUbicacion = () => {
             isActive={activeTab == "Ciclos"}
             colorChange={"#2563EB"}
           />
-        ),
-        props: { ...propsNavigation },
-      },
-      {
-        name: "Learning Path",
-        icon: (
-          <BookIcon3 isActive={activeTab == "Learning Path"} colorChange={"#2563EB"} />
         ),
         props: { ...propsNavigation },
       },

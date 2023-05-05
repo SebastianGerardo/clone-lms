@@ -82,3 +82,54 @@ export const TraeLearning = async (bearer, id) => {
     }
   };
   
+//CURSOS POR SEMANA PARA LEARNING PATH
+
+  export const crearCursoSemana = async (bearer, registro) => {
+    try {
+      const fetchResponse = await fetch(`${URL}/courses_weeks`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${bearer}`,
+        },
+        body: JSON.stringify(registro),
+      });
+      const data = await fetchResponse.json();
+      return data;
+    } catch (error) {
+      return error;
+    }
+  };
+
+  export const cambiarCursoSemana = async (bearer, registro, id) => {
+    try {
+      const fetchResponse = await fetch(`${URL}/courses_weeks/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${bearer}`,
+        },
+        body: JSON.stringify(registro),
+      });
+      const data = await fetchResponse.json();
+      return data;
+    } catch (error) {
+      return error;
+    }
+  };
+
+  export const eliminarCursoSemana = async (bearer, id) => {
+    try {
+      const fetchResponse = await fetch(`${URL}/courses_weeks/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${bearer}`,
+        },
+      });
+      const data = await fetchResponse.json();
+      return data;
+    } catch (error) {
+      return error;
+    }
+  };

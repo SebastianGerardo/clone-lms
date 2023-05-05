@@ -4,7 +4,7 @@ import editIcon from "../../../../../assets/icons/editIcon.png";
 import deleteIcon from "../../../../../assets/icons/deleteIcon.png";
 import Swal from "sweetalert2";
 import { Toast } from "../../../../../components/Alertas/SweetAlerts";
-import { eliminarTema } from "../../../../../helpers/ApiConfiguracion";
+import { eliminarCursoSemana } from "../../../../../helpers/ApiConfiguracion/ApiLearningPath";
 
 export const ColumnsCursos = ({handleOpenModal, setTemaSeleccionado, token, handleRecargar}) => {
   const columnsCursos = [
@@ -77,11 +77,11 @@ const deleteAlert = (token, id,handleRecargar) => {
     cancelButtonText: 'Cancelar'
   }).then((result) => {
     if (result.isConfirmed) {
-      eliminarTema(token, id).then((res) => {
+      eliminarCursoSemana(token, id).then((res) => {
         if (res.statusCode == 200) {
           Swal.fire(
             'Eliminado!',
-            'El tema ha sido eliminado.',
+            'El curso agregado ha sido eliminado.',
             'success'
           )
           handleRecargar();
