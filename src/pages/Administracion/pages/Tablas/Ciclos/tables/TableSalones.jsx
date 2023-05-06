@@ -15,30 +15,28 @@ export const ColumnsSalones = ({handleRecargar,  handleOpenModal, setCapituloSel
           <p className="mt-[0.10rem] font-semibold">{index + 1}</p>
         ),
         width: "5rem",
-        center: true,
-      },
-      {
-        name: <NameTable name="Nombre del salón" />,
-        cell: (row) => <p className="mt-[0.10rem] font-semibold">{row?.name}</p>,
-        width: "15rem",
+        sortable: true,
         center: true,
       },
       {
         name: <NameTable name="Salón" />,
-        cell: (row) => <p className="mt-[0.10rem] font-semibold">Pabellón {row?.classroom?.pavilion}</p>,
+        cell: (row) => <p className="mt-[0.10rem] font-semibold">Salón {row?.classroom?.pavilion}</p>,
         width: "15rem",
+        sortable: true,
         center: true,
       },
       {
         name: <NameTable name="Codigo" />,
         cell: (row) => <p className="mt-[0.10rem] font-semibold">{row?.classroom?.code}</p>,
-        width: "10rem",
+        width: "15rem",
+        sortable: true,
         center: true,
       },
       {
         name: <NameTable name="Max. Alumnos" />,
         cell: (row) => <p className="mt-[0.10rem] font-semibold">{row?.classroom?.totalStudents}</p>,
         width: "15rem",
+        sortable: true,
         center: true,
       },
       {

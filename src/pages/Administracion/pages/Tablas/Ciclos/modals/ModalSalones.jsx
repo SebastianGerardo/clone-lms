@@ -8,7 +8,6 @@ export const ModalSalones = ({ isOpen, cursoSeleccionado, token, handleCloseModa
 
     const [formData, setFormData] = useState({
       cycle: cursoSeleccionado,
-      name: capituloSeleccionado?.name || "",
       classroom: capituloSeleccionado?.classroom?.id || "",
     });
 
@@ -17,16 +16,16 @@ export const ModalSalones = ({ isOpen, cursoSeleccionado, token, handleCloseModa
     useEffect(() => {
       setFormData({
         cycle: cursoSeleccionado?.id || "",
-        name: capituloSeleccionado?.name || "",
         classroom: capituloSeleccionado?.classroom?.id || "",
       })
     }, [capituloSeleccionado])
 
+    console.log(formData)
+
     const handleChange = (e) => {
-      const value = e.target.name != "name" ? Number(e.target.value) : e.target.value;
       setFormData({
         ...formData,
-        [e.target.name]: value,
+        [e.target.name]: Number(e.target.value),
       });
     };
   
@@ -66,7 +65,7 @@ export const ModalSalones = ({ isOpen, cursoSeleccionado, token, handleCloseModa
           })
         }
     };
-
+  
     return (
       <Modal isOpen={isOpen} onClose={handleCloseModal}>
         <h1 className="font-medium">{Object.values(capituloSeleccionado).length > 0 ? "Editar" : "Agregar nuevo"} salón</h1>
@@ -76,15 +75,6 @@ export const ModalSalones = ({ isOpen, cursoSeleccionado, token, handleCloseModa
             onSubmit={crearCurso}
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              <div className="col-span-2">
-                <InputBasic
-                  pHolder={"Matemática"}
-                  data={formData.name}
-                  labelName={"Nombre del salón"}
-                  name={"name"}
-                  onChange={handleChange}
-                />
-              </div>
               <InputBasic
                 pHolder={"Seleccione un salón"}
                 data={cursoSeleccionado?.learningPath?.name}

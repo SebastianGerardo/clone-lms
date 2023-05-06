@@ -49,6 +49,8 @@ const Cursos = ({setCursoActual, setNombreCurso, setCursoSeleccionado}) => {
     setIsOpen:setIsOpen
   }
 
+  dataCursos.sort((a, b) => a.name.localeCompare(b.name))
+
   return (
     <section className="p-8 pt-0">
       <ContentTableCursos handleOpenModal={handleOpenModal} dataCursos={dataCursos} />

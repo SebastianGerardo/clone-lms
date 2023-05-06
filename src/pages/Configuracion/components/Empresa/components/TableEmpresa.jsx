@@ -34,9 +34,16 @@ export const ColumnsEmpresa = ({setCursoActual, setNombreCurso, handleOpenModal,
         center: true,
       },
       {
+        name: <NameTable name="Ruc" />,
+        cell: (row) => <p className="mt-[0.10rem] font-semibold">{row.ruc}</p>,
+        width: "15rem",
+        sortable: true,
+        center: true,
+      },
+      {
         name: <NameTable name="Página Web" />,
         cell: (row) => {
-          return <p className="mt-[0.10rem] font-semibold">{row.website}</p>;
+          return row.website;
         },
         sortable: true,
         center: true,
@@ -74,12 +81,9 @@ export const ColumnsEmpresa = ({setCursoActual, setNombreCurso, handleOpenModal,
   }
 }
 
-export const ContentTableEmpresa = ({handleOpenModal, ApiConfiguracionCursos, dataEmpresa}) => {
+export const ContentTableEmpresa = ({handleOpenModal, dataEmpresa}) => {
   return (
     <div className="flex flex-col gap-y-2 mb-4 p-0">
-      {/* <h1 className="font-bold text-2xl text-center min-[1235px]:text-start">
-        Cursos
-      </h1> */}
       <section className="flex flex-col min-[1235px]:flex-row min-[1235px]:justify-around items-center gap-y-4">
         {/* TOTAL DE VIDEOS */}
         <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#0052CA] text-white">
@@ -107,12 +111,6 @@ export const ContentTableEmpresa = ({handleOpenModal, ApiConfiguracionCursos, da
         </form>
         {/* BOTONES PARA FILTRAR */}
         <div className="flex gap-4">
-          {/* <button className="flex justify-center items-center rounded-md text-white bg-[#0052CA] w-11 h-11">
-            <FilterIcon color="#fff" />
-          </button>
-          <button className="flex justify-center items-center rounded-md text-white bg-white border w-11 h-11">
-            <FilterIcon2 color="#292D32" />
-          </button> */}
           <button onClick={handleOpenModal} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
             <span className="truncate">+ Nueva empresa</span>
           </button>

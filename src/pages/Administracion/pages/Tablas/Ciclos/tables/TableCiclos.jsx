@@ -3,42 +3,46 @@ import {SearchIcon } from "../../../../../assets/svgs/NormalSvgs";
 import { NameTable } from "../../../../../components/Tables/TableComponents";
 import editIcon from "../../../../../assets/icons/editIcon.png";
 import deleteIcon from "../../../../../assets/icons/deleteIcon.png";
+import verMas from "../../../../../assets/icons/verMas.png";
 import Swal from "sweetalert2";
-import { Toast } from "../../../../../components/Alertas/SweetAlerts";
-import { eliminarCicloSalon } from "../../../../../helpers/ApiConfiguracion/ApiCiclosxSalon";
+import { eliminarCiclo } from "../../../../../helpers/ApiConfiguracion/ApiCiclos";
 
-export const ColumnsSalones = ({handleRecargar,  handleOpenModal, setCapituloSeleccionado, token}) => {
-  const columnsSalones = [
+export const ColumnsCiclos = ({setCursoActual, setNombreCurso, recargarTabla, setRecargarTabla, token, handleOpenModal, setDataSeleccionada, setCursoSeleccionado}) => {
+  const columnsCiclos = [
       {
         name: <NameTable name="Orden" />,
         cell: (row, index) => (
           <p className="mt-[0.10rem] font-semibold">{index + 1}</p>
         ),
         width: "5rem",
+        sortable: true,
         center: true,
       },
       {
-        name: <NameTable name="Nombre del salón" />,
-        cell: (row) => <p className="mt-[0.10rem] font-semibold">{row?.name}</p>,
+        name: <NameTable name="Learning Path" />,
+        cell: (row) => row.learningPath?.name,
         width: "15rem",
+        sortable: true,
         center: true,
       },
       {
-        name: <NameTable name="Salón" />,
-        cell: (row) => <p className="mt-[0.10rem] font-semibold">Pabellón {row?.classroom?.pavilion}</p>,
-        width: "15rem",
+        name: <NameTable name="Costo" />,
+        cell: (row) => <p className="mt-[0.10rem] font-semibold">S/.{row.costo}</p>,
+        sortable: true,
         center: true,
       },
       {
-        name: <NameTable name="Codigo" />,
-        cell: (row) => <p className="mt-[0.10rem] font-semibold">{row?.classroom?.code}</p>,
-        width: "10rem",
+        name: <NameTable name="Fecha de Inicio" />,
+        cell: (row) => row.start,
+        sortable: true,
         center: true,
       },
       {
-        name: <NameTable name="Max. Alumnos" />,
-        cell: (row) => <p className="mt-[0.10rem] font-semibold">{row?.classroom?.totalStudents}</p>,
-        width: "15rem",
+        name: <NameTable name="Duracion" />,
+        cell: (row) => {
+          return <p className="mt-[0.10rem] font-semibold">{row.learningPath?.duration} Semanas</p>;
+        },
+        sortable: true,
         center: true,
       },
       {
@@ -46,7 +50,7 @@ export const ColumnsSalones = ({handleRecargar,  handleOpenModal, setCapituloSel
         cell: (row) => (
           <div className="flex gap-2">
               <div
-              onClick={() => {handleOpenModal(), setCapituloSeleccionado(row)}}
+              onClick={()=>{handleOpenModal(), setDataSeleccionada(row)}}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-6 h-6 object-cover">
@@ -54,7 +58,15 @@ export const ColumnsSalones = ({handleRecargar,  handleOpenModal, setCapituloSel
                   </div>
               </div>
               <div
-              onClick={() => deleteAlert(row.id, token, handleRecargar)}
+              onClick={()=>{setCursoActual("Capitulos"), setNombreCurso(row.learningPath?.name), setCursoSeleccionado(row)}}
+              className="cursor-pointer mx-auto"
+              >
+                  <div className="w-6 h-6 object-cover">
+                      <img src={verMas} alt="" className="w-full h-full object-cover" />
+                  </div>
+              </div>
+              <div
+              onClick={() => deleteAlert(row.id, recargarTabla, setRecargarTabla, token)}
               className="cursor-pointer mx-auto"
               >
                   <div className="w-[25px] h-[25px] object-cover">
@@ -64,26 +76,27 @@ export const ColumnsSalones = ({handleRecargar,  handleOpenModal, setCapituloSel
   
           </div>
         ),
+        width: "12rem",
         sortable: true,
         center: true,
       },
   ];
   return {
-    columnsSalones
+    columnsCiclos
   }
 }
-export const ContentTableSalones = ({handleOpenModal, cyclesClassrooms,setCursoActual, setNombreCurso, setCambiarTabla, cambiarTabla}) => {
+
+export const ContentTableCiclos = ({handleOpenModal, dataCiclos}) => {
   return (
     <div className="flex flex-col gap-y-2 mb-4 p-0">
       <section className="flex flex-col min-[1235px]:flex-row min-[1235px]:justify-around items-center gap-y-4">
         {/* TOTAL DE VIDEOS */}
         <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#0052CA] text-white">
-          <p>Total de salones</p>
+          <p>Total de ciclos</p>
           <span className="text-white/80">
-            {"("}{cyclesClassrooms?.length}{")"}
+            {"("}{dataCiclos?.length}{")"}
           </span>
         </div>
-        
         {/* INPUT BUSCAR */}
         <form className="w-full min-[790px]:w-auto">
           <div className="relative">
@@ -103,17 +116,8 @@ export const ContentTableSalones = ({handleOpenModal, cyclesClassrooms,setCursoA
         </form>
         {/* BOTONES PARA FILTRAR */}
         <div className="flex gap-4">
-          {/* <span onClick={() => {setCambiarTabla(true)}}>
-            <HoverButton colorChange={cambiarTabla ? "bg-[#0052CA]" : "bg-white"} text={<FilterIcon isActive={cambiarTabla} colorChange={"#fff"} color="#292D32" />} dialog={"Capitulos"}/>
-          </span>
-          <span onClick={() => {setCambiarTabla(false)}}>
-            <HoverButton colorChange={cambiarTabla ? "bg-white" : "bg-[#0052CA]"} text={<FilterIcon2 isActive={cambiarTabla} colorChange={"#292D32"} color="#fff" />} dialog={"Temas"}/>
-          </span> */}
           <button onClick={handleOpenModal} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
-            <span className="truncate">+ Agregar salón </span>
-          </button>
-          <button onClick={() => {setCursoActual("Cursos"), setNombreCurso(null)}} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
-            <span className="truncate">Volver</span>
+            <span className="truncate">+ Nuevo Ciclo</span>
           </button>
         </div>
       </section>
@@ -121,10 +125,9 @@ export const ContentTableSalones = ({handleOpenModal, cyclesClassrooms,setCursoA
   );
 };
 
-
-const deleteAlert = (id, token, handleRecargar ) => {
+const deleteAlert = (id, recargarTabla, setRecargarTabla, token) => {
   Swal.fire({
-    title: `¿Estás seguro de eliminar este salón?`,
+    title: '¿Estás seguro de eliminar este ciclo?',
     text: "No podrás revertir esta acción!",
     icon: 'warning',
     showCancelButton: true,
@@ -134,19 +137,20 @@ const deleteAlert = (id, token, handleRecargar ) => {
     cancelButtonText: 'Cancelar'
   }).then((result) => {
     if (result.isConfirmed) {
-      eliminarCicloSalon(token, id).then((res) => {
-        if (res.statusCode === 200) {
+      eliminarCiclo(token, id).then((res) => {
+        if (res.statusCode == 200) {
           Swal.fire(
             'Eliminado!',
-            `El salón ha sido eliminado.`,
+            'El ciclo ha sido eliminado.',
             'success'
           )
-          handleRecargar()
+          setRecargarTabla(!recargarTabla)
         } else {
-          Toast.fire({
-            icon: "error",
-            title: "Ocurrió un error al eliminar el salón",
-          });
+          Swal.fire(
+            'Error!',
+            'No se pudo eliminar el ciclo.',
+            'error'
+          )
         }
       })
     }

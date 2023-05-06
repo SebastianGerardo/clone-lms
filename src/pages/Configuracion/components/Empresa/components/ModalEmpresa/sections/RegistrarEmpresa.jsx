@@ -92,6 +92,23 @@ const RegistrarEmpresa = ({ handleChange, formData }) => {
           </label>
         </div>
 
+          {/* Direccion */}
+        <div className="w-full">
+          <label className="flex flex-col gap-y-1">
+            <span className="block text-sm font-medium text-gray-400">
+              Dirección Legal
+            </span>
+            <input
+              value={formData?.address}
+              onChange={handleChange}
+              type="text"
+              name="address"
+              placeholder="ESEAE SRL"
+              className="p-3 h-[3rem] block w-full rounded-lg sm:text-sm bg-formButton text-black border border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 disabled:bg-gray-300/50 disabled:text-gray-500"
+            />
+          </label>
+        </div>
+
         {/* País */}
         <div className="w-full col-start-1 col-end-4">
           <label className="flex flex-col gap-y-1">

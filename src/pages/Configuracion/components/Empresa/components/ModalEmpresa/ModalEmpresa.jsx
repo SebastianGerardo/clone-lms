@@ -160,6 +160,7 @@ const enviarData = ({infoEmpresa, handleCloseModal, setRecargarTabla, recargarTa
     email: infoEmpresa?.email || "",
     website: infoEmpresa?.website || "",
     agent: infoEmpresa?.agent || "",
+    address: infoEmpresa?.address || "",
   });
   
   const {formUbicacion, dataUbicacion, dataDepartamento, dataProvincia, handleSelect} = useUbicaciones({infoEmpresa, token, setFormData, formData})
