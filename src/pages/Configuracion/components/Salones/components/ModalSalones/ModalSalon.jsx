@@ -25,7 +25,7 @@ const ModalSalon = ({ handleCloseModal, recargarTabla, setRecargarTabla, dataLoc
       />
       <div className="flex justify-end pt-4">
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-[#ef4444] hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
           onClick={handleMatricular}
         >
           {Object.values(infoSalon).length > 0 ? "Actualizar" : "Crear"}

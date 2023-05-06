@@ -139,7 +139,7 @@ export const ModalCiclo = ({isOpen, handleCloseModal, dataSeleccionada, token, s
         </div>
         <div className="flex justify-end pt-4">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-[#ef4444] hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
           >
             {Object.values(dataSeleccionada).length > 0 ? "Actualizar" : "Crear"}
           </button>

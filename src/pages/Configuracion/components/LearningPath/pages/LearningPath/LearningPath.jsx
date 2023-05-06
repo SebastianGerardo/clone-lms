@@ -159,7 +159,7 @@ const SeccionModal = ({dataSeleccionada, token, setRecargarTabla, recargarTabla,
               />
               <div className="col-span-2 flex justify-center">
                 <button
-                  className={` w-max bg-green-500 hover:bg-green-700 cursor-pointer text-white py-2 px-2 rounded `}
+                  className={` w-max bg-[#ef4444] hover:bg-red-600 cursor-pointer text-white py-2 px-2 rounded `}
                 >
                   Agregar
                 </button>

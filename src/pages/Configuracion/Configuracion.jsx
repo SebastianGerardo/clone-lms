@@ -53,7 +53,7 @@ export default function Configuracion() {
               </AnimatePresence>
               ) : (
                 <div className="flex justify-center items-center h-[20rem]">
-                  <Ripples color="#2563EB" />
+                  <Ripples color="#ef4444" />
                 </div>
               )}
             </main>
@@ -75,9 +75,9 @@ const Navigation = ({
 }) => {
   return (
     <button
-      className={`flex gap-2 group w-max cursor-pointer px-6 mx-0 text-left py-3 border-b-2 sm:text-basic transition-all duration-100 hover:text-blue-600 hover:border-blue-600 ${
+      className={`flex gap-2 group w-max cursor-pointer px-6 mx-0 text-left py-3 border-b-2 sm:text-basic transition-all duration-100 hover:text-[#ef4444] hover:border-red-600 ${
         activeTab == nameActive
-          ? "border-blue-600 text-blue-600"
+          ? "border-red-600 text-[#ef4444]"
           : "border-[#D9D9D9]"
       }`}
       onClick={() => {

@@ -82,7 +82,7 @@ export const ContentTableRutas = ({handleOpenModal, dataLearning}) => {
       </h1> */}
       <section className="flex flex-col min-[1235px]:flex-row min-[1235px]:justify-around items-center gap-y-4">
         {/* TOTAL DE VIDEOS */}
-        <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#0052CA] text-white">
+        <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#ef4444] text-white">
           <p>Rutas de aprendizaje</p>
           <span className="text-white/80">
             {"("}{dataLearning?.length}{")"}
@@ -113,7 +113,7 @@ export const ContentTableRutas = ({handleOpenModal, dataLearning}) => {
           <button className="flex justify-center items-center rounded-md text-white bg-white border w-11 h-11">
             <FilterIcon2 color="#292D32" />
           </button> */}
-          <button onClick={handleOpenModal} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
+          <button onClick={handleOpenModal} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#ef4444]">
             <span className="truncate">+ Nueva ruta</span>
           </button>
         </div>

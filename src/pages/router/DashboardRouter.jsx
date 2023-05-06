@@ -47,7 +47,7 @@ function DashboardRouter() {
         <Header />
         {isLoading ? (
           <div className="flex justify-center items-center h-full">
-            <Waveform size={35} color={'#2563EB'} />
+            <Waveform size={35} color={'#ef4444'} />
           </div>
         ) : (
           <Outlet />

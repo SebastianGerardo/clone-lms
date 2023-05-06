@@ -95,7 +95,7 @@ export const ModalCapitulos = ({ isOpen, cursoSeleccionado, token, handleCloseMo
               />
             </div>
             <button
-              className={`bg-green-500 hover:bg-green-700 cursor-pointer text-white py-2 px-2 rounded xl:relative xl:left-10 xl:top-2`}
+              className={`bg-[#ef4444] hover:bg-red-600 cursor-pointer text-white py-2 px-2 rounded xl:relative xl:left-10 xl:top-2`}
             >
               Agregar
             </button>

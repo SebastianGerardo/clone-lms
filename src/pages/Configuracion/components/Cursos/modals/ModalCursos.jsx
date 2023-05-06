@@ -78,7 +78,7 @@ export const ModalCursos = ({dataCurso, token, setRecargarTabla, recargarTabla, 
                 name={"name"}
               />
               <button
-                className={`bg-green-500 hover:bg-green-700 transition-all duration-150 cursor-pointer text-white py-2 px-2 rounded xl:relative xl:left-10 xl:top-2`}
+                className={`bg-[#ef4444] hover:bg-red-600 transition-all duration-150 cursor-pointer text-white py-2 px-2 rounded xl:relative xl:left-10 xl:top-2`}
               >
                 {validarCursoEscogido ? "Editar" : "Agregar"}
               </button>

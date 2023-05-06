@@ -12,7 +12,7 @@ export const NavLinks = ({links = []}) => {
               state={{ logged: true }} 
               className={({ isActive }) =>
                isActive 
-                ? "flex gap-2 px-5 p-3 w-full rounded-md text-white bg-blue-600" 
+                ? "flex gap-2 px-5 p-3 w-full rounded-md text-white bg-[#ef4444]" 
                 : "flex gap-2 px-5 p-3 w-full bg-transparent" 
                 } 
               >

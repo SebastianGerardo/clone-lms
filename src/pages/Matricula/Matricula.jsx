@@ -68,7 +68,7 @@ export default function Matricula() {
         {mostrarPor ? (
           loader ? (
             <div className="flex justify-center items-center h-[20rem]">
-              <Ripples color="#2563EB" />
+              <Ripples color="#ef4444" />
             </div>
           ) : (
             <AnimatePresence>
@@ -84,12 +84,12 @@ export default function Matricula() {
                     <div
                       key={item.id}
                       onClick={() => handleOpenModal(item.id)}
-                      className="cursor-pointer mx-auto flex flex-col gap-y-4 justify-center items-center rounded-xl w-[10rem] h-[10rem] bg-blue-200/70"
+                      className="cursor-pointer mx-auto flex flex-col gap-y-4 justify-center items-center rounded-xl w-[10rem] h-[10rem] bg-red-200/70"
                     >
                       <div className="w-20 object-cover">
                         <img src={cicloImg[item.nombre]} alt="escudo" className="w-full h-full" />
                       </div>
-                      <h1 className="text-center font-poppins text-blue-600">
+                      <h1 className="text-center font-poppins text-[#ef4444]">
                         {item.nombre}
                       </h1>
                     </div>
@@ -114,7 +114,7 @@ export default function Matricula() {
           </AnimatePresence>
         ) : (
           <div className="flex justify-center items-center h-[20rem]">
-            <Ripples color="#2563EB" />
+            <Ripples color="#ef4444" />
           </div>
         )}
         <Modal isOpen={isOpen} onClose={handleCloseModal}>

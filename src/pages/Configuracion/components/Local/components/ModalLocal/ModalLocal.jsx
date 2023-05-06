@@ -34,7 +34,7 @@ const ModalLocal = ({ handleCloseModal, recargarTabla, setRecargarTabla, dataEmp
         {currentStep === 0 ? (
           <div className="flex justify-end pt-4">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-[#ef4444] hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
               onClick={handleNextStep}
               disabled={currentStep === 3 - 1}
             >
@@ -44,7 +44,7 @@ const ModalLocal = ({ handleCloseModal, recargarTabla, setRecargarTabla, dataEmp
         ) : (
           <div className="flex justify-between pt-4">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-[#ef4444] hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
               onClick={handlePrevStep}
             >
               Anterior
@@ -52,9 +52,9 @@ const ModalLocal = ({ handleCloseModal, recargarTabla, setRecargarTabla, dataEmp
             <button
               className={`${
                 currentStep === 2
-                  ? "bg-green-500  hover:bg-green-700 cursor-pointer"
-                  : "bg-blue-500"
-              } hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`}
+                  ? "bg-[#ef4444]  hover:bg-red-600 cursor-pointer"
+                  : "bg-[#ef4444]"
+              }  hover:bg-red-600 text-white font-bold py-2 px-4 rounded`}
               onClick={currentStep !== 1 ? handleNextStep : handleCrear}
             >
               {isLastStep ? Object.values(dataLocal).length > 0 ? "Actualizar" : "Crear" : "Siguiente"}

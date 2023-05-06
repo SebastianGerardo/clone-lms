@@ -16,7 +16,7 @@ export const CentralBarMatricula = ({ dataCiclos, mostrarPor, setMostrarPor, set
         </h1>
         <section className="flex flex-col min-[885px]:flex-row min-[800px]:justify-between  min-[1235px]:flex-row min-[1235px]:justify-around items-center gap-y-4">
           {/* TOTAL DE VIDEOS */}
-          <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#0052CA] text-white">
+          <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#ef4444] hover:bg-red-600 text-white">
             <p>Total de ciclos</p>
             <span className="text-white/80">{`(${dataCiclos.length})`}</span>
           </div>
@@ -45,7 +45,7 @@ export const CentralBarMatricula = ({ dataCiclos, mostrarPor, setMostrarPor, set
             <button
               onClick={() => setMostrarPor(true)}
               className={`flex justify-center items-center rounded-md text-white transition-all duration-150 ${
-                mostrarPor ? "bg-[#0052CA]" : "bg-white"
+                mostrarPor ? "bg-[#ef4444] hover:bg-red-600" : "bg-white"
               }  border w-11 h-11`}
             >
               <FilterIcon2
@@ -57,7 +57,7 @@ export const CentralBarMatricula = ({ dataCiclos, mostrarPor, setMostrarPor, set
             <button
               onClick={() => setMostrarPor(false)}
               className={`flex justify-center items-center rounded-md text-white transition-all duration-150 ${
-                mostrarPor ? "bg-white" : "bg-[#0052CA]"
+                mostrarPor ? "bg-white" : "bg-[#ef4444] hover:bg-red-600"
               } border w-11 h-11`}
             >
               <FilterIcon
@@ -69,7 +69,7 @@ export const CentralBarMatricula = ({ dataCiclos, mostrarPor, setMostrarPor, set
             <NavLink
               state={{logged: true}}
               to="/dashboard/administracion/edit/alumno"
-              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`}
+              className={`bg-[#ef4444] hover:bg-red-600 text-white font-bold py-2 px-4 rounded`}
             >
               Alumnos registrados
             </NavLink>

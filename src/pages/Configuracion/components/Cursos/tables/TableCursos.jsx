@@ -82,7 +82,7 @@ export const ContentTableCursos = ({handleOpenModal, dataCursos}) => {
       </h1> */}
       <section className="flex flex-col min-[1235px]:flex-row min-[1235px]:justify-around items-center gap-y-4">
         {/* TOTAL DE VIDEOS */}
-        <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#0052CA] text-white">
+        <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#ef4444] hover:bg-red-600 text-white">
           <p>Total de cursos</p>
           <span className="text-white/80">
             {"("}{dataCursos?.length}{")"}
@@ -107,13 +107,13 @@ export const ContentTableCursos = ({handleOpenModal, dataCursos}) => {
         </form>
         {/* BOTONES PARA FILTRAR */}
         <div className="flex gap-4">
-          {/* <button className="flex justify-center items-center rounded-md text-white bg-[#0052CA] w-11 h-11">
+          {/* <button className="flex justify-center items-center rounded-md text-white bg-[#ef4444] hover:bg-red-600 w-11 h-11">
             <FilterIcon color="#fff" />
           </button>
           <button className="flex justify-center items-center rounded-md text-white bg-white border w-11 h-11">
             <FilterIcon2 color="#292D32" />
           </button> */}
-          <button onClick={handleOpenModal} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
+          <button onClick={handleOpenModal} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#ef4444] hover:bg-red-600">
             <span className="truncate">+ Nuevo curso</span>
           </button>
         </div>

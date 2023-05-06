@@ -88,7 +88,7 @@ export const ContentTableSemanas = ({handleOpenModal, dataSemanas,setCursoActual
     <div className="flex flex-col gap-y-2 mb-4 p-0">
       <section className="flex flex-col min-[1235px]:flex-row min-[1235px]:justify-around items-center gap-y-4">
         {/* TOTAL DE VIDEOS */}
-        <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#0052CA] text-white">
+        <div className="w-max p-3 px-6 rounded-md flex gap-1 text-sm bg-[#ef4444] text-white">
           <p>Total de {cambiarTabla ? "semanas" : "cursos"}</p>
           <span className="text-white/80">
             {"("}{dataSemanas?.length}{")"}
@@ -114,11 +114,11 @@ export const ContentTableSemanas = ({handleOpenModal, dataSemanas,setCursoActual
         {/* BOTONES PARA FILTRAR */}
         <div className="flex gap-4">
           {!cambiarTabla && (
-            <button onClick={handleOpenModal} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
+            <button onClick={handleOpenModal} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#ef4444]">
               <span className="truncate">+ Agregar curso </span>
             </button>
           )}
-          <button onClick={handleRetroceder} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#0052CA]">
+          <button onClick={handleRetroceder} className="flex items-center gap-2 px-4 py-3 rounded-md text-sm text-white bg-[#ef4444]">
             <span className="truncate">Volver</span>
           </button>
         </div>
