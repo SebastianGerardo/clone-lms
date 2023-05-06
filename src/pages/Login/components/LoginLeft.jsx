@@ -3,6 +3,7 @@ import logoGoogle from '../../../assets/icons/google.png'
 import { IniciarSesion } from '../../../helpers/ApiUsuarios'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import textoEncinas from '../../../assets/img/texto_encinas.png'
 
 const LoginLeft = () => {
   const [datosUsuario, setDatosUsuario] = useState({
@@ -44,7 +45,7 @@ const LoginLeft = () => {
     <section className='flex justify-center items-center'>
           {/* Contenido */}
         <div className='flex flex-col w-[80%] lg:max-w-[50%] lg:w-[50%]'>
-            <span className='text-center text-blue-700 mb-20 font-bold text-4xl'>Logotipo</span>
+            <span className='text-center text-[#ef4444] mb-14 font-bold text-4xl'><img src={textoEncinas} alt="" className="w-full h-full object-contain" /></span>
             {/* Botón de Google */}
             <button className='flex justify-center items-center bg-black text-white py-4 rounded-md'>
                 <img src={logoGoogle} alt="logoGoogle" className='w-6 h-6 mr-2' />
@@ -75,12 +76,12 @@ const LoginLeft = () => {
                     </a>
                 </div>
                 {/* BOTÓN */}
-                <input className='cursor-pointer bg-blue-700 my-4 text-white text-center py-4 rounded-md' type="submit" value="Sign in" />
+                <input className='cursor-pointer text-white bg-[#ef4444] hover:bg-red-600 my-4  text-center py-4 rounded-md' type="submit" value="Sign in" />
             </form>
             {/* Link para crear cuenta */}
             <div className='text-center mb-4'>
                 <span className='text-gray-400'>¿Aún no tienes una cuenta?</span>
-                <a href="#" className='text-blue-700'>Crear una cuenta</a>
+                <a href="#" className='text-[#ef4444]'>Crear una cuenta</a>
             </div>
         </div>
       </section>
